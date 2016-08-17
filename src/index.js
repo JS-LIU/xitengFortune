@@ -6,9 +6,10 @@ var ReactDom = require('react-dom');
 var { Router, Route, hashHistory,IndexRedirect} = require('react-router');
 var HomePage = require('../src/components/HomePage');
 var Guess = require('../src/container/Guess');
+var Shop = require('../src/container/Shop');
+var ProductDetails = require('../src/container/ProductDetails');
 var AskBar = require('../src/components/AskBar');
 var Discover = require('../src/components/Discover');
-var Shop = require('../src/components/Shop');
 var Store = require('../src/redux/store/store');
 var {Provider} = require('react-redux');
 var op = require('../src/redux/store/openingTimeInit');
@@ -28,6 +29,8 @@ var getRoutes = ()=>{
             <Route path="/Discover" component={Discover}></Route>
         </Route>
         <Route path="/Shop" component={Shop}></Route>
+        <Route path="/ProductDetails" components={ProductDetails}></Route>
+
     </Router>
     )};
 
@@ -36,7 +39,8 @@ var getRoutes = ()=>{
 function initState(){
     return {
         openingTime:op,
-        shop:{productList:[]}
+        shop:{productList:[]},
+        storage:{productId:''}
     }
 }
 
