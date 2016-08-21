@@ -13,6 +13,9 @@ var Discover = require('../src/components/Discover');
 var Store = require('../src/redux/store/store');
 var {Provider} = require('react-redux');
 var op = require('../src/redux/store/openingTimeInit');
+import {shoppingCartInit} from '../src/redux/store/shoppingCartInit'
+
+
 
 import {DevTools} from 'Util/3rd/DevTools'
 var {syncHistoryWithStore} = require('react-router-redux');
@@ -40,7 +43,9 @@ function initState(){
     return {
         openingTime:op,
         shop:{productList:[]},
-        storage:{productId:''}
+        storage:{productId:''},
+        productInfo:{},
+        shoppingCart:shoppingCartInit
     }
 }
 
