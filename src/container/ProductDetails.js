@@ -15,19 +15,21 @@ var ProductDetails = React.createClass({
     componentWillMount:function(){
         this.props.storageActionKeys.getProductId();
         let productId = this.props.storage.productId;
-        console.log('getProductId->',productId);
 
         this.props.productInfoActionKeys.getProductInfo({});
     },
     render: function () {
-        console.log('productInfo->render->',this.props.productInfo);
         var productInfo = this.props.productInfo;
         return (
             <div>
 
                 <div>商品名称：{productInfo.title}</div>
                 <div>商品价格：{productInfo.price}</div>
-                <Footer addProductItem={this.props.shoppingCartActionKeys.addProductItem} productInfo={productInfo}/>
+                <Footer
+                    addProductItem={this.props.shoppingCartActionKeys.addProductItem}
+                    productInfo={productInfo}
+                    shoppingCart={this.props.shoppingCart}
+                />
             </div>
         )
     }
@@ -36,7 +38,6 @@ var ProductDetails = React.createClass({
 var Footer = React.createClass({
 
     addProductItem:function(){
-        console.log('---click add',this.props.productInfo);
         let productInfo = this.props.productInfo;
         this.props.addProductItem(productInfo);
 
@@ -50,7 +51,8 @@ var Footer = React.createClass({
                 </li>
                 <li className="fl">
                     <Link to="/ShoppingCart" className="fl">
-                        购物车
+                        <span>购物车</span>
+                        <span>{this.props.shoppingCart.totalNum}</span>
                     </Link>
                 </li>
                 <li className="fl" onClick={this.addProductItem} >
