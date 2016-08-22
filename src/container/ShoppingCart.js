@@ -10,14 +10,26 @@ import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 
 var ShoppingCart = React.createClass({
 
+    componentWillMount:function () {
+        this.props.shoppingCartActionKeys.calcTotalMoney();
+    },
+    allCheck:function(){
+        this.props.shoppingCartActionKeys.allCheck();
+    },
     render:function(){
         console.log(this.props.shoppingCart);
         return(
             <div>
 
-                <ProductList products={this.props.shoppingCart.products}/>
-                <input type="checkbox"/>
-                <span>总价：</span>
+                <ProductList
+                    products={this.props.shoppingCart.products}
+                    checekedProduct={this.props.shoppingCartActionKeys.checkedItem}
+                />
+                <input type="checkbox"
+                       checked={this.props.shoppingCart.allChecked}
+                       onChange={this.allCheck}
+                />
+                <span>总价：{this.props.shoppingCart.realCount}</span>
             </div>
         )
     }
@@ -25,14 +37,19 @@ var ShoppingCart = React.createClass({
 
 
 var ProductList = React.createClass({
-
+    checkedProduct:function(product){
+        var self = this;
+        return function(){
+            self.props.checekedProduct(product);
+        }
+    },
     render:function(){
 
         var productNodes = this.props.products.map((item,index)=>{
 
             return (
                 <li key={index}>
-                    <input type="checkbox"/>
+                    <input type="checkbox" checked={item.checked} onChange={this.checkedProduct(item)}/>
                     <span>{item.title}</span>
                     <span>{item.num}</span>
                 </li>

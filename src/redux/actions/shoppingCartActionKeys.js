@@ -3,3 +3,6 @@
  */
 
 export const ADD_PRODUCTITEM = 'ADD_PRODUCTITEM';
+export const CALC_TOTALMONEY = 'CALC_TOTALMONEY';
+export const CHECKED_ITEM = 'CHECKED_ITEM';
+export const ALLCHECKED = 'ALLCHECKED';

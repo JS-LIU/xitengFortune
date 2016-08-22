@@ -2,42 +2,85 @@
  * Created by LDQ on 2016/8/18.
  */
 
-import {ADD_PRODUCTITEM} from '../actions/shoppingCartActionKeys';
+import {ADD_PRODUCTITEM,CALC_TOTALMONEY,CHECKED_ITEM,ALLCHECKED} from '../actions/shoppingCartActionKeys';
 
 class ShoppingCartCtrl {
     constructor(state,item){
-        this.item = Object.assign({},item,{checked:true,num:1});
+
         this.shoppingCart = state;
     }
 
-    pushOrAdd(){
-
-        var itemId = this.item.productId;
+    pushOrAdd(item){
+        var product = Object.assign({},item,{checked:true,num:1});
+        var itemId = product.productId;
 
         this.shoppingCart.products.map((product,index)=>{
             if(product.productId == itemId){
-                product.num += (this.item.num);
+                product.num += (product.num);
             }else{
-                this.shoppingCart.products.push(this.item);
+                this.shoppingCart.products.push(product);
             }
         });
 
         if(this.shoppingCart.products.length == 0){
-            this.shoppingCart.products.push(this.item);
+            this.shoppingCart.products.push(product);
         }
-        this.shoppingCart.totalNum += (this.item.num);
+        this.shoppingCart.totalNum += (product.num);
     }
+
+    calcTotalMoney(){
+        this.shoppingCart.realCount = 0;
+        this.shoppingCart.products.map((product,index)=>{
+            if(product.checked){
+                this.shoppingCart.realCount += (product.num * product.price);
+            }
+        });
+    }
+
+    checkedItem(item){
+        item.checked = !item.checked;
+        this.isAllChecked();
+        this.calcTotalMoney();
+    }
+
+    isAllChecked(){
+        this.shoppingCart.allChecked = true;
+        this.shoppingCart.products.map((product,index)=>{
+            if(!product.checked){
+                this.shoppingCart.allChecked = false
+            }
+        });
+    }
+    allCheck(){
+        this.shoppingCart.allChecked = !this.shoppingCart.allChecked;
+        this.shoppingCart.products.map((product,index)=>{
+            product.checked = this.shoppingCart.allChecked;
+        });
+
+        this.calcTotalMoney();
+    }
+
 }
 
 export const shoppingCart = function(state = {},action){
+    var shoppingCartCtrl = new ShoppingCartCtrl(state);
 
     switch (action.type) {
         case 'ADD_PRODUCTITEM':
-            var shoppingCartCtrl = new ShoppingCartCtrl(state,action.item);
-            shoppingCartCtrl.pushOrAdd();
+            shoppingCartCtrl.pushOrAdd(action.item);
+            return Object.assign({},state);
 
+        case 'CALC_TOTALMONEY':
+            shoppingCartCtrl.calcTotalMoney();
+            return Object.assign({},state);
+
+        case 'CHECKED_ITEM':
+            shoppingCartCtrl.checkedItem(action.item);
+            return Object.assign({},state);
+        case 'ALLCHECKED':
+            shoppingCartCtrl.allCheck();
             return Object.assign({},state);
         default:
-            return state
+            return state;
     }
 };
