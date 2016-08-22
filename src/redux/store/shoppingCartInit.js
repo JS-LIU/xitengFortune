@@ -4,7 +4,7 @@
 
 
 export const shoppingCartInit = {
-    totalCount:0,
+    realCount:0,
     totalNum:0,
-    productInfo:[]
+    products:[]
 };
