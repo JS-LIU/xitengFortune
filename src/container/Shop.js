@@ -42,7 +42,7 @@ var PruductItems = React.createClass({
 var Shop = React.createClass({
 
     componentWillMount:function(){
-        this.props.shopActionKeys.getShopItems({});
+        this.props.shopActionKeys.getProducts({productList:'productList.json'});
     },
     render: function () {
 

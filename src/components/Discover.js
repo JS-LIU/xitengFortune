@@ -26,7 +26,7 @@ var Discover = React.createClass({
                     icon:''
                 }, {
                     name:'购买钻石',
-                    url:'buyDiamonds',
+                    url:'BuyDiamonds',
                     icon:''
                 }]}/>
                 <EntranceList itemList={[{

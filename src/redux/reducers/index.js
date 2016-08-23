@@ -9,12 +9,12 @@ import {shop} from './shop';
 import {storage} from './storage';
 import {productInfo} from './productInfo';
 import {shoppingCart} from './shoppingCart';
-
+import {diamonds} from './diamonds';
 
 
 
 var rootReducer = combineReducers({
-    routing,openingTime,shop,storage,productInfo,shoppingCart
+    routing,openingTime,shop,diamonds,storage,productInfo,shoppingCart
 });
 
 module.exports = rootReducer;

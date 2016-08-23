@@ -16,20 +16,25 @@ var ShoppingCart = React.createClass({
     allCheck:function(){
         this.props.shoppingCartActionKeys.allCheck();
     },
+    deleteProducts:function(){
+        this.props.shoppingCartActionKeys.deleteProducts();
+    },
     render:function(){
-        console.log(this.props.shoppingCart);
         return(
             <div>
 
                 <ProductList
                     products={this.props.shoppingCart.products}
                     checekedProduct={this.props.shoppingCartActionKeys.checkedItem}
+                    increase={this.props.shoppingCartActionKeys.increase}
+                    reduce={this.props.shoppingCartActionKeys.reduce}
                 />
                 <input type="checkbox"
                        checked={this.props.shoppingCart.allChecked}
                        onChange={this.allCheck}
                 />
                 <span>总价：{this.props.shoppingCart.realCount}</span>
+                <span onClick={this.deleteProducts}>删除</span>
             </div>
         )
     }
@@ -43,6 +48,18 @@ var ProductList = React.createClass({
             self.props.checekedProduct(product);
         }
     },
+    increase:function(product){
+        var self = this;
+        return function(){
+            self.props.increase(product)
+        }
+    },
+    reduce:function(product){
+        var self = this;
+        return function(){
+            self.props.reduce(product)
+        }
+    },
     render:function(){
 
         var productNodes = this.props.products.map((item,index)=>{
@@ -51,7 +68,10 @@ var ProductList = React.createClass({
                 <li key={index}>
                     <input type="checkbox" checked={item.checked} onChange={this.checkedProduct(item)}/>
                     <span>{item.title}</span>
+                    <span onClick={this.increase(item)}>+</span>
                     <span>{item.num}</span>
+                    <span onClick={this.reduce(item)}>-</span>
+
                 </li>
             )
         });

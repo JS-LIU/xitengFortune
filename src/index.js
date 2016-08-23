@@ -9,6 +9,8 @@ var Guess = require('../src/container/Guess');
 var Shop = require('../src/container/Shop');
 var ShoppingCart = require('../src/container/ShoppingCart');
 var ProductDetails = require('../src/container/ProductDetails');
+var BuyDiamonds = require('../src/container/BuyDiamonds');
+
 var AskBar = require('../src/components/AskBar');
 var Discover = require('../src/components/Discover');
 var Store = require('../src/redux/store/store');
@@ -34,6 +36,7 @@ var getRoutes = ()=>{
         </Route>
         <Route path="/Shop" component={Shop}></Route>
         <Route path="/ProductDetails" components={ProductDetails}></Route>
+        <Route path="/BuyDiamonds" components={BuyDiamonds}></Route>
         <Route path="/ShoppingCart" components={ShoppingCart}></Route>
 
     </Router>
@@ -45,6 +48,7 @@ function initState(){
     return {
         openingTime:op,
         shop:{productList:[]},
+        diamonds:{diamondList:[]},
         storage:{productId:''},
         productInfo:{},
         shoppingCart:shoppingCartInit
