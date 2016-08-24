@@ -17,10 +17,10 @@ export const shoppingCartActions = {
             type:CALC_TOTALMONEY
         }
     },
-    checkedItem:(item)=>{
+    checkedItem:(index)=>{
         return {
             type:CHECKED_ITEM,
-            item
+            index
         }
     },
     allCheck:()=>{
@@ -28,16 +28,16 @@ export const shoppingCartActions = {
             type:ALLCHECKED
         }
     },
-    increase:(item)=>{
+    increase:(index)=>{
         return{
             type:INCREASE,
-            item
+            index
         }
     },
-    reduce:(item)=>{
+    reduce:(index)=>{
         return {
             type:REDUCE,
-            item
+            index
         }
     },
     deleteProducts:()=>{

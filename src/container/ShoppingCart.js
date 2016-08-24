@@ -42,22 +42,22 @@ var ShoppingCart = React.createClass({
 
 
 var ProductList = React.createClass({
-    checkedProduct:function(product){
+    checkedProduct:function(index){
         var self = this;
         return function(){
-            self.props.checekedProduct(product);
+            self.props.checekedProduct(index);
         }
     },
-    increase:function(product){
+    increase:function(index){
         var self = this;
         return function(){
-            self.props.increase(product)
+            self.props.increase(index)
         }
     },
-    reduce:function(product){
+    reduce:function(index){
         var self = this;
         return function(){
-            self.props.reduce(product)
+            self.props.reduce(index)
         }
     },
     render:function(){
@@ -66,11 +66,11 @@ var ProductList = React.createClass({
 
             return (
                 <li key={index}>
-                    <input type="checkbox" checked={item.checked} onChange={this.checkedProduct(item)}/>
+                    <input type="checkbox" checked={item.checked} onChange={this.checkedProduct(index)}/>
                     <span>{item.title}</span>
-                    <span onClick={this.increase(item)}>+</span>
+                    <span onClick={this.increase(index)}>+</span>
                     <span>{item.num}</span>
-                    <span onClick={this.reduce(item)}>-</span>
+                    <span onClick={this.reduce(index)}>-</span>
 
                 </li>
             )
