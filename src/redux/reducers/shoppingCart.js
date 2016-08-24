@@ -171,11 +171,9 @@ function calcTotleNum(products){
     return totalNum;
 }
 export const shoppingCart = function(state = {},action){
-    // var shoppingCartCtrl = new ShoppingCartCtrl(state);
 
     switch (action.type) {
         case 'ADD_PRODUCTITEM':
-            //
             var productList = pushOrAdd(state.products,action.item);
             return Object.assign({},state,{
                 products:productList,
@@ -184,13 +182,11 @@ export const shoppingCart = function(state = {},action){
             });
 
         case 'CALC_TOTALMONEY':
-            // shoppingCartCtrl.calcTotalMoney();
             return Object.assign({},state,{
                 realCount:calcTotalMoney(state.products)
             });
 
         case 'CHECKED_ITEM':
-            // shoppingCartCtrl.checkedItem(action.index);
             let productList = checkItem(state.products,action.index);
             return Object.assign({},state,{
                 products:productList,
@@ -199,7 +195,6 @@ export const shoppingCart = function(state = {},action){
             });
 
         case 'ALLCHECKED':
-            // shoppingCartCtrl.allCheck();
             var newState = allCheck(state);
             return Object.assign({},state,{
                 products:newState.productList,
@@ -208,7 +203,6 @@ export const shoppingCart = function(state = {},action){
             });
 
         case 'INCREASE':
-            // shoppingCartCtrl.increase(action.index);
             var productList = increase(state.products,action.index);
             return Object.assign({},state,{
                 products:productList,
@@ -217,7 +211,6 @@ export const shoppingCart = function(state = {},action){
             });
 
         case 'REDUCE':
-            // shoppingCartCtrl.reduce(action.item);
             var productList = reduce(state.products,action.index);
             return Object.assign({},state,{
                 products:productList,
@@ -226,7 +219,6 @@ export const shoppingCart = function(state = {},action){
             });
 
         case 'DELETE_PRODUCTS':
-            // shoppingCartCtrl.deleteProducts();
             var productList = deleteProducts(state.products);
             return Object.assign({},state,{
                 products:productList,

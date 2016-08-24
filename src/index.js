@@ -10,7 +10,7 @@ var Shop = require('../src/container/Shop');
 var ShoppingCart = require('../src/container/ShoppingCart');
 var ProductDetails = require('../src/container/ProductDetails');
 var BuyDiamonds = require('../src/container/BuyDiamonds');
-
+var Register = require('../src/container/Register');
 var AskBar = require('../src/components/AskBar');
 var Discover = require('../src/components/Discover');
 var Store = require('../src/redux/store/store');
@@ -38,6 +38,8 @@ var getRoutes = ()=>{
         <Route path="/ProductDetails" components={ProductDetails}></Route>
         <Route path="/BuyDiamonds" components={BuyDiamonds}></Route>
         <Route path="/ShoppingCart" components={ShoppingCart}></Route>
+        <Route path="/Register" components={Register}></Route>
+
 
     </Router>
     )};
