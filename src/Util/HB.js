@@ -196,84 +196,76 @@ HB.arrObj = (function(){
 })();
 
 HB.ajax = (function(){
-
+    /*
+    *   第一个参数:url模板字符串类型，其中可以出现占位符，占位符要以“:”为前缀
+    *   比如：'/productList/:type';
+    *
+    *
+    *
+    *
+    * */
     class Resource{
-        constructor(templateUrl,restfulHash){
+        constructor(templateUrl){
 
-            this.url = templateUrl;
-            var templateArr = templateUrl.split('/');
-            for(let prop in restfulHash){
-                let i = templateArr.findIndex((ele,index,templateArr)=>{
-                    if(ele[0] == ':'){
-                        return ele.slice(1) == prop;
-                    }
-                });
+            //  分割字符串
+            this.templateUrlArr = templateUrl.split('/');
+        }
 
-                if(i != -1 && i != 0){
-                    templateArr[i] = restfulHash[prop];
+        getRealUrl(entity_obj){
+            this.templateUrlArr.map((item,i)=>{
+                if(item[0] === ":"){
+                    this.replaceItem(entity_obj,item,i)
+                }
+            });
+            return this.templateUrlArr.join('/');
+        }
+
+        replaceItem(entity_obj,item,index){
+            for(let prop in entity_obj){
+                if(prop === item.slice(1)){
+                    this.templateUrlArr[index] = entity_obj[prop];
+                }else{
+                    entity_obj = "";
                 }
             }
-            this.templateArr = templateArr;
+        }
+        ajax(type,url,data){
+            return new Promise((resolve,reject)=>{
+                $.ajax({
+                    type:type,
+                    url:url,
+                    dataType: "json",
+                    data:data,
+                    contentType:'application/json; charset=utf-8',
+                    headers: {
+                        "Access-Control-Allow-Origin":"*"
+                    }
+                }).done(resolve).fail(reject);
+
+            });
         }
 
         query(entity_obj){
 
-            var t = this.templateArr;
-            for(let prop in entity_obj){
-                let i = t.findIndex((ele,index,t)=>{
-                    if(ele[0] == '@'){
-                        return ele.slice(1) == prop;
-                    }
-
-                });
-                t[i] = entity_obj[prop];
-            }
-            var url = t.join('/');
-
-            return new Promise((resolve,reject)=>{
-
-                $.ajax({
-                    type:'GET',
-                    url:url,
-                    dataType: "json",
-                    contentType:'application/json; charset=utf-8'
-                }).done(resolve).fail(reject);
-
-            });
-
+            let url = this.getRealUrl(entity_obj);
+            console.log(url);
+            let type = 'GET';
+            var data = "";
+            this.ajax(type,url,data);
         }
 
-        save(entity_obj){
 
-            var t = this.templateArr;
-            for(let prop in entity_obj){
-                let i = t.findIndex((ele,index,t)=>{
-                    return ele == prop;
-                });
-                t[i] = entity_obj[prop];
-            }
-            var url = '';
-            for(let i = 0;i < t.length;i++){
-                url += t[i];
-            }
-
-            return new Promise((resolve,reject)=>{
-
-                $.ajax({
-                    type:'POST',
-                    url:url,
-                    dataType: "json",
-                    contentType:'application/json; charset=utf-8'
-                }).done(resolve).fail(reject);
-
-            });
+        save(entity_obj,data={}){
+            let url = this.getRealUrl(entity_obj);
+            let type = 'POST';
+            this.ajax(type,url,data);
         }
 
     }
 
     return {
-        resource:function(url){
-            return new Resource(url);
+        resource:function(templateUrl){
+            return new Resource(templateUrl);
         }
     }
 })();
