@@ -5,18 +5,17 @@
 /**
  *  HB.obj
  *      HB.obj.toEquals
- *      HB.obj.addProp
+ *      HB.obj.addProp(废弃 es6中已经有了)
  *      HB.obj.isEmpty
  *
- *  HB.arrObj
+ *  HB.arrObj（废弃 es6种已经有了）
  *      HB.arrObj.findObjs
  *      HB.arrObj.findIndex
  *      HB.arrObj.deleteObjs
  *
- *  HB.ajax
- *      HB.get  内部只使用了new XMLHttpRequest(); 所以可能不兼容部分IE浏览器
- *      HB.post
- *      HB.ajax
+ *  HB.resource
+ *      HB.resource.query()
+ *      HB.resource.save()
  */
 
 var $ = require('jquery');
@@ -211,6 +210,7 @@ HB.ajax = (function(){
             this.templateUrlArr = templateUrl.split('/');
         }
 
+        //  实际上这个方法并不想暴露出来
         getRealUrl(entity_obj){
             this.templateUrlArr.map((item,i)=>{
                 if(item[0] === ":"){
@@ -219,7 +219,7 @@ HB.ajax = (function(){
             });
             return this.templateUrlArr.join('/');
         }
-
+        //  实际上这个方法并不想暴露出来
         replaceItem(entity_obj,item,index){
             for(let prop in entity_obj){
                 if(prop === item.slice(1)){
@@ -229,6 +229,7 @@ HB.ajax = (function(){
                 }
             }
         }
+        //  实际上这个方法并不想暴露出来
         ajax(type,url,data){
             return new Promise((resolve,reject)=>{
                 $.ajax({
@@ -251,14 +252,14 @@ HB.ajax = (function(){
             console.log(url);
             let type = 'GET';
             var data = "";
-            this.ajax(type,url,data);
+            return this.ajax(type,url,data);
         }
 
 
         save(entity_obj,data={}){
             let url = this.getRealUrl(entity_obj);
             let type = 'POST';
-            this.ajax(type,url,data);
+            return this.ajax(type,url,data);
         }
 
     }

@@ -4,24 +4,26 @@
 var React = require('react');
 var ReactDom = require('react-dom');
 var { Router, Route, hashHistory,IndexRedirect} = require('react-router');
+var Store = require('../src/redux/store/store');
+var {Provider} = require('react-redux');
+import {DevTools} from 'Util/3rd/DevTools'
+
 var HomePage = require('../src/components/HomePage');
+var My = require('../src/components/My');
+var AskBar = require('../src/components/AskBar');
+var Discover = require('../src/components/Discover');
+
 var Guess = require('../src/container/Guess');
 var Shop = require('../src/container/Shop');
 var ShoppingCart = require('../src/container/ShoppingCart');
 var ProductDetails = require('../src/container/ProductDetails');
 var BuyDiamonds = require('../src/container/BuyDiamonds');
 var Register = require('../src/container/Register');
-var AskBar = require('../src/components/AskBar');
-var Discover = require('../src/components/Discover');
-var Store = require('../src/redux/store/store');
-var {Provider} = require('react-redux');
+
 var op = require('../src/redux/store/openingTimeInit');
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit'
-
-
-
-import {DevTools} from 'Util/3rd/DevTools'
 var {syncHistoryWithStore} = require('react-router-redux');
+
 const store = Store(initState());
 const history = syncHistoryWithStore(hashHistory, store);
 
@@ -33,6 +35,7 @@ var getRoutes = ()=>{
             <Route path="/Guess" component={Guess}></Route>
             <Route path="/AskBar" component={AskBar}></Route>
             <Route path="/Discover" component={Discover}></Route>
+            <Route path="/My" component={My}></Route>
         </Route>
         <Route path="/Shop" component={Shop}></Route>
         <Route path="/ProductDetails" components={ProductDetails}></Route>
