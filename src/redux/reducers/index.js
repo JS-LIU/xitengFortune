@@ -10,11 +10,11 @@ import {storage} from './storage';
 import {productInfo} from './productInfo';
 import {shoppingCart} from './shoppingCart';
 import {diamonds} from './diamonds';
-
+import {userInfo} from './userInfo';
 
 
 var rootReducer = combineReducers({
-    routing,openingTime,shop,diamonds,storage,productInfo,shoppingCart
+    routing,openingTime,shop,diamonds,storage,productInfo,shoppingCart,userInfo
 });
 
 module.exports = rootReducer;

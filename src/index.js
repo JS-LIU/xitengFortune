@@ -19,9 +19,9 @@ var ShoppingCart = require('../src/container/ShoppingCart');
 var ProductDetails = require('../src/container/ProductDetails');
 var BuyDiamonds = require('../src/container/BuyDiamonds');
 var Register = require('../src/container/Register');
-
 var op = require('../src/redux/store/openingTimeInit');
-import {shoppingCartInit} from '../src/redux/store/shoppingCartInit'
+import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
+import {userInfoInit} from  '../src/redux/store/userInfoInit';
 var {syncHistoryWithStore} = require('react-router-redux');
 
 const store = Store(initState());
@@ -56,7 +56,8 @@ function initState(){
         diamonds:{diamondList:[]},
         storage:{productId:''},
         productInfo:{},
-        shoppingCart:shoppingCartInit
+        shoppingCart:shoppingCartInit,
+        userInfo:userInfoInit
     }
 }
 

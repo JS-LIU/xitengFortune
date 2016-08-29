@@ -16,6 +16,8 @@
  *  HB.resource
  *      HB.resource.query()
  *      HB.resource.save()
+ *  HB.valid
+ *      HB.valid.toPhoneNum
  */
 
 var $ = require('jquery');
@@ -269,6 +271,33 @@ HB.ajax = (function(){
             return new Resource(templateUrl);
         }
     }
+})();
+HB.valid = (function(){
+    /*
+    *   第1个参数是分割哪个电话号码 比如：18801233565
+    *   第2个参数是每隔多少个字符分割 比如：18801233565 分成 188 0123 3565 就传[3,4,4]
+    *   第3个参数是用什么来分割 比如：18801233565 分成 188-0123-3565 就传'-'
+    * */
+
+    function validNum(num,arr,str){
+        var newPhoneNum = [];
+        arr.map((item,i)=>{
+            var newNum = num.slice(0,item);
+            num = num.substr(item);
+            newPhoneNum.push(newNum);
+        });
+
+        return newPhoneNum.join(str);
+    }
+    function trimAllBlank(str){
+        return str.replace(/\s/g, "");
+    }
+
+    return {
+        validNum:validNum,
+        trimAllBlank:trimAllBlank
+    }
+
 })();
 
 module.exports = HB;
