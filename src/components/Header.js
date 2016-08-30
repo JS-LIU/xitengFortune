@@ -19,6 +19,7 @@ var BackBtn = React.createClass({
     componentWillMount:function(){
         if(this.props.back.src){
             backStyle.backgroundImage="url("+this.props.back.src+")";
+            backStyle.paddingLeft="30px";
         }else{
             backStyle.paddingLeft = "15px";
         }
@@ -49,8 +50,7 @@ const backStyle = {
     backgroundSize:"10px",
     backgroundRepeat:'no-repeat',
     backgroundPositionX:"15px",
-    backgroundPositionY:'center',
-    paddingLeft:"30px",
+    backgroundPositionY:'center'
 };
 var titleStyle = {
     marginLeft:'-30px',

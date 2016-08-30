@@ -286,8 +286,7 @@ HB.valid = (function(){
             num = num.substr(item);
             newPhoneNum.push(newNum);
         });
-
-        return newPhoneNum.join(str);
+        return newPhoneNum.join(str).trim();
     }
     function trimAllBlank(str){
         return str.replace(/\s/g, "");

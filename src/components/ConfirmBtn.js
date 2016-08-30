@@ -9,9 +9,11 @@ var {Link} = require('react-router');
 
 
 var ConfirmBtn = React.createClass({
+
     render: function () {
+
         return (
-            <div style={confirmBtnStyle}  className="tc">
+            <div style={confirmBtnStyle}  className="tc" >
                 确定
             </div>
         )

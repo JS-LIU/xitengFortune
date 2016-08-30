@@ -3,7 +3,6 @@
  */
 
 import {GET_PRODUCTS} from './shopActionKeys';
-import fetcher1 from '../../Util/fetcher/fetcher';
 import _h from '../../Util/HB';
 
 

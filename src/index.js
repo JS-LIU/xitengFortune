@@ -19,6 +19,8 @@ var ShoppingCart = require('../src/container/ShoppingCart');
 var ProductDetails = require('../src/container/ProductDetails');
 var BuyDiamonds = require('../src/container/BuyDiamonds');
 var Register = require('../src/container/Register');
+var CheckCode = require('../src/container/CheckCode');
+
 var op = require('../src/redux/store/openingTimeInit');
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
 import {userInfoInit} from  '../src/redux/store/userInfoInit';
@@ -42,7 +44,7 @@ var getRoutes = ()=>{
         <Route path="/BuyDiamonds" components={BuyDiamonds}></Route>
         <Route path="/ShoppingCart" components={ShoppingCart}></Route>
         <Route path="/Register" components={Register}></Route>
-
+        <Route path="/CheckCode" components={CheckCode}></Route>
 
     </Router>
     )};
@@ -57,7 +59,8 @@ function initState(){
         storage:{productId:''},
         productInfo:{},
         shoppingCart:shoppingCartInit,
-        userInfo:userInfoInit
+        userInfo:userInfoInit,
+        showDialog:{}
     }
 }
 
