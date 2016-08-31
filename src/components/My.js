@@ -8,7 +8,11 @@ var {Link} = require('react-router');
 var My = React.createClass({
     render: function () {
         return (
-            <Link to='/Register'>注册</Link>
+            <div>
+                <Link to='/Register'>注册</Link>
+                <Link to='/Login'>登录</Link>
+            </div>
+
         )
     }
 });

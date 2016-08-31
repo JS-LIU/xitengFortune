@@ -14,7 +14,7 @@ var ConfirmBtn = React.createClass({
 
         return (
             <div style={confirmBtnStyle}  className="tc" >
-                确定
+                {this.props.text}
             </div>
         )
     }

@@ -6,7 +6,7 @@
  */
 
 
-import {SET_PHONENUM} from '../actions/userInfoActionKeys';
+import {SET_PHONENUM,LOGIN} from '../actions/userInfoActionKeys';
 var _h = require('../../../src/Util/HB');
 
 export const userInfo = function(state = {},action){
@@ -18,6 +18,11 @@ export const userInfo = function(state = {},action){
                 phoneNum:_h.valid.validNum(action.num,[3,4,4]," ")
             });
 
+        case 'LOGIN':
+            console.log(action.data);
+            return Object.assign({},state,{
+                accessInfo:action.data
+            });
         default:
             return state
     }

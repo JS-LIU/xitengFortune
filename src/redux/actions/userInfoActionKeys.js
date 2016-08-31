@@ -3,3 +3,4 @@
  */
 export const SET_PHONENUM = 'SET_PHONENUM';
 export const GET_CHECKCODE = 'GET_CHECKCODE';
+export const LOGIN = 'LOGIN';

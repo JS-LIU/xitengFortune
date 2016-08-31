@@ -52,7 +52,7 @@ var Register = React.createClass({
                     </li>
                 </ul>
                 <RegisterBtn showDialogActionKeys={this.props.showDialogActionKeys}>
-                    <ConfirmBtn />
+                    <ConfirmBtn text={'确定'}/>
                 </RegisterBtn>
                 {this.props.showDialog.showDialog?<DialogiOS >
                     <DialogHeader title="确认手机号码"/>
