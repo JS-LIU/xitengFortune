@@ -7,6 +7,7 @@ var ConfirmBtn = require('../components/ConfirmBtn');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 
+import {hex_md5} from '../Util/md5';
 import {userInfoActions} from '../redux/actions/userInfoActions';
 
 

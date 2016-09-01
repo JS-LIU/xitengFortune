@@ -1,7 +1,7 @@
 var hexcase = 0;
 var b64pad  = "";
 var chrsz   = 8;
-function hex_md5(s){ return binl2hex(core_md5(str2binl(s), s.length * chrsz)).toUpperCase();}
+export const hex_md5 = function(s) { return binl2hex(core_md5(str2binl(s), s.length * chrsz)).toUpperCase();}
 function b64_md5(s){ return binl2b64(core_md5(str2binl(s), s.length * chrsz));}
 function hex_hmac_md5(key, data) { return binl2hex(core_hmac_md5(key, data)); }
 function b64_hmac_md5(key, data) { return binl2b64(core_hmac_md5(key, data)); }

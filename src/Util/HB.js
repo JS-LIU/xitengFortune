@@ -239,10 +239,7 @@ HB.ajax = (function(){
                     url:url,
                     dataType: "json",
                     data:data,
-                    contentType:'application/json; charset=utf-8',
-                    headers: {
-                        "Access-Control-Allow-Origin":"*"
-                    }
+                    contentType:'application/json; charset=utf-8'
                 }).done(resolve).fail(reject);
 
             });
@@ -262,6 +259,9 @@ HB.ajax = (function(){
             let url = this.getRealUrl(entity_obj);
             let type = 'POST';
             return this.ajax(type,url,data);
+        }
+        h5_save(){
+
         }
 
     }

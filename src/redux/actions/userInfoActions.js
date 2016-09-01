@@ -25,7 +25,7 @@ export const userInfoActions = {
     },
     logIn: (obj1,obj2)=>{
         return (dispatch)=>{
-            _h.ajax.resource('http://114.251.53.22/xitenggamejar/login').save(obj1,obj2)
+            _h.ajax.resource('/xitenggamejar/login').save(obj1,obj2)
                 .then((data)=>{
                     dispatch({type:'LOGIN', data})
                 })
