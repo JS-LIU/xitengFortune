@@ -255,15 +255,24 @@ HB.ajax = (function(){
         }
 
 
-        save(entity_obj,data={}){
+        save(entity_obj,data){
             let url = this.getRealUrl(entity_obj);
             let type = 'POST';
             return this.ajax(type,url,data);
         }
-        h5_save(){
-
+        test_save(data){
+            let url = this.getRealUrl({});
+            console.log(url);
+            return new Promise((resolve,reject)=>{
+                $.ajax({
+                    type:"POST",
+                    url:url,
+                    dataType: "json",
+                    data:data,
+                    contentType:'application/json; charset=utf-8'
+                }).done(resolve).fail(reject);
+            });
         }
-
     }
 
     return {

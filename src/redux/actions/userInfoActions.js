@@ -23,9 +23,10 @@ export const userInfoActions = {
                 })
         }
     },
-    logIn: (obj1,obj2)=>{
+    logIn: (obj2)=>{
         return (dispatch)=>{
-            _h.ajax.resource('/xitenggamejar/login').save(obj1,obj2)
+            console.log(JSON.stringify(obj2));
+            _h.ajax.resource('/login').test_save(obj2)
                 .then((data)=>{
                     dispatch({type:'LOGIN', data})
                 })
@@ -33,6 +34,6 @@ export const userInfoActions = {
                     console.log("error",error);
                 })
         }
-    },
+    }
 
 };

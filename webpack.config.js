@@ -8,6 +8,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     devtool: 'inline-source-map',
     entry: [
+        'webpack-dev-server/client?http://localhost:8080/',
         'webpack/hot/only-dev-server',
         'babel-polyfill',
         './src'
@@ -30,23 +31,25 @@ module.exports = {
             { test: /\.css$/, loader: 'style-loader!css-loader' }
         ]
     },
-    //其实很简单的，只要配置这个参数就可以了
-    proxy: {
-        'http://localhost:8080/': {
-            target: 'http://114.251.53.22',
-            secure: false,
-            bypass: function (req, res, proxyOptions) {
-                if (req.headers.accept.indexOf('html') !== -1) {
-                    console.log('Skipping proxy for browser request.');
-                    return '/index.html';
+    devServer:{
+        proxy: {
+            '**': {
+                target: 'http://114.251.53.22/xitenggamejar',
+                secure: false,
+                bypass: function (req, res, proxyOptions) {
+                    if (req.headers.accept.indexOf('html') !== -1) {
+                        console.log('Skipping proxy for browser request.');
+                        return '/index.html';
+                    }
+                    if (req.headers.accept.indexOf('css') !== -1) {
+                        console.log('Skipping proxy for browser request.');
+                        return '/src/Util/base.css';
+                    }
                 }
             }
-        }
+        },
     },
-    devServer: {
-        inline: true,
-        port:9001
-    },
+
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),

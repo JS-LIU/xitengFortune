@@ -36,8 +36,19 @@ var LogIn = React.createClass({
 
 var LogInBtn = React.createClass({
     logIn:function(){
-
-        this.props.logIn({},{
+        // console.log({
+        //     "userName":this.props.openId,
+        //     "app_key":this.props.appKey,
+        //     "accessInfo":{
+        //         "app_key":this.props.appKey,
+        //         "access_token":"",
+        //         "phone_num":this.props.openId,
+        //         "signature":hex_md5(this.props.appSecret + this.props.openId),
+        //         "loginType":'weixin'
+        //     }
+        // });
+        // this.props.logIn({},{});
+        this.props.logIn({
             userName:this.props.openId,
             app_key:this.props.appKey,
             accessInfo:{
