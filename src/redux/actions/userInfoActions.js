@@ -23,10 +23,9 @@ export const userInfoActions = {
                 })
         }
     },
-    logIn: (obj2)=>{
+    logIn: (obj1,obj2)=>{
         return (dispatch)=>{
-            console.log(JSON.stringify(obj2));
-            _h.ajax.resource('/login').test_save(obj2)
+            _h.ajax.resource('/login').save(obj1,obj2)
                 .then((data)=>{
                     dispatch({type:'LOGIN', data})
                 })

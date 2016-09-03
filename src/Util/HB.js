@@ -258,7 +258,7 @@ HB.ajax = (function(){
         save(entity_obj,data){
             let url = this.getRealUrl(entity_obj);
             let type = 'POST';
-            return this.ajax(type,url,data);
+            return this.ajax(type,url,JSON.stringify(data));
         }
         test_save(data){
             let url = this.getRealUrl({});
