@@ -35,7 +35,7 @@ var BackBtn = React.createClass({
 var Title = React.createClass({
     render: function () {
         return (
-            <li style={titleStyle} className="tc">{this.props.title.text}</li>
+            <li style={titleStyle} className="tc f16">{this.props.title.text}</li>
         )
     }
 });
@@ -44,7 +44,8 @@ var Title = React.createClass({
 const headerStyle = {
     height:'44px',
     lineHeight:'44px',
-    fontSize:'14px'
+    fontSize:'14px',
+    background:"#0A89FE"
 };
 const backStyle = {
     backgroundSize:"10px",
@@ -53,6 +54,7 @@ const backStyle = {
     backgroundPositionY:'center'
 };
 var titleStyle = {
-    marginLeft:'-30px',
+    // marginLeft:'-30px',
+    color:'#FFF'
 };
 module.exports = {Header,BackBtn,Title};

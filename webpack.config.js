@@ -38,12 +38,15 @@ module.exports = {
                 secure: false,
                 bypass: function (req, res, proxyOptions) {
                     if (req.headers.accept.indexOf('html') !== -1) {
-                        console.log('Skipping proxy for browser request.');
                         return '/index.html';
                     }
                     if (req.headers.accept.indexOf('css') !== -1) {
-                        console.log('Skipping proxy for browser request.');
                         return '/src/Util/base.css';
+                    }
+                    if (req.headers.accept.indexOf('image') !== -1) {
+                        console.log('Skipping proxy for browser request.png');
+                        console.log(req.url);
+                        return "/src/images"+req.url;
                     }
                 }
             }

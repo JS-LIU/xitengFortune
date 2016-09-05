@@ -4,8 +4,8 @@
 var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
+var {Header,Title} = require('../components/Header');
 import {openingTimeActions} from '../redux/actions/openingTimeActions'
-
 
 var GuessTitle = React.createClass({
     timer:{},
@@ -41,17 +41,34 @@ var Guess = React.createClass({
         };
         return (
             <div>
+                <Header>
+                    <Title title={{text:'喜腾'}}></Title>
+                </Header>
+                <img src="/caicai_ad.png" className="fl" style={headerPic}/>
                 <GuessTitle countInit={this.props.openingTimeActionKeys.countInit} countDown={this.props.openingTimeActionKeys.countDown} openingTime={op}/>
                 <div>我是猜猜</div>
             </div>
         )
     }
 });
+var StockMarketList = React.createClass({
+    render: function () {
+        return (
+            <div></div>
+        )
+    }
+});
+
+
+
+const headerPic = {
+    height:"140px",
+};
 
 
 
 function mapStatetoProps(state){
-    console.log(state.openingTime);
+    // console.log(state.openingTime);
     return state.openingTime;
 }
 function mapDispatchToProps(dispatch){

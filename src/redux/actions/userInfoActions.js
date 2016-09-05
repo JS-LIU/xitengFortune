@@ -3,7 +3,7 @@
  */
 import {SET_PHONENUM,GET_CHECKCODE,LOGIN} from './userInfoActionKeys';
 import _h from '../../Util/HB';
-
+import {hex_md5} from '../../Util/md5';
 export const userInfoActions = {
 
     setPhoneNum: (num)=>{
@@ -23,9 +23,22 @@ export const userInfoActions = {
                 })
         }
     },
-    logIn: (obj1,obj2)=>{
-        return (dispatch)=>{
-            _h.ajax.resource('/login').save(obj1,obj2)
+    logIn: (obj)=>{
+        return (dispatch,getState)=>{
+            let userInfo = getState().userInfo;
+            let postData = {
+                userName:userInfo.openId,
+                app_key:userInfo.appKey,
+                accessInfo:{
+                    app_key:userInfo.appKey,
+                    access_token:"",
+                    phone_num:userInfo.openId,
+                    signature:hex_md5(userInfo.appSecret + userInfo.openId),
+                    loginType:'weixin'
+                }
+            };
+
+            _h.ajax.resource('/login').save(obj,postData)
                 .then((data)=>{
                     dispatch({type:'LOGIN', data})
                 })
