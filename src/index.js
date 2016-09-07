@@ -23,7 +23,7 @@ var CheckCode = require('../src/container/CheckCode');
 var LogIn = require('../src/container/Login');
 
 
-var op = require('../src/redux/store/openingTimeInit');
+import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
 import {userInfoInit} from  '../src/redux/store/userInfoInit';
 var {syncHistoryWithStore} = require('react-router-redux');
@@ -55,7 +55,7 @@ var getRoutes = ()=>{
 
 function initState(){
     return {
-        openingTime:op,
+        gameList:gameListInit,
         shop:{productList:[]},
         diamonds:{diamondList:[]},
         storage:{productId:''},

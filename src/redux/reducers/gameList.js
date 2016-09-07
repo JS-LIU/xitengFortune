@@ -1,8 +1,8 @@
 /**
  * Created by LDQ on 2016/8/8.
  */
-import { COUNT_DOWN, COUNT_INIT} from '../actions/openingTimeActionKeys'
-var op = require('./../store/openingTimeInit');
+import { COUNT_DOWN, COUNT_INIT} from '../actions/gameListActionKeys'
+var gameList = require('./../store/gameListInit');
 
 function secTurnHours(sec){
     var myHour = parseInt(sec / 3600);
@@ -16,15 +16,15 @@ function secTurnHours(sec){
     }
 }
 
-export const openingTime = function (state = {},action){
+export const gameList = function (state = {},action){
     switch (action.type) {
         case COUNT_INIT:
             return Object.assign({},state,{
-                initTime:op.initTime,
+                initTime:gameList.initTime,
             });
         case COUNT_DOWN:
             return Object.assign({},state,{
-                countDown:secTurnHours(op.countDown(action.time) - action.step)
+                countDown:secTurnHours(gameList.countDown(action.time) - action.step)
             });
         case 'fromserver':
             console.log("fromserver",action.data);
