@@ -55,7 +55,7 @@ var getRoutes = ()=>{
 
 function initState(){
     return {
-        gameList:gameListInit,
+        stockGame:gameListInit,
         shop:{productList:[]},
         diamonds:{diamondList:[]},
         storage:{productId:''},

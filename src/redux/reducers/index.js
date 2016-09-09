@@ -4,7 +4,7 @@
 var {combineReducers} = require('redux');
 import { routerReducer as routing } from 'react-router-redux'
 
-import {gameList} from './gameList';
+import {stockGame} from './stockGame';
 import {shop} from './shop';
 import {storage} from './storage';
 import {productInfo} from './productInfo';
@@ -15,7 +15,7 @@ import {showDialog} from './showDialog';
 
 
 var rootReducer = combineReducers({
-    routing,gameList,shop,diamonds,storage,productInfo,shoppingCart,userInfo,showDialog
+    routing,stockGame,shop,diamonds,storage,productInfo,shoppingCart,userInfo,showDialog
 });
 
 module.exports = rootReducer;

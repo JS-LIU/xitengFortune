@@ -2,12 +2,12 @@
  * Created by LDQ on 2016/8/8.
  */
 
-import {COUNT_INIT,COUNT_DOWN,GET_GAMELIST} from './gameListActionKeys';
+import {COUNT_INIT,COUNT_DOWN,GET_GAMELIST} from './stockGameActionKeys';
 
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 
-export var gameListActions = {
+export var stockGameActions = {
     countDown: (date,step = 1)=>{
         return {
             type : COUNT_DOWN,
@@ -26,15 +26,15 @@ export var gameListActions = {
     getGameList:(obj1,obj2)=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
-            let gameListInfo = getState().gameList;
+            let stockGameInfo = getState().stockGame;
             let postData = {
                 accessInfo:{
                     app_key:userInfo.appKey,
                     phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret + userInfo.openId),
+                    signature:hex_md5(userInfo.appSecret),
                 },
-                pageNo:gameListInfo.pageNo,
-                size:gameListInfo.size
+                pageNo:stockGameInfo.pageNo,
+                size:stockGameInfo.size
             };
             console.log(postData);
             _h.ajax.resource('/stockGameList').save(obj1,postData)
