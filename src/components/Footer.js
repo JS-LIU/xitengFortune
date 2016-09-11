@@ -17,7 +17,7 @@ var Footer = React.createClass({
         });
 
         return (
-            <ul className="footer">
+            <ul className="w" style={footerStyle}>
                 {footerNodes}
             </ul>
         )
@@ -25,7 +25,13 @@ var Footer = React.createClass({
 });
 
 
-
+const footerStyle = {
+    position:"fixed",
+    bottom:"0px",
+    height:"44px",
+    background:"#FFF",
+    zIndex:"11"
+};
 
 
 module.exports = Footer;

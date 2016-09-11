@@ -8,11 +8,13 @@ import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 
 export var stockGameActions = {
-    countDown: (date,step = 1)=>{
+    countDown: (nowTime,startTime,endTime,step = 1000)=>{
         return {
             type : COUNT_DOWN,
-            step:step,
-            time:date
+            step,
+            nowTime,
+            startTime,
+            endTime
         }
     },
 

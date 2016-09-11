@@ -23,7 +23,12 @@ var Guess = React.createClass({
                 <div className="clearfix">
                     <img src="/caicai_ad.png" className="fl w"/>
                 </div>
-                <StockMarketList gameList={stockGame.gameList}/>
+                <StockMarketList
+                    gameList={stockGame.gameList}
+                    gameTime={stockGame.gameTime}
+                    countDown={stockGame.countDown}
+                    countDownAction={this.props.stockGameActionsKeys.countDown}
+                />
             </div>
         )
     }
@@ -37,50 +42,93 @@ var StockMarketList = React.createClass({
     render: function () {
         var stockMarketNodes = this.props.gameList.map((gameItem,index)=>{
             return (
-                <li key={index}>
-                    <div className="tc f20" style={stockMarketHead}>
-                        {gameItem.stockGameName}
-                    </div>
-                    <div>
-                        <div className="f16 tc" style={stockMarketCenterTop}>
-                            <span className="pr5">{gameItem.stockModel.currentPoint}</span>
-                            <span className="pr5">{gameItem.stockModel.chg}</span>
-                            <span className="pr5">{gameItem.stockModel.changeRate}%</span>
-                        </div>
-
-                        <div style={stockMarketCenterBody}>
-                            <img src="/lg_1@3x.png" alt="" className="pt20" style={stockMarketPic}/>
-                            <ul className="clearfix" style={guessUpDown}>
-                               <li className="fl tc f16" style={guessItemLeft}>
-                                   <p className="f16">猜涨总额</p>
-                                   {gameItem.guessUpXtBAmount}XT币
-                               </li>
-                                <li className="fr tc f16" style={guessItemRight}>
-                                    <p className="f16">猜跌总额</p>
-                                    {gameItem.guessDownXtBAmount}XT币
-                                </li>
-                            </ul>
-                            <div style={stockMarketCenterFooter}>
-                                {/*<Link to="/"/>*/}
-                            </div>
-                        </div>
-                    </div>
-                </li>
+                <GameItem gameItem={gameItem} key={index}/>
             )
         });
-
-
         return (
             <ul style={stockMarketListStyle}>
+                <GameTime
+                    gameTime={this.props.gameTime}
+                    countDownAction={this.props.countDownAction}
+                    countDown={this.props.countDown}
+                />
                 {stockMarketNodes}
             </ul>
         )
     }
 });
 
+var GameTime = React.createClass({
+    // timer:function(){
+    //
+    // },
+    componentDidMount:function(){
+        setInterval(()=>{
+            this.props.countDownAction(
+                new Date(),
+                this.props.gameTime.startTime,
+                this.props.gameTime.endTime
+            );
+        },1000);
+    },
+    render: function () {
+        return (
+            <ul>
+                <li className="tc f14 pt10">猜股市收盘涨跌</li>
+                <li className="tc f20 pt5" style={nowTimeStyle}>8月15日（周一）</li>
+                <li className="tc f16 pt5" style={countDownStyle}>距离{this.props.countDown.startOrEnd}还剩:{this.props.countDown.countDownTime}</li>
+            </ul>
+        )
+    }
+});
+
+
+var GameItem = React.createClass({
+    render: function () {
+        var gameItem = this.props.gameItem;
+        return (
+            <li style={gameItemStyle}>
+                <div className="tc f20" style={stockMarketHead}>
+                    {gameItem.stockGameName}
+                </div>
+                <div>
+                    <div className="f16 tc" style={stockMarketCenterTop}>
+                        <span className="pr5">{gameItem.stockModel.currentPoint}</span>
+                        <span className="pr5">{gameItem.stockModel.chg}</span>
+                        <span className="pr5">{gameItem.stockModel.changeRate}%</span>
+                    </div>
+
+                    <div style={stockMarketCenterBody}>
+                        <img src="/lg_1@3x.png" alt="" className="pt20" style={stockMarketPic}/>
+                        <ul className="clearfix" style={guessUpDown}>
+                            <li className="fl tc f16" style={guessItemLeft}>
+                                <p className="f16">猜涨总额</p>
+                                {gameItem.guessUpXtBAmount}XT币
+                            </li>
+                            <li className="fr tc f16" style={guessItemRight}>
+                                <p className="f16">猜跌总额</p>
+                                {gameItem.guessDownXtBAmount}XT币
+                            </li>
+                        </ul>
+                        <div style={stockMarketCenterFooter}>
+                            {/*<Link to="/"/>*/}
+                        </div>
+                    </div>
+                </div>
+            </li>
+        )
+    }
+});
+
+
+
+const gameItemStyle = {
+    paddingBottom:"20px",
+};
 
 
 const stockMarketListStyle = {
+    marginBottom:"44px",
     background:"url('/caicai_bg.png') no-repeat center",
     backgroundSize:"content"
 };
@@ -99,7 +147,7 @@ const stockMarketHead = {
 const stockMarketCenterTop = {
     margin:"-14px 14px 0px",
     paddingBottom:"20px",
-    height:"60px",
+    height:"40px",
     lineHeight:"70px",
     background:"#C7E7FE",
     borderTopLeftRadius:"6px",
@@ -133,6 +181,12 @@ const stockMarketCenterFooter = {
     height:"50px",
     background:"url('/item_game_go.png') no-repeat center",
     backgroundSize:"contain"
+};
+const nowTimeStyle = {
+    color:"#FF3B18"
+};
+const countDownStyle = {
+    color:"#FFF"
 };
 
 
