@@ -7,11 +7,29 @@ var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var {Header,Title} = require('../components/Header');
 import {stockGameActions} from '../redux/actions/stockGameActions'
-
+import {storageActions} from '../redux/actions/storageActions'
 
 var Guess = React.createClass({
+    timer:{},
     componentWillMount:function(){
-        this.props.stockGameActionsKeys.getGameList({});
+        if(this.props.stockGame.gameList.length == 0){
+            this.props.stockGameActionsKeys.getGameList({});
+        }
+    },
+    componentDidMount:function(){
+        var time = 60000;
+        if(this.props.stockGame.gameList.length <= 3){
+            time = 5000;
+        }
+
+        this.timer = setInterval(()=>{
+            this.props.stockGame.gameList.map((stockItem,index)=>{
+                this.props.stockGameActionsKeys.refresh(stockItem.stockGameId);
+            });
+        },time);
+    },
+    componentWillUnmount:function(){
+        clearInterval(this.timer);
     },
     render: function () {
         var stockGame = this.props.stockGame;
@@ -59,11 +77,9 @@ var StockMarketList = React.createClass({
 });
 
 var GameTime = React.createClass({
-    // timer:function(){
-    //
-    // },
+    timer:{},
     componentDidMount:function(){
-        setInterval(()=>{
+        this.timer = setInterval(()=>{
             this.props.countDownAction(
                 new Date(),
                 this.props.gameTime.startTime,
@@ -71,11 +87,18 @@ var GameTime = React.createClass({
             );
         },1000);
     },
+    componentWillUnmount:function(){
+        clearInterval(this.timer);
+    },
     render: function () {
+        var date = new Date();
+        var month = date.getMonth()+1;
+        var ri = date.getDate();
+        var day = date.getDay();
         return (
             <ul>
-                <li className="tc f14 pt10">猜股市收盘涨跌</li>
-                <li className="tc f20 pt5" style={nowTimeStyle}>8月15日（周一）</li>
+                <li className="tc f14 pt10" style={countDownStyle}>猜股市收盘涨跌</li>
+                <li className="tc f20 pt5" style={nowTimeStyle}>{month}月{ri}日（周{day}）</li>
                 <li className="tc f16 pt5" style={countDownStyle}>距离{this.props.countDown.startOrEnd}还剩:{this.props.countDown.countDownTime}</li>
             </ul>
         )
@@ -84,6 +107,11 @@ var GameTime = React.createClass({
 
 
 var GameItem = React.createClass({
+    setStockId:function(stockCode){
+        return function(stockCode){
+            this.props.storageActions.setStockGameId(stockCode);
+        }
+    },
     render: function () {
         var gameItem = this.props.gameItem;
         return (
@@ -110,9 +138,10 @@ var GameItem = React.createClass({
                                 {gameItem.guessDownXtBAmount}XT币
                             </li>
                         </ul>
-                        <div style={stockMarketCenterFooter}>
-                            {/*<Link to="/"/>*/}
-                        </div>
+                        <Link to="/stockDetails" onClick={this.setStockId(gameItem.stockCode)}>
+                            <div style={stockMarketCenterFooter}></div>
+                        </Link>
+
                     </div>
                 </div>
             </li>
@@ -192,13 +221,17 @@ const countDownStyle = {
 
 function mapStatetoProps(state){
     // console.log(state.openingTime);
-    return {stockGame:state.stockGame};
+    return {
+        stockGame:state.stockGame,
+        storage:state.storage
+    };
 }
 
 function mapDispatchToProps(dispatch){
 
     return{
-        stockGameActionsKeys : bindActionCreators(stockGameActions,dispatch)
+        stockGameActionsKeys : bindActionCreators(stockGameActions,dispatch),
+        storageActions:bindActionCreators(storageActions,dispatch)
     }
 }
 

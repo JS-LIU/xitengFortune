@@ -1,11 +1,12 @@
 /**
  * Created by LDQ on 2016/8/8.
  */
-import { COUNT_DOWN,GET_GAMELIST} from '../actions/stockGameActionKeys'
+import { COUNT_DOWN,GET_GAMELIST,REFRESH} from '../actions/stockGameActionKeys'
 
 export const stockGame = function (state = {},action){
     switch (action.type) {
         case 'GET_GAMELIST':
+
             var gameList = state.gameList.concat(action.data.content);
             var startTime = gameList[0].gameStartTime;
             var endTime = gameList[0].gameEndTime;
@@ -36,6 +37,16 @@ export const stockGame = function (state = {},action){
                    startOrEnd:startOrEnd
                }
 
+            });
+        case 'REFRESH':
+
+            let index = state.gameList.findIndex((gameItem)=>{
+                return gameItem.stockGameId == action.id;
+            });
+            var gameList = [...state.gameList];
+            gameList[index].stockModel = action.data;
+            return Object.assign({},state,{
+                gameList:gameList
             });
 
         default:

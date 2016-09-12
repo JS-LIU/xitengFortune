@@ -21,7 +21,7 @@ var BuyDiamonds = require('../src/container/BuyDiamonds');
 var Register = require('../src/container/Register');
 var CheckCode = require('../src/container/CheckCode');
 var LogIn = require('../src/container/Login');
-
+var StockDetails = require('../src/container/StockDetails');
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -42,12 +42,13 @@ var getRoutes = ()=>{
             <Route path="/My" component={My}></Route>
         </Route>
         <Route path="/Shop" component={Shop}></Route>
-        <Route path="/ProductDetails" components={ProductDetails}></Route>
-        <Route path="/BuyDiamonds" components={BuyDiamonds}></Route>
-        <Route path="/ShoppingCart" components={ShoppingCart}></Route>
-        <Route path="/Register" components={Register}></Route>
-        <Route path="/CheckCode" components={CheckCode}></Route>
-        <Route path="/LogIn" components={LogIn}></Route>
+        <Route path="/ProductDetails" component={ProductDetails}></Route>
+        <Route path="/BuyDiamonds" component={BuyDiamonds}></Route>
+        <Route path="/ShoppingCart" component={ShoppingCart}></Route>
+        <Route path="/Register" component={Register}></Route>
+        <Route path="/CheckCode" component={CheckCode}></Route>
+        <Route path="/LogIn" component={LogIn}></Route>
+        <Route path="/StockDetails" component={StockDetails}></Route>
     </Router>
     )};
 
@@ -58,7 +59,7 @@ function initState(){
         stockGame:gameListInit,
         shop:{productList:[]},
         diamonds:{diamondList:[]},
-        storage:{productId:''},
+        storage:{productId:'',stockGameId:''},
         productInfo:{},
         shoppingCart:shoppingCartInit,
         userInfo:userInfoInit,

@@ -2,7 +2,7 @@
  * Created by LDQ on 2016/8/17.
  */
 
-import {SET_PRODUCTID,GET_PRODUCTID} from './storageActionKeys';
+import {SET_PRODUCTID,GET_PRODUCTID,SET_STOCKGAMEID,GET_STOCKGAMEID} from './storageActionKeys';
 
 export const storageActions = {
 
@@ -17,6 +17,18 @@ export const storageActions = {
         return {
             type : GET_PRODUCTID,
         }
-    }
+    },
+    setStockGameId: (id)=>{
+        return {
+            type : SET_STOCKGAMEID,
+            id
+        }
+    },
+    getStockGameId: () =>{
+        return {
+            type : GET_STOCKGAMEID,
+        }
+    },
+
 
 };

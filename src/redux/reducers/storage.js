@@ -3,7 +3,7 @@
  */
 
 
-import {SET_PRODUCTID,GET_PRODUCTID} from '../actions/storageActionKeys'
+import {SET_PRODUCTID,GET_PRODUCTID,SET_STOCKGAMEID,GET_STOCKGAMEID} from '../actions/storageActionKeys'
 
 export const storage = function(state = {},action){
 
@@ -12,9 +12,17 @@ export const storage = function(state = {},action){
             return Object.assign({},state,{
                 productId:action.id
             });
+
         case 'GET_PRODUCTID':
-            console.log('storageActions->store->storage->productId->',state.productId);
             return state.productId;
+
+        case 'SET_STOCKGAMEID':
+            return Object.assign({},state,{
+                stockGameId:action.id
+            });
+
+        case 'GET_STOCKGAMEID':
+            return state.stockGameId;
         default:
             return state
     }

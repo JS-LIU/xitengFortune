@@ -2,7 +2,7 @@
  * Created by LDQ on 2016/8/8.
  */
 
-import {COUNT_INIT,COUNT_DOWN,GET_GAMELIST} from './stockGameActionKeys';
+import {COUNT_INIT,COUNT_DOWN,GET_GAMELIST,REFRESH} from './stockGameActionKeys';
 
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
@@ -38,7 +38,6 @@ export var stockGameActions = {
                 pageNo:stockGameInfo.pageNo,
                 size:stockGameInfo.size
             };
-            console.log(postData);
             _h.ajax.resource('/stockGameList').save(obj1,postData)
                 .then((data)=>{
                     dispatch({type:'GET_GAMELIST', data})
@@ -47,6 +46,28 @@ export var stockGameActions = {
                     console.log("error",error);
                 })
         }
+    },
+
+    refresh:(id)=>{
+        return (dispatch,getState)=>{
+            let userInfo = getState().userInfo;
+            let postData = {
+                accessInfo:{
+                    app_key:userInfo.appKey,
+                    phone_num:userInfo.openId,
+                    signature:hex_md5(userInfo.appSecret),
+                },
+                stockGameId:id
+            };
+            _h.ajax.resource('/getStockData').save({},postData)
+                .then((data)=>{
+                    dispatch({type:'REFRESH', data,id})
+                })
+                .catch((error)=>{
+                    console.log("error",error);
+                })
+        }
     }
+
 };
 
