@@ -6,14 +6,16 @@ var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var {Header,Title} = require('../components/Header');
-import {stockGameActions} from '../redux/actions/stockGameActions'
-import {storageActions} from '../redux/actions/storageActions'
+
+
+import {stockGameActions} from '../redux/actions/stockGameActions';
+import {storageActions} from '../redux/actions/storageActions';
 
 var Guess = React.createClass({
     timer:{},
     componentWillMount:function(){
         if(this.props.stockGame.gameList.length == 0){
-            this.props.stockGameActionsKeys.getGameList({});
+            this.props.stockGameActionKeys.getGameList({});
         }
     },
     componentDidMount:function(){
@@ -24,7 +26,7 @@ var Guess = React.createClass({
 
         this.timer = setInterval(()=>{
             this.props.stockGame.gameList.map((stockItem,index)=>{
-                this.props.stockGameActionsKeys.refresh(stockItem.stockGameId);
+                this.props.stockGameActionKeys.refresh(stockItem.stockGameId);
             });
         },time);
     },
@@ -45,7 +47,8 @@ var Guess = React.createClass({
                     gameList={stockGame.gameList}
                     gameTime={stockGame.gameTime}
                     countDown={stockGame.countDown}
-                    countDownAction={this.props.stockGameActionsKeys.countDown}
+                    countDownAction={this.props.stockGameActionKeys.countDown}
+                    setStockGameIdAction={this.props.storageActionKeys.setStockGameId}
                 />
             </div>
         )
@@ -60,7 +63,7 @@ var StockMarketList = React.createClass({
     render: function () {
         var stockMarketNodes = this.props.gameList.map((gameItem,index)=>{
             return (
-                <GameItem gameItem={gameItem} key={index}/>
+                <GameItem setStockGameIdAction={this.props.setStockGameIdAction} gameItem={gameItem} key={index}/>
             )
         });
         return (
@@ -108,8 +111,10 @@ var GameTime = React.createClass({
 
 var GameItem = React.createClass({
     setStockId:function(stockCode){
-        return function(stockCode){
-            this.props.storageActions.setStockGameId(stockCode);
+        var stockCode = stockCode;
+        var self = this;
+        return function(){
+            self.props.setStockGameIdAction(stockCode);
         }
     },
     render: function () {
@@ -230,8 +235,8 @@ function mapStatetoProps(state){
 function mapDispatchToProps(dispatch){
 
     return{
-        stockGameActionsKeys : bindActionCreators(stockGameActions,dispatch),
-        storageActions:bindActionCreators(storageActions,dispatch)
+        stockGameActionKeys : bindActionCreators(stockGameActions,dispatch),
+        storageActionKeys:bindActionCreators(storageActions,dispatch)
     }
 }
 

@@ -48,6 +48,7 @@ const headerStyle = {
     background:"#0A89FE"
 };
 const backStyle = {
+    color:"#FFF",
     backgroundSize:"10px",
     backgroundRepeat:'no-repeat',
     backgroundPositionX:"15px",

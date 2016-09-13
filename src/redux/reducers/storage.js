@@ -22,7 +22,9 @@ export const storage = function(state = {},action){
             });
 
         case 'GET_STOCKGAMEID':
+            console.log(state.stockGameId);
             return state.stockGameId;
+
         default:
             return state
     }

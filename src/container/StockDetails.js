@@ -5,18 +5,32 @@ var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
+var {Header,BackBtn,Title} = require('../components/Header');
+
+import {storageActions} from '../redux/actions/storageActions'
 
 var StockDetails = React.createClass({
+    componentWillMount:function(){
+        this.props.storageActionKeys.getStockGameId();
+
+    },
     render: function () {
+        var stockGameId = this.props.storage;
+        var daily = "http://image.sinajs.cn/newchart/daily/n/sh"+stockGameId+".gif";
         return (
-            <div></div>
+            <div>
+                <Header >
+                    <BackBtn back={{text:'猜猜',src:'/nav_btn_back@2x.png'}}/>
+                    <Title title={{text:'喜腾'}}></Title>
+                </Header>
+                <img src={daily} alt="" className="w"/>
+            </div>
         )
     }
 });
 
 
 function mapStatetoProps(state){
-    // console.log(state.openingTime);
     return {
         storage:state.storage
     };
@@ -25,8 +39,7 @@ function mapStatetoProps(state){
 function mapDispatchToProps(dispatch){
 
     return{
-        stockGameActionsKeys : bindActionCreators(stockGameActions,dispatch),
-        storageActions:bindActionCreators(storageActions,dispatch)
+        storageActionKeys:bindActionCreators(storageActions,dispatch)
     }
 }
 
