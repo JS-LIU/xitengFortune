@@ -44,7 +44,7 @@ export const stockGame = function (state = {},action){
                 return gameItem.stockGameId == action.id;
             });
             var gameList = [...state.gameList];
-            gameList[index].stockModel = action.data;
+            gameList[index] = action.data;
             return Object.assign({},state,{
                 gameList:gameList
             });

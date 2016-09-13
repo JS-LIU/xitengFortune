@@ -110,11 +110,11 @@ var GameTime = React.createClass({
 
 
 var GameItem = React.createClass({
-    setStockId:function(stockCode){
-        var stockCode = stockCode;
+    setStockId:function(stockGameId){
+        var stockGameId = stockGameId;
         var self = this;
         return function(){
-            self.props.setStockGameIdAction(stockCode);
+            self.props.setStockGameIdAction(stockGameId);
         }
     },
     render: function () {
@@ -143,7 +143,7 @@ var GameItem = React.createClass({
                                 {gameItem.guessDownXtBAmount}XT币
                             </li>
                         </ul>
-                        <Link to="/stockDetails" onClick={this.setStockId(gameItem.stockCode)}>
+                        <Link to="/stockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
                             <div style={stockMarketCenterFooter}></div>
                         </Link>
 

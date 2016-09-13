@@ -26,6 +26,9 @@ var StockDetails = require('../src/container/StockDetails');
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
 import {userInfoInit} from  '../src/redux/store/userInfoInit';
+import {stockGameDetail} from '../src/redux/store/stockGameDetailInit';
+
+
 var {syncHistoryWithStore} = require('react-router-redux');
 
 const store = Store(initState());
@@ -57,6 +60,7 @@ var getRoutes = ()=>{
 function initState(){
     return {
         stockGame:gameListInit,
+        stockGameDetail:{detail:stockGameDetail},
         shop:{productList:[]},
         diamonds:{diamondList:[]},
         storage:{productId:'',stockGameId:''},

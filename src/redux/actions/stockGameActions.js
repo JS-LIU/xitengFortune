@@ -59,7 +59,7 @@ export var stockGameActions = {
                 },
                 stockGameId:id
             };
-            _h.ajax.resource('/getStockData').save({},postData)
+            _h.ajax.resource('/stockGameDetail').save({},postData)
                 .then((data)=>{
                     dispatch({type:'REFRESH', data,id})
                 })
