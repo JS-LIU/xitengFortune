@@ -29,6 +29,7 @@ var StockDetails = React.createClass({
                     getStockKLine={this.props.stockGameDetailActionKeys.getStockKLine}
                     kLineImg={this.props.stockGameDetail.kLineImg}
                 />
+                <UpDownRate stockGameDetail={this.props.stockGameDetail.detail}/>
             </div>
         )
     }
@@ -40,8 +41,8 @@ var StockGameDetail = React.createClass({
         var stockGameDetail = this.props.stockGameDetail;
         var stockCode = stockGameDetail.stockCode;
         return (
-            <div >
-                <ul className="pl15 pr15 clearfix f14">
+            <div>
+                <ul className="pl15 pr15 clearfix">
                     <li className="w">
                         <span>{stockGameDetail.stockModel.currentPoint}</span>
                         <span>{stockGameDetail.stockModel.chg}</span>
@@ -59,7 +60,6 @@ var StockGameDetail = React.createClass({
                     kLineImg={this.props.kLineImg}
                     getStockKLine={this.props.getStockKLine}
                 />
-                {/*<img src={} alt="" className="w"/>*/}
             </div>
         )
     }
@@ -85,12 +85,12 @@ var StockPic = React.createClass({
         }
 
         return (
-            <div>
-                <ul>
-                    <li onClick={this.cutKLineImg("min")}>分时</li>
-                    <li onClick={this.cutKLineImg("daily")}>日K</li>
-                    <li onClick={this.cutKLineImg("weekly")}>周K</li>
-                    <li onClick={this.cutKLineImg("monthly")}>月K</li>
+            <div className="m15" style={stockDetailStyle}>
+                <ul className="clearfix" style={stockDetailHeader}>
+                    <li style={stockDetailHeaderItem} className="fl tc" onClick={this.cutKLineImg("min")}>分时</li>
+                    <li style={stockDetailHeaderItem} className="fl tc" onClick={this.cutKLineImg("daily")}>日K</li>
+                    <li style={stockDetailHeaderItem} className="fl tc" onClick={this.cutKLineImg("weekly")}>周K</li>
+                    <li style={stockDetailHeaderItem} className="fl tc" onClick={this.cutKLineImg("monthly")}>月K</li>
                 </ul>
                 <img src={src} alt="" className="w"/>
             </div>
@@ -98,13 +98,81 @@ var StockPic = React.createClass({
     }
 });
 
+var UpDownRate = React.createClass({
+    render: function () {
+
+        var stockGameDetail = this.props.stockGameDetail;
+
+        return (
+            <ul className="m15 f14">
+               <li className="clearfix" style={guessUpDownRateStyle}>
+                   <span className="fl" style={guessUpRateStyle}>看涨：{stockGameDetail.guessUpRate}</span>
+                   <span className="fr" style={guessDownRateStyle}>看跌：{stockGameDetail.guessDownRate}</span>
+               </li>
+                <li className="clearfix">
+                    <div className="fl tc" style={guessUpXtBAmountStyle}>合计：{stockGameDetail.guessUpXtBAmount}XT币</div>
+                    <div className="fl">vs</div>
+                    <div className="fr tc" style={guessDownXtBAmountStyle}>合计：{stockGameDetail.guessDownXtBAmount}XT币</div>
+                </li>
+                <li>
+                    <span>投注时间截止：{stockGameDetail.gameEndTime}</span>
+                    <span>开奖时间间：{stockGameDetail.gameStartTime}</span>
+                </li>
+            </ul>
+        )
+    }
+});
+module.exports = UpDownRate;
+
 
 const stockDetailList = {
     width:"33.3%"
-
+};
+const stockDetailStyle = {
+    border:"1px solid #E2E2E2"
 };
 
+const stockDetailHeader = {
+    height:"40px",
+    lineHeight:"40px"
+};
 
+const stockDetailHeaderItem = {
+    width:"25%"
+};
+const guessUpDownRateStyle = {
+    lineHeight:"40px"
+};
+const guessUpRateStyle = {
+    background:'url("/flag_red@2x.png") no-repeat left center',
+    backgroundSize:'15px',
+    paddingLeft:'20px',
+    color:"#DE3031"
+};
+const guessDownRateStyle = {
+    background:'url("/flag_green@2x.png") no-repeat left center',
+    backgroundSize:'15px',
+    paddingLeft:'20px',
+    color:"#03C56C"
+};
+
+const guessUpXtBAmountStyle = {
+    width:"45%",
+    height:"30px",
+    lineHeight:"30px",
+    color:"#FFF",
+    background:'url("/red@2x.png") no-repeat center',
+    backgroundSize:"cover"
+};
+
+const guessDownXtBAmountStyle = {
+    width:"45%",
+    height:"30px",
+    lineHeight:"30px",
+    color:"#FFF",
+    background:'url("/green@2x.png") no-repeat center',
+    backgroundSize:"cover"
+};
 
 function mapStatetoProps(state){
     return {
