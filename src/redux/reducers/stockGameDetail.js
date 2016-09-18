@@ -2,7 +2,7 @@
  * Created by LDQ on 2016/9/13.
  */
 
-import { GET_STOCKDETAIL} from '../actions/stockGameDetailActionKeys'
+import { GET_STOCKDETAIL,GET_STOCKKLINE} from '../actions/stockGameDetailActionKeys'
 
 
 export const stockGameDetail = function (state = {},action){
@@ -11,6 +11,12 @@ export const stockGameDetail = function (state = {},action){
 
             return Object.assign({},state,{
                 detail:action.data
+            });
+
+        case 'GET_STOCKKLINE':
+
+            return Object.assign({},state,{
+                kLineImg:action.kLine
             });
 
         default:

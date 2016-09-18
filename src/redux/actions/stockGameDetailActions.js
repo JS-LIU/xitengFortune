@@ -1,7 +1,7 @@
 /**
  * Created by LDQ on 2016/9/13.
  */
-import { GET_STOCKDETAIL} from '../actions/stockGameDetailActionKeys'
+import { GET_STOCKDETAIL,GET_STOCKKLINE} from '../actions/stockGameDetailActionKeys'
 
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
@@ -28,4 +28,12 @@ export var stockGameDetailActions = {
                 })
         }
     },
+    getStockKLine:(kLine)=>{
+        return {
+            type : GET_STOCKKLINE,
+            kLine
+        }
+
+    }
+
 };

@@ -28,5 +28,5 @@ export const stockGameDetail = {
     leastCathectic: "",
     guessUpRate: "",
     guessDownRate: "",
-    guessXtbCount: ""
+    guessXtbCount: "",
 };

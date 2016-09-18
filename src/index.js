@@ -60,7 +60,7 @@ var getRoutes = ()=>{
 function initState(){
     return {
         stockGame:gameListInit,
-        stockGameDetail:{detail:stockGameDetail},
+        stockGameDetail:{detail:stockGameDetail,kLineImg:"min"},
         shop:{productList:[]},
         diamonds:{diamondList:[]},
         storage:{productId:'',stockGameId:''},
