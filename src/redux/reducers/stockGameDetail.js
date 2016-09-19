@@ -15,8 +15,13 @@ export const stockGameDetail = function (state = {},action){
 
         case 'GET_STOCKKLINE':
 
+            var KLineTags = [...state.KLineTags];
+            KLineTags.map((tag,index)=>{
+                tag.selected = false;
+            });
+            KLineTags[action.index].selected = true;
             return Object.assign({},state,{
-                kLineImg:action.kLine
+                KLineTags:KLineTags
             });
 
         default:

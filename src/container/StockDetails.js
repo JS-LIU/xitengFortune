@@ -27,7 +27,7 @@ var StockDetails = React.createClass({
                 <StockGameDetail
                     stockGameDetail={this.props.stockGameDetail.detail}
                     getStockKLine={this.props.stockGameDetailActionKeys.getStockKLine}
-                    kLineImg={this.props.stockGameDetail.kLineImg}
+                    KLineTags={this.props.stockGameDetail.KLineTags}
                 />
                 <UpDownRate stockGameDetail={this.props.stockGameDetail.detail}/>
             </div>
@@ -41,23 +41,35 @@ var StockGameDetail = React.createClass({
         var stockGameDetail = this.props.stockGameDetail;
         var stockCode = stockGameDetail.stockCode;
         return (
-            <div>
+            <div className="pb15" style={stockDetailStyle}>
                 <ul className="pl15 pr15 clearfix">
                     <li className="w">
                         <span>{stockGameDetail.stockModel.currentPoint}</span>
                         <span>{stockGameDetail.stockModel.chg}</span>
                         <span>{stockGameDetail.stockModel.changeRate}</span>
                     </li>
-                    <li className="fl tl" style={stockDetailList}>昨收{this.props.stockGameDetail.stockModel.yesterDayClosed}</li>
-                    <li className="fl tl" style={stockDetailList}>最高{stockGameDetail.stockModel.todayMaxPrice}</li>
-                    <li className="fl tl" style={stockDetailList}>成交量{stockGameDetail.stockModel.turnoverStockAmount}</li>
-                    <li className="fl tl" style={stockDetailList}>今开{stockGameDetail.stockModel.todayOpend}</li>
-                    <li className="fl tl" style={stockDetailList}>最低{stockGameDetail.stockModel.todayMinPrice}</li>
-                    <li className="fl tl" style={stockDetailList}>成交额{stockGameDetail.stockModel.turnoverStockMoney}</li>
+                    <li className="fl tl" style={stockDetailListStyle}>
+                        <span>昨收</span>
+                        <span className="pl5">{this.props.stockGameDetail.stockModel.yesterDayClosed}</span>
+                    </li>
+                    <li className="fl tl" style={stockDetailListStyle}>
+                        <span>最高</span>
+                        <span className="pl5">{stockGameDetail.stockModel.todayMaxPrice}</span>
+                    </li>
+                    <li className="fl tl" style={stockDetailListLongStyle}>
+                        <span>成交量</span>
+                        <span className="pl5">{stockGameDetail.stockModel.turnoverStockAmount}</span>
+                    </li>
+                    <li className="fl tl" style={stockDetailListStyle}>
+                        <span>今开</span>
+                        <span className="pl5">{stockGameDetail.stockModel.todayOpend}</span>
+                    </li>
+                    <li className="fl tl" style={stockDetailListStyle}>最低{stockGameDetail.stockModel.todayMinPrice}</li>
+                    <li className="fl tl" style={stockDetailListLongStyle}>成交额{stockGameDetail.stockModel.turnoverStockMoney}</li>
                 </ul>
                 <StockPic
                     stockCode={stockCode}
-                    kLineImg={this.props.kLineImg}
+                    KLineTags={this.props.KLineTags}
                     getStockKLine={this.props.getStockKLine}
                 />
             </div>
@@ -67,30 +79,36 @@ var StockGameDetail = React.createClass({
 
 var StockPic = React.createClass({
 
-    cutKLineImg:function(str){
-        var kLineImg = str;
-        var self = this;
+    cutKLineImg:function(index){
+        var index = index;
         return function(){
-            self.props.getStockKLine(kLineImg);
+            console.log(index);
+            // self.props.getStockKLine(kLineImg);
         }
     },
     render: function () {
         var src = '';
-        var kLineImg = this.props.kLineImg;
-
-        if(this.props.stockCode == '000001'){
-            src = "http://image.sinajs.cn/newchart/"+kLineImg+"/n/sh"+this.props.stockCode+".gif";
-        }else{
-            src = "http://image.sinajs.cn/newchart/"+kLineImg+"/n/sz"+this.props.stockCode+".gif";
-        }
+        var KLineTags = this.props.KLineTags;
+        console.log(KLineTags);
+        // if(this.props.stockCode == '000001'){
+        //     src = "http://image.sinajs.cn/newchart/"+KLineTags+"/n/sh"+this.props.stockCode+".gif";
+        // }else{
+        //     src = "http://image.sinajs.cn/newchart/"+KLineTags+"/n/sz"+this.props.stockCode+".gif";
+        // }
+        var KLineTagNodes = KLineTags.map((tagItem,index)=>{
+            return (
+                <li className="fl tc"
+                    key={index}
+                    onClick={this.cutKLineImg(index)}
+                    style={stockDetailHeaderItem}
+                    >{tagItem.tagTitle}</li>
+            )
+        });
 
         return (
-            <div className="m15" style={stockDetailStyle}>
+            <div className="m15" style={stockDetailPicStyle}>
                 <ul className="clearfix" style={stockDetailHeader}>
-                    <li style={stockDetailHeaderItem} className="fl tc" onClick={this.cutKLineImg("min")}>分时</li>
-                    <li style={stockDetailHeaderItem} className="fl tc" onClick={this.cutKLineImg("daily")}>日K</li>
-                    <li style={stockDetailHeaderItem} className="fl tc" onClick={this.cutKLineImg("weekly")}>周K</li>
-                    <li style={stockDetailHeaderItem} className="fl tc" onClick={this.cutKLineImg("monthly")}>月K</li>
+                    {KLineTagNodes}
                 </ul>
                 <img src={src} alt="" className="w"/>
             </div>
@@ -111,12 +129,12 @@ var UpDownRate = React.createClass({
                </li>
                 <li className="clearfix">
                     <div className="fl tc" style={guessUpXtBAmountStyle}>合计：{stockGameDetail.guessUpXtBAmount}XT币</div>
-                    <div className="fl">vs</div>
+                    <div className="fl tc fb f20" style={vsStyle}>vs</div>
                     <div className="fr tc" style={guessDownXtBAmountStyle}>合计：{stockGameDetail.guessDownXtBAmount}XT币</div>
                 </li>
-                <li>
-                    <span>投注时间截止：{stockGameDetail.gameEndTime}</span>
-                    <span>开奖时间间：{stockGameDetail.gameStartTime}</span>
+                <li className="mt30 f12" >
+                    <span>截止时间：{stockGameDetail.gameEndTime}</span>
+                    <span>开奖时间：{stockGameDetail.gameStartTime}</span>
                 </li>
             </ul>
         )
@@ -124,17 +142,26 @@ var UpDownRate = React.createClass({
 });
 module.exports = UpDownRate;
 
-
-const stockDetailList = {
-    width:"33.3%"
-};
 const stockDetailStyle = {
+    background:"#24232B",
+
+};
+const stockDetailListStyle = {
+    width:"30%",
+    lineHeight:"30px"
+};
+const stockDetailListLongStyle = {
+    width:"40%",
+    lineHeight:"30px"
+};
+const stockDetailPicStyle = {
     border:"1px solid #E2E2E2"
 };
 
 const stockDetailHeader = {
     height:"40px",
-    lineHeight:"40px"
+    lineHeight:"40px",
+    borderBottom:"1px solid #E2E2E2"
 };
 
 const stockDetailHeaderItem = {
@@ -158,20 +185,24 @@ const guessDownRateStyle = {
 
 const guessUpXtBAmountStyle = {
     width:"45%",
-    height:"30px",
-    lineHeight:"30px",
+    height:"33px",
+    lineHeight:"33px",
     color:"#FFF",
     background:'url("/red@2x.png") no-repeat center',
-    backgroundSize:"cover"
+    backgroundSize:"contain"
 };
 
 const guessDownXtBAmountStyle = {
     width:"45%",
-    height:"30px",
-    lineHeight:"30px",
+    height:"33px",
+    lineHeight:"33px",
     color:"#FFF",
     background:'url("/green@2x.png") no-repeat center',
-    backgroundSize:"cover"
+    backgroundSize:"contain"
+};
+const vsStyle = {
+    width:"10%",
+    color:"#EFB800"
 };
 
 function mapStatetoProps(state){
