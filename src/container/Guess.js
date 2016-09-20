@@ -56,8 +56,6 @@ var Guess = React.createClass({
 });
 
 
-
-
 var StockMarketList = React.createClass({
 
     render: function () {
@@ -225,7 +223,6 @@ const countDownStyle = {
 
 
 function mapStatetoProps(state){
-    // console.log(state.openingTime);
     return {
         stockGame:state.stockGame,
         storage:state.storage

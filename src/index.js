@@ -63,7 +63,7 @@ function initState(){
         stockGameDetail:stockGameDetail,
         shop:{productList:[]},
         diamonds:{diamondList:[]},
-        storage:{productId:'',stockGameId:''},
+        storage:{productId:'',stockGameId:'',guessType:''},
         productInfo:{},
         shoppingCart:shoppingCartInit,
         userInfo:userInfoInit,

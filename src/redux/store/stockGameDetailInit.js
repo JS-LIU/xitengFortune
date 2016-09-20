@@ -32,10 +32,10 @@ export const stockGameDetail = {
         guessXtbCount: ""
     },
     KLineTags:[
-        {tag:"min",tagTitle:"分时",selected:'true'},
-        {tag:"daily",tagTitle:"日K",selected:'false'},
-        {tag:"weekly",tagTitle:"周K",selected:'false'},
-        {tag:"monthly",tagTitle:"月K",selected:'false'}
+        {tag:"min",tagTitle:"分时",selected:true},
+        {tag:"daily",tagTitle:"日K",selected:false},
+        {tag:"weekly",tagTitle:"周K",selected:false},
+        {tag:"monthly",tagTitle:"月K",selected:false}
     ]
 
 
