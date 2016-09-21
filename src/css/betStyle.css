@@ -1,0 +1,23 @@
+.center{
+    top:44px;
+    bottom:0px;
+    background:#000;
+}
+.betBtn{
+    margin:0 auto;
+    bottom:27%;
+    color:#FFF004;
+}
+.bgLight{
+    height:80%;
+    left:12%;
+}
+.bet_header_item{
+    width:135px;
+    height:77px;
+    line-height: 77px;
+}
+.bet_header{
+    display: flex;
+    justify-content: center;
+}

@@ -22,12 +22,13 @@ var Register = require('../src/container/Register');
 var CheckCode = require('../src/container/CheckCode');
 var LogIn = require('../src/container/Login');
 var StockDetails = require('../src/container/StockDetails');
+var Bet = require('../src/container/Bet');
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
 import {userInfoInit} from  '../src/redux/store/userInfoInit';
 import {stockGameDetail} from '../src/redux/store/stockGameDetailInit';
-
+import {storageInit} from '../src/redux/store/storageInit';
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -52,6 +53,7 @@ var getRoutes = ()=>{
         <Route path="/CheckCode" component={CheckCode}></Route>
         <Route path="/LogIn" component={LogIn}></Route>
         <Route path="/StockDetails" component={StockDetails}></Route>
+        <Route path="/Bet" component={Bet}></Route>
     </Router>
     )};
 
@@ -63,7 +65,7 @@ function initState(){
         stockGameDetail:stockGameDetail,
         shop:{productList:[]},
         diamonds:{diamondList:[]},
-        storage:{productId:'',stockGameId:'',guessType:''},
+        storage:storageInit,
         productInfo:{},
         shoppingCart:shoppingCartInit,
         userInfo:userInfoInit,

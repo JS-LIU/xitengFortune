@@ -14,12 +14,11 @@ import {stockGameDetailActions} from '../redux/actions/stockGameDetailActions'
 var StockDetails = React.createClass({
     timer:{},
     componentWillMount:function(){
-        this.props.storageActionKeys.getStockGameId();
         var stockGameId = this.props.storage.stockGameId;
         this.props.stockGameDetailActionKeys.getStockDetail(stockGameId);
     },
     componentDidMount:function(){
-        var time = 60000;
+        var time = 5000;
         var stockGameId = this.props.storage.stockGameId;
         this.timer = setInterval(()=>{
             this.props.stockGameDetailActionKeys.getStockDetail(stockGameId);
@@ -33,8 +32,8 @@ var StockDetails = React.createClass({
         return (
             <div>
                 <Header >
-                    <BackBtn back={{text:'猜猜',src:'/nav_btn_back@2x.png'}}/>
-                    <Title title={{text:'喜腾'}}></Title>
+                    <BackBtn back={{text:'猜猜',src:'/nav_btn_back@2x.png',link:'/Guess'}}/>
+                    <Title title={{text:'喜腾'}} />
                 </Header>
                 <StockGameDetail
                     stockGameDetail={this.props.stockGameDetail.detail}
@@ -42,7 +41,9 @@ var StockDetails = React.createClass({
                     KLineTags={this.props.stockGameDetail.KLineTags}
                 />
                 <UpDownRate stockGameDetail={this.props.stockGameDetail.detail}/>
-                <StockDetailFooter />
+                <StockDetailFooter
+                    storageActionKeys={this.props.storageActionKeys}
+                />
             </div>
         )
     }
@@ -115,7 +116,6 @@ var StockPic = React.createClass({
     },
 
     cutKLineImg:function(index){
-        var index = index;
         return ()=>{
             this.props.getStockKLine(index);
             selectTag(this.props.KLineTags);
@@ -177,9 +177,9 @@ var UpDownRate = React.createClass({
 });
 
 var StockDetailFooter = React.createClass({
-    setGuessType:function(id){
+    setGuessType:function(guessType){
         return ()=>{
-            this.props.setGuessType(id);
+            this.props.storageActionKeys.setGuessType(guessType);
         }
     },
 
@@ -187,13 +187,13 @@ var StockDetailFooter = React.createClass({
         return (
             <ul className="footer w">
                 <li className="guessBtn h tc red f20 ">
-                    <Link to="/Bet" onClick={this.setGuessType(0)}>
-                        <span className="guessUp cfff">猜涨</span>
+                    <Link to="/Bet" >
+                        <span className="guessUp cfff" onClick={this.setGuessType(0)}>猜涨</span>
                     </Link>
                 </li>
-                <li className="guessBtn h tc f20 green cfff">
+                <li className="guessBtn h tc f20 green ">
                     <Link to="/Bet" onClick={this.setGuessType(1)}>
-                        <span className="guessDown">猜跌</span>
+                        <span className="guessDown cfff">猜跌</span>
                     </Link>
                 </li>
             </ul>

@@ -35,6 +35,11 @@ export const storageActions = {
             id
         }
     },
+    getGuessType: () =>{
+        return {
+            type : GET_GUESSTYPE,
+        }
+    },
 
 
 };
