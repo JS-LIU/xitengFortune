@@ -28,10 +28,10 @@ export var stockGameDetailActions = {
                 })
         }
     },
-    getStockKLine:(kLine)=>{
+    getStockKLine:(index)=>{
         return {
             type : GET_STOCKKLINE,
-            kLine
+            index
         }
 
     }

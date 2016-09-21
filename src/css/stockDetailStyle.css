@@ -1,0 +1,32 @@
+.footer{
+    display: flex;
+    position: fixed;
+    height:50px;
+    bottom:0px;
+    flex-direction:row;/* 默认 row 横向排列 */
+}
+.guessBtn{
+    flex-grow:1;
+    line-height:50px;
+}
+.red{
+    background:#DE3031;
+}
+.green{
+    background:#03C56C;
+}
+.cfff{
+    color:#FFF;
+}
+.guessUp{
+    padding-left:25px;
+    background:url('/guessUpBtn.png') no-repeat left center;
+    -webkit-background-size:20px;
+    background-size:20px;
+}
+.guessDown{
+    padding-left:25px;
+    background:url('/guessDownBtn.png') no-repeat left center;
+    -webkit-background-size:20px;
+    background-size:20px;
+}

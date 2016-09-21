@@ -27,7 +27,10 @@ var BackBtn = React.createClass({
     render: function () {
         return (
             <li style={backStyle} className="fl">
-                {this.props.back.text}
+                <Link to={this.props.back.link}>
+                    <span style={backTextStyle}>{this.props.back.text}</span>
+
+                </Link>
             </li>
         )
     }
@@ -35,13 +38,15 @@ var BackBtn = React.createClass({
 var Title = React.createClass({
     render: function () {
         return (
-            <li style={titleStyle} className="tc f16">{this.props.title.text}</li>
+            <li style={titleStyle} className="tc f16 po w">{this.props.title.text}</li>
         )
     }
 });
 
 
 const headerStyle = {
+    display:"flex",
+    justifyContent:"space-between",
     height:'44px',
     lineHeight:'44px',
     fontSize:'14px',
@@ -52,7 +57,11 @@ const backStyle = {
     backgroundSize:"10px",
     backgroundRepeat:'no-repeat',
     backgroundPositionX:"15px",
-    backgroundPositionY:'center'
+    backgroundPositionY:'center',
+    zIndex:'1'
+};
+const backTextStyle = {
+    color:'#FFF'
 };
 var titleStyle = {
     // marginLeft:'-30px',
