@@ -8,14 +8,19 @@ var {Link} = require('react-router');
 var {Header,BackBtn,Title} = require('../components/Header');
 
 require('../css/stockDetailStyle.css');
+
 import {storageActions} from '../redux/actions/storageActions'
 import {stockGameDetailActions} from '../redux/actions/stockGameDetailActions'
+import {userInfoActions} from '../redux/actions/userInfoActions'
+import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 
 var StockDetails = React.createClass({
     timer:{},
     componentWillMount:function(){
         var stockGameId = this.props.storage.stockGameId;
         this.props.stockGameDetailActionKeys.getStockDetail(stockGameId);
+        this.props.historyUrlsActionKeys.pushUrl('/StockDetails');
+        console.log(this.props.historyUrls);
     },
     componentDidMount:function(){
         var time = 5000;
@@ -31,8 +36,12 @@ var StockDetails = React.createClass({
 
         return (
             <div>
-                <Header >
-                    <BackBtn back={{text:'猜猜',src:'/nav_btn_back@2x.png',link:'/Guess'}}/>
+                <Header
+                    historyUrls={this.props.historyUrls}
+                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
+                    <BackBtn
+                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
+                        back={{text:'猜猜',src:'/nav_btn_back@2x.png',link:'/Guess'}}/>
                     <Title title={{text:'喜腾'}} />
                 </Header>
                 <StockGameDetail
@@ -43,6 +52,7 @@ var StockDetails = React.createClass({
                 <UpDownRate stockGameDetail={this.props.stockGameDetail.detail}/>
                 <StockDetailFooter
                     storageActionKeys={this.props.storageActionKeys}
+                    userInfo={this.props.userInfo}
                 />
             </div>
         )
@@ -184,15 +194,20 @@ var StockDetailFooter = React.createClass({
     },
 
     render: function () {
+
+        var src = "/Login";
+        if(this.props.userInfo.access_token != ''){
+            src = '/Bet';
+        }
         return (
             <ul className="footer w">
                 <li className="guessBtn h tc red f20 ">
-                    <Link to="/Bet" >
-                        <span className="guessUp cfff" onClick={this.setGuessType(0)}>猜涨</span>
+                    <Link to={src} onClick={this.setGuessType(0)}>
+                        <span className="guessUp cfff">猜涨</span>
                     </Link>
                 </li>
                 <li className="guessBtn h tc f20 green ">
-                    <Link to="/Bet" onClick={this.setGuessType(1)}>
+                    <Link to={src} onClick={this.setGuessType(1)}>
                         <span className="guessDown cfff">猜跌</span>
                     </Link>
                 </li>
@@ -286,6 +301,8 @@ function mapStatetoProps(state){
     return {
         stockGameDetail:state.stockGameDetail,
         storage:state.storage,
+        userInfo:state.userInfo,
+        historyUrls:state.historyUrls
 
     };
 }
@@ -294,7 +311,9 @@ function mapDispatchToProps(dispatch){
 
     return{
         stockGameDetailActionKeys:bindActionCreators(stockGameDetailActions,dispatch),
-        storageActionKeys:bindActionCreators(storageActions,dispatch)
+        storageActionKeys:bindActionCreators(storageActions,dispatch),
+        userInfoActionKeys:bindActionCreators(userInfoActions,dispatch),
+        historyUrlsActionKeys:bindActionCreators(historyUrlsActions,dispatch)
     }
 }
 

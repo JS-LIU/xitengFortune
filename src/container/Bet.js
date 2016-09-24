@@ -12,17 +12,23 @@ var {Header,BackBtn,Title} = require('../components/Header');
 
 require('../css/betStyle.css');
 
+import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
+
 var Bet = React.createClass({
 
     componentWillMount:function(){
+        this.props.historyUrlsActionKeys.pushUrl('/Bet');
         console.log(this.props.storage);
     },
     render: function () {
 
         return (
             <div>
-                <Header >
-                    <BackBtn back={{text:'取消',src:'/nav_btn_back@2x.png',link:'/StockDetails'}}/>
+                <Header historyUrls={this.props.historyUrls}
+                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
+                    <BackBtn
+                        back={{text:'取消',src:'/nav_btn_back@2x.png',link:'/StockDetails'}}
+                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}/>
                     <Title title={{text:'投注'}} />
                 </Header>
                 <div className="center po w">
@@ -56,13 +62,15 @@ var BetHeader = React.createClass({
 
 function mapStatetoProps(state){
     return {
-        storage:state.storage
+        storage:state.storage,
+        historyUrls:state.historyUrls
     }
 }
 function mapDispatchToProps(dispatch){
 
     return{
-        storageActionKeys: bindActionCreators(storageActions,dispatch)
+        storageActionKeys: bindActionCreators(storageActions,dispatch),
+        historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch)
     }
 }
 

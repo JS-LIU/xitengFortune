@@ -21,7 +21,8 @@ export const userInfo = function(state = {},action){
         case 'LOGIN':
             console.log(action.data);
             return Object.assign({},state,{
-                accessInfo:action.data
+                access_token:action.data.access_token,
+                access_token_secret:action.data.access_token
             });
         default:
             return state

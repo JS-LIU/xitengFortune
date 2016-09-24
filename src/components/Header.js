@@ -24,10 +24,16 @@ var BackBtn = React.createClass({
             backStyle.paddingLeft = "15px";
         }
     },
+    backTo:function(){
+        return ()=>{
+            this.props.historyUrlsActionKeys.popUrl()
+        }
+    },
     render: function () {
+        console.log(this.props.back);
         return (
             <li style={backStyle} className="fl">
-                <Link to={this.props.back.link}>
+                <Link to={this.props.back.link} onClick={this.backTo()}>
                     <span style={backTextStyle}>{this.props.back.text}</span>
 
                 </Link>

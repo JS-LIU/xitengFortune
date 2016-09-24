@@ -9,12 +9,13 @@ var {Link} = require('react-router');
 
 
 var ConfirmBtn = React.createClass({
-
     render: function () {
-
         return (
-            <div style={confirmBtnStyle}  className="tc" >
-                {this.props.text}
+            <div style={confirmBtnStyle} className="tc" >
+                <Link to={this.props.confirm.link}>
+                    {this.props.confirm.text}
+                </Link>
+
             </div>
         )
     }

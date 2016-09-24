@@ -7,9 +7,10 @@ var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var {Header,Title} = require('../components/Header');
 
-
 import {stockGameActions} from '../redux/actions/stockGameActions';
 import {storageActions} from '../redux/actions/storageActions';
+import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
+
 
 var Guess = React.createClass({
     timer:{},
@@ -17,6 +18,8 @@ var Guess = React.createClass({
         if(this.props.stockGame.gameList.length == 0){
             this.props.stockGameActionKeys.getGameList({});
         }
+        this.props.historyUrlsActionKeys.pushUrl('/Guess');
+
     },
     componentDidMount:function(){
         var time = 60000;
@@ -141,7 +144,7 @@ var GameItem = React.createClass({
                                 {gameItem.guessDownXtBAmount}XT币
                             </li>
                         </ul>
-                        <Link to="/stockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
+                        <Link to="/StockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
                             <div style={stockMarketCenterFooter}></div>
                         </Link>
 
@@ -225,7 +228,8 @@ const countDownStyle = {
 function mapStatetoProps(state){
     return {
         stockGame:state.stockGame,
-        storage:state.storage
+        storage:state.storage,
+        historyUrls:state.historyUrls
     };
 }
 
@@ -233,7 +237,8 @@ function mapDispatchToProps(dispatch){
 
     return{
         stockGameActionKeys : bindActionCreators(stockGameActions,dispatch),
-        storageActionKeys:bindActionCreators(storageActions,dispatch)
+        storageActionKeys:bindActionCreators(storageActions,dispatch),
+        historyUrlsActionKeys: bindActionCreators(historyUrlsActions,dispatch)
     }
 }
 

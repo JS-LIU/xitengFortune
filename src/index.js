@@ -20,7 +20,7 @@ var ProductDetails = require('../src/container/ProductDetails');
 var BuyDiamonds = require('../src/container/BuyDiamonds');
 var Register = require('../src/container/Register');
 var CheckCode = require('../src/container/CheckCode');
-var LogIn = require('../src/container/Login');
+var Login = require('../src/container/Login');
 var StockDetails = require('../src/container/StockDetails');
 var Bet = require('../src/container/Bet');
 
@@ -51,7 +51,7 @@ var getRoutes = ()=>{
         <Route path="/ShoppingCart" component={ShoppingCart}></Route>
         <Route path="/Register" component={Register}></Route>
         <Route path="/CheckCode" component={CheckCode}></Route>
-        <Route path="/LogIn" component={LogIn}></Route>
+        <Route path="/Login" component={Login}></Route>
         <Route path="/StockDetails" component={StockDetails}></Route>
         <Route path="/Bet" component={Bet}></Route>
     </Router>
@@ -70,6 +70,7 @@ function initState(){
         shoppingCart:shoppingCartInit,
         userInfo:userInfoInit,
         showDialog:{},
+        historyUrls:[]
     }
 }
 

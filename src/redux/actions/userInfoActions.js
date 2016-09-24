@@ -23,7 +23,7 @@ export const userInfoActions = {
                 })
         }
     },
-    logIn: (obj)=>{
+    logIn: ()=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
             let postData = {
@@ -38,7 +38,7 @@ export const userInfoActions = {
                 }
             };
 
-            _h.ajax.resource('/login').save(obj,postData)
+            _h.ajax.resource('/login').save({},postData)
                 .then((data)=>{
                     dispatch({type:'LOGIN', data})
                 })
