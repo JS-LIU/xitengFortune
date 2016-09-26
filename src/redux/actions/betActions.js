@@ -14,7 +14,9 @@ export var betActions = {
     },
     immediatelyBet : (dispatch,getState)=>{
         let userInfo = getState().userInfo;
-        let stockGameId = getState().stockGameId;
+        let stockGameId = getState().storage.stockGameId;
+        let cathecticAmount = getState().bet.betAmount;
+        let guessType = getState().storage.guessType
         let postData = {
             accessInfo:{
                 app_key:userInfo.appKey,
@@ -23,7 +25,8 @@ export var betActions = {
                 signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret),
             },
             stockId:stockGameId,
-            guessType:guessType
+            guessType:guessType,
+            cathecticAmount:cathecticAmount
         };
 
         _h.ajax.resource('/guessGame').save({},postData)
