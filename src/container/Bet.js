@@ -69,7 +69,7 @@ var BetHeader = React.createClass({
 
 var BetCenter = React.createClass({
     inputMoney:function(){
-        console.log(this.refs.XTMoney);
+        console.log($(this.refs.XTMoney).val());
     },
 
     render: function () {
