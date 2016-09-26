@@ -7,7 +7,7 @@
 var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
-var {Header,BackBtn,Title} = require('../components/Header');
+var { Header,BackBtn,Title } = require('../components/Header');
 
 require('../css/betStyle.css');
 
@@ -25,6 +25,7 @@ var Bet = React.createClass({
         return ()=>{
             console.log('---bet---');
             // this.props.betActionKeys.immediatelyBet
+
         }
     },
     render: function () {
@@ -41,7 +42,7 @@ var Bet = React.createClass({
                 <div className="center po w">
                     <img src="/lg_light1@2x.png" alt="" className="bgLight po"/>
                     <BetHeader />
-                    <BetCenter />
+                    <BetCenter inputMoneyAction={this.props.betActionKeys}/>
                     <div className="betBtn po tc f16 w" onClick={this.bet()}>立即投注</div>
                 </div>
             </div>
@@ -67,13 +68,21 @@ var BetHeader = React.createClass({
 });
 
 var BetCenter = React.createClass({
+    inputMoney:function(){
+        console.log(this.refs.XTMoney);
+    },
+
     render: function () {
         return (
             <div className="bet_center pr">
                 <ul>
                     <li className="input_money_box">
                         <span className="cfff">金额：</span>
-                        <input type="number" placeholder="请选择/输入金额" className="input_money pl10 mr5"/>
+                        <input type="number"
+                               placeholder="请选择/输入金额"
+                               className="input_money pl10 mr5"
+                               ref="XTMoney"
+                               onChange={this.inputMoney}/>
                         <span className="cfff">XT币</span>
                     </li>
                     <li className="selected_box">
