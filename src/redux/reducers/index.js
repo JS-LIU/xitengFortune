@@ -14,9 +14,21 @@ import {userInfo} from './userInfo';
 import {showDialog} from './showDialog';
 import {stockGameDetail} from './stockGameDetail';
 import {historyUrls} from './historyUrls'
+import {bet} from './bet';
 
 var rootReducer = combineReducers({
-    routing,stockGame,stockGameDetail,shop,diamonds,storage,productInfo,shoppingCart,userInfo,showDialog,historyUrls
+    routing,
+    stockGame,
+    stockGameDetail,
+    shop,
+    diamonds,
+    storage,
+    productInfo,
+    shoppingCart,
+    userInfo,
+    showDialog,
+    historyUrls,
+    bet
 });
 
 module.exports = rootReducer;

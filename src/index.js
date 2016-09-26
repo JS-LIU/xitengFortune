@@ -29,6 +29,7 @@ import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
 import {userInfoInit} from  '../src/redux/store/userInfoInit';
 import {stockGameDetail} from '../src/redux/store/stockGameDetailInit';
 import {storageInit} from '../src/redux/store/storageInit';
+import {betInit} from '../src/redux/store/betInit';
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -70,7 +71,8 @@ function initState(){
         shoppingCart:shoppingCartInit,
         userInfo:userInfoInit,
         showDialog:{},
-        historyUrls:[]
+        historyUrls:[],
+        bet:betInit
     }
 }
 
