@@ -12,6 +12,11 @@ export const bet = function(state = {},action){
                 betAmount:action.money
             });
 
+        case 'IMMEDIATELY_BET':
+
+            return Object.assign({},state,{
+                hasEnoughMoney:action.hasEnoughMoney
+            });
         default:
             return state
     }

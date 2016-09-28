@@ -22,7 +22,7 @@ export const userInfo = function(state = {},action){
             console.log(action.data);
             return Object.assign({},state,{
                 access_token:action.data.access_token,
-                access_token_secret:action.data.access_token
+                access_token_secret:action.data.access_token_secret
             });
         default:
             return state

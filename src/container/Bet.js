@@ -1,19 +1,19 @@
 /**
  * Created by LDQ on 2016/9/21.
  */
-/**
- * Created by LDQ on 2016/8/23.
- */
 var React = require('react');
+var $ = require('jquery');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var { Header,BackBtn,Title } = require('../components/Header');
+var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
 require('../css/betStyle.css');
 
 import {storageActions} from '../redux/actions/storageActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {betActions} from '../redux/actions/betActions';
+import {dialogActions} from '../redux/actions/dialogActions';
 
 var Bet = React.createClass({
 
@@ -23,13 +23,10 @@ var Bet = React.createClass({
     },
     bet:function(){
         return ()=>{
-            console.log('---bet---');
-            // this.props.betActionKeys.immediatelyBet
-
+            this.props.betActionKeys.immediatelyBet();
         }
     },
     render: function () {
-
         return (
             <div>
                 <Header historyUrls={this.props.historyUrls}
@@ -41,10 +38,19 @@ var Bet = React.createClass({
                 </Header>
                 <div className="center po w">
                     <img src="/lg_light1@2x.png" alt="" className="bgLight po"/>
-                    <BetHeader />
+                    <BetHeader storage={this.props.storage}/>
                     <BetCenter inputMoneyAction={this.props.betActionKeys}/>
                     <div className="betBtn po tc f16 w" onClick={this.bet()}>立即投注</div>
                 </div>
+
+                {this.props.bet.hasEnoughMoney?'':<DialogiOS >
+                    <DialogHeader title="喜腾币不足"/>
+                    <DialogBody content={"请您去兑换喜腾币"}/>
+                    <DialogFooter>
+                        <DialogCancel showDialogActionKeys={this.props.showDialogActionKeys}/>
+                        <DialogConfirm url={'/ExchangeXTCoins'} />
+                    </DialogFooter>
+                </DialogiOS>}
             </div>
         )
     }
@@ -52,6 +58,10 @@ var Bet = React.createClass({
 
 var BetHeader = React.createClass({
     render: function () {
+        let upOrDown = "猜涨";
+        if(this.props.storage.guessType){
+            upOrDown = "猜跌";
+        }
         return (
             <ul className="bet_header pr">
                 <li className="bet_header_item tc cfff f16">
@@ -59,7 +69,7 @@ var BetHeader = React.createClass({
                     <span>1888期</span>
                 </li>
                 <li className="bet_header_item tc cfff f16">
-                    <span>猜涨</span>
+                    <span>{upOrDown}</span>
                     <span>投注</span>
                 </li>
             </ul>
@@ -69,7 +79,8 @@ var BetHeader = React.createClass({
 
 var BetCenter = React.createClass({
     inputMoney:function(){
-        console.log($(this.refs.XTMoney).val());
+        let money = $(this.refs.XTMoney).val();
+        this.props.inputMoneyAction.betAmount(money);
     },
 
     render: function () {
@@ -110,7 +121,8 @@ function mapStatetoProps(state){
     return {
         storage:state.storage,
         historyUrls:state.historyUrls,
-        bet:state.bet
+        bet:state.bet,
+        showDialog:state.showDialog
     }
 }
 function mapDispatchToProps(dispatch){
@@ -118,7 +130,8 @@ function mapDispatchToProps(dispatch){
     return{
         storageActionKeys: bindActionCreators(storageActions,dispatch),
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
-        betActionKeys: bindActionCreators(betActions,dispatch)
+        betActionKeys: bindActionCreators(betActions,dispatch),
+        showDialogActionKeys:bindActionCreators(dialogActions,dispatch)
     }
 }
 

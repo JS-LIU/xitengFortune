@@ -3,13 +3,14 @@
  */
 var React = require('react');
 var {Link} = require('react-router');
+require('../css/dialogiOSStyle.css');
 
 var DialogiOS = React.createClass({
 
     render: function () {
 
         return (
-            <div style={dialogiOSStyle}>
+            <div className="pr dialog_body">
                 {this.props.children}
             </div>
         )
@@ -18,7 +19,7 @@ var DialogiOS = React.createClass({
 var DialogHeader = React.createClass({
     render:function() {
         return (
-            <div className="tc f14">
+            <div className="tc f14 pt15 dialog_header">
                 {this.props.title}
             </div>
         )
@@ -28,7 +29,7 @@ var DialogHeader = React.createClass({
 var DialogBody = React.createClass({
     render:function() {
         return (
-            <div className="tc f14">
+            <div className="tc f14 pb10 dailog_content">
                 {this.props.content}
             </div>
         )
@@ -38,7 +39,7 @@ var DialogBody = React.createClass({
 var DialogFooter = React.createClass({
     render:function() {
         return (
-            <div style={dialogFooterStyle}>
+            <div className="dialog_footer">
                 {this.props.children}
             </div>
         )
@@ -47,8 +48,8 @@ var DialogFooter = React.createClass({
 var DialogConfirm = React.createClass({
     render:function() {
         return (
-            <div style={dialogBtnSytle}>
-                <Link to={this.props.url} className="tc f14">
+            <div className="dialog_btn">
+                <Link to={this.props.url} className="tc f14 dialog_btn_color">
                     确定
                 </Link>
             </div>
@@ -62,23 +63,13 @@ var DialogCancel = React.createClass({
     },
     render:function() {
         return (
-            <div style={dialogBtnSytle} className="tc f14" onClick={this.hideDialog}>
+            <div className="dialog_btn tc f14 dialog_btn_color" onClick={this.hideDialog}>
                 取消
             </div>
         )
     }
 });
-var  dialogiOSStyle = {
-    width:"calc(100% - 100px)",
-    margin:'0 auto'
-};
 
-const dialogFooterStyle = {
-    display:"flex"
-};
-const dialogBtnSytle = {
-    flexGrow:'1'
-};
 module.exports = {
     DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel
 };

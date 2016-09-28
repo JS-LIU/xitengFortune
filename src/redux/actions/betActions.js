@@ -12,30 +12,36 @@ export var betActions = {
             money
         }
     },
-    immediatelyBet : (dispatch,getState)=>{
-        let userInfo = getState().userInfo;
-        let stockGameId = getState().storage.stockGameId;
-        let cathecticAmount = getState().bet.betAmount;
-        let guessType = getState().storage.guessType
-        let postData = {
-            accessInfo:{
-                app_key:userInfo.appKey,
-                access_token:userInfo.access_token,
-                phone_num:userInfo.openId,
-                signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret),
-            },
-            stockId:stockGameId,
-            guessType:guessType,
-            cathecticAmount:cathecticAmount
-        };
+    immediatelyBet : ()=>{
+        return (dispatch,getState)=>{
+            let userInfo = getState().userInfo;
+            let stockGameId = getState().storage.stockGameId;
+            let cathecticAmount = getState().bet.betAmount;
+            let guessType = getState().storage.guessType;
+            let postData = {
+                accessInfo:{
+                    app_key:userInfo.appKey,
+                    access_token:userInfo.access_token,
+                    phone_num:userInfo.openId,
+                    signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret)
+                },
+                stockId:stockGameId,
+                guessType:guessType,
+                cathecticAmount:cathecticAmount
+            };
+            console.log(userInfo.access_token_secret);
 
-        _h.ajax.resource('/guessGame').save({},postData)
-            .then((data)=>{
-                dispatch({type:'IMMEDIATELY_BET', data})
-            })
-            .catch((error)=>{
-                console.log("error",error);
-            })
+            let hasEnoughMoney = true;
+            _h.ajax.resource('/guessGame').save({},postData)
+                .then((data)=>{
+                    dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney});
+                })
+                .catch((error)=>{
+
+                    hasEnoughMoney = false;
+                    dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney});
+                })
+        }
     }
 
 

@@ -23,6 +23,7 @@ var CheckCode = require('../src/container/CheckCode');
 var Login = require('../src/container/Login');
 var StockDetails = require('../src/container/StockDetails');
 var Bet = require('../src/container/Bet');
+var ExchangeXTCoins = require('../src/container/ExchangeXTCoins');
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -55,6 +56,7 @@ var getRoutes = ()=>{
         <Route path="/Login" component={Login}></Route>
         <Route path="/StockDetails" component={StockDetails}></Route>
         <Route path="/Bet" component={Bet}></Route>
+        <Route path="/ExchangeXTCoins" component={ExchangeXTCoins}></Route>
     </Router>
     )};
 
