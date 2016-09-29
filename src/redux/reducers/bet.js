@@ -13,6 +13,7 @@ export const bet = function(state = {},action){
             });
 
         case 'IMMEDIATELY_BET':
+            console.log('reducer---',action.hasEnoughMoney);
 
             return Object.assign({},state,{
                 hasEnoughMoney:action.hasEnoughMoney

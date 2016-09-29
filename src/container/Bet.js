@@ -19,6 +19,7 @@ var Bet = React.createClass({
 
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Bet');
+        this.props.showDialogActionKeys.hideDialog();
         console.log(this.props.storage);
     },
     bet:function(){
@@ -27,6 +28,7 @@ var Bet = React.createClass({
         }
     },
     render: function () {
+        console.log(this.props.bet.hasEnoughMoney);
         return (
             <div>
                 <Header historyUrls={this.props.historyUrls}

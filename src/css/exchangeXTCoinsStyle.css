@@ -1,0 +1,12 @@
+.c000{
+    color:#000;
+}
+.cred{
+    color:#FF4244;
+}
+.my_diamonds{
+    display: flex;
+    height:44px;
+    line-height:44px;
+    background:#F5F5F5;
+}

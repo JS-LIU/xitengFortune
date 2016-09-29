@@ -15,6 +15,7 @@ import {showDialog} from './showDialog';
 import {stockGameDetail} from './stockGameDetail';
 import {historyUrls} from './historyUrls'
 import {bet} from './bet';
+import {account} from './account';
 
 var rootReducer = combineReducers({
     routing,
@@ -28,7 +29,8 @@ var rootReducer = combineReducers({
     userInfo,
     showDialog,
     historyUrls,
-    bet
+    bet,
+    account
 });
 
 module.exports = rootReducer;

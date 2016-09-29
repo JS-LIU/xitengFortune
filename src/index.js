@@ -31,6 +31,7 @@ import {userInfoInit} from  '../src/redux/store/userInfoInit';
 import {stockGameDetail} from '../src/redux/store/stockGameDetailInit';
 import {storageInit} from '../src/redux/store/storageInit';
 import {betInit} from '../src/redux/store/betInit';
+import {accountInit} from '../src/redux/store/accountInit'
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -74,7 +75,8 @@ function initState(){
         userInfo:userInfoInit,
         showDialog:{},
         historyUrls:[],
-        bet:betInit
+        bet:betInit,
+        account:accountInit
     }
 }
 

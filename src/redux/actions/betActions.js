@@ -29,18 +29,24 @@ export var betActions = {
                 guessType:guessType,
                 cathecticAmount:cathecticAmount
             };
-            console.log(userInfo.access_token_secret);
+            console.log(postData);
 
-            let hasEnoughMoney = true;
-            _h.ajax.resource('/guessGame').save({},postData)
-                .then((data)=>{
-                    dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney});
-                })
-                .catch((error)=>{
-
-                    hasEnoughMoney = false;
-                    dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney});
-                })
+            var hasEnoughMoney = true;
+            _h.ajax.resource('/guessGame').save({},postData).then((data)=>{
+                    console.log('success---',data);
+                    console.log('success---',hasEnoughMoney);
+                    // dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney})
+                });
+                // .catch((error)=>{
+                //     console.log("error",error);
+                // });
+                // .catch((error)=>{
+                //
+                //     hasEnoughMoney = false;
+                //     console.log('fail---',hasEnoughMoney);
+                //     console.log('error---',error);
+                //     dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney});
+                // })
         }
     }
 
