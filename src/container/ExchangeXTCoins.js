@@ -80,7 +80,6 @@ var  PurchaseQuantity = React.createClass({
                 </ul>
                 <p>应付钻石：50颗</p>
             </div>
-
         )
     }
 });

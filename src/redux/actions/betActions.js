@@ -32,21 +32,14 @@ export var betActions = {
             console.log(postData);
 
             var hasEnoughMoney = true;
-            _h.ajax.resource('/guessGame').save({},postData).then((data)=>{
-                    console.log('success---',data);
+            _h.ajax.resource('/guessGame').save({},postData).then((data={})=>{
                     console.log('success---',hasEnoughMoney);
-                    // dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney})
-                });
-                // .catch((error)=>{
-                //     console.log("error",error);
-                // });
-                // .catch((error)=>{
-                //
-                //     hasEnoughMoney = false;
-                //     console.log('fail---',hasEnoughMoney);
-                //     console.log('error---',error);
-                //     dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney});
-                // })
+                    dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney})
+                })
+                .catch((error)=>{
+                    hasEnoughMoney = false;
+                    dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney});
+                })
         }
     }
 
