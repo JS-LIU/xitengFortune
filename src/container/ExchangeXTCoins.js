@@ -7,7 +7,9 @@ var React = require('react');
 var $ = require('jquery');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
+var {Link} = require('react-router');
 var { Header,BackBtn,Title } = require('../components/Header');
+
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
 require('../css/exchangeXTCoinsStyle.css');
@@ -15,13 +17,14 @@ require('../css/exchangeXTCoinsStyle.css');
 import {userInfoActions} from '../redux/actions/userInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {accountActions} from '../redux/actions/accountActions';
+import {XTCoinsActions} from '../redux/actions/XTCoinsActions';
 
 var ExchangeXTCoins = React.createClass({
     render: function () {
         var urls = this.props.historyUrls;
         var backUrl = urls[urls.length-2];
         return (
-            <div>
+            <div className="buy_XTCoins po w h">
                 <Header
                     historyUrls={this.props.historyUrls}
                     historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
@@ -34,6 +37,8 @@ var ExchangeXTCoins = React.createClass({
                 <BuyXTCoins
                     accountActionKeys={this.props.accountActionKeys}
                     account={this.props.account}
+                    XTCoins={this.props.XTCoins}
+                    XTCoinsActionKeys={this.props.XTCoinsActionKeys}
                 />
             </div>
         )
@@ -48,7 +53,9 @@ var BuyXTCoins = React.createClass({
                     accountActionKeys={this.props.accountActionKeys}
                     account={this.props.account}
                 />
-                <PurchaseQuantity />
+                <PurchaseQuantity
+                    XTCoins={this.props.XTCoins}
+                    XTCoinsActionKeys={this.props.XTCoinsActionKeys}/>
             </div>
         )
     }
@@ -71,14 +78,33 @@ var MyDiamonds = React.createClass({
 });
 
 var  PurchaseQuantity = React.createClass({
+    selectedBuyXTCoin:function(index){
+        return ()=>{
+            this.props.XTCoinsActionKeys.selectedBuyXTCoin(index);
+        }
+    },
+
     render: function () {
+        var red = {color:"red"},diamonds = 0;
+        var XTCoinNodes = this.props.XTCoins.XTCoinList.map((item,index)=>{
+
+            return (
+                <li className="XTCoin mt10 tc cblue" style={item.selected?red:""} key={index} onClick={this.selectedBuyXTCoin(index)}>
+                    <p className="f16 pt10">{item.count}</p>
+                    <p className="pb10">喜腾币</p>
+                </li>
+            )
+        });
+
         return (
-            <div>
-                <p>选择套餐</p>
-                <ul>
-                    <li>120喜腾币</li>
+            <div className="purchase_quantity">
+                <p className="selected_title f16">选择套餐</p>
+                <ul className="XICoin_box">
+                    {XTCoinNodes}
                 </ul>
-                <p>应付钻石：50颗</p>
+                <p className="pay_diamonds f16">
+                    <span>应付钻石：</span>
+                    <span>{diamonds}颗</span></p>
             </div>
         )
     }
@@ -90,7 +116,8 @@ function mapStatetoProps(state){
     return {
         userInfo:state.userInfo,
         historyUrls:state.historyUrls,
-        account:state.account
+        account:state.account,
+        XTCoins:state.XTCoins
     }
 }
 function mapDispatchToProps(dispatch){
@@ -98,7 +125,8 @@ function mapDispatchToProps(dispatch){
     return{
         userInfoActionKeys : bindActionCreators(userInfoActions,dispatch),
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
-        accountActionKeys:bindActionCreators(accountActions,dispatch)
+        accountActionKeys : bindActionCreators(accountActions,dispatch),
+        XTCoinsActionKeys : bindActionCreators(XTCoinsActions,dispatch)
     }
 }
 

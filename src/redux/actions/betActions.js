@@ -32,7 +32,7 @@ export var betActions = {
             console.log(postData);
 
             var hasEnoughMoney = true;
-            _h.ajax.resource('/guessGame').save({},postData).then((data={})=>{
+            _h.ajax.resource('/guessGame').save({},postData).then((data)=>{
                     console.log('success---',hasEnoughMoney);
                     dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney})
                 })
