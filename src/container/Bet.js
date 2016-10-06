@@ -18,17 +18,16 @@ import {dialogActions} from '../redux/actions/dialogActions';
 var Bet = React.createClass({
 
     componentWillMount:function(){
-        this.props.historyUrlsActionKeys.pushUrl('/Bet');
         this.props.showDialogActionKeys.hideDialog();
-        console.log(this.props.storage);
+        this.props.historyUrlsActionKeys.pushUrl('/Bet');
     },
     bet:function(){
         return ()=>{
-            this.props.betActionKeys.immediatelyBet();
+            let money = parseInt($('.J_betMoney').val());
+            this.props.betActionKeys.immediatelyBet(money);
         }
     },
     render: function () {
-        console.log(this.props.bet.hasEnoughMoney);
         return (
             <div>
                 <Header historyUrls={this.props.historyUrls}
@@ -45,14 +44,14 @@ var Bet = React.createClass({
                     <div className="betBtn po tc f16 w" onClick={this.bet()}>立即投注</div>
                 </div>
 
-                {this.props.bet.hasEnoughMoney?'':<DialogiOS >
+                {this.props.showDialog.showDialog?<DialogiOS >
                     <DialogHeader title="喜腾币不足"/>
                     <DialogBody content={"请您去兑换喜腾币"}/>
                     <DialogFooter>
                         <DialogCancel showDialogActionKeys={this.props.showDialogActionKeys}/>
                         <DialogConfirm url={'/ExchangeXTCoins'} />
                     </DialogFooter>
-                </DialogiOS>}
+                </DialogiOS>:''}
             </div>
         )
     }
@@ -80,11 +79,12 @@ var BetHeader = React.createClass({
 });
 
 var BetCenter = React.createClass({
-    inputMoney:function(){
-        let money = $(this.refs.XTMoney).val();
-        this.props.inputMoneyAction.betAmount(money);
-    },
+    betQuickly:function(money){
+        return ()=>{
+            $('.J_betMoney').val(money);
+        };
 
+    },
     render: function () {
         return (
             <div className="bet_center pr">
@@ -93,21 +93,20 @@ var BetCenter = React.createClass({
                         <span className="cfff">金额：</span>
                         <input type="number"
                                placeholder="请选择/输入金额"
-                               className="input_money pl10 mr5"
-                               ref="XTMoney"
-                               onChange={this.inputMoney}/>
+                               className="J_betMoney input_money pl10 mr5"
+                               ref="XTMoney"/>
                         <span className="cfff">XT币</span>
                     </li>
                     <li className="selected_box">
-                        <div className="selected_money cfff tc">
+                        <div className="selected_money cfff tc" onClick={this.betQuickly(100)}>
                             <p className="f14">100</p>
                             <p>XT币</p>
                         </div>
-                        <div className="selected_money cfff tc ml15">
-                            <p className="f14">1000</p>
+                        <div className="selected_money cfff tc ml15" onClick={this.betQuickly(1000)}>
+                            <p className="f14" >1000</p>
                             <p>XT币</p>
                         </div>
-                        <div className="selected_money cfff tc ml15">
+                        <div className="selected_money cfff tc ml15" onClick={this.betQuickly(10000)}>
                             <p className="f14">10000</p>
                             <p>XT币</p>
                         </div>
@@ -123,7 +122,6 @@ function mapStatetoProps(state){
     return {
         storage:state.storage,
         historyUrls:state.historyUrls,
-        bet:state.bet,
         showDialog:state.showDialog
     }
 }

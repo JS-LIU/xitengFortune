@@ -4,21 +4,15 @@
 
 let XTCoinsList = [120,600,1200,2400,6000,12000];
 
-function getPrice(XTCoins){
-    let rate = 1/12;
-    return XTCoins * rate;
-}
-
-
 let myXTCoinsList = XTCoinsList.map((item,index)=>{
     return {
         count:item,
-        selected:false,
-        price:getPrice(item)
+        selected:false
     }
 });
 
 
 export const XTCoinsInit = {
-    XTCoinList:myXTCoinsList
+    XTCoinList:myXTCoinsList,
+    price:0
 };

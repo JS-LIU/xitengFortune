@@ -30,7 +30,6 @@ import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
 import {userInfoInit} from  '../src/redux/store/userInfoInit';
 import {stockGameDetail} from '../src/redux/store/stockGameDetailInit';
 import {storageInit} from '../src/redux/store/storageInit';
-import {betInit} from '../src/redux/store/betInit';
 import {accountInit} from '../src/redux/store/accountInit'
 import {XTCoinsInit} from '../src/redux/store/XTCoinsInit';
 
@@ -77,7 +76,6 @@ function initState(){
         userInfo:userInfoInit,
         showDialog:{},
         historyUrls:[],
-        bet:betInit,
         account:accountInit,
         XTCoins:XTCoinsInit
     }

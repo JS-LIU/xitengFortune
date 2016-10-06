@@ -18,13 +18,24 @@ import {userInfoActions} from '../redux/actions/userInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {accountActions} from '../redux/actions/accountActions';
 import {XTCoinsActions} from '../redux/actions/XTCoinsActions';
+import {dialogActions} from '../redux/actions/dialogActions';
 
 var ExchangeXTCoins = React.createClass({
+    componentWillMount:function(){
+        this.props.showDialogActionKeys.hideDialog();
+        this.props.historyUrlsActionKeys.pushUrl('/ExchangeXTCoins');
+    },
+    exchangeXTCoins:function(tradeWay){
+        return ()=>{
+            this.props.XTCoinsActionKeys.exchangeXTCoins(tradeWay);
+        }
+    },
+
     render: function () {
         var urls = this.props.historyUrls;
         var backUrl = urls[urls.length-2];
         return (
-            <div className="buy_XTCoins po w h">
+            <div>
                 <Header
                     historyUrls={this.props.historyUrls}
                     historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
@@ -34,13 +45,26 @@ var ExchangeXTCoins = React.createClass({
                     />
                     <Title title={{text:'兑换喜腾币'}}></Title>
                 </Header>
-                <BuyXTCoins
-                    accountActionKeys={this.props.accountActionKeys}
-                    account={this.props.account}
-                    XTCoins={this.props.XTCoins}
-                    XTCoinsActionKeys={this.props.XTCoinsActionKeys}
-                />
+                <div className="buy_XTCoins po w">
+                    <BuyXTCoins
+                        accountActionKeys={this.props.accountActionKeys}
+                        account={this.props.account}
+                        XTCoins={this.props.XTCoins}
+                        XTCoinsActionKeys={this.props.XTCoinsActionKeys}
+                    />
+                    <div className="exchangeXTCoins tc f16 cfff" onClick={this.exchangeXTCoins(3)}>立即兑换</div>
+                </div>
+                {this.props.showDialog.showDialog?<DialogiOS >
+                    <DialogHeader title="钻石不足"/>
+                    <DialogBody content={"您的钻石余额不足，赶快去购买钻石吧！"}/>
+                    <DialogFooter>
+                        <DialogCancel showDialogActionKeys={this.props.showDialogActionKeys}/>
+                        <DialogConfirm url={'/ExchangeXTCoins'} />
+                    </DialogFooter>
+                </DialogiOS>:''}
             </div>
+
+
         )
     }
 });
@@ -85,12 +109,11 @@ var  PurchaseQuantity = React.createClass({
     },
 
     render: function () {
-        var red = {color:"red"},diamonds = 0;
         var XTCoinNodes = this.props.XTCoins.XTCoinList.map((item,index)=>{
 
             return (
-                <li className="XTCoin mt10 tc cblue" style={item.selected?red:""} key={index} onClick={this.selectedBuyXTCoin(index)}>
-                    <p className="f16 pt10">{item.count}</p>
+                <li className="XTCoin mt10 tc cblue" style={item.selected?{border:"1px solid #FF4242",color:"#FF4242"}:{}} key={index} onClick={this.selectedBuyXTCoin(index)}>
+                    <p className="f16 pt10" >{item.count}</p>
                     <p className="pb10">喜腾币</p>
                 </li>
             )
@@ -104,7 +127,7 @@ var  PurchaseQuantity = React.createClass({
                 </ul>
                 <p className="pay_diamonds f16">
                     <span>应付钻石：</span>
-                    <span>{diamonds}颗</span></p>
+                    <span className="cred">{this.props.XTCoins.price}颗</span></p>
             </div>
         )
     }
@@ -117,7 +140,8 @@ function mapStatetoProps(state){
         userInfo:state.userInfo,
         historyUrls:state.historyUrls,
         account:state.account,
-        XTCoins:state.XTCoins
+        XTCoins:state.XTCoins,
+        showDialog:state.showDialog
     }
 }
 function mapDispatchToProps(dispatch){
@@ -126,7 +150,8 @@ function mapDispatchToProps(dispatch){
         userInfoActionKeys : bindActionCreators(userInfoActions,dispatch),
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         accountActionKeys : bindActionCreators(accountActions,dispatch),
-        XTCoinsActionKeys : bindActionCreators(XTCoinsActions,dispatch)
+        XTCoinsActionKeys : bindActionCreators(XTCoinsActions,dispatch),
+        showDialogActionKeys:bindActionCreators(dialogActions,dispatch)
     }
 }
 

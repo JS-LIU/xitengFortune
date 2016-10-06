@@ -237,9 +237,8 @@ HB.ajax = (function(){
                 $.ajax({
                     type:type,
                     url:url,
-                    dataType: "json",
                     data:data,
-                    contentType:'application/json; charset=utf-8'
+                    contentType:'application/json; charset=utf-8',
                 }).done(resolve).fail(reject);
 
             });
@@ -267,10 +266,10 @@ HB.ajax = (function(){
                 $.ajax({
                     type:"POST",
                     url:url,
-                    dataType: "json",
                     data:data,
                     contentType:'application/json; charset=utf-8'
-                }).done(resolve).fail(reject);
+
+                }).done(console.log("secSuccess")).fail(reject);
             });
         }
     }

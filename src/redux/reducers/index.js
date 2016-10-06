@@ -14,7 +14,6 @@ import {userInfo} from './userInfo';
 import {showDialog} from './showDialog';
 import {stockGameDetail} from './stockGameDetail';
 import {historyUrls} from './historyUrls'
-import {bet} from './bet';
 import {account} from './account';
 import {XTCoins} from './XTCoins';
 
@@ -30,7 +29,6 @@ var rootReducer = combineReducers({
     userInfo,
     showDialog,
     historyUrls,
-    bet,
     account,
     XTCoins
 });

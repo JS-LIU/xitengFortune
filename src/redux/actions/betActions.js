@@ -1,22 +1,16 @@
 /**
  * Created by LDQ on 2016/9/26.
  */
-import {BET_AMOUNT,IMMEDIATELY_BET} from './betActionKeys';
+import {SHOW_DIALOG,HIDE_DIALOG} from './dialogActionKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 
 export var betActions = {
-    betAmount: (money)=>{
-        return {
-            type : BET_AMOUNT,
-            money
-        }
-    },
-    immediatelyBet : ()=>{
+    immediatelyBet : (money)=>{
+
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
             let stockGameId = getState().storage.stockGameId;
-            let cathecticAmount = getState().bet.betAmount;
             let guessType = getState().storage.guessType;
             let postData = {
                 accessInfo:{
@@ -27,21 +21,18 @@ export var betActions = {
                 },
                 stockId:stockGameId,
                 guessType:guessType,
-                cathecticAmount:cathecticAmount
+                cathecticAmount:money
             };
             console.log(postData);
 
-            var hasEnoughMoney = true;
+            // var hasEnoughMoney = true;
             _h.ajax.resource('/guessGame').save({},postData).then((data)=>{
-                    console.log('success---',hasEnoughMoney);
-                    dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney})
+                    dispatch({type:'HIDE_DIALOG'})
                 })
                 .catch((error)=>{
-                    hasEnoughMoney = false;
-                    dispatch({type:'IMMEDIATELY_BET', hasEnoughMoney});
+                    console.log(error);
+                    dispatch({type:'SHOW_DIALOG'});
                 })
         }
     }
-
-
 };

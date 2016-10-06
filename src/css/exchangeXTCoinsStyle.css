@@ -2,13 +2,14 @@
     color:#000;
 }
 .cred{
-    color:#FF4244;
+    color:#FF4242;
 }
 .cblue{
     color:#4964EF;
 }
 .buy_XTCoins{
     background:#F5F5F5;
+    height:calc(100% - 44px)
 }
 .my_diamonds{
     display: flex;
@@ -17,13 +18,13 @@
     background:#F5F5F5;
 }
 .selected_title{
-    padding:17px 0px 0px 15px;
+    padding:17px 0 0 15px;
 }
 .XICoin_box{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding:0px 15px 15px;
+    padding:0 15px 15px;
 }
 .purchase_quantity{
     background:#FFF;
@@ -40,4 +41,10 @@
 .pay_diamonds{
     float:right;
     margin:15px 15px;
+}
+.exchangeXTCoins{
+    height:40px;
+    line-height:40px;
+    margin:100px 15px;
+    background:#4964EF;
 }
