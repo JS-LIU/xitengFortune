@@ -22,19 +22,19 @@ var BuyDiamonds = React.createClass({
         this.props.accountActionKeys.getAccount();
     },
     render: function () {
-        // var urls = this.props.historyUrls;
-        // var backUrl = urls[urls.length-2];
+        var urls = this.props.historyUrls;
+        var backUrl = urls[urls.length-2];
         return (
             <div>
-                {/*<Header*/}
-                    {/*historyUrls={this.props.historyUrls}*/}
-                    {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}>*/}
-                    {/*<BackBtn*/}
-                        {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
-                        {/*back={{text:'返回',src:'/nav_btn_back@2x.png',link:backUrl}}*/}
-                    {/*/>*/}
-                    {/*<Title title={{text:'购买钻石'}}></Title>*/}
-                {/*</Header>*/}
+                <Header
+                    historyUrls={this.props.historyUrls}
+                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
+                    <BackBtn
+                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
+                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:backUrl}}
+                    />
+                    <Title title={{text:'购买钻石'}}></Title>
+                </Header>
                 <div className="pt15 pl15">
                     <span className="c000">钻石余额：</span>
                     <span className="cred">{this.props.account.diamondAmount}</span>
@@ -77,7 +77,7 @@ var PruductItems = React.createClass({
                             <span className="tag cfff ml10">{item.tagName}</span>
                             <span className="cblue pl10">{(item.giveDiamondCount==0)?"":"赠送"+item.giveDiamondCount+"颗钻石"}</span>
                         </p>
-                        <div className="buy_btn f16 cred tc" onClick={this.buyDiamonds(item)}>立即购买</div>
+                        <Link to="/Pay" className="buy_btn f16 cred tc" onClick={this.buyDiamonds(item)}>立即购买</Link>
                     </div>
                 </li>
             )
@@ -97,8 +97,7 @@ function mapStatetoProps(state){
         account:state.account,
         historyUrls:state.historyUrls,
         diamonds:state.diamonds,
-        storage:state.storage,
-        tradeOrder:state.tradeOrder
+        storage:state.storage
     }
 }
 function mapDispatchToProps(dispatch){

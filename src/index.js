@@ -24,6 +24,8 @@ var Login = require('../src/container/Login');
 var StockDetails = require('../src/container/StockDetails');
 var Bet = require('../src/container/Bet');
 var ExchangeXTCoins = require('../src/container/ExchangeXTCoins');
+var Pay = require('../src/container/Pay');
+
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -59,6 +61,7 @@ var getRoutes = ()=>{
         <Route path="/StockDetails" component={StockDetails}></Route>
         <Route path="/Bet" component={Bet}></Route>
         <Route path="/ExchangeXTCoins" component={ExchangeXTCoins}></Route>
+        <Route path="/Pay" component={Pay}></Route>
     </Router>
     )};
 
@@ -77,8 +80,7 @@ function initState(){
         showDialog:{},
         historyUrls:[],
         account:accountInit,
-        XTCoins:XTCoinsInit,
-        tradeOrder:{}
+        XTCoins:XTCoinsInit
     }
 }
 

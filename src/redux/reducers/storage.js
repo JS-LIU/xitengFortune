@@ -3,7 +3,15 @@
  */
 
 
-import {SET_PRODUCTID,GET_PRODUCTID,SET_STOCKGAMEID,GET_STOCKGAMEID,SET_GUESSTYPE,GET_GUESSTYPE} from '../actions/storageActionKeys'
+import {
+    SET_PRODUCTID,
+    GET_PRODUCTID,
+    SET_STOCKGAMEID,
+    GET_STOCKGAMEID,
+    SET_GUESSTYPE,
+    GET_GUESSTYPE,
+    SET_TRADEORDER
+} from '../actions/storageActionKeys'
 
 export const storage = function(state = {},action){
 
@@ -32,6 +40,12 @@ export const storage = function(state = {},action){
         case 'GET_GUESSTYPE':
             console.log(state.guessType);
             return state.guessType;
+
+        case 'SET_TRADEORDER':
+            return Object.assign({},state,{
+                tradeInfo:action.tradeInfo,
+                item:action.item
+            });
 
         default:
             return state

@@ -1,7 +1,7 @@
 /**
  * Created by LDQ on 2016/10/8.
  */
-import { CREATE_TRADEORDER } from './createTradeOrderActionKeys';
+import { SET_TRADEORDER } from './storageActionKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 //  暂时不需要 在商品的时候才需要 接口为数组 我以为和购买商品用的是同一个借口呢
@@ -53,8 +53,8 @@ export var createTradeOrderActions = {
             };
 
             _h.ajax.resource('/createTradeOrder').save({},postData)
-                .then((data)=>{
-                    dispatch({type:'GET_ACCOUNT', data});
+                .then((tradeInfo)=>{
+                    dispatch({type:'SET_TRADEORDER', tradeInfo,item});
                 })
                 .catch((error)=>{
                     console.log(error);

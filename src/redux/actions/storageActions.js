@@ -2,7 +2,14 @@
  * Created by LDQ on 2016/8/17.
  */
 
-import {SET_PRODUCTID,GET_PRODUCTID,SET_STOCKGAMEID,GET_STOCKGAMEID,SET_GUESSTYPE,GET_GUESSTYPE} from './storageActionKeys';
+import {
+    SET_PRODUCTID,
+    GET_PRODUCTID,
+    SET_STOCKGAMEID,
+    GET_STOCKGAMEID,
+    SET_GUESSTYPE,
+    GET_GUESSTYPE
+} from './storageActionKeys';
 
 export const storageActions = {
 
@@ -39,7 +46,6 @@ export const storageActions = {
         return {
             type : GET_GUESSTYPE,
         }
-    },
-
+    }
 
 };
