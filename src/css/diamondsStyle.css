@@ -1,0 +1,45 @@
+.c000{
+    color:#000;
+}
+.cfff{
+    color:#FFF;
+}
+.cred{
+    color:#FF4242;
+}
+.cblue{
+    color:#6D7EF0;
+}
+.diamonds_list{
+    width:calc(100% - 15px);
+}
+.diamond{
+    border:1px solid #E2E2E2;
+    width:calc(50% - 17px);
+}
+.diamond_count{
+    min-height:100px;
+}
+.price{
+    line-height: 40px;
+    height:40px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.tag{
+    padding:1px 2px;
+    background:#FF4242;
+    -webkit-border-radius:2px;
+    -moz-border-radius:2px;
+    border-radius:2px;
+}
+.buy_btn{
+    margin:0 auto ;
+    width:75px;
+    padding:1px 6px;
+    -webkit-border-radius:16px;
+    -moz-border-radius:16px;
+    border-radius:16px;
+    border:1px solid #FF4242;
+}

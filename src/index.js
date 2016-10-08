@@ -77,7 +77,8 @@ function initState(){
         showDialog:{},
         historyUrls:[],
         account:accountInit,
-        XTCoins:XTCoinsInit
+        XTCoins:XTCoinsInit,
+        tradeOrder:{}
     }
 }
 

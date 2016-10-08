@@ -59,7 +59,7 @@ var ExchangeXTCoins = React.createClass({
                     <DialogBody content={"您的钻石余额不足，赶快去购买钻石吧！"}/>
                     <DialogFooter>
                         <DialogCancel showDialogActionKeys={this.props.showDialogActionKeys}/>
-                        <DialogConfirm url={'/ExchangeXTCoins'} />
+                        <DialogConfirm url={'/BuyDiamonds'} />
                     </DialogFooter>
                 </DialogiOS>:''}
             </div>

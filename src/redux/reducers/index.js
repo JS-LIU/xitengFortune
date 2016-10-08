@@ -16,6 +16,7 @@ import {stockGameDetail} from './stockGameDetail';
 import {historyUrls} from './historyUrls'
 import {account} from './account';
 import {XTCoins} from './XTCoins';
+import {tradeOrder} from './tradeOrder';
 
 var rootReducer = combineReducers({
     routing,
@@ -30,7 +31,8 @@ var rootReducer = combineReducers({
     showDialog,
     historyUrls,
     account,
-    XTCoins
+    XTCoins,
+    tradeOrder
 });
 
 module.exports = rootReducer;
