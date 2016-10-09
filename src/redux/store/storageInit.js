@@ -5,5 +5,13 @@
 export const storageInit = {
     productId:'',
     stockGameId:'',
-    guessType:''
+    guessType:'',
+    tradeInfo:{
+    },
+    productInfo:{
+        diamondCount:0,
+        price:0,
+        picture:"",
+        giveDiamondCount:0
+    }
 };

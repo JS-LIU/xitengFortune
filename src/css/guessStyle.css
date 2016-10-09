@@ -1,0 +1,36 @@
+.cfff{
+    color:#FFF;
+}
+.cred{
+    color:#FF4242;
+}
+.stockMarketListStyle{
+    margin-bottom:44px;
+    background:url('/home_lg@2x.png') no-repeat center;
+    background-size:cover;
+}
+.gameItemStyle{
+    margin:20px 15px;
+    background: #2c3256;
+    opacity:0.8;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.stockMarketPic{
+    display:block;
+    margin:0 auto;
+    width:calc(100% - 100px);
+}
+.up_down{
+    line-height:30px;
+}
+.guessUpDown{
+    margin:5px 30px;
+    line-height:25px;
+}
+.xt_money{
+    padding-right: 20px;
+    background:url('/icon_big@2x.png') no-repeat right center;
+    -webkit-background-size:15px;
+    background-size:15px;
+}

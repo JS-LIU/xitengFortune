@@ -7,6 +7,8 @@ var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var {Header,Title} = require('../components/Header');
 
+require("../css/guessStyle.css");
+
 import {stockGameActions} from '../redux/actions/stockGameActions';
 import {storageActions} from '../redux/actions/storageActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -43,9 +45,6 @@ var Guess = React.createClass({
                 <Header>
                     <Title title={{text:'喜腾'}}></Title>
                 </Header>
-                <div className="clearfix">
-                    <img src="/caicai_ad.png" className="fl w"/>
-                </div>
                 <StockMarketList
                     gameList={stockGame.gameList}
                     gameTime={stockGame.gameTime}
@@ -68,7 +67,7 @@ var StockMarketList = React.createClass({
             )
         });
         return (
-            <ul style={stockMarketListStyle}>
+            <ul className="stockMarketListStyle" >
                 <GameTime
                     gameTime={this.props.gameTime}
                     countDownAction={this.props.countDownAction}
@@ -112,98 +111,42 @@ var GameTime = React.createClass({
 
 var GameItem = React.createClass({
     setStockId:function(stockGameId){
-        var stockGameId = stockGameId;
-        var self = this;
-        return function(){
-            self.props.setStockGameIdAction(stockGameId);
+        return ()=>{
+            this.props.setStockGameIdAction(stockGameId);
         }
     },
     render: function () {
         var gameItem = this.props.gameItem;
         return (
-            <li style={gameItemStyle}>
-                <div className="tc f20" style={stockMarketHead}>
-                    {gameItem.stockGameName}
-                </div>
-                <div>
-                    <div className="f16 tc" style={stockMarketCenterTop}>
-                        <span className="pr5">{gameItem.stockModel.currentPoint}</span>
-                        <span className="pr5">{gameItem.stockModel.chg}</span>
-                        <span className="pr5">{gameItem.stockModel.changeRate}%</span>
-                    </div>
-
-                    <div style={stockMarketCenterBody}>
-                        <img src="/lg_1@3x.png" alt="" className="pt20" style={stockMarketPic}/>
-                        <ul className="clearfix" style={guessUpDown}>
-                            <li className="fl tc f16" style={guessItemLeft}>
-                                <p className="f16">猜涨总额</p>
-                                {gameItem.guessUpXtBAmount}XT币
-                            </li>
-                            <li className="fr tc f16" style={guessItemRight}>
-                                <p className="f16">猜跌总额</p>
-                                {gameItem.guessDownXtBAmount}XT币
-                            </li>
-                        </ul>
-                        <Link to="/StockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
-                            <div style={stockMarketCenterFooter}></div>
-                        </Link>
-
-                    </div>
-                </div>
+            <li className="gameItemStyle pb30">
+                <p className="tc f20 cfff pt20">{gameItem.stockGameName}</p>
+                <p className="up_down f16 tc cred">
+                    <span className="pr5">{gameItem.stockModel.currentPoint}</span>
+                    <span className="pr5">{gameItem.stockModel.chg}</span>
+                    <span className="pr5">{gameItem.stockModel.changeRate}%</span>
+                </p>
+                <Link to="/StockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
+                    <img src="/btn_go@2x.png" alt="" className="stockMarketPic pt5"/>
+                    <ul className="clearfix guessUpDown" >
+                        <li className="fl tc f16 cfff">
+                            <p className="f16">
+                                <span className="xt_money">猜涨:</span>
+                                <span className="pl5">{gameItem.guessUpXtBAmount}</span>
+                            </p>
+                        </li>
+                        <li className="fr tc f16 cfff">
+                            <p className="f16">
+                                <span className="xt_money">猜跌:</span>
+                                <span className="pl5">{gameItem.guessDownXtBAmount}</span>
+                            </p>
+                        </li>
+                    </ul>
+                </Link>
             </li>
         )
     }
 });
 
-
-
-const gameItemStyle = {
-    paddingBottom:"20px",
-};
-
-
-const stockMarketListStyle = {
-    marginBottom:"44px",
-    background:"url('/caicai_bg.png') no-repeat center",
-    backgroundSize:"content"
-};
-
-const stockMarketHead = {
-    position:"relative",
-    margin:"0 auto",
-    width:"186px",
-    height:"60px",
-    lineHeight:"70px",
-    background:"url('/head@2x.png') no-repeat center",
-    backgroundSize:'cover',
-    color:"#FF3B18",
-    zIndex:"1"
-};
-const stockMarketCenterTop = {
-    margin:"-14px 14px 0px",
-    paddingBottom:"20px",
-    height:"40px",
-    lineHeight:"70px",
-    background:"#C7E7FE",
-    borderTopLeftRadius:"6px",
-    borderTopRightRadius:"6px",
-    color:"#FF3B18"
-};
-const stockMarketCenterBody = {
-    margin:"0px 14px",
-    background:"#FFF",
-    borderBottomLeftRadius:"6px",
-    borderBottomRightRadius:"6px"
-};
-const stockMarketPic = {
-    display:'block',
-    margin:'auto',
-    width:'calc(100% - 100px)'
-};
-const guessUpDown = {
-    margin:"0px 30px",
-    lineHeight:"25px"
-};
 const guessItemLeft = {
     width:"37%"
 };

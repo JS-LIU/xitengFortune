@@ -20,6 +20,7 @@ var BuyDiamonds = React.createClass({
     componentWillMount:function(){
         this.props.diamondsActionKeys.getDiamonds();
         this.props.accountActionKeys.getAccount();
+        this.props.historyUrlsActionKeys.pushUrl('/BuyDiamonds');
     },
     render: function () {
         var urls = this.props.historyUrls;

@@ -44,7 +44,7 @@ export const storage = function(state = {},action){
         case 'SET_TRADEORDER':
             return Object.assign({},state,{
                 tradeInfo:action.tradeInfo,
-                item:action.item
+                productInfo:action.item
             });
 
         default:
