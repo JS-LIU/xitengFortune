@@ -4,17 +4,23 @@
 .cred{
     color:#FF4242;
 }
-.stockMarketListStyle{
-    margin-bottom:44px;
-    background:url('/home_lg@2x.png') no-repeat center;
-    background-size:cover;
+.f18{
+    font-size:18px;
 }
-.gameItemStyle{
-    margin:20px 15px;
+.game_item{
+    margin:0 15px 20px;
     background: #2c3256;
-    opacity:0.8;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border-radius:6px;
+}
+.time_bg{
+    background:url('/home_lg1@2x.png') no-repeat top center;
+    background-size: cover;
+}
+.common_bg{
+    background:url('/home_lg@2x.png') repeat-y center;
+    background-size: contain;
 }
 .stockMarketPic{
     display:block;
@@ -33,4 +39,49 @@
     background:url('/icon_big@2x.png') no-repeat right center;
     -webkit-background-size:15px;
     background-size:15px;
+}
+.count_down_title{
+    font-size:34px;
+}
+.count_down_icon{
+    padding-left:25px;
+    background:url('/home_icon_time@2x.png') no-repeat left center;
+    -webkit-background-size:20px;
+    background-size:20px;
+}
+.bet_user_box{
+    margin-top:-20px;
+    padding:20px 15px 20px;
+}
+.bet_user,
+.rank_user{
+    line-height: 35px;
+}
+.bet_user_header,
+.rank_user_header{
+    width:25px;
+    height:25px;
+    overflow: hidden;
+    margin:5px;
+}
+.bet_user_name{
+    width:110px;
+}
+.bet_user_bet,
+.rank_user_bet{
+    padding-left:20px;
+    background:url('/icon_big@2x.png') no-repeat left center;
+    background-size: 15px;
+}
+.pk_title{
+    background:url('/home_line@2x.png') no-repeat top center;
+    -webkit-background-size:contain;
+    background-size: contain;
+    line-height:50px;
+}
+.pk_pic{
+    width:calc(100% - 30px);
+}
+.pk_box{
+    padding-bottom:44px;
 }

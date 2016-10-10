@@ -1,0 +1,18 @@
+.fff{
+    background:#FFF;
+}
+.main_footer{
+    display: flex;
+    flex-direction:row;/* 默认 row 横向排列 */
+    justify-content:space-between;
+    position: fixed;
+    height:44px;
+    bottom:0;
+    z-index: 11;
+}
+.footer_item{
+    display: flex;
+    flex-direction:column;
+    flex:1;
+    justify-content:center;
+}

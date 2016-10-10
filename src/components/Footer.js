@@ -3,35 +3,30 @@
  */
 var React = require('react');
 var {Link} = require('react-router');
-require('../Footer.css');
+require('../css/footerStyle.css');
 
 var Footer = React.createClass({
 
     render: function () {
         var footerNodes = this.props.footerData.map((footerItem,index) => {
             return (
-                <li className="fl" key={index}>
-                    <Link to={footerItem.url}>{footerItem.name}</Link>
+                <li className="fl footer_item tc" key={index}>
+                    <Link to={footerItem.url}>
+                        <img src="" alt=""/>
+                        {footerItem.name}
+                    </Link>
                 </li>
             )
         });
 
         return (
-            <ul className="w" style={footerStyle}>
+            <ul className="w main_footer fff">
                 {footerNodes}
             </ul>
         )
     }
 });
 
-
-const footerStyle = {
-    position:"fixed",
-    bottom:"0px",
-    height:"44px",
-    background:"#FFF",
-    zIndex:"11"
-};
 
 
 module.exports = Footer;

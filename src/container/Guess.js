@@ -6,37 +6,23 @@ var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var {Header,Title} = require('../components/Header');
+var $ = require('jquery');
 
 require("../css/guessStyle.css");
 
+import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {stockGameActions} from '../redux/actions/stockGameActions';
 import {storageActions} from '../redux/actions/storageActions';
-import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
+import {betListActions} from '../redux/actions/betListActions';
+import {awardActions} from '../redux/actions/awardActions';
+import {rankActions} from '../redux/actions/rankActions';
+import _h from '../Util/HB';
+
 
 
 var Guess = React.createClass({
-    timer:{},
     componentWillMount:function(){
-        if(this.props.stockGame.gameList.length == 0){
-            this.props.stockGameActionKeys.getGameList({});
-        }
         this.props.historyUrlsActionKeys.pushUrl('/Guess');
-
-    },
-    componentDidMount:function(){
-        var time = 60000;
-        if(this.props.stockGame.gameList.length <= 3){
-            time = 5000;
-        }
-
-        this.timer = setInterval(()=>{
-            this.props.stockGame.gameList.map((stockItem,index)=>{
-                this.props.stockGameActionKeys.refresh(stockItem.stockGameId);
-            });
-        },time);
-    },
-    componentWillUnmount:function(){
-        clearInterval(this.timer);
     },
     render: function () {
         var stockGame = this.props.stockGame;
@@ -45,13 +31,26 @@ var Guess = React.createClass({
                 <Header>
                     <Title title={{text:'喜腾'}}></Title>
                 </Header>
-                <StockMarketList
-                    gameList={stockGame.gameList}
-                    gameTime={stockGame.gameTime}
-                    countDown={stockGame.countDown}
-                    countDownAction={this.props.stockGameActionKeys.countDown}
-                    setStockGameIdAction={this.props.storageActionKeys.setStockGameId}
-                />
+                <div>
+                    <StockMarketList
+                        gameList={stockGame.gameList}
+                        gameTime={stockGame.gameTime}
+                        countDown={stockGame.countDown}
+                        stockGameActionKeys={this.props.stockGameActionKeys}
+                        storageActionKeys={this.props.storageActionKeys}
+                    />
+                    <BetList
+                        betListActionKeys={this.props.betListActionKeys}
+                        betList={this.props.betList}
+                    />
+                    <Rank
+                        awardList={this.props.award.awardList}
+                        awardActionKeys={this.props.awardActionKeys}
+                        rank={this.props.rank}
+                        rankActionKeys={this.props.rankActionKeys}
+                    />
+                </div>
+
             </div>
         )
     }
@@ -59,36 +58,64 @@ var Guess = React.createClass({
 
 
 var StockMarketList = React.createClass({
+    timer:function(){
+        var time = 60000;
+        if(this.props.gameList.length <= 3){
+            time = 5000;
+        }
 
+        this.timer = setInterval(()=>{
+            this.props.gameList.map((stockItem,index)=>{
+                this.props.stockGameActionKeys.refresh(stockItem.stockGameId);
+            });
+        },time);
+    },
+    componentWillMount:function(){
+        if(this.props.gameList.length == 0){
+            this.props.stockGameActionKeys.getGameList();
+        }
+    },
+    componentDidMount:function(){
+        this.timer();
+
+
+    },
+    componentWillUnmount:function(){
+        clearInterval(this.timer);
+    },
     render: function () {
         var stockMarketNodes = this.props.gameList.map((gameItem,index)=>{
             return (
-                <GameItem setStockGameIdAction={this.props.setStockGameIdAction} gameItem={gameItem} key={index}/>
+                <GameItem storageActionKeys={this.props.storageActionKeys} gameItem={gameItem} key={index}/>
             )
         });
         return (
-            <ul className="stockMarketListStyle" >
+            <div>
                 <GameTime
                     gameTime={this.props.gameTime}
-                    countDownAction={this.props.countDownAction}
+                    stockGameActionKeys={this.props.stockGameActionKeys}
                     countDown={this.props.countDown}
                 />
-                {stockMarketNodes}
-            </ul>
+                <ul className="common_bg">
+                    {stockMarketNodes}
+                </ul>
+            </div>
         )
     }
 });
 
 var GameTime = React.createClass({
-    timer:{},
-    componentDidMount:function(){
-        this.timer = setInterval(()=>{
-            this.props.countDownAction(
+    timer:function(){
+        setInterval(()=>{
+            this.props.stockGameActionKeys.countDown(
                 new Date(),
                 this.props.gameTime.startTime,
                 this.props.gameTime.endTime
             );
         },1000);
+    },
+    componentDidMount:function(){
+        this.timer();
     },
     componentWillUnmount:function(){
         clearInterval(this.timer);
@@ -99,10 +126,12 @@ var GameTime = React.createClass({
         var ri = date.getDate();
         var day = date.getDay();
         return (
-            <ul>
-                <li className="tc f14 pt10" style={countDownStyle}>猜股市收盘涨跌</li>
-                <li className="tc f20 pt5" style={nowTimeStyle}>{month}月{ri}日（周{day}）</li>
-                <li className="tc f16 pt5" style={countDownStyle}>距离{this.props.countDown.startOrEnd}还剩:{this.props.countDown.countDownTime}</li>
+            <ul className="time_bg">
+                <li className="count_down_title fb tc f14 pt10 cfff">猜股市涨跌</li>
+                <li className="tc f18 pt10 cfff" >{month}月{ri}日（周{_h.valid.parseDay(day)}）</li>
+                <li className="cfff tc f16 pt5 pb15">
+                    <span className="count_down_icon">截止投注:{this.props.countDown.countDownTime}</span>
+                </li>
             </ul>
         )
     }
@@ -112,13 +141,13 @@ var GameTime = React.createClass({
 var GameItem = React.createClass({
     setStockId:function(stockGameId){
         return ()=>{
-            this.props.setStockGameIdAction(stockGameId);
+            this.props.storageActionKeys.setStockGameId(stockGameId);
         }
     },
     render: function () {
         var gameItem = this.props.gameItem;
         return (
-            <li className="gameItemStyle pb30">
+            <li className="game_item pb30">
                 <p className="tc f20 cfff pt20">{gameItem.stockGameName}</p>
                 <p className="up_down f16 tc cred">
                     <span className="pr5">{gameItem.stockModel.currentPoint}</span>
@@ -147,41 +176,114 @@ var GameItem = React.createClass({
     }
 });
 
-const guessItemLeft = {
-    width:"37%"
-};
-const guessItemRight = {
-    width:"40%"
-};
-const stockMarketCenterFooter = {
-    margin:"0 auto",
-    width:"80px",
-    height:"50px",
-    background:"url('/item_game_go.png') no-repeat center",
-    backgroundSize:"contain"
-};
-const nowTimeStyle = {
-    color:"#FF3B18"
-};
-const countDownStyle = {
-    color:"#FFF"
-};
+var BetList = React.createClass({
+    componentWillMount:function(){
+        this.props.betListActionKeys.getBetList();
+    },
 
+    render: function () {
+        let betNodes = this.props.betList.betList.map((item,index)=>{
+            return (
+                <li className="bet_user clearfix f14" key={index}>
+                    <div className="bet_user_header fl">
+                        <img src={item.userIconUrl} alt="" className="w"/>
+                    </div>
+                    <div className="bet_user_name pl10 fl cfff">
+                        <span>{item.userName}</span>
+                    </div>
+                    <div className="fl">
+                        <span>刚刚投注</span>
+                    </div>
+                    <div className="fr">
+                        <span className="bet_user_bet cfff">{item.guessXitbAmount}</span>
+                    </div>
+                </li>
+            )
+        });
+
+        return (
+            <ul className="bet_user_box common_bg">
+                {betNodes}
+            </ul>
+        )
+    }
+});
+
+var Rank = React.createClass({
+    componentWillMount:function(){
+        this.props.awardActionKeys.getAward(3);
+        this.props.rankActionKeys.getRank();
+    },
+    cutRank:function(id,type){
+        return ()=>{
+            this.props.awardActionKeys.getAward(id);
+            this.props.rankActionKeys.selected(id);
+            this.props.rankActionKeys.getRank(0,type,3);
+        }
+    },
+    render: function () {
+        let pic_src = this.props.awardList[0].productInfo.picUrl;
+        let rankTypeNodes = this.props.rank.rankType.map((item,index)=>{
+            return (
+                <li className="J_ranktype fl cfff pl5 pr5"
+                    style={item.selected?{color:"#FF4242"}:{}}
+                    key={index}
+                    onClick={this.cutRank(item.id,item.type)}>
+                    <span>{item.title}排行</span>
+                </li>
+            )
+        });
+        let rankUserNodes = this.props.rank.rankList.map((item,index)=>{
+            return (
+                <li className="rank_user clearfix">
+                    <span className="cfff fl">{index}</span>
+                    <div className="rank_user_header cfff fl">
+                        <img src={item.iconUrl} alt="" className="w"/>
+                    </div>
+                    <span className="fr rank_user_bet cfff">
+
+                    </span>
+                </li>
+            )
+        });
+
+        return (
+            <div className="common_bg pk_box">
+                <div className="pk_title cfff pl15 clearfix">
+                    <p className="f20 fl">股神争霸</p>
+                    <ul className="fr clearfix f14 pr10">
+                        {rankTypeNodes}
+                    </ul>
+                </div>
+                <div className="pk_pic ml15">
+                    <img src={pic_src} alt="" className="w"/>
+                </div>
+            </div>
+        )
+    }
+});
 
 function mapStatetoProps(state){
     return {
+        historyUrls:state.historyUrls,
         stockGame:state.stockGame,
         storage:state.storage,
-        historyUrls:state.historyUrls
+        betList:state.betList,
+        award:state.award,
+        rank:state.rank
     };
 }
 
 function mapDispatchToProps(dispatch){
 
     return{
+        historyUrlsActionKeys: bindActionCreators(historyUrlsActions,dispatch),
         stockGameActionKeys : bindActionCreators(stockGameActions,dispatch),
         storageActionKeys:bindActionCreators(storageActions,dispatch),
-        historyUrlsActionKeys: bindActionCreators(historyUrlsActions,dispatch)
+        betListActionKeys:bindActionCreators(betListActions,dispatch),
+        awardActionKeys:bindActionCreators(awardActions,dispatch),
+        rankActionKeys:bindActionCreators(rankActions,dispatch)
+
     }
 }
 

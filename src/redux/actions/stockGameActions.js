@@ -25,7 +25,7 @@ export var stockGameActions = {
         }
     },
 
-    getGameList:(obj1,obj2)=>{
+    getGameList:()=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
             let stockGameInfo = getState().stockGame;
@@ -38,7 +38,7 @@ export var stockGameActions = {
                 pageNo:stockGameInfo.pageNo,
                 size:stockGameInfo.size
             };
-            _h.ajax.resource('/stockGameList').save(obj1,postData)
+            _h.ajax.resource('/stockGameList').save({},postData)
                 .then((data)=>{
                     dispatch({type:'GET_GAMELIST', data})
                 })

@@ -5,14 +5,7 @@
 /**
  *  HB.obj
  *      HB.obj.toEquals
- *      HB.obj.addProp(废弃 es6中已经有了)
  *      HB.obj.isEmpty
- *
- *  HB.arrObj（废弃 es6种已经有了）
- *      HB.arrObj.findObjs
- *      HB.arrObj.findIndex
- *      HB.arrObj.deleteObjs
- *
  *  HB.resource
  *      HB.resource.query()
  *      HB.resource.save()
@@ -26,175 +19,44 @@ window.HB = window.HB || {};
 
 HB.obj = (function(){
 
-
     //  判断obj1 中的属性 是否和obj2中的所有属性相等
     var toEquals = function(obj1,obj2){
-
         var flag = true;
-
         for(var prop in obj2){
 
             if(obj1[prop] != obj2[prop]){
-
                 flag = false;
-
                 break;
-
             }
-
         }
-
         return flag;
 
     };
 
-    var addProp = function(obj,addedProp,bool = "fasle"){
-
-        if(bool){
-
-            for(var prop in addedProp){
-
-                obj[prop] = addedProp[prop];
-
-            }
-
-        }else{
-
-            for(var prop in addedProp){
-
-                if(!obj[prop]){
-
-                    obj[prop] = addedProp[prop];
-
-                }
-
-            }
-
-        }
-
-        return obj;
-
-    };
-
+    //  用途：是否为空对象
     var isEmpty = function(obj){
 
         var proparr = [];
 
         for(var prop in obj){
-
             proparr.push(prop);
-
         }
 
         if(proparr.length == 0){
-
             return true;
-
         }else{
-
             return false;
-
         }
-
     };
 
     return {
-
         toEquals:toEquals,
-
-        addProp:addProp,
-
         isEmpty:isEmpty
     }
 
 })();
 
 
-HB.arrObj = (function(){
-
-
-    var findObjs = function(findedList,condition){
-
-        var fitsList = [];
-
-        for(var i = 0,len = findedList.length; i < len;i++){
-
-            if(HB.obj.toEquals(findedList[i],condition)){
-
-                fitsList.push(findedList[i]);
-
-            }
-
-        }
-
-        return fitsList;
-
-    };
-
-    var findIndex = function(findedList,condition){
-
-        var fitsIndex = [];
-
-        for(var i = 0,len = findedList.length; i < len;i++){
-
-            if(HB.obj.toEquals(findedList[i],condition)){
-
-                fitsIndex.push(i);
-
-            }
-
-        }
-
-        return fitsIndex;
-
-    };
-
-    var deleteObjs = function(deletedList,condition){
-
-        var newList = [];
-
-        for(var i = 0,len = deletedList.length; i < len;i++){
-
-            if(!HB.obj.toEquals(deletedList[i],condition)){
-
-                newList.push(deletedList[i]);
-
-            }
-
-        }
-
-        return newList;
-
-    };
-
-    var isEmpty = function(arr){
-
-
-        if(arr.length == 0){
-
-            return true;
-
-        }else{
-
-            return false
-
-        }
-
-    };
-
-    return {
-
-        findObjs:findObjs,
-
-        findIndex:findIndex,
-
-        deleteObjs:deleteObjs,
-
-        isEmpty:isEmpty
-
-    }
-
-})();
 
 HB.ajax = (function(){
     /*
@@ -259,19 +121,6 @@ HB.ajax = (function(){
             let type = 'POST';
             return this.ajax(type,url,JSON.stringify(data));
         }
-        test_save(data){
-            let url = this.getRealUrl({});
-            console.log(url);
-            return new Promise((resolve,reject)=>{
-                $.ajax({
-                    type:"POST",
-                    url:url,
-                    data:data,
-                    contentType:'application/json; charset=utf-8'
-
-                }).done(console.log("secSuccess")).fail(reject);
-            });
-        }
     }
 
     return {
@@ -282,6 +131,7 @@ HB.ajax = (function(){
 })();
 HB.valid = (function(){
     /*
+    *   用途：按一定规则分割字符串
     *   第1个参数是分割哪个电话号码 比如：18801233565
     *   第2个参数是每隔多少个字符分割 比如：18801233565 分成 188 0123 3565 就传[3,4,4]
     *   第3个参数是用什么来分割 比如：18801233565 分成 188-0123-3565 就传'-'
@@ -296,13 +146,50 @@ HB.valid = (function(){
         });
         return newPhoneNum.join(str).trim();
     }
+
+    //  用途：将字符串中所有空格删除
     function trimAllBlank(str){
         return str.replace(/\s/g, "");
     }
 
+    //  用途：将数字转换成字符串
+    function parseString(i){
+        return i+"";
+    }
+
+    //  用途：将字符串转换为数组
+    function parseArr(str){
+        return str.split('');
+    }
+
+    //  用途：将阿拉伯数子转换为汉字
+    function parseChinese(number){
+        let chinese = ['零','一','二','三','四','五','六','七','八','九'];
+        let arrNumber = parseArr(parseString(number));
+        let chineseNumber = "";
+
+        return arrNumber.map((item,index)=>{
+            chineseNumber += chinese[item];
+            return chineseNumber;
+        });
+    }
+
+    //  将星期几转换成汉字的
+    function parseDay(day){
+        let myDay = day;
+        if(day == 0){
+            myDay = 7;
+        }
+        return parseChinese(myDay);
+
+    }
     return {
         validNum:validNum,
-        trimAllBlank:trimAllBlank
+        trimAllBlank:trimAllBlank,
+        parseString:parseString,
+        parseArr:parseArr,
+        parseChinese:parseChinese,
+        parseDay:parseDay
     }
 
 })();
