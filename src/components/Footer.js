@@ -10,19 +10,19 @@ var Footer = React.createClass({
     render: function () {
         var footerNodes = this.props.footerData.map((footerItem,index) => {
             return (
-                <li className="fl footer_item tc" key={index}>
-                    <Link to={footerItem.url}>
-                        <img src="" alt=""/>
-                        {footerItem.name}
-                    </Link>
-                </li>
+                <Link to={footerItem.url} className="footer_item tc" key={index}>
+                    <div className="footer_text">
+                        <img src={footerItem.isChecked?footerItem.checked:footerItem.unchecked} alt="" className="footer_icon"/>
+                        <span>{footerItem.name}</span>
+                    </div>
+                </Link>
             )
         });
 
         return (
-            <ul className="w main_footer fff">
+            <div className="w main_footer fff">
                 {footerNodes}
-            </ul>
+            </div>
         )
     }
 });

@@ -10,10 +10,9 @@ var HomePage = React.createClass({
             <div>
                 {this.props.children}
                 <Footer footerData={[
-                    {name:'猜猜',url:'/Guess'},
-                    {name:'问吧',url:'/AskBar'},
-                    {name:'发现',url:'/Discover'},
-                    {name:'我',url:'/My'}
+                    {name:'猜猜',url:'/Guess',checked:"/caicai_d@2x.png",unchecked:"caicai_d@2x.png",isChecked:true},
+                    {name:'发现',url:'/Discover',checked:"/faxian_s@2x.png",unchecked:"faxian_d@2x.png",isChecked:false},
+                    {name:'我',url:'/My',checked:"/me_s@2x.png",unchecked:"me_d@2x.png",isChecked:false}
                     ]}/>
             </div>
         )
