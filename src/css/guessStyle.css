@@ -27,9 +27,6 @@
     margin:0 auto;
     width:calc(100% - 100px);
 }
-.up_down{
-    line-height:30px;
-}
 .guessUpDown{
     margin:5px 30px;
     line-height:25px;
@@ -49,9 +46,13 @@
     -webkit-background-size:20px;
     background-size:20px;
 }
-.bet_user_box{
+.bet_user_box,
+.rank_user_box{
     margin-top:-20px;
     padding:20px 15px 20px;
+}
+.rank_user_box{
+    margin-top:-10px;
 }
 .bet_user,
 .rank_user{
@@ -64,7 +65,8 @@
     overflow: hidden;
     margin:5px;
 }
-.bet_user_name{
+.bet_user_name,
+.rank_user_name{
     width:110px;
 }
 .bet_user_bet,
@@ -83,5 +85,11 @@
     width:calc(100% - 30px);
 }
 .pk_box{
-    padding-bottom:44px;
+    padding-bottom:50px;
+}
+.prize_pic{
+    display: block;
+    -webkit-border-radius:6px;
+    -moz-border-radius:6px;
+    border-radius:6px;
 }

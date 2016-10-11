@@ -23,8 +23,7 @@ var BuyDiamonds = React.createClass({
         this.props.historyUrlsActionKeys.pushUrl('/BuyDiamonds');
     },
     render: function () {
-        var urls = this.props.historyUrls;
-        var backUrl = urls[urls.length-2];
+        var backUrl = this.props.historyUrls.last;
         return (
             <div>
                 <Header

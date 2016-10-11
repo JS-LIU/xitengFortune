@@ -7,8 +7,7 @@ export const gameListInit = {
         endTime:""
     },
     countDown:{
-        countDownTime:"",
-        startOrEnd:""
+        countDownTime:""
     },
     gameList:[],
     last:false,

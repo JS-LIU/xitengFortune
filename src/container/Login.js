@@ -18,8 +18,7 @@ var Login = React.createClass({
         this.props.historyUrlsActionKeys.pushUrl('/Login');
     },
     render: function () {
-        var urls = this.props.historyUrls;
-        var backUrl = urls[urls.length-2];
+        var backUrl = this.props.historyUrls.last;
         var confirmUrl = '/StockDetails';
         return (
             <div>

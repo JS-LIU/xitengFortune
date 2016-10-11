@@ -16,5 +16,6 @@ export const historyUrlsActions = {
             type: POP_URL,
             index
         }
-    },
+    }
+
 };

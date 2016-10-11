@@ -9,11 +9,11 @@ var {Provider} = require('react-redux');
 import {DevTools} from 'Util/3rd/DevTools'
 
 var HomePage = require('../src/components/HomePage');
-var My = require('../src/components/My');
 var AskBar = require('../src/components/AskBar');
-var Discover = require('../src/components/Discover');
 
 var Guess = require('../src/container/Guess');
+var Discover = require('../src/container/Discover');
+var My = require('../src/container/My');
 var Shop = require('../src/container/Shop');
 var ShoppingCart = require('../src/container/ShoppingCart');
 var ProductDetails = require('../src/container/ProductDetails');
@@ -37,6 +37,7 @@ import {XTCoinsInit} from '../src/redux/store/XTCoinsInit';
 import {rankInit} from '../src/redux/store/rankInit.js';
 import {betListInit} from '../src/redux/store/betListInit';
 import {awardInit} from '../src/redux/store/awardInit';
+import {historyUrlsInit} from '../src/redux/store/historyUrlsInit';
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -80,7 +81,7 @@ function initState(){
         shoppingCart:shoppingCartInit,
         userInfo:userInfoInit,
         showDialog:{},
-        historyUrls:[],
+        historyUrls:historyUrlsInit,
         account:accountInit,
         XTCoins:XTCoinsInit,
         rank:rankInit,
