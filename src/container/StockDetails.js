@@ -20,7 +20,6 @@ var StockDetails = React.createClass({
         var stockGameId = this.props.storage.stockGameId;
         this.props.stockGameDetailActionKeys.getStockDetail(stockGameId);
         this.props.historyUrlsActionKeys.pushUrl('/StockDetails');
-        console.log(this.props.historyUrls);
     },
     componentDidMount:function(){
         var time = 5000;
@@ -195,10 +194,6 @@ var StockDetailFooter = React.createClass({
 
     render: function () {
 
-        var src = "/Login";
-        if(this.props.userInfo.access_token != ''){
-            src = '/Bet';
-        }
         return (
             <ul className="footer w">
                 <li className="guessBtn h tc red f20 ">
@@ -207,7 +202,7 @@ var StockDetailFooter = React.createClass({
                     </Link>
                 </li>
                 <li className="guessBtn h tc f20 green ">
-                    <Link to={src} onClick={this.setGuessType(1)}>
+                    <Link to={this.props.userInfo.logIn?"/Bet":"/Login"} onClick={this.setGuessType(1)}>
                         <span className="guessDown cfff">猜跌</span>
                     </Link>
                 </li>

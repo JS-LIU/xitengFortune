@@ -51,7 +51,7 @@ var ExchangeXTCoins = React.createClass({
                         XTCoins={this.props.XTCoins}
                         XTCoinsActionKeys={this.props.XTCoinsActionKeys}
                     />
-                    <div className="exchangeXTCoins tc f16 cfff" onClick={this.exchangeXTCoins(3)}>立即兑换</div>
+                    <Link to={this.props.userInfo.logIn?"/PaySuccess":"/Login"} className="exchangeXTCoins tc f16 cfff" onClick={this.exchangeXTCoins(3)}>立即兑换</Link>
                 </div>
                 {this.props.showDialog.showDialog?<DialogiOS >
                     <DialogHeader title="钻石不足"/>

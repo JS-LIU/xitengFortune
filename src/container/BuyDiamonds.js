@@ -37,7 +37,7 @@ var BuyDiamonds = React.createClass({
                 </Header>
                 <div className="pt15 pl15">
                     <span className="c000">钻石余额：</span>
-                    <span className="cred">{this.props.account.diamondAmount}</span>
+                    <span className="cred">{this.props.account.diamondAmount||0}</span>
                     <span className="c000">颗</span>
                     <span>(钻石兑换喜腾币为1:12)</span>
                 </div>
@@ -46,6 +46,7 @@ var BuyDiamonds = React.createClass({
                     diamondList={this.props.diamonds.diamondList}
                     setProductId={this.props.storageActionKeys.setProductId}
                     createTradeOrderActionKeys={this.props.createTradeOrderActionKeys}
+                    userInfo={this.props.userInfo}
                 />
             </div>
         )
@@ -56,7 +57,6 @@ var PruductItems = React.createClass({
 
     buyDiamonds:function(item){
         return ()=>{
-            console.log(item);
             this.props.createTradeOrderActionKeys.createTradeOrder(item,2,1)
         }
     },
@@ -77,7 +77,7 @@ var PruductItems = React.createClass({
                             <span className="tag cfff ml10">{item.tagName}</span>
                             <span className="cblue pl10">{(item.giveDiamondCount==0)?"":"赠送"+item.giveDiamondCount+"颗钻石"}</span>
                         </p>
-                        <Link to="/Pay" className="buy_btn f16 cred tc" onClick={this.buyDiamonds(item)}>立即购买</Link>
+                        <Link to={this.props.userInfo.logIn?"/Pay":"/Login"} className="buy_btn f16 cred tc" onClick={this.buyDiamonds(item)}>立即购买</Link>
                     </div>
                 </li>
             )
@@ -97,7 +97,8 @@ function mapStatetoProps(state){
         account:state.account,
         historyUrls:state.historyUrls,
         diamonds:state.diamonds,
-        storage:state.storage
+        storage:state.storage,
+        userInfo:state.userInfo
     }
 }
 function mapDispatchToProps(dispatch){

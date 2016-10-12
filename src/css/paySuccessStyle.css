@@ -1,0 +1,8 @@
+.cblue{
+    color:#0A89FE;
+}
+.pay_success{
+    height:110px;
+    background:#FFF url("/common_icon_pay-success@2x.png") no-repeat center 15px;
+    background-size: 25px;
+}

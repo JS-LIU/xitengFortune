@@ -7,5 +7,6 @@ export const userInfoInit = {
     appSecret:"71838ae252714085bc0fb2fc3f420110",
     access_token:'',
     access_token_secret:'',
-    openId:"123"
+    openId:"123",
+    logIn:false
 };

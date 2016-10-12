@@ -25,7 +25,7 @@ var StockDetails = require('../src/container/StockDetails');
 var Bet = require('../src/container/Bet');
 var ExchangeXTCoins = require('../src/container/ExchangeXTCoins');
 var Pay = require('../src/container/Pay');
-
+var PaySuccess = require('../src/container/PaySuccess');
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -65,6 +65,7 @@ var getRoutes = ()=>{
         <Route path="/Bet" component={Bet}></Route>
         <Route path="/ExchangeXTCoins" component={ExchangeXTCoins}></Route>
         <Route path="/Pay" component={Pay}></Route>
+        <Route path="/PaySuccess" component={PaySuccess}></Route>
     </Router>
     )};
 
