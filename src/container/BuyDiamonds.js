@@ -23,7 +23,6 @@ var BuyDiamonds = React.createClass({
         this.props.historyUrlsActionKeys.pushUrl('/BuyDiamonds');
     },
     render: function () {
-        var backUrl = this.props.historyUrls.last;
         return (
             <div>
                 <Header
@@ -31,7 +30,7 @@ var BuyDiamonds = React.createClass({
                     historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
                     <BackBtn
                         historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:backUrl}}
+                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
                     />
                     <Title title={{text:'购买钻石'}}></Title>
                 </Header>

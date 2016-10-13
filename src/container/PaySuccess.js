@@ -33,7 +33,7 @@ var PaySuccess = React.createClass({
                     />
                     <Title title={{text:'支付结果'}}></Title>
                 </Header>
-                <div className="pay_success cblue">
+                <div className="pay_success cblue tc">
                     兑换成功
                 </div>
             </div>

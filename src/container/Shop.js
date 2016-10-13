@@ -6,16 +6,23 @@ var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
+var { Header,BackBtn,Title } = require('../components/Header');
 
+require('../css/shopStyle.css');
+
+import {userInfoActions} from '../redux/actions/userInfoActions';
+import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shopActions} from '../redux/actions/shopActions';
 import {storageActions} from '../redux/actions/storageActions';
 
 var PruductItems = React.createClass({
-
+    componentWillMount:function(){
+        this.props.historyUrlsActionKeys.pushUrl('/Shop');
+        this.props.storageActionKeys.getProductList()
+    },
     setProductId:function(item){
-        var self = this;
-        return function(){
-            self.props.setProductId(item.productId);
+        return ()=>{
+            this.props.setProductId(item.productId);
         }
     },
     render:function(){
@@ -31,9 +38,13 @@ var PruductItems = React.createClass({
         });
 
         return (
-            <ul>
-                {productNodes}
-            </ul>
+            <div>
+
+                <ul>
+                    {productNodes}
+                </ul>
+            </div>
+
         )
     }
 
@@ -61,13 +72,16 @@ var Shop = React.createClass({
 
 function mapStatetoProps(state){
     return {
+        userInfo:state.userInfo,
+        historyUrls:state.historyUrls,
         shop:state.shop,
         storage:state.storage
     }
 }
 function mapDispatchToProps(dispatch){
-
     return{
+        userInfoActionKeys : bindActionCreators(userInfoActions,dispatch),
+        historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         shopActionKeys : bindActionCreators(shopActions,dispatch),
         storageActionKeys: bindActionCreators(storageActions,dispatch)
     }

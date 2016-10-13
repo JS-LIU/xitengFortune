@@ -3,7 +3,7 @@
  */
 
 
-import {GET_PRODUCTS} from '../actions/shopActionKeys';
+import {GET_DIAMONDS,GET_PRODUCTS} from '../actions/shopActionKeys';
 
 export const shop = function(state = {},action){
 
@@ -14,6 +14,10 @@ export const shop = function(state = {},action){
                 productList:action.data.productList
             });
 
+        case "GET_DIAMONDS":
+            return Object.assign({},state,{
+                productList:action.data.productList
+            });
         default:
             return state
     }

@@ -33,6 +33,13 @@ var ExchangeXTCoins = React.createClass({
 
     render: function () {
         var backUrl = this.props.historyUrls.last;
+        let src = "/ExchangeXTCoins";
+        if(!this.props.userInfo.logIn){
+            src = "/Login";
+        }else if(!this.props.showDialog.showDialog){
+            src = "/PaySuccess";
+        }
+
         return (
             <div>
                 <Header
@@ -51,7 +58,7 @@ var ExchangeXTCoins = React.createClass({
                         XTCoins={this.props.XTCoins}
                         XTCoinsActionKeys={this.props.XTCoinsActionKeys}
                     />
-                    <Link to={this.props.userInfo.logIn?"/PaySuccess":"/Login"} className="exchangeXTCoins tc f16 cfff" onClick={this.exchangeXTCoins(3)}>立即兑换</Link>
+                    <Link to={src} className="exchangeXTCoins tc f16 cfff" onClick={this.exchangeXTCoins(3)}>立即兑换</Link>
                 </div>
                 {this.props.showDialog.showDialog?<DialogiOS >
                     <DialogHeader title="钻石不足"/>
@@ -62,8 +69,6 @@ var ExchangeXTCoins = React.createClass({
                     </DialogFooter>
                 </DialogiOS>:''}
             </div>
-
-
         )
     }
 });
@@ -126,7 +131,8 @@ var  PurchaseQuantity = React.createClass({
                 </ul>
                 <p className="pay_diamonds f16">
                     <span>应付钻石：</span>
-                    <span className="cred">{this.props.XTCoins.price}颗</span></p>
+                    <span className="cred">{this.props.XTCoins.price}颗</span>
+                </p>
             </div>
         )
     }

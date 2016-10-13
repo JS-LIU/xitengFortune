@@ -9,13 +9,15 @@ var {Link} = require('react-router');
 
 
 var ConfirmBtn = React.createClass({
+    popHistory:function(){
+        this.props.historyUrlsActionKeys.popUrl();
+    },
     render: function () {
         return (
             <div style={confirmBtnStyle} className="tc" >
-                <Link to={this.props.confirm.link}>
+                <Link to={this.props.confirm.link} onClick={this.popHistory}>`
                     {this.props.confirm.text}
                 </Link>
-
             </div>
         )
     }

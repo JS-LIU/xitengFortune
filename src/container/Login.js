@@ -19,7 +19,6 @@ var Login = React.createClass({
     },
     render: function () {
         var backUrl = this.props.historyUrls.last;
-        var confirmUrl = '/StockDetails';
         return (
             <div>
                 <Header
@@ -30,10 +29,8 @@ var Login = React.createClass({
                         back={{text:'取消',src:'/nav_btn_back@2x.png',link:backUrl}}
                     />
                 </Header>
-                <LoginBtn
-                    logIn={this.props.userInfoActionKeys.logIn}>
-                    <ConfirmBtn
-                        confirm={{link:confirmUrl,text:'使用微信授权登录'}}/>
+                <LoginBtn logIn={this.props.userInfoActionKeys.logIn}>
+                    <ConfirmBtn confirm={{link:backUrl,text:'使用微信授权登录'}} historyUrlsActionKeys={this.props.historyUrlsActionKeys}/>
                 </LoginBtn>
 
             </div>
