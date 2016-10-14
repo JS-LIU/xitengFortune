@@ -11,7 +11,7 @@ require("../css/diamondsStyle.css");
 
 import {accountActions} from '../redux/actions/accountActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
-import {shopActions} from '../redux/actions/shopActions';
+import {diamondsActions} from '../redux/actions/diamondsActions';
 import {storageActions} from '../redux/actions/storageActions';
 import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
 
@@ -105,7 +105,7 @@ function mapDispatchToProps(dispatch){
     return{
         accountActionKeys : bindActionCreators(accountActions,dispatch),
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
-        diamondsActionKeys : bindActionCreators(shopActions,dispatch),
+        diamondsActionKeys : bindActionCreators(diamondsActions,dispatch),
         storageActionKeys: bindActionCreators(storageActions,dispatch),
         createTradeOrderActionKeys: bindActionCreators(createTradeOrderActions,dispatch)
     }

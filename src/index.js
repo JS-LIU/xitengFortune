@@ -38,6 +38,8 @@ import {rankInit} from '../src/redux/store/rankInit.js';
 import {betListInit} from '../src/redux/store/betListInit';
 import {awardInit} from '../src/redux/store/awardInit';
 import {historyUrlsInit} from '../src/redux/store/historyUrlsInit';
+import {shopInit} from '../src/redux/store/shopInit';
+
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -75,7 +77,7 @@ function initState(){
     return {
         stockGame:gameListInit,
         stockGameDetail:stockGameDetail,
-        shop:{productList:[]},
+        shop:shopInit,
         diamonds:{diamondList:[]},
         storage:storageInit,
         productInfo:{},

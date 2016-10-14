@@ -1,7 +1,7 @@
 /**
  * Created by LDQ on 2016/8/23.
  */
-import {GET_DIAMONDS} from '../actions/shopActionKeys';
+import {GET_DIAMONDS} from '../actions/diamondsActions';
 
 export const diamonds = function(state = {},action){
 

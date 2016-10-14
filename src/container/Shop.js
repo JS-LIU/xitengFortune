@@ -10,64 +10,107 @@ var { Header,BackBtn,Title } = require('../components/Header');
 
 require('../css/shopStyle.css');
 
+import {accountActions} from '../redux/actions/accountActions';
 import {userInfoActions} from '../redux/actions/userInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shopActions} from '../redux/actions/shopActions';
 import {storageActions} from '../redux/actions/storageActions';
 
-var PruductItems = React.createClass({
-    componentWillMount:function(){
-        this.props.historyUrlsActionKeys.pushUrl('/Shop');
-        this.props.storageActionKeys.getProductList()
-    },
-    setProductId:function(item){
-        return ()=>{
-            this.props.setProductId(item.productId);
-        }
-    },
-    render:function(){
-        var productNodes = this.props.ProductList.map((item,index)=>{
-            return (
-                <li key={index} onClick={this.setProductId(item)}>
-                    <Link to="/ProductDetails">
-                        <span>{item.title}</span>
-                    </Link>
-                </li>
-            )
-
-        });
-
-        return (
-            <div>
-
-                <ul>
-                    {productNodes}
-                </ul>
-            </div>
-
-        )
-    }
-
-});
-
 var Shop = React.createClass({
 
     componentWillMount:function(){
-        this.props.shopActionKeys.getProducts({productList:'productList.json'});
+        this.props.historyUrlsActionKeys.pushUrl('/Shop');
+        this.props.accountActionKeys.getAccount();
     },
     render: function () {
 
         return (
-            <div >
-                <PruductItems
-                    ProductList={this.props.shop.productList}
-                    setProductId={this.props.storageActionKeys.setProductId}
+            <div className="f5f5f5">
+                <Header
+                    historyUrls={this.props.historyUrls}
+                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
+                    <BackBtn
+                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
+                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
+                    />
+                    <Title title={{text:'礼品商城'}}></Title>
+                </Header>
+                <p className="shop_xtbTotalAmount pl15 f14 f5f5f">
+                    <span>可兑换礼品金额：</span>
+                    <span className="xt_money">{this.props.account.xtbTotalAmount||0}</span>
+                </p>
+                <PruductList
+                    shop={this.props.shop}
+                    shopActionKeys={this.props.shopActionKeys}
+                    storageActionKeys={this.props.storageActionKeys}
                 />
             </div>
         )
     }
 });
 
+var PruductList = React.createClass({
+    componentWillMount:function(){
+        this.props.shopActionKeys.getProductList();
+    },
+    setProductId:function(item){
+        return ()=>{
+            this.props.storageActionKeys.setProductId(item.productId);
+
+        }
+    },
+    render:function(){
+        let productNodes = this.props.shop.productList.map((item,index)=>{
+            return (
+                <li className="shop_product_item w fff mb10" key={index} onClick={this.setProductId(item)} >
+                    <Link to="/ProductDetails" className="w">
+                        <div className="shop_product_pic w tc fff tc">
+                            <img src={item.picUrl} alt="商品图片" className="h"/>
+                        </div>
+                        <div className="shop_product_footer fff f14 pl15 pr15">
+                            <p className="shop_product_name">{item.productName}</p>
+                            <p className="shop_product_price cred">{item.price/100}</p>
+                        </div>
+                    </Link>
+                </li>
+            )
+        });
+
+        return (
+            <div>
+                <ProductType
+                    shopActionKeys={this.props.shopActionKeys}
+                    shop={this.props.shop}
+                />
+                <ul className="shop_product_list">
+                    {productNodes}
+                </ul>
+            </div>
+        )
+    }
+
+});
+var ProductType = React.createClass({
+    cutType:function(mannerId,index){
+        return ()=>{
+            this.props.shopActionKeys.getProductList(mannerId,index);
+        }
+    },
+    render: function () {
+        let typeNodes = this.props.shop.type.map((item,index)=>{
+            return (
+                <li key={index} className="shop_type_item f16" onClick={this.cutType(item.mannerId,index)}>
+                    <span style={item.selected?{cblueStyle}:{}}>{item.title}</span>
+                </li>
+            )
+        });
+        return (
+            <ul className="shop_type_list fff c16">
+                {typeNodes}
+            </ul>
+        )
+    }
+});
 
 
 function mapStatetoProps(state){
@@ -75,16 +118,22 @@ function mapStatetoProps(state){
         userInfo:state.userInfo,
         historyUrls:state.historyUrls,
         shop:state.shop,
-        storage:state.storage
+        storage:state.storage,
+        account:state.account,
     }
 }
 function mapDispatchToProps(dispatch){
     return{
         userInfoActionKeys : bindActionCreators(userInfoActions,dispatch),
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
+        accountActionKeys : bindActionCreators(accountActions,dispatch),
         shopActionKeys : bindActionCreators(shopActions,dispatch),
         storageActionKeys: bindActionCreators(storageActions,dispatch)
     }
 }
 
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(Shop);
+
+const cblueStyle = {
+    color:"#0A89FE"
+};

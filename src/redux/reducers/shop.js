@@ -3,20 +3,23 @@
  */
 
 
-import {GET_DIAMONDS,GET_PRODUCTS} from '../actions/shopActionKeys';
+import {GET_PRODUCTS} from '../actions/shopActionKeys';
 
 export const shop = function(state = {},action){
 
     switch (action.type) {
-        case 'GET_PRODUCTS':
 
-            return Object.assign({},state,{
-                productList:action.data.productList
+        case 'GET_PRODUCTS':
+            let type = [...state.type];
+            type.map((item,index)=>{
+                item.selected = false;
             });
 
-        case "GET_DIAMONDS":
+            type[action.index].selected = true;
+            console.log(type);
             return Object.assign({},state,{
-                productList:action.data.productList
+                productList:action.data.datas,
+                type:type
             });
         default:
             return state

@@ -6,34 +6,19 @@ import {GET_PRODUCTS} from './shopActionKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 
-export const shopActions= {
+export const shopActions = {
 
-    getDiamonds:()=>{
+    getProductList:(mannerId={tagName:"推荐"},index=0,pageNo=0,size=10)=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
 
-            let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:"",
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret),
+            let myManner = mannerId;
+            for(let prop in mannerId){
+                if(-(mannerId[prop]*-1)==mannerId[prop]){
+                    myManner[prop] = mannerId[prop]*-1;
                 }
-            };
-            console.log(postData);
+            }
 
-            _h.ajax.resource('/diamond/list').save({},postData)
-                .then((data)=>{
-                    dispatch({type:'GET_PRODUCTS', data})
-                })
-                .catch((error)=>{
-                    console.log("error",error);
-                })
-        }
-    },
-    getProductList:(pageNo=10,size=10,orderObj={tagName:"推荐"})=>{
-        return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
 
             let postData = Object.assign({},{
                 accessInfo:{
@@ -44,17 +29,17 @@ export const shopActions= {
                 },
                 pageNo:pageNo,
                 size:size
-            },orderObj);
+            },myManner);
             console.log(postData);
-
-            _h.ajax.resource('/diamond/list').save({},postData)
+            console.log(index)
+            _h.ajax.resource('/product/list').save({},postData)
                 .then((data)=>{
-                    dispatch({type:'GET_DIAMONDS', data})
+                    dispatch({type:'GET_PRODUCTS', data,index})
                 })
                 .catch((error)=>{
                     console.log("error",error);
                 })
         }
-    }
+    },
 
 };
