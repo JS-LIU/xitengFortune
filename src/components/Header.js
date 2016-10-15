@@ -30,7 +30,6 @@ var BackBtn = React.createClass({
         }
     },
     render: function () {
-        console.log(this.props.back);
         return (
             <li style={backStyle} className="fl">
                 <Link to={this.props.back.link} onClick={this.backTo()}>

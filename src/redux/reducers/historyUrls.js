@@ -26,11 +26,17 @@ export const historyUrls = function(state = {},action){
     switch (action.type) {
         case 'PUSH_URL':
 
-            return historyUrls.pushUrl(action.url,state);
+            let urlList = historyUrls.pushUrl(action.url,state.urlList);
+            let previousUrl = urlList[urlList.length-2]||action.url;
+            return Object.assign({},state,{
+                urlList:urlList,
+                last:previousUrl
+            });
 
         case 'POP_URL':
-
-            return historyUrls.popUrl(action.index,state);
+            return Object.assign({},state,{
+                urlList:historyUrls.popUrl(action.index,state.urlList)
+            });
 
         default:
             return state

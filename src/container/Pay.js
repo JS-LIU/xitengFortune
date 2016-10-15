@@ -14,9 +14,11 @@ import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {storageActions} from '../redux/actions/storageActions';
 
 var Pay = React.createClass({
+    componentWillMount:function(){
+        this.props.historyUrlsActionKeys.pushUrl('/Pay');
+    },
     render: function () {
-        var urls = this.props.historyUrls;
-        var backUrl = urls[urls.length-2];
+        var backUrl = this.props.historyUrls.last;
         console.log(this.props.storage);
         return (
             <div className="po w h f5f5f5">

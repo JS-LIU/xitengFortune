@@ -149,13 +149,13 @@ var GameItem = React.createClass({
         return (
             <li className="game_item pb30">
                 <p className="tc f20 cfff pt20">{gameItem.stockGameName}</p>
-                <p className="up_down f16 tc cred">
-                    <span className="pr5">{gameItem.stockModel.currentPoint}</span>
-                    <span className="pr5">{gameItem.stockModel.chg}</span>
-                    <span className="pr5">{gameItem.stockModel.changeRate}%</span>
+                <p className="pt15 f16 tc cred">
+                    <span className="pr15 f20" style={(gameItem.stockModel.chg>0)?upStyle:downStyle}>{gameItem.stockModel.currentPoint}</span>
+                    <span className="pl10" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg}</span>
+                    <span className="pl10" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.changeRate}%</span>
                 </p>
                 <Link to="/StockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
-                    <img src="/btn_go@2x.png" alt="" className="stockMarketPic pt5"/>
+                    <img src="/btn_go@2x.png" alt="" className="stockMarketPic pt15"/>
                     <ul className="clearfix guessUpDown" >
                         <li className="fl tc f16 cfff">
                             <p className="f16">
@@ -235,13 +235,16 @@ var Rank = React.createClass({
         });
         let rankUserNodes = this.props.rank.rankList.map((item,index)=>{
             return (
-                <li className="rank_user clearfix">
-                    <span className="cfff fl">{index}</span>
+                <li className="rank_user clearfix f14" key={index}>
+                    <span className="cfff fl pl5 pr5">{index+1}</span>
                     <div className="rank_user_header cfff fl">
                         <img src={item.iconUrl} alt="" className="w"/>
                     </div>
+                    <div className="rank_user_name pl10 fl cfff">
+                        <span>{item.userName}</span>
+                    </div>
                     <span className="fr rank_user_bet cfff">
-
+                        {item.bonusXtbAmount}
                     </span>
                 </li>
             )
@@ -256,8 +259,11 @@ var Rank = React.createClass({
                     </ul>
                 </div>
                 <div className="pk_pic ml15">
-                    <img src={pic_src} alt="" className="w"/>
+                    <img src={pic_src} alt="" className="prize_pic w"/>
                 </div>
+                <ul className="rank_user_box common_bg pt10">
+                    {rankUserNodes}
+                </ul>
             </div>
         )
     }
@@ -287,5 +293,21 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(Guess);
+
+const upStyle={
+    color:"#FF4242",
+    background:'url("/icon_arrow_up-@2x.png") no-repeat right center',
+    backgroundSize:"12px",
+};
+const downStyle={
+    color:"#02C56B",
+    background:'url("/icon_arrow_down@2x.png") no-repeat right center',
+    backgroundSize:"12px",
+};
+const cred={
+    color:"#FF4242"
+};
+const cgreen={
+    color:"#02C56B"
+};

@@ -7,34 +7,28 @@ export const stockGame = function (state = {},action){
     switch (action.type) {
         case 'GET_GAMELIST':
 
-            var gameList = state.gameList.concat(action.data.content);
-            var startTime = gameList[0].gameStartTime;
-            var endTime = gameList[0].gameEndTime;
+            let myGameList = state.gameList.concat(action.data.content);
+            let startTime = myGameList[0].gameStartTime;
+            let endTime = myGameList[0].gameEndTime;
             startTime = new Date(startTime.replace(new RegExp("-","gm"),"/")).getTime();
             endTime = new Date(endTime.replace(new RegExp("-","gm"),"/")).getTime();
+
+
             return Object.assign({},state,{
                 gameTime:{
                     startTime:startTime,
                     endTime:endTime
                 },
-                gameList:gameList,
-                last:action.data.last
+                gameList:myGameList,
+                last:action.data.last,
             });
         case 'COUNT_DOWN':
-            var nowTime = action.nowTime.getTime();
-            var startTime = action.startTime;
-            var countDownTime = startTime - nowTime;
-            var startOrEnd = "开始";
-
-            if(countDownTime < 0){
-                startOrEnd = "结束";
-                countDownTime = action.endTime - nowTime;
-            }
+            let nowTime = action.nowTime.getTime();
+            let countDownTime = action.endTime - nowTime;
 
             return Object.assign({},state,{
                countDown:{
-                   countDownTime:trimTime(countDownTime - action.step,":"),
-                   startOrEnd:startOrEnd
+                   countDownTime:trimTime(countDownTime - action.step,":")
                }
 
             });

@@ -20,7 +20,6 @@ var StockDetails = React.createClass({
         var stockGameId = this.props.storage.stockGameId;
         this.props.stockGameDetailActionKeys.getStockDetail(stockGameId);
         this.props.historyUrlsActionKeys.pushUrl('/StockDetails');
-        console.log(this.props.historyUrls);
     },
     componentDidMount:function(){
         var time = 5000;
@@ -168,10 +167,10 @@ var UpDownRate = React.createClass({
 
         return (
             <ul className="m15 f14">
-               <li className="clearfix" style={guessUpDownRateStyle}>
-                   <span className="fl" style={guessUpRateStyle}>看涨：{stockGameDetail.guessUpRate}</span>
-                   <span className="fr" style={guessDownRateStyle}>看跌：{stockGameDetail.guessDownRate}</span>
-               </li>
+                <li className="clearfix" style={guessUpDownRateStyle}>
+                    <span className="fl" style={guessUpRateStyle}>看涨：{stockGameDetail.guessUpRate}</span>
+                    <span className="fr" style={guessDownRateStyle}>看跌：{stockGameDetail.guessDownRate}</span>
+                </li>
                 <li className="clearfix">
                     <div className="fl tc" style={guessUpXtBAmountStyle}>合计：{stockGameDetail.guessUpXtBAmount}XT币</div>
                     <div className="fl tc fb f20" style={vsStyle}>vs</div>
@@ -195,19 +194,15 @@ var StockDetailFooter = React.createClass({
 
     render: function () {
 
-        var src = "/Login";
-        if(this.props.userInfo.access_token != ''){
-            src = '/Bet';
-        }
         return (
             <ul className="footer w">
                 <li className="guessBtn h tc red f20 ">
-                    <Link to={src} onClick={this.setGuessType(0)}>
+                    <Link to={this.props.userInfo.logIn?"/Bet":"/Login"} onClick={this.setGuessType(0)}>
                         <span className="guessUp cfff">猜涨</span>
                     </Link>
                 </li>
                 <li className="guessBtn h tc f20 green ">
-                    <Link to={src} onClick={this.setGuessType(1)}>
+                    <Link to={this.props.userInfo.logIn?"/Bet":"/Login"} onClick={this.setGuessType(1)}>
                         <span className="guessDown cfff">猜跌</span>
                     </Link>
                 </li>

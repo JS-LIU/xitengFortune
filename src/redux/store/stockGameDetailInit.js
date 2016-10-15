@@ -29,7 +29,8 @@ export const stockGameDetail = {
         leastCathectic: "",
         guessUpRate: "",
         guessDownRate: "",
-        guessXtbCount: ""
+        guessXtbCount: "",
+        upOrDown:true
     },
     KLineTags:[
         {tag:"min",tagTitle:"分时",selected:true},
@@ -37,6 +38,4 @@ export const stockGameDetail = {
         {tag:"weekly",tagTitle:"周K",selected:false},
         {tag:"monthly",tagTitle:"月K",selected:false}
     ]
-
-
 };

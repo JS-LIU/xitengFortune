@@ -9,11 +9,11 @@ var {Provider} = require('react-redux');
 import {DevTools} from 'Util/3rd/DevTools'
 
 var HomePage = require('../src/components/HomePage');
-var My = require('../src/components/My');
 var AskBar = require('../src/components/AskBar');
-var Discover = require('../src/components/Discover');
 
 var Guess = require('../src/container/Guess');
+var Discover = require('../src/container/Discover');
+var My = require('../src/container/My');
 var Shop = require('../src/container/Shop');
 var ShoppingCart = require('../src/container/ShoppingCart');
 var ProductDetails = require('../src/container/ProductDetails');
@@ -25,7 +25,7 @@ var StockDetails = require('../src/container/StockDetails');
 var Bet = require('../src/container/Bet');
 var ExchangeXTCoins = require('../src/container/ExchangeXTCoins');
 var Pay = require('../src/container/Pay');
-
+var PaySuccess = require('../src/container/PaySuccess');
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -37,6 +37,9 @@ import {XTCoinsInit} from '../src/redux/store/XTCoinsInit';
 import {rankInit} from '../src/redux/store/rankInit.js';
 import {betListInit} from '../src/redux/store/betListInit';
 import {awardInit} from '../src/redux/store/awardInit';
+import {historyUrlsInit} from '../src/redux/store/historyUrlsInit';
+import {shopInit} from '../src/redux/store/shopInit';
+
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -64,6 +67,7 @@ var getRoutes = ()=>{
         <Route path="/Bet" component={Bet}></Route>
         <Route path="/ExchangeXTCoins" component={ExchangeXTCoins}></Route>
         <Route path="/Pay" component={Pay}></Route>
+        <Route path="/PaySuccess" component={PaySuccess}></Route>
     </Router>
     )};
 
@@ -73,14 +77,14 @@ function initState(){
     return {
         stockGame:gameListInit,
         stockGameDetail:stockGameDetail,
-        shop:{productList:[]},
+        shop:shopInit,
         diamonds:{diamondList:[]},
         storage:storageInit,
         productInfo:{},
         shoppingCart:shoppingCartInit,
         userInfo:userInfoInit,
         showDialog:{},
-        historyUrls:[],
+        historyUrls:historyUrlsInit,
         account:accountInit,
         XTCoins:XTCoinsInit,
         rank:rankInit,

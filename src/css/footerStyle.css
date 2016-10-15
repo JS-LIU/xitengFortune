@@ -15,12 +15,11 @@
     flex:1;
     justify-content:center;
 }
-
-.footer_text{
+.footer_pic_box{
     display: flex;
-    flex-direction: column;
     justify-content:center;
+    flex-direction:column;
 }
-.footer_icon{
+.footer_pic{
     height:25px;
 }

@@ -2,34 +2,44 @@
  * Created by LDQ on 2016/8/15.
  */
 
-import {GET_DIAMONDS} from './shopActionKeys';
+import {GET_PRODUCTS} from './shopActionKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 
-export const shopActions= {
+export const shopActions = {
 
-    getDiamonds:()=>{
+    getProductList:(mannerId={tagName:"推荐"},index=0,pageNo=0,size=10)=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
 
-            let postData = {
+            let myManner = mannerId;
+            for(let prop in mannerId){
+                if(-(mannerId[prop]*-1)==mannerId[prop]){
+                    myManner[prop] = mannerId[prop]*-1;
+                }
+            }
+
+
+            let postData = Object.assign({},{
                 accessInfo:{
                     app_key:userInfo.appKey,
                     access_token:"",
                     phone_num:userInfo.openId,
                     signature:hex_md5(userInfo.appSecret),
-                }
-            };
+                },
+                pageNo:pageNo,
+                size:size
+            },myManner);
             console.log(postData);
-
-            _h.ajax.resource('/diamond/list').save({},postData)
+            console.log(index)
+            _h.ajax.resource('/product/list').save({},postData)
                 .then((data)=>{
-                    dispatch({type:'GET_DIAMONDS', data})
+                    dispatch({type:'GET_PRODUCTS', data,index})
                 })
                 .catch((error)=>{
                     console.log("error",error);
                 })
         }
-    }
+    },
 
 };
