@@ -11,6 +11,9 @@
  *      HB.resource.save()
  *  HB.valid
  *      HB.valid.toPhoneNum
+ *  HB.ui
+ *      HB.ui.scrollToTheBottom
+ *
  */
 
 var $ = require('jquery');
@@ -19,7 +22,7 @@ window.HB = window.HB || {};
 
 HB.obj = (function(){
 
-    //  判断obj1 中的属性 是否和obj2中的所有属性相等
+    //  判断obj1中是否有obj2中的所有属性
     var toEquals = function(obj1,obj2){
         var flag = true;
         for(var prop in obj2){
@@ -193,5 +196,26 @@ HB.valid = (function(){
     }
 
 })();
+
+HB.ui = (function(){
+
+    var scrollToTheBottom = function(func){
+        $(window).scroll(function(){
+            var $_scrollTop = $(this).scrollTop();
+            var $_scrollHeight = $(document).height();
+            var $_windowHeight = $(this).height();
+            if($_scrollTop + $_windowHeight == $_scrollHeight){
+                func();
+            }
+        });
+    };
+
+
+    return {
+        scrollToTheBottom:scrollToTheBottom
+    }
+})();
+
+
 
 module.exports = HB;

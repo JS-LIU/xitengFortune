@@ -6,7 +6,10 @@ var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
+var $ = require('jquery');
 var { Header,BackBtn,Title } = require('../components/Header');
+var _h = require('../Util/HB');
+
 
 require('../css/shopStyle.css');
 
@@ -17,10 +20,25 @@ import {shopActions} from '../redux/actions/shopActions';
 import {storageActions} from '../redux/actions/storageActions';
 
 var Shop = React.createClass({
-
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Shop');
         this.props.accountActionKeys.getAccount();
+    },
+    componentDidMount:function(){
+        _h.ui.scrollToTheBottom(()=>{
+            if(!this.props.shop.last){
+                let pageNo = this.props.shop.pageNo + 1;
+                let type = this.props.shop.type;
+                let manner = {};
+                for(let i = 0;i < type.length;i++){
+                    if(type[i].selected){
+                        manner = {mannerId:type[i].mannerId,index:i};
+                        break;
+                    }
+                }
+                this.props.shopActionKeys.getProductList(manner.mannerId,manner.index,pageNo);
+            }
+        });
     },
     render: function () {
 
@@ -56,7 +74,6 @@ var PruductList = React.createClass({
     setProductId:function(item){
         return ()=>{
             this.props.storageActionKeys.setProductId(item.productId);
-
         }
     },
     render:function(){
@@ -99,8 +116,13 @@ var ProductType = React.createClass({
     render: function () {
         let typeNodes = this.props.shop.type.map((item,index)=>{
             return (
-                <li key={index} className="shop_type_item f16" onClick={this.cutType(item.mannerId,index)}>
-                    <span style={item.selected?{cblueStyle}:{}}>{item.title}</span>
+                <li
+                    key={index}
+                    className="shop_type_item f16"
+                    onClick={this.cutType(item.mannerId,index)}
+                >
+                    <span style={item.selected?cBlueStyle:{}}>
+                        {item.title}</span>
                 </li>
             )
         });
@@ -119,7 +141,7 @@ function mapStatetoProps(state){
         historyUrls:state.historyUrls,
         shop:state.shop,
         storage:state.storage,
-        account:state.account,
+        account:state.account
     }
 }
 function mapDispatchToProps(dispatch){
@@ -134,6 +156,6 @@ function mapDispatchToProps(dispatch){
 
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(Shop);
 
-const cblueStyle = {
+const cBlueStyle = {
     color:"#0A89FE"
 };

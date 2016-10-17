@@ -8,7 +8,7 @@ import {hex_md5} from '../../Util/md5';
 
 export const shopActions = {
 
-    getProductList:(mannerId={tagName:"推荐"},index=0,pageNo=0,size=10)=>{
+    getProductList:(mannerId={tagName:"推荐"},index=0,pageNo=0,size=6)=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
 
@@ -30,11 +30,10 @@ export const shopActions = {
                 pageNo:pageNo,
                 size:size
             },myManner);
-            console.log(postData);
-            console.log(index)
+            console.log('action---',postData);
             _h.ajax.resource('/product/list').save({},postData)
                 .then((data)=>{
-                    dispatch({type:'GET_PRODUCTS', data,index})
+                    dispatch({type:'GET_PRODUCTS', data,index,pageNo})
                 })
                 .catch((error)=>{
                     console.log("error",error);

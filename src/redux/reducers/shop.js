@@ -16,10 +16,16 @@ export const shop = function(state = {},action){
             });
 
             type[action.index].selected = true;
-            console.log(type);
+            console.log('reducer---pageNo---',action.pageNo);
+            let productList = action.data.datas;
+            if(action.pageNo != 0){
+                productList = state.productList.concat(action.data.datas);
+            }
             return Object.assign({},state,{
-                productList:action.data.datas,
-                type:type
+                productList:productList,
+                type:type,
+                last:action.data.last,
+                pageNo:action.pageNo
             });
         default:
             return state
