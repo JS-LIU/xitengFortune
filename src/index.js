@@ -39,7 +39,7 @@ import {betListInit} from '../src/redux/store/betListInit';
 import {awardInit} from '../src/redux/store/awardInit';
 import {historyUrlsInit} from '../src/redux/store/historyUrlsInit';
 import {shopInit} from '../src/redux/store/shopInit';
-
+import {productInfoInit} from '../src/redux/store/productInfoInit';
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -80,7 +80,7 @@ function initState(){
         shop:shopInit,
         diamonds:{diamondList:[]},
         storage:storageInit,
-        productInfo:{},
+        productInfo:productInfoInit,
         shoppingCart:shoppingCartInit,
         userInfo:userInfoInit,
         showDialog:{},

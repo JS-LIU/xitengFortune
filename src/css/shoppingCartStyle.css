@@ -1,0 +1,41 @@
+/**
+ * Created by LDQ on 2016/10/17.
+ */
+.fff{
+    background:#FFF;
+}
+.cart_shop_name{
+    height:44px;
+    line-height: 44px;
+    background:#FFF;
+}
+.cart_shop_name_icon{
+    background:url("/icon_mall@2x.png") no-repeat 10px center;
+    -webkit-background-size: 20px;
+    background-size:20px;
+    padding:1px 0 0 40px;
+}
+.cart_product{
+    height:95px;
+}
+.cart_product_pic{
+    width:73px;
+    height:73px;
+    border:1px solid #E2E2E2;
+    overflow: hidden;
+}
+.cart_product{
+    display:flex;
+    flex-direction: row;
+}
+.cart_product_check{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.cart_product_pic{
+
+}
+.cart_product_info{
+
+}

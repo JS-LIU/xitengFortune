@@ -10,7 +10,6 @@ var $ = require('jquery');
 var { Header,BackBtn,Title } = require('../components/Header');
 var _h = require('../Util/HB');
 
-
 require('../css/shopStyle.css');
 
 import {accountActions} from '../redux/actions/accountActions';

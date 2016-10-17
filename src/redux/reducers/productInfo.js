@@ -6,7 +6,7 @@
 import { GET_PRODUCTINFO} from '../actions/productInfoActionKeys'
 
 
-export const productInfo = function (state = {},action){
+export const productInfo = function (state={},action){
     switch (action.type) {
         case GET_PRODUCTINFO:
             return action.data;
