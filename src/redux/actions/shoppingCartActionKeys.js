@@ -9,3 +9,4 @@ export const CHECKED_ITEM = 'CHECKED_ITEM';
 export const ALLCHECKED = 'ALLCHECKED';
 export const INCREASE = 'INCREASE';
 export const REDUCE = 'REDUCE';
+export const EDIT = 'EDIT';

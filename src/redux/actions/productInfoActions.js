@@ -10,7 +10,7 @@ export var productActions = {
     getProductInfo:()=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
-            let productId = getState().storage.productId
+            let productId = getState().storage.productId;
             let postData = {
                 accessInfo:{
                     app_key:userInfo.appKey,

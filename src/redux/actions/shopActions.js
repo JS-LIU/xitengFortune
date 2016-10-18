@@ -19,6 +19,7 @@ export const shopActions = {
                 }
             }
 
+            dispatch({type:'PREVENT_MULTIPLE_POST'});
 
             let postData = Object.assign({},{
                 accessInfo:{
@@ -30,7 +31,7 @@ export const shopActions = {
                 pageNo:pageNo,
                 size:size
             },myManner);
-            console.log('action---',postData);
+
             _h.ajax.resource('/product/list').save({},postData)
                 .then((data)=>{
                     dispatch({type:'GET_PRODUCTS', data,index,pageNo})

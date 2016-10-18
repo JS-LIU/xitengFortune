@@ -73,3 +73,25 @@
     border-left:1px solid #E2E2E2;
     border-right:1px solid #E2E2E2;
 }
+.cart_footer{
+    position:fixed;
+    bottom:0;
+    height:47px;
+    line-height:47px;
+    background:#FFF;
+}
+.cart_delete_all{
+    width:125px;
+    background:#FF4242;
+}
+.cart_payment_btn{
+    width:125px;
+    background:#FFBA26;
+}
+.cart_body{
+    padding-bottom:47px;
+    min-height:calc(100% - 47px);
+}
+.cart_edit{
+    z-index:1;
+}

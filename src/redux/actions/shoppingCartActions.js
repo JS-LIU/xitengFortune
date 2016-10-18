@@ -2,7 +2,16 @@
  * Created by LDQ on 2016/8/18.
  */
 
-import {ADD_PRODUCTITEM,CALC_TOTALMONEY,DELETE_PRODUCTS,CHECKED_ITEM,ALLCHECKED,INCREASE,REDUCE} from '../actions/shoppingCartActionKeys';
+import {
+    ADD_PRODUCTITEM,
+    CALC_TOTALMONEY,
+    DELETE_PRODUCTS,
+    CHECKED_ITEM,
+    ALLCHECKED,
+    INCREASE,
+    REDUCE,
+    EDIT
+} from '../actions/shoppingCartActionKeys';
 
 export const shoppingCartActions = {
 
@@ -43,6 +52,11 @@ export const shoppingCartActions = {
     deleteProducts:()=>{
         return {
             type:DELETE_PRODUCTS
+        }
+    },
+    edit:()=>{
+        return {
+            type:EDIT
         }
     }
 

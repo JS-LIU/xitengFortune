@@ -97,32 +97,33 @@ HB.ajax = (function(){
             }
         }
         //  实际上这个方法并不想暴露出来
-        ajax(type,url,data){
+        ajax(type,url,data,bool){
             return new Promise((resolve,reject)=>{
                 $.ajax({
                     type:type,
                     url:url,
                     data:data,
                     contentType:'application/json; charset=utf-8',
+                    async:bool
                 }).done(resolve).fail(reject);
 
             });
         }
 
-        query(entity_obj){
+        query(entity_obj,bool=true){
 
             let url = this.getRealUrl(entity_obj);
             console.log(url);
             let type = 'GET';
             var data = "";
-            return this.ajax(type,url,data);
+            return this.ajax(type,url,data,bool);
         }
 
 
-        save(entity_obj,data){
+        save(entity_obj,data,bool=true){
             let url = this.getRealUrl(entity_obj);
             let type = 'POST';
-            return this.ajax(type,url,JSON.stringify(data));
+            return this.ajax(type,url,JSON.stringify(data),bool);
         }
     }
 

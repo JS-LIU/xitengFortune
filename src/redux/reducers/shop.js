@@ -3,7 +3,10 @@
  */
 
 
-import {GET_PRODUCTS} from '../actions/shopActionKeys';
+import {GET_PRODUCTS,PREVENT_MULTIPLE_POST} from '../actions/shopActionKeys';
+
+
+
 
 export const shop = function(state = {},action){
 
@@ -26,6 +29,10 @@ export const shop = function(state = {},action){
                 type:type,
                 last:action.data.last,
                 pageNo:action.pageNo
+            });
+        case 'PREVENT_MULTIPLE_POST':
+            return Object.assign({},state,{
+                last:true
             });
         default:
             return state

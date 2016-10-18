@@ -26,6 +26,8 @@ var Bet = require('../src/container/Bet');
 var ExchangeXTCoins = require('../src/container/ExchangeXTCoins');
 var Pay = require('../src/container/Pay');
 var PaySuccess = require('../src/container/PaySuccess');
+var ConfirmOrder = require('../src/container/ConfirmOrder');
+
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -40,6 +42,7 @@ import {awardInit} from '../src/redux/store/awardInit';
 import {historyUrlsInit} from '../src/redux/store/historyUrlsInit';
 import {shopInit} from '../src/redux/store/shopInit';
 import {productInfoInit} from '../src/redux/store/productInfoInit';
+import {addressInit} from '../src/redux/store/addressInit';
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -68,6 +71,7 @@ var getRoutes = ()=>{
         <Route path="/ExchangeXTCoins" component={ExchangeXTCoins}></Route>
         <Route path="/Pay" component={Pay}></Route>
         <Route path="/PaySuccess" component={PaySuccess}></Route>
+        <Route path="/ConfirmOrder" component={ConfirmOrder}></Route>
     </Router>
     )};
 
@@ -89,7 +93,8 @@ function initState(){
         XTCoins:XTCoinsInit,
         rank:rankInit,
         betList:betListInit,
-        award:awardInit
+        award:awardInit,
+        address:addressInit
     }
 }
 

@@ -9,7 +9,7 @@ var Header = React.createClass({
     render:function(){
 
         return (
-            <ul className="clearfix" style={headerStyle}>
+            <ul style={headerStyle}>
                 {this.props.children}
             </ul>
         )
@@ -31,7 +31,7 @@ var BackBtn = React.createClass({
     },
     render: function () {
         return (
-            <li style={backStyle} className="fl">
+            <li style={backStyle}>
                 <Link to={this.props.back.link} onClick={this.backTo()}>
                     <span style={backTextStyle}>{this.props.back.text}</span>
 

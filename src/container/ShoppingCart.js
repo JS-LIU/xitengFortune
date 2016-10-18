@@ -25,30 +25,45 @@ var ShoppingCart = React.createClass({
     deleteProducts:function(){
         this.props.shoppingCartActionKeys.deleteProducts();
     },
+    edit:function(){
+        this.props.shoppingCartActionKeys.edit();
+    },
     render:function(){
         return(
-            <div className="f5f5f5">
+            <div className="cart_body f5f5f5 po w">
                 <Header
                     historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
+                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}
+                    shoppingCart={this.props.shoppingCart}>
                     <BackBtn
                         historyUrlsActionKeys={this.props.historyUrlsActionKeys}
                         back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
                     />
                     <Title title={{text:'购物车'}}></Title>
+                    <div className="cart_edit pr15 cfff" onClick={this.edit}>
+                        <span>{this.props.shoppingCart.edit?"完成":"编辑"}</span>
+                    </div>
                 </Header>
                 <ProductList
-                    products={this.props.shoppingCart.products}
-                    checekedProduct={this.props.shoppingCartActionKeys.checkedItem}
-                    increase={this.props.shoppingCartActionKeys.increase}
-                    reduce={this.props.shoppingCartActionKeys.reduce}
+                    shoppingCart={this.props.shoppingCart}
+                    shoppingCartActionKeys={this.props.shoppingCartActionKeys}
+
                 />
-                <input type="checkbox"
-                       checked={this.props.shoppingCart.allChecked}
-                       onChange={this.allCheck}
-                />
-                <span>总价：{this.props.shoppingCart.realCount / 100}</span>
-                <span onClick={this.deleteProducts}>删除</span>
+                <div className="cart_footer f16 w">
+                    <input type="checkbox"
+                           checked={this.props.shoppingCart.allChecked}
+                           onChange={this.allCheck}
+                           className="ml15"
+                    />
+                    <span className="f14 ml5">全选</span>
+                    <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
+                    {this.props.shoppingCart.edit?(
+                        <span onClick={this.deleteProducts} className="cart_delete_all fr cfff f20 tc">删除</span>
+                    ):(
+                        <Link to={this.props.userInfo.logIn?"/ConfirmOrder":"/Login"} className="cart_payment_btn fr cfff f20 tc">去结算</Link>
+                    )}
+
+                </div>
             </div>
         )
     }
@@ -58,21 +73,24 @@ var ShoppingCart = React.createClass({
 var ProductList = React.createClass({
     checkedProduct:function(index){
         return ()=>{
-            this.props.checekedProduct(index);
+            this.props.shoppingCartActionKeys.checkedItem(index);
         }
     },
     increase:function(index){
         return ()=>{
-            this.props.increase(index)
+            this.props.shoppingCartActionKeys.increase(index)
         }
     },
     reduce:function(index){
         return ()=>{
-            this.props.reduce(index)
+            this.props.shoppingCartActionKeys.reduce(index)
         }
     },
+    allCheck:function(){
+        this.props.shoppingCartActionKeys.allCheck();
+    },
     render:function(){
-        let productNodes = this.props.products.map((item,index)=>{
+        let productNodes = this.props.shoppingCart.products.map((item,index)=>{
             return (
                 <li key={index} className="cart_product pl15 pr">
                     <div className="cart_product_check">
@@ -97,15 +115,17 @@ var ProductList = React.createClass({
                         <span className="cart_ctrl_num">{item.num}</span>
                         <span onClick={this.increase(index)} className="cart_ctrl_increase">+</span>
                     </div>
-
-
                 </li>
             )
         });
         return (
-            <ul className="fff  mt10">
+            <ul className="fff mt10">
                 <li className="cart_shop_name pl15">
-                    <input type="checkbox"/>
+                    <input
+                        type="checkbox"
+                        checked={this.props.shoppingCart.allChecked}
+                        onChange={this.allCheck}
+                    />
                     <span className="cart_shop_name_icon pl15">礼品商城</span>
                 </li>
                 {productNodes}
@@ -121,7 +141,8 @@ var ProductList = React.createClass({
 function mapStatetoProps(state){
     return {
         shoppingCart:state.shoppingCart,
-        historyUrls:state.historyUrls
+        historyUrls:state.historyUrls,
+        userInfo:state.userInfo
     }
 }
 function mapDispatchToProps(dispatch){

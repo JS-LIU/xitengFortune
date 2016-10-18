@@ -12,8 +12,8 @@
 }
 .red_XT_icon{
     background:url("/icon_maddle_red@2x.png") no-repeat left center;
-    -webkit-background-size:15px;
-    background-size:15px;
+    -webkit-background-size:12px;
+    background-size:12px;
 }
 .detail_product_info{
     display:flex;
