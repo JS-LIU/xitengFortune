@@ -1,8 +1,14 @@
 /**
  * Created by LDQ on 2016/10/17.
  */
+.f5f5f5{
+    background:#F5F5F5;
+}
 .fff{
     background:#FFF;
+}
+.cred{
+    color:#FF4242;
 }
 .cart_shop_name{
     height:44px;
@@ -13,10 +19,13 @@
     background:url("/icon_mall@2x.png") no-repeat 10px center;
     -webkit-background-size: 20px;
     background-size:20px;
-    padding:1px 0 0 40px;
+    padding:3px 0 3px 40px;
 }
 .cart_product{
     height:95px;
+    display:flex;
+    flex-direction: row;
+    border-top:1px solid #E2E2E2;
 }
 .cart_product_pic{
     width:73px;
@@ -24,18 +33,43 @@
     border:1px solid #E2E2E2;
     overflow: hidden;
 }
-.cart_product{
-    display:flex;
-    flex-direction: row;
-}
 .cart_product_check{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.cart_product_pic{
-
-}
 .cart_product_info{
-
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.red_XT_icon{
+    background:url("/icon_maddle_red@2x.png") no-repeat left center;
+    -webkit-background-size:15px;
+    background-size:15px;
+}
+.cart_ctrl{
+    width:85px;
+    height:20px;
+    right:15px;
+    bottom:15px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    border:1px solid #E2E2E2;
+}
+.cart_ctrl_reduce,
+.cart_ctrl_increase{
+    display: flex;
+    flex:1;
+    flex-direction: row;
+    justify-content: center;
+}
+.cart_ctrl_num{
+    display:flex;
+    flex:2;
+    flex-direction: row;
+    justify-content: center;
+    border-left:1px solid #E2E2E2;
+    border-right:1px solid #E2E2E2;
 }

@@ -27,7 +27,7 @@ var ShoppingCart = React.createClass({
     },
     render:function(){
         return(
-            <div>
+            <div className="f5f5f5">
                 <Header
                     historyUrls={this.props.historyUrls}
                     historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
@@ -74,22 +74,28 @@ var ProductList = React.createClass({
     render:function(){
         let productNodes = this.props.products.map((item,index)=>{
             return (
-                <li key={index} className="cart_product">
-                    <input type="checkbox" className="cart_product_check" checked={item.checked} onChange={this.checkedProduct(index)}/>
+                <li key={index} className="cart_product pl15 pr">
+                    <div className="cart_product_check">
+                        <input
+                            type="checkbox"
+                            checked={item.checked}
+                            onChange={this.checkedProduct(index)}/>
+                    </div>
+
                     <div className="cart_product_pic m10 tc">
                         <img src={item.smallPicture} alt="" className="w"/>
                     </div>
                     <div className="cart_product_info">
-                        <p>{item.productName}</p>
-                        <p>
-                            <span>{item.price / 100}</span>
+                        <p className="f16">{item.productName}</p>
+                        <p className="f16 mt10">
+                            <span className="cred red_XT_icon pl15">{item.price / 100}</span>
                             <span>*{item.num}</span>
                         </p>
                     </div>
-                    <div className="cart_ctrl">
-                        <span onClick={this.increase(index)}>+</span>
-                        <span>{item.num}</span>
-                        <span onClick={this.reduce(index)}>-</span>
+                    <div className="cart_ctrl po">
+                        <span onClick={this.reduce(index)} className="cart_ctrl_reduce">-</span>
+                        <span className="cart_ctrl_num">{item.num}</span>
+                        <span onClick={this.increase(index)} className="cart_ctrl_increase">+</span>
                     </div>
 
 
@@ -97,8 +103,8 @@ var ProductList = React.createClass({
             )
         });
         return (
-            <ul className="pl15 fff  mt10">
-                <li className="cart_shop_name">
+            <ul className="fff  mt10">
+                <li className="cart_shop_name pl15">
                     <input type="checkbox"/>
                     <span className="cart_shop_name_icon pl15">礼品商城</span>
                 </li>
