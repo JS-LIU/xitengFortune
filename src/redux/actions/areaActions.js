@@ -1,26 +1,28 @@
 /**
- * Created by LDQ on 2016/9/29.
+ * Created by LDQ on 2016/10/19.
  */
-import { GET_ACCOUNT } from './accountActionKeys';
+import { GET_PROVINCES } from './areaAcitonKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 
-export var accountActions = {
-    getAccount : ()=>{
+export var areaActions = {
+    getArea : (path)=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
             let postData = {
                 accessInfo:{
                     app_key:userInfo.appKey,
-                    access_token:userInfo.access_token,
+                    access_token:"",
                     phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret)
-                }
+                    signature:hex_md5(userInfo.appSecret)
+                },
+                size:50,
+                pageNo:0
             };
 
-            _h.ajax.resource('/account/:info').save({info:'info'},postData)
+            _h.ajax.resource('/area/:area').save(path,postData)
                 .then((data)=>{
-                    dispatch({type:'GET_ACCOUNT', data});
+                    dispatch({type:'GET_PROVINCES', data});
                 })
                 .catch((error)=>{
                     console.log(error);

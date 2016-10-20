@@ -8,7 +8,8 @@ import {
     SET_STOCKGAMEID,
     GET_STOCKGAMEID,
     SET_GUESSTYPE,
-    GET_GUESSTYPE
+    GET_GUESSTYPE,
+    SET_PROVINCE
 } from './storageActionKeys';
 
 export const storageActions = {
@@ -45,6 +46,11 @@ export const storageActions = {
     getGuessType: () =>{
         return {
             type : GET_GUESSTYPE,
+        }
+    },
+    setProvince: (item) =>{
+        return {
+            type : SET_PROVINCE,
         }
     }
 

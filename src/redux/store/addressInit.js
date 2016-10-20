@@ -16,6 +16,8 @@ export const addressInit = {
         districtAddress:"",
         address:""
     },
-    hasCurrentAddress:false
+    hasCurrentAddress:false,
+    newAddressInfo:{
 
+    }
 };

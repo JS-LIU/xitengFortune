@@ -7,7 +7,7 @@ var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var {Header,BackBtn,Title} = require('../components/Header');
 
-require('../css/submitOrderStyle.css');
+require('../css/confirmOrderStyle.css');
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
@@ -31,28 +31,40 @@ var ConfirmOrder = React.createClass({
                     />
                     <Title title={{text:'确认订单'}}></Title>
                 </Header>
-                <ul className="order_def_address pl15">
-                    <li className="order_user_info">
-                        <p className="order_user_name ">
-                            <span className="f16">收货人：</span>
-                            <span>{this.props.address.currentAddress.userName}</span>
-                        </p>
-                        <p className="order_user_mobile pr15">
-                            {this.props.address.currentAddress.mobile}
-                        </p>
-                    </li>
-                    <li className="order_user_address">
-                        <span className="f16">送货地址：</span>
+                {this.props.address.hasCurrentAddress?(
+                    <CurrentList address={this.props.address} />
+                ):(<div className="address_list pl15 f16">
+                    <Link to="/SelectAddress">请选择地址</Link>
+                </div>)}
 
-                    </li>
-
-                </ul>
 
                 <div className="cart_footer f16 w">
                     <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
                     <Link to="/Pay" className="cart_payment_btn fr cfff f20 tc">提交订单</Link>
                 </div>
             </div>
+        )
+    }
+});
+
+var CurrentList = React.createClass({
+    render: function () {
+        return (
+            <ul className="order_def_address pl15">
+                <li className="order_user_info">
+                    <p className="order_user_name ">
+                        <span className="f16">收货人：</span>
+                        <span>{this.props.address.currentAddress.userName}</span>
+                    </p>
+                    <p className="order_user_mobile pr15">
+                        {this.props.address.currentAddress.mobile}
+                    </p>
+                </li>
+                <li className="order_user_address">
+                    <span className="f16">送货地址：</span>
+
+                </li>
+            </ul>
         )
     }
 });

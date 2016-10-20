@@ -19,7 +19,8 @@ import {XTCoins} from './XTCoins';
 import {rank} from './rank'
 import {betList} from './betList';
 import {award} from './award';
-import {address} from './address'
+import {address} from './address';
+import {provinces} from './provinces';
 
 var rootReducer = combineReducers({
     routing,
@@ -38,7 +39,8 @@ var rootReducer = combineReducers({
     rank,
     betList,
     award,
-    address
+    address,
+    provinces
 });
 
 module.exports = rootReducer;
