@@ -11,10 +11,6 @@ import {
     SET_GUESSTYPE,
     GET_GUESSTYPE,
     SET_TRADEORDER,
-    SET_PROVINCE,
-    SET_CITY,
-    SET_AREA
-
 } from '../actions/storageActionKeys'
 
 export const storage = function(state = {},action){

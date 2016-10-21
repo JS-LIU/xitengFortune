@@ -9,7 +9,5 @@ export const GET_STOCKGAMEID = 'GET_STOCKGAMEID';
 export const SET_GUESSTYPE = 'SET_GUESSTYPE';
 export const GET_GUESSTYPE = 'GET_GUESSTYPE';
 export const SET_TRADEORDER = 'SET_TRADEORDER';
-export const SET_PROVINCE = 'SET_PROVINCE';
-export const SET_CITY = 'SET_CITY';
-export const SET_AREA = 'SET_AREA';
+
 

@@ -2,7 +2,17 @@
  * Created by LDQ on 2016/10/19.
  */
 
-import { GET_DEFAULT ,GET_LIST} from '../actions/addressActionKeys';
+import {
+    GET_DEFAULT ,
+    GET_LIST ,
+    SET_PROVINCE,
+    SET_CITY,
+    SET_AREA,
+    SET_NAME,
+    SET_PHONE_NUM,
+    SET_DEFAULT,
+    SET_DETAIL_ADDRESS
+} from '../actions/addressActionKeys';
 
 function hasCurrentAddress(currentAddress){
     if(currentAddress.mobile){
@@ -30,6 +40,7 @@ function getListAddress(addressList){
 }
 
 export const address = function(state = {},action){
+    var newState = Object.assign({},state);
 
     switch (action.type) {
         case 'GET_DEFAULT':
@@ -46,8 +57,35 @@ export const address = function(state = {},action){
             return Object.assign({},state,{
                 listAddress:getListAddress(action.data.content)
             });
-        case 'CREATE_ADDRESS':
+        case 'SET_PROVINCE':
 
+            newState.newAddressInfo.province = action.item;
+            return Object.assign({},state,newState);
+        case 'SET_CITY':
+
+            newState.newAddressInfo.city = action.item;
+            return Object.assign({},state,newState);
+
+        case 'SET_AREA':
+
+            newState.newAddressInfo.area = action.item;
+            return Object.assign({},state,newState);
+        case 'SET_NAME':
+
+            newState.newAddressInfo.name = action.item;
+            return Object.assign({},state,newState);
+        case 'SET_PHONE_NUM':
+
+            newState.newAddressInfo.phoneNum = action.item;
+            return Object.assign({},state,newState);
+        case 'SET_DEFAULT':
+
+            newState.newAddressInfo.default = action.item;
+            return Object.assign({},state,newState);
+        case 'SET_DETAIL_ADDRESS':
+
+            newState.newAddressInfo.detailAddress = action.item;
+            return Object.assign({},state,newState);
         default:
             return state
     }

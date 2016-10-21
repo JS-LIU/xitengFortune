@@ -16,13 +16,10 @@ require('../css/areaStyle.css');
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {addressActions} from '../redux/actions/addressActions';
 import {areaActions} from '../redux/actions/areaActions';
-import {storageActions} from '../redux/actions/storageActions';
 
 var Areas = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Areas');
-        let cityId = this.props.storage.cityInfo.id;
-        this.props.areaActionKeys.getArea({area:"cities"},2,{parentAreaId:cityId});
     },
     render: function () {
         return (
@@ -36,26 +33,26 @@ var Areas = React.createClass({
                     />
                     <Title title={{text:"选取地区"}} />
                 </Header>
-                <CityList
+                <AreaList
                     areas={this.props.areas}
-                    storageActionKeys={this.props.storageActionKeys}
+                    addressActionKeys={this.props.addressActionKeys}
                 />
             </div>
         )
     }
 });
 
-var CityList = React.createClass({
+var AreaList = React.createClass({
     saveArea:function(item){
         return ()=>{
-            this.props.storageActionKeys.setArea(item);
+            this.props.addressActionKeys.setArea(item);
         }
     },
     render: function () {
         let areaNodes = this.props.areas.list.map((item,index)=>{
             return (
                 <li className="pl15" key={index} onClick={this.saveArea(item)}>
-                    <Link to="/Areas">{item.label}</Link>
+                    <Link to="/CreateAddress">{item.label}</Link>
                 </li>
             )
         });
@@ -72,7 +69,6 @@ function mapStatetoProps(state){
         historyUrls:state.historyUrls,
         address:state.address,
         areas:state.areas,
-        storage:state.storage
     }
 }
 function mapDispatchToProps(dispatch){
@@ -81,7 +77,6 @@ function mapDispatchToProps(dispatch){
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         addressActionKeys:bindActionCreators(addressActions,dispatch),
         areaActionKeys:bindActionCreators(areaActions,dispatch),
-        storageActionKeys:bindActionCreators(storageActions,dispatch)
     }
 }
 

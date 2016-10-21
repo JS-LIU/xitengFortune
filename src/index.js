@@ -33,7 +33,6 @@ var Provinces = require('../src/container/Provinces');
 var Cities = require('../src/container/Cities');
 var Areas = require('../src/container/Areas');
 
-
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
 import {userInfoInit} from  '../src/redux/store/userInfoInit';
@@ -110,7 +109,7 @@ function initState(){
         address:addressInit,
         provinces:provincesInit,
         cities:citiesInit,
-        areas:areasInit
+        areas:areasInit,
     }
 }
 

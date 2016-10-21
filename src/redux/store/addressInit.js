@@ -18,6 +18,11 @@ export const addressInit = {
     },
     hasCurrentAddress:false,
     newAddressInfo:{
-
+        name:"",
+        phoneNum:"",
+        detailAddress:"",
+        province:{label:"请"},
+        city:{label:"选择"},
+        area:{label:"地址"}
     }
 };

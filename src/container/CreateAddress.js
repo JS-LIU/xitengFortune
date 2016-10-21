@@ -13,13 +13,14 @@ require('../css/ceateAddressStyle.css');
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {addressActions} from '../redux/actions/addressActions';
+import {areaActions} from '../redux/actions/areaActions';
 
 var CreateAddress = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/CreateAddress');
     },
     saveAddress:function(){
-
+        this.props.addressActionKeys.createAddress();
     },
     render: function () {
         return (
@@ -38,33 +39,67 @@ var CreateAddress = React.createClass({
                     </div>
                     <Title title={{text:'新建地址'}} />
                 </Header>
-                <NewAddressInfo address={this.props.address}/>
+                <NewAddressInfo
+                    address={this.props.address}
+                    areaActionKeys={this.props.areaActionKeys}
+                    addressActionKeys={this.props.addressActionKeys}
+                />
             </div>
         )
     }
 });
 
 var NewAddressInfo = React.createClass({
+    getProvinces:function(){
+        this.props.areaActionKeys.getArea({area:"provinces"},0);
+    },
+    setName:function(){
+        console.log(this.refs.name.value);
+        this.props.addressActionKeys.setName(this.refs.name.value);
+    },
+    setPhoneNum:function(){
+        this.props.addressActionKeys.setPhoneNum(this.refs.phoneNum.value);
+    },
+    setDetailAddress:function(){
+        this.props.addressActionKeys.setDetailAddress(this.refs.detailAddress.value);
+    },
     render: function () {
         return (
             <ul className="new_address_info fff">
                 <li className="new_address_name pl15">
                     <p>收 货 人 ：</p>
-                    <input type="text" placeholder="请填写姓名"/>
+                    <input type="text"
+                           placeholder="请填写姓名"
+                           ref="name"
+                           onChange={this.setName}
+                           value={this.props.address.newAddressInfo.name}
+                    />
                 </li>
                 <li className="new_address_phone pl15">
                     <p>联系方式：</p>
-                    <input type="text" placeholder="请填写您的手机号"/>
+                    <input type="text"
+                           placeholder="请填写您的手机号"
+                           ref="phoneNum"
+                           onChange={this.setPhoneNum}
+                           value={this.props.address.newAddressInfo.phoneNum}
+                    />
                 </li>
-                <li className="new_address_district pl15">
+                <li className="new_address_district pl15" onClick={this.getProvinces}>
                     <p>所在地区：</p>
-                    <Link to='/Provinces' className="new_address_district_selected">
-                        <span>请选择收货区域</span>
+                    <Link to='/Provinces' className="new_address_district_selected" >
+                        <span>{this.props.address.newAddressInfo.province.label}</span>
+                        <span>{this.props.address.newAddressInfo.city.label}</span>
+                        <span>{this.props.address.newAddressInfo.area.label}</span>
                     </Link>
                 </li>
                 <li className="new_address_detail pl15">
                     <p>详细信息：</p>
-                    <input type="text" placeholder="请填写收获的详细地址"/>
+                    <input type="text"
+                           placeholder="请填写收获的详细地址"
+                           ref="detailAddress"
+                           onChange={this.setDetailAddress}
+                           value={this.props.address.newAddressInfo.detailAddress}
+                    />
                 </li>
                 <li className="pl15">
                     <p>设为默认</p>
@@ -78,13 +113,14 @@ var NewAddressInfo = React.createClass({
 function mapStatetoProps(state){
     return {
         historyUrls:state.historyUrls,
-        address:state.address
+        address:state.address,
     }
 }
 function mapDispatchToProps(dispatch){
 
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
+        areaActionKeys:bindActionCreators(areaActions,dispatch),
         addressActionKeys:bindActionCreators(addressActions,dispatch)
     }
 }

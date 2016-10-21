@@ -13,13 +13,10 @@ require('../css/areaStyle.css');
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {addressActions} from '../redux/actions/addressActions';
 import {areaActions} from '../redux/actions/areaActions';
-import {storageActions} from '../redux/actions/storageActions';
 
 var Cities = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Cities');
-        let provinceId = this.props.storage.provinceInfo.id;
-        this.props.areaActionKeys.getArea({area:"cities"},1,{parentAreaId:provinceId});
     },
     render: function () {
         return (
@@ -35,7 +32,8 @@ var Cities = React.createClass({
                 </Header>
                 <CityList
                     cities={this.props.cities}
-                    storageActionKeys={this.props.storageActionKeys}
+                    areaActionKeys={this.props.areaActionKeys}
+                    addressActionKeys={this.props.addressActionKeys}
                 />
             </div>
         )
@@ -45,7 +43,8 @@ var Cities = React.createClass({
 var CityList = React.createClass({
     saveCity:function(item){
         return ()=>{
-            this.props.storageActionKeys.setCity(item);
+            this.props.addressActionKeys.setCity(item);
+            this.props.areaActionKeys.getArea({area:"cities"},2,{parentAreaId:item.id});
         }
     },
     render: function () {
@@ -69,7 +68,6 @@ function mapStatetoProps(state){
         historyUrls:state.historyUrls,
         address:state.address,
         cities:state.cities,
-        storage:state.storage
     }
 }
 function mapDispatchToProps(dispatch){
@@ -78,7 +76,6 @@ function mapDispatchToProps(dispatch){
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         addressActionKeys:bindActionCreators(addressActions,dispatch),
         areaActionKeys:bindActionCreators(areaActions,dispatch),
-        storageActionKeys:bindActionCreators(storageActions,dispatch)
     }
 }
 

@@ -14,12 +14,10 @@ require('../css/areaStyle.css');
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {addressActions} from '../redux/actions/addressActions';
 import {areaActions} from '../redux/actions/areaActions';
-import {storageActions} from '../redux/actions/storageActions';
 
 var Provinces = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Provinces');
-        this.props.areaActionKeys.getArea({area:"provinces"},0);
     },
     render: function () {
         return (
@@ -35,7 +33,8 @@ var Provinces = React.createClass({
                 </Header>
                 <ProvinceList
                     provinces={this.props.provinces}
-                    storageActionKeys={this.props.storageActionKeys}
+                    areaActionKeys={this.props.areaActionKeys}
+                    addressActionKeys={this.props.addressActionKeys}
                 />
             </div>
         )
@@ -45,7 +44,8 @@ var Provinces = React.createClass({
 var ProvinceList = React.createClass({
     saveProvince:function(item){
         return ()=>{
-            this.props.storageActionKeys.setProvince(item);
+            this.props.addressActionKeys.setProvince(item);
+            this.props.areaActionKeys.getArea({area:"cities"},1,{parentAreaId:item.id});
         }
     },
     render: function () {
@@ -68,8 +68,7 @@ function mapStatetoProps(state){
     return {
         historyUrls:state.historyUrls,
         address:state.address,
-        provinces:state.provinces,
-        storage:state.storage
+        provinces:state.provinces
     }
 }
 function mapDispatchToProps(dispatch){
@@ -77,8 +76,7 @@ function mapDispatchToProps(dispatch){
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         addressActionKeys:bindActionCreators(addressActions,dispatch),
-        areaActionKeys:bindActionCreators(areaActions,dispatch),
-        storageActionKeys:bindActionCreators(storageActions,dispatch)
+        areaActionKeys:bindActionCreators(areaActions,dispatch)
     }
 }
 
