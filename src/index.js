@@ -30,6 +30,8 @@ var ConfirmOrder = require('../src/container/ConfirmOrder');
 var SelectAddress = require('../src/container/SelectAddress');
 var CreateAddress = require('../src/container/CreateAddress');
 var Provinces = require('../src/container/Provinces');
+var Cities = require('../src/container/Cities');
+var Areas = require('../src/container/Areas');
 
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
@@ -47,6 +49,8 @@ import {shopInit} from '../src/redux/store/shopInit';
 import {productInfoInit} from '../src/redux/store/productInfoInit';
 import {addressInit} from '../src/redux/store/addressInit';
 import {provincesInit} from '../src/redux/store/provincesInit';
+import {citiesInit} from '../src/redux/store/citiesInit';
+import {areasInit} from '../src/redux/store/areasInit';
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -79,6 +83,8 @@ var getRoutes = ()=>{
         <Route path="/SelectAddress" component={SelectAddress}></Route>
         <Route path="/CreateAddress" component={CreateAddress}></Route>
         <Route path="/Provinces" component={Provinces}></Route>
+        <Route path="/Cities" component={Cities}></Route>
+        <Route path="/Areas" component={Areas}></Route>
     </Router>
     )};
 
@@ -102,7 +108,9 @@ function initState(){
         betList:betListInit,
         award:awardInit,
         address:addressInit,
-        provinces:provincesInit
+        provinces:provincesInit,
+        cities:citiesInit,
+        areas:areasInit
     }
 }
 

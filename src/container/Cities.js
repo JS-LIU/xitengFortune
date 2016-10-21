@@ -1,12 +1,11 @@
 /**
- * Created by LDQ on 2016/10/19.
+ * Created by liudq on 2016/10/20.
  */
-
 var React = require('react');
 var $ = require('jquery');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
-var {Link} = require('react-router');
+var { Link } = require('react-router');
 var { Header,BackBtn,Title } = require('../components/Header');
 
 require('../css/areaStyle.css');
@@ -16,10 +15,11 @@ import {addressActions} from '../redux/actions/addressActions';
 import {areaActions} from '../redux/actions/areaActions';
 import {storageActions} from '../redux/actions/storageActions';
 
-var Provinces = React.createClass({
+var Cities = React.createClass({
     componentWillMount:function(){
-        this.props.historyUrlsActionKeys.pushUrl('/Provinces');
-        this.props.areaActionKeys.getArea({area:"provinces"},0);
+        this.props.historyUrlsActionKeys.pushUrl('/Cities');
+        let provinceId = this.props.storage.provinceInfo.id;
+        this.props.areaActionKeys.getArea({area:"cities"},1,{parentAreaId:provinceId});
     },
     render: function () {
         return (
@@ -29,12 +29,12 @@ var Provinces = React.createClass({
                     historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
                     <BackBtn
                         historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
+                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:"/Provinces"}}
                     />
-                    <Title title={{text:"选取省份"}} />
+                    <Title title={{text:"选取城市"}} />
                 </Header>
-                <ProvinceList
-                    provinces={this.props.provinces}
+                <CityList
+                    cities={this.props.cities}
                     storageActionKeys={this.props.storageActionKeys}
                 />
             </div>
@@ -42,23 +42,23 @@ var Provinces = React.createClass({
     }
 });
 
-var ProvinceList = React.createClass({
-    saveProvince:function(item){
+var CityList = React.createClass({
+    saveCity:function(item){
         return ()=>{
-            this.props.storageActionKeys.setProvince(item);
+            this.props.storageActionKeys.setCity(item);
         }
     },
     render: function () {
-        let provinceNodes = this.props.provinces.list.map((item,index)=>{
+        let cityNodes = this.props.cities.list.map((item,index)=>{
             return (
-                <li className="pl15" key={index} onClick={this.saveProvince(item)}>
-                    <Link to="/Cities">{item.label}</Link>
+                <li className="pl15" key={index} onClick={this.saveCity(item)}>
+                    <Link to="/Areas">{item.label}</Link>
                 </li>
             )
         });
         return (
             <ul className="area_list">
-                {provinceNodes}
+                {cityNodes}
             </ul>
         )
     }
@@ -68,7 +68,7 @@ function mapStatetoProps(state){
     return {
         historyUrls:state.historyUrls,
         address:state.address,
-        provinces:state.provinces,
+        cities:state.cities,
         storage:state.storage
     }
 }
@@ -82,4 +82,4 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-module.exports = connect(mapStatetoProps,mapDispatchToProps)(Provinces);
+module.exports = connect(mapStatetoProps,mapDispatchToProps)(Cities);

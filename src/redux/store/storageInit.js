@@ -13,5 +13,8 @@ export const storageInit = {
         price:0,
         picture:"",
         giveDiamondCount:0
+    },
+    provinceInfo:{
+
     }
 };

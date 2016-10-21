@@ -21,6 +21,9 @@ import {betList} from './betList';
 import {award} from './award';
 import {address} from './address';
 import {provinces} from './provinces';
+import {cities} from './cities';
+import {areas} from './areas';
+
 
 var rootReducer = combineReducers({
     routing,
@@ -40,7 +43,9 @@ var rootReducer = combineReducers({
     betList,
     award,
     address,
-    provinces
+    provinces,
+    cities,
+    areas
 });
 
 module.exports = rootReducer;
