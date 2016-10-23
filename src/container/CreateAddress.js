@@ -33,7 +33,7 @@ var CreateAddress = React.createClass({
                         back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
                     />
                     <div className="create_address_save pr15" onClick={this.saveAddress}>
-                        <Link to={this.props.historyUrls.last}>
+                        <Link to='/SelectedAddress'>
                             <span className="cfff">保存</span>
                         </Link>
                     </div>

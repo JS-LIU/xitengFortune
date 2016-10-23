@@ -11,7 +11,9 @@ import {
     SET_AREA,
     SET_NAME,
     SET_PHONE_NUM,
-    SET_DETAIL_ADDRESS
+    SET_DETAIL_ADDRESS,
+    CHECKED_ADDRESS,
+    SAVE_CURRENT
 } from './addressActionKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
@@ -73,13 +75,15 @@ export var addressActions = {
                 },
                 provinceId:newAddressInfo.province.id,
                 cityId:newAddressInfo.city.id,
-                fullAddress:districtAddress+otherInfo.detailAddress,
+                fullAddress:districtAddress+newAddressInfo.detailAddress,
                 districtAddress:districtAddress,
                 positionX:"0",
                 positionY:"0",
-                isDefault:0
-
-            },otherInfo);
+                isDefault:0,
+                phoneNum:newAddressInfo.phoneNum,
+                recievName:newAddressInfo.name,
+                detailAddress:newAddressInfo.detailAddress
+            });
             console.log(postData);
 
             _h.ajax.resource('/deliveryAddress/create').save({},postData).then((data)=>{
@@ -125,5 +129,16 @@ export var addressActions = {
             item
         }
     },
+    checkedAddress: (item) =>{
+        return {
+            type : CHECKED_ADDRESS,
+            item
+        }
+    },
+    saveCurrent: ()=>{
+        return {
+            type : SAVE_CURRENT,
+        }
+    }
 
 };

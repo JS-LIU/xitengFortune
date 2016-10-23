@@ -3,18 +3,16 @@
  */
 export const addressInit = {
     defaultAddress:{
-        userName:"",
-        mobile:"",
-        districtAddress:"",
-        address:"",
-        selected:true
+        recievName:"",
+        phoneNum:"",
+        fullAddress:""
     },
     listAddress:[],
     currentAddress:{
-        userName:"",
-        mobile:"",
-        districtAddress:"",
-        address:""
+        recievName:"",
+        phoneNum:"",
+        fullAddress:"",
+        addressId:""
     },
     hasCurrentAddress:false,
     newAddressInfo:{

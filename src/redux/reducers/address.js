@@ -11,51 +11,83 @@ import {
     SET_NAME,
     SET_PHONE_NUM,
     SET_DEFAULT,
-    SET_DETAIL_ADDRESS
+    SET_DETAIL_ADDRESS,
+    CHECKED_ADDRESS,
+    SAVE_CURRENT
 } from '../actions/addressActionKeys';
 
 function hasCurrentAddress(currentAddress){
-    if(currentAddress.mobile){
+    if(currentAddress.addressId !== ""){
         return true;
     }else{
         return false;
     }
 }
-function getCurrentAddress(defaultAddress,listAddress){
-    if(defaultAddress.selected){
-        return defaultAddress;
+function hasDefaultAddress(defaultAddress){
+    if(defaultAddress.recievName !== ""){
+        return true;
     }else{
-        getSelectedAddress(listAddress);
+        return false;
     }
 }
-function getSelectedAddress(listAddress){
+function getCurrentAddress(currentAddress,defaultAddress){
+    if(hasCurrentAddress(currentAddress)){
+        return currentAddress;
+    }else if(hasDefaultAddress(defaultAddress)){
+        return defaultAddress;
+    }
+}
+function getCheckedAddress(listAddress){
     for(let i = 0;i < listAddress.length;i++){
-        if(listAddress[i].selected){
+        if(listAddress[i].checked){
             return listAddress[i];
         }
     }
 }
-function getListAddress(addressList){
-    return [];
+function getListAddress(newState){
+    for(let i = 0;i < newState.listAddress.length;i++){
+        newState.listAddress[i].checked = false;
+
+        if(newState.hasCurrentAddress){
+            if(newState.listAddress[i].addressId == newState.currentAddress.addressId){
+                newState.listAddress[i].checked = true;
+            }
+        }
+    }
+    return newState.listAddress;
 }
+function checkedAddress(listAddress,item) {
+    for(let i = 0;i < listAddress.length;i++){
+        listAddress[i].checked = false;
+        if(listAddress[i].addressId === item.addressId){
+            listAddress[i].checked = true;
+        }
+    }
+    return listAddress;
+}
+
 
 export const address = function(state = {},action){
     var newState = Object.assign({},state);
 
     switch (action.type) {
         case 'GET_DEFAULT':
-            console.log(action.data);
-            let defaultAddress = Object.assign({},state.defaultAddress,action.data);
-            console.log(defaultAddress);
             return Object.assign({},state,{
-                defaultAddress:defaultAddress,
-                currentAddress:getCurrentAddress(defaultAddress,state.listAddress),
+                defaultAddress:{
+                    recievName:action.data.userName,
+                    phoneNum:action.data.mobile,
+                    fullAddress:action.data.fullAddress
+                },
+                currentAddress:getCurrentAddress(state.currentAddress,action.data),
                 hasCurrentAddress:hasCurrentAddress(state.currentAddress)
             });
         case 'GET_LIST':
-            //  TODO 翻页
+            var copyState = Object.assign({},state,{
+                listAddress:action.data.content
+            });
+            console.log('copyState---',copyState);
             return Object.assign({},state,{
-                listAddress:getListAddress(action.data.content)
+                listAddress:getListAddress(copyState)
             });
         case 'SET_PROVINCE':
 
@@ -86,6 +118,17 @@ export const address = function(state = {},action){
 
             newState.newAddressInfo.detailAddress = action.item;
             return Object.assign({},state,newState);
+        case 'CHECKED_ADDRESS':
+
+            return Object.assign({},state,{
+                listAddress:checkedAddress([...state.listAddress],action.item)
+            });
+        case 'SAVE_CURRENT':
+            console.log(getCheckedAddress([...state.listAddress]));
+            return Object.assign({},state,{
+                currentAddress:getCheckedAddress([...state.listAddress]),
+                hasCurrentAddress:true
+            });
         default:
             return state
     }

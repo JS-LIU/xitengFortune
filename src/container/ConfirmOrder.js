@@ -50,19 +50,19 @@ var ConfirmOrder = React.createClass({
 var CurrentList = React.createClass({
     render: function () {
         return (
-            <ul className="order_def_address pl15">
+            <ul className="order_def_address pl15 fff">
                 <li className="order_user_info">
                     <p className="order_user_name ">
-                        <span className="f16">收货人：</span>
-                        <span>{this.props.address.currentAddress.userName}</span>
-                    </p>
-                    <p className="order_user_mobile pr15">
-                        {this.props.address.currentAddress.mobile}
+                        <span className="f14 pl15">收货人：</span>
+                        <p className="order_user_n_m pr15">
+                            <span>{this.props.address.currentAddress.recievName}</span>
+                            <span>{this.props.address.currentAddress.phoneNum}</span>
+                        </p>
                     </p>
                 </li>
                 <li className="order_user_address">
-                    <span className="f16">送货地址：</span>
-
+                    <span className="f14">送货地址：</span>
+                    <span>{this.props.address.currentAddress.fullAddress}</span>
                 </li>
             </ul>
         )

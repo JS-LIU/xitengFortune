@@ -11,3 +11,5 @@ export const SET_NAME = 'SET_NAME';
 export const SET_PHONE_NUM = 'SET_PHONE_NUM';
 export const SET_DETAIL_ADDRESS = 'SET_DETAIL_ADDRESS';
 export const SET_DEFAULT = 'SET_DEFAULT';
+export const CHECKED_ADDRESS = 'CHECKED_ADDRESS';
+export const SAVE_CURRENT = 'SAVE_CURRENT';

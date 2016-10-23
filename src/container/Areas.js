@@ -1,9 +1,7 @@
 /**
  * Created by liudq on 2016/10/20.
  */
-/**
- * Created by liudq on 2016/10/20.
- */
+
 var React = require('react');
 var $ = require('jquery');
 var { bindActionCreators } = require('redux');
