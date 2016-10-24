@@ -32,11 +32,11 @@ var ConfirmOrder = React.createClass({
                     <Title title={{text:'确认订单'}}></Title>
                 </Header>
                 {this.props.address.hasCurrentAddress?(
-                    <CurrentList address={this.props.address} />
+                    <CurrentAddress address={this.props.address} />
                 ):(<div className="address_list pl15 f16">
                     <Link to="/SelectAddress">请选择地址</Link>
                 </div>)}
-
+                <ProductList />
 
                 <div className="cart_footer f16 w">
                     <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
@@ -47,27 +47,40 @@ var ConfirmOrder = React.createClass({
     }
 });
 
-var CurrentList = React.createClass({
+var CurrentAddress = React.createClass({
     render: function () {
         return (
-            <ul className="order_def_address pl15 fff">
-                <li className="order_user_info">
-                    <p className="order_user_name ">
+            <Link to="/SelectAddress" className="order_def_address pl15 fff">
+                <div className="order_user_info">
+                    <div className="order_user_name ">
                         <span className="f14 pl15">收货人：</span>
                         <p className="order_user_n_m pr15">
                             <span>{this.props.address.currentAddress.recievName}</span>
                             <span>{this.props.address.currentAddress.phoneNum}</span>
                         </p>
-                    </p>
-                </li>
-                <li className="order_user_address">
+                    </div>
+                </div>
+                <div className="order_user_address">
                     <span className="f14">送货地址：</span>
                     <span>{this.props.address.currentAddress.fullAddress}</span>
-                </li>
+                </div>
+            </Link>
+        )
+    }
+});
+
+var ProductList = React.createClass({
+    render: function () {
+
+        return (
+            <ul>
+
             </ul>
         )
     }
 });
+
+
 
 function mapStatetoProps(state){
     return {

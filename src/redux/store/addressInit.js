@@ -5,22 +5,16 @@ export const addressInit = {
     defaultAddress:{
         recievName:"",
         phoneNum:"",
-        fullAddress:""
+        fullAddress:"",
+        id:""
     },
     listAddress:[],
     currentAddress:{
         recievName:"",
         phoneNum:"",
         fullAddress:"",
-        addressId:""
+        id:""
     },
     hasCurrentAddress:false,
-    newAddressInfo:{
-        name:"",
-        phoneNum:"",
-        detailAddress:"",
-        province:{label:"请"},
-        city:{label:"选择"},
-        area:{label:"地址"}
-    }
+    newAddressInfo:{},
 };

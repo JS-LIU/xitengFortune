@@ -13,7 +13,9 @@ import {
     SET_PHONE_NUM,
     SET_DETAIL_ADDRESS,
     CHECKED_ADDRESS,
-    SAVE_CURRENT
+    SAVE_CURRENT,
+    SET_DEFAULT,
+    SET_NEW_ADDRESS
 } from './addressActionKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
@@ -61,11 +63,10 @@ export var addressActions = {
             })
         }
     },
-    createAddress:(otherInfo)=>{
+    createAddress:()=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
             let newAddressInfo = getState().address.newAddressInfo;
-            let districtAddress = newAddressInfo.province.label+newAddressInfo.city.label+newAddressInfo.area.label;
             let postData = Object.assign({},{
                 accessInfo:{
                     app_key:userInfo.appKey,
@@ -73,20 +74,25 @@ export var addressActions = {
                     phone_num:userInfo.openId,
                     signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret)
                 },
-                provinceId:newAddressInfo.province.id,
-                cityId:newAddressInfo.city.id,
-                fullAddress:districtAddress+newAddressInfo.detailAddress,
-                districtAddress:districtAddress,
+                provinceId:newAddressInfo.provinceId,
+                cityId:newAddressInfo.cityId,
+                fullAddress:newAddressInfo.districtAddress+newAddressInfo.detailAddress,
+                districtAddress:newAddressInfo.districtAddress,
                 positionX:"0",
                 positionY:"0",
-                isDefault:0,
+                isDefault:newAddressInfo.isDefault,
                 phoneNum:newAddressInfo.phoneNum,
-                recievName:newAddressInfo.name,
+                recievName:newAddressInfo.recievName,
                 detailAddress:newAddressInfo.detailAddress
             });
             console.log(postData);
-
-            _h.ajax.resource('/deliveryAddress/create').save({},postData).then((data)=>{
+            let path = "create";
+            if(newAddressInfo.id){
+                path = "edit";
+                postData.id=newAddressInfo.id;
+            }
+            console.log(path);
+            _h.ajax.resource('/deliveryAddress/:path').save({path:path},postData).then((data)=>{
                 dispatch({type:'CREATE_ADDRESS',data})
             }).catch((error)=>{
                 console.log(error);
@@ -138,6 +144,17 @@ export var addressActions = {
     saveCurrent: ()=>{
         return {
             type : SAVE_CURRENT,
+        }
+    },
+    setDefault: ()=>{
+        return {
+            type : SET_DEFAULT,
+        }
+    },
+    setNewAddress: (item)=>{
+        return {
+            type : SET_NEW_ADDRESS,
+            item
         }
     }
 

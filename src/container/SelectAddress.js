@@ -23,6 +23,11 @@ var SelectAddress = React.createClass({
     saveCurrent:function(){
         this.props.addressActionKeys.saveCurrent();
     },
+    setNewAddress:function(item){
+        return ()=>{
+            this.props.addressActionKeys.setNewAddress(item);
+        }
+    },
     render: function () {
         return (
             <div className="selected_address_body f5f5f5 po w">
@@ -40,7 +45,7 @@ var SelectAddress = React.createClass({
                         </Link>
                     </div>
                 </Header>
-                <div className="create_address_btn f16 pl15">
+                <div className="create_address_btn f16 pl15" onClick={this.setNewAddress({})}>
                     <Link to="/CreateAddress">
                         <span>+</span>
                         <span>新建收货地址</span>
@@ -61,6 +66,12 @@ var AddressList = React.createClass({
             this.props.addressActionKeys.checkedAddress(item);
         }
     },
+    setNewAddress:function(item){
+        return ()=>{
+            console.log(item);
+            this.props.addressActionKeys.setNewAddress(item);
+        }
+    },
     render: function () {
         let addressNodes = this.props.address.listAddress.map((item,index)=>{
             return(
@@ -74,7 +85,7 @@ var AddressList = React.createClass({
                         />
                     </div>
                     <div className="address_item_info">
-                        <p className="address_userInfo f16">
+                        <p className="address_userInfo f14">
                             <span className="address_name">{item.recievName}</span>
                             <span className="address_phone_num">{item.phoneNum}</span>
                         </p>
@@ -82,8 +93,11 @@ var AddressList = React.createClass({
                             {item.fullAddress}
                         </p>
                     </div>
-                    <div className="address_item_edit tr">
-                        <span >编辑</span>
+                    <div className="address_item_edit tr" onClick={this.setNewAddress(item)}>
+                        <Link to='/CreateAddress'>
+                            编辑
+                        </Link>
+
                     </div>
                 </li>
             )

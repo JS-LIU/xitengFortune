@@ -47,7 +47,6 @@ var ShoppingCart = React.createClass({
                 <ProductList
                     shoppingCart={this.props.shoppingCart}
                     shoppingCartActionKeys={this.props.shoppingCartActionKeys}
-
                 />
                 <div className="cart_footer f16 w">
                     <input type="checkbox"

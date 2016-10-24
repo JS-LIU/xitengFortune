@@ -33,11 +33,11 @@ var CreateAddress = React.createClass({
                         back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
                     />
                     <div className="create_address_save pr15" onClick={this.saveAddress}>
-                        <Link to='/SelectedAddress'>
+                        <Link to='/SelectAddress'>
                             <span className="cfff">保存</span>
                         </Link>
                     </div>
-                    <Title title={{text:'新建地址'}} />
+                    <Title title={{text:this.props.address.newAddressInfo.title+"地址"}} />
                 </Header>
                 <NewAddressInfo
                     address={this.props.address}
@@ -63,6 +63,9 @@ var NewAddressInfo = React.createClass({
     setDetailAddress:function(){
         this.props.addressActionKeys.setDetailAddress(this.refs.detailAddress.value);
     },
+    setDefault:function(){
+        this.props.addressActionKeys.setDefault();
+    },
     render: function () {
         return (
             <ul className="new_address_info fff">
@@ -72,7 +75,7 @@ var NewAddressInfo = React.createClass({
                            placeholder="请填写姓名"
                            ref="name"
                            onChange={this.setName}
-                           value={this.props.address.newAddressInfo.name}
+                           value={this.props.address.newAddressInfo.recievName}
                     />
                 </li>
                 <li className="new_address_phone pl15">
@@ -87,9 +90,7 @@ var NewAddressInfo = React.createClass({
                 <li className="new_address_district pl15" onClick={this.getProvinces}>
                     <p>所在地区：</p>
                     <Link to='/Provinces' className="new_address_district_selected" >
-                        <span>{this.props.address.newAddressInfo.province.label}</span>
-                        <span>{this.props.address.newAddressInfo.city.label}</span>
-                        <span>{this.props.address.newAddressInfo.area.label}</span>
+                        <span>{this.props.address.newAddressInfo.districtAddress}</span>
                     </Link>
                 </li>
                 <li className="new_address_detail pl15">
@@ -101,8 +102,11 @@ var NewAddressInfo = React.createClass({
                            value={this.props.address.newAddressInfo.detailAddress}
                     />
                 </li>
-                <li className="pl15">
+                <li className="pl15 new_address_set_default">
                     <p>设为默认</p>
+                    <div onClick={this.setDefault} className="pr15">
+                        {Boolean(this.props.address.newAddressInfo.isDefault)?"":"非"}默认
+                    </div>
                 </li>
             </ul>
         )
