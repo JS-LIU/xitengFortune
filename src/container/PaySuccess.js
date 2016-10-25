@@ -29,7 +29,7 @@ var PaySuccess = React.createClass({
                     historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
                     <BackBtn
                         historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:'/ExchangeXTCoins'}}
+                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:'/'}}
                     />
                     <Title title={{text:'支付结果'}}></Title>
                 </Header>

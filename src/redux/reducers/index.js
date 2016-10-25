@@ -23,6 +23,7 @@ import {address} from './address';
 import {provinces} from './provinces';
 import {cities} from './cities';
 import {areas} from './areas';
+import {order} from './order';
 
 var rootReducer = combineReducers({
     routing,
@@ -45,6 +46,7 @@ var rootReducer = combineReducers({
     provinces,
     cities,
     areas,
+    order
 });
 
 module.exports = rootReducer;

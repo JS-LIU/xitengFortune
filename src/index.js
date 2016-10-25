@@ -50,6 +50,8 @@ import {addressInit} from '../src/redux/store/addressInit';
 import {provincesInit} from '../src/redux/store/provincesInit';
 import {citiesInit} from '../src/redux/store/citiesInit';
 import {areasInit} from '../src/redux/store/areasInit';
+import {orderInit} from '../src/redux/store/orderInit';
+
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -110,6 +112,7 @@ function initState(){
         provinces:provincesInit,
         cities:citiesInit,
         areas:areasInit,
+        order:orderInit
     }
 }
 

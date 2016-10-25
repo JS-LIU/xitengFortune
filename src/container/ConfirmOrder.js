@@ -6,18 +6,26 @@ var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var {Header,BackBtn,Title} = require('../components/Header');
+var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
 require('../css/confirmOrderStyle.css');
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {addressActions} from '../redux/actions/addressActions';
+import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
+import {dialogActions} from '../redux/actions/dialogActions';
+
 
 var ConfirmOrder = React.createClass({
 
     componentWillMount:function () {
-        this.props.historyUrlsActionKeys.pushUrl('/SubmitOrder');
+        this.props.historyUrlsActionKeys.pushUrl('/ConfirmOrder');
         this.props.addressActionKeys.getDefault();
+        this.props.showDialogActionKeys.hideDialog();
+    },
+    exchangeProduct:function(){
+        this.props.createTradeOrderActionKeys.exchangeProduct();
     },
     render:function(){
         return(
@@ -40,8 +48,17 @@ var ConfirmOrder = React.createClass({
 
                 <div className="cart_footer f16 w">
                     <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
-                    <Link to="/Pay" className="cart_payment_btn fr cfff f20 tc">提交订单</Link>
+                    <div className="cart_payment_btn fr cfff f20 tc" onClick={this.exchangeProduct}>提交订单</div>
                 </div>
+
+                {this.props.showDialog.showDialog?<DialogiOS >
+                    <DialogHeader title={this.props.order.isSuccess?"兑换确认":"喜腾币不足"}/>
+                    <DialogBody content={this.props.order.isSuccess?"确认兑换以上商品吗":"你在账户的喜腾币不足，是否立即兑换喜腾币"}/>
+                    <DialogFooter>
+                        <DialogCancel showDialogActionKeys={this.props.showDialogActionKeys}/>
+                        <DialogConfirm url={this.props.order.isSuccess?"/PaySuccess":"/ExchangeXTCoins"} />
+                    </DialogFooter>
+                </DialogiOS>:""}
             </div>
         )
     }
@@ -86,7 +103,9 @@ function mapStatetoProps(state){
     return {
         shoppingCart:state.shoppingCart,
         historyUrls:state.historyUrls,
-        address:state.address
+        address:state.address,
+        order:state.order,
+        showDialog:state.showDialog
     }
 }
 function mapDispatchToProps(dispatch){
@@ -94,7 +113,9 @@ function mapDispatchToProps(dispatch){
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
-        addressActionKeys:bindActionCreators(addressActions,dispatch)
+        addressActionKeys:bindActionCreators(addressActions,dispatch),
+        createTradeOrderActionKeys:bindActionCreators(createTradeOrderActions,dispatch),
+        showDialogActionKeys:bindActionCreators(dialogActions,dispatch)
     }
 }
 
