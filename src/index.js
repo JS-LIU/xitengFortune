@@ -32,6 +32,8 @@ var CreateAddress = require('../src/container/CreateAddress');
 var Provinces = require('../src/container/Provinces');
 var Cities = require('../src/container/Cities');
 var Areas = require('../src/container/Areas');
+var MyAsset = require('../src/container/MyAsset');
+
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -86,6 +88,7 @@ var getRoutes = ()=>{
         <Route path="/Provinces" component={Provinces}></Route>
         <Route path="/Cities" component={Cities}></Route>
         <Route path="/Areas" component={Areas}></Route>
+        <Route path="/MyAsset" component={MyAsset}></Route>
     </Router>
     )};
 

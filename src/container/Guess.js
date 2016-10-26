@@ -159,14 +159,14 @@ var GameItem = React.createClass({
                     <ul className="clearfix guessUpDown" >
                         <li className="fl tc f16 cfff">
                             <p className="f16">
-                                <span className="xt_money">猜涨:</span>
-                                <span className="pl5">{gameItem.guessUpXtBAmount}</span>
+                                <span className="">猜涨:</span>
+                                <span className="pl5 xt_money">{gameItem.guessUpXtBAmount}</span>
                             </p>
                         </li>
                         <li className="fr tc f16 cfff">
                             <p className="f16">
-                                <span className="xt_money">猜跌:</span>
-                                <span className="pl5">{gameItem.guessDownXtBAmount}</span>
+                                <span className="">猜跌:</span>
+                                <span className="pl5 xt_money">{gameItem.guessDownXtBAmount}</span>
                             </p>
                         </li>
                     </ul>
