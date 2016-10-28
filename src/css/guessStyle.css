@@ -50,6 +50,8 @@
 .rank_user_box{
     margin-top:-20px;
     padding:20px 15px 20px;
+    -webkit-background-size:cover;
+    background-size:cover;
 }
 .rank_user_box{
     margin-top:-10px;
@@ -86,6 +88,8 @@
 }
 .pk_box{
     padding-bottom:50px;
+    -webkit-background-size:cover;
+    background-size:cover;
 }
 .prize_pic{
     display: block;

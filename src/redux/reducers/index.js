@@ -24,6 +24,7 @@ import {provinces} from './provinces';
 import {cities} from './cities';
 import {areas} from './areas';
 import {order} from './order';
+import {betRecord} from './betRecord';
 
 var rootReducer = combineReducers({
     routing,
@@ -46,7 +47,8 @@ var rootReducer = combineReducers({
     provinces,
     cities,
     areas,
-    order
+    order,
+    betRecord
 });
 
 module.exports = rootReducer;

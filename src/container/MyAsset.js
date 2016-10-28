@@ -9,17 +9,20 @@ var { Link } = require('react-router');
 var { Header,Title,BackBtn } = require('../components/Header');
 var $ = require('jquery');
 
+require('../css/MyStyle.css');
+
+
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {accountActions} from '../redux/actions/accountActions';
 
-var My = React.createClass({
+var MyAssert = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/MyAsset');
         this.props.accountActionKeys.getAccount();
     },
     render: function () {
         return (
-            <div>
+            <div className="h po f5f5f5 w">
                 <Header
                     historyUrls={this.props.historyUrls}
                     historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
@@ -30,9 +33,7 @@ var My = React.createClass({
                     <Title title={{text:'资产'}}></Title>
                 </Header>
                 <Myaccount account={this.props.account} />
-
-
-                <div className="discover_body po f5f5f5 w">
+                <div>
                     <EntranceList itemList={[{
                         name:'购买钻石',
                         url:"BuyDiamonds",
@@ -51,12 +52,19 @@ var My = React.createClass({
 var Myaccount = React.createClass({
     render: function () {
         return (
-            <ul>
-                <li>
-                    <span>{this.props.account.diamondAmount}</span>
+            <ul className="my_account f14">
+                <li className="tc">
+                    <span className="my_account_diamonds">
+                        <span className="cblue f20">{this.props.account.diamondAmount}</span>
+                        <span>颗钻石</span>
+                    </span>
+
                 </li>
-                <li>
-                    <span>{this.props.account.xtbTotalAmount}</span>
+                <li className="tc">
+                    <span className="my_account_XTCoins">
+                        <span className="cred f20">{this.props.account.xtbTotalAmount}</span>
+                        <span>喜腾币</span>
+                    </span>
                 </li>
             </ul>
         )
@@ -80,4 +88,4 @@ function mapDispatchToProps(dispatch){
     }
 }
 
-module.exports = connect(mapStatetoProps,mapDispatchToProps)(My);
+module.exports = connect(mapStatetoProps,mapDispatchToProps)(MyAssert);

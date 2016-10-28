@@ -33,7 +33,7 @@ var Provinces = require('../src/container/Provinces');
 var Cities = require('../src/container/Cities');
 var Areas = require('../src/container/Areas');
 var MyAsset = require('../src/container/MyAsset');
-
+var MyRecord = require('../src/container/MyRecord');
 
 import {gameListInit} from  '../src/redux/store/gameListInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -53,7 +53,7 @@ import {provincesInit} from '../src/redux/store/provincesInit';
 import {citiesInit} from '../src/redux/store/citiesInit';
 import {areasInit} from '../src/redux/store/areasInit';
 import {orderInit} from '../src/redux/store/orderInit';
-
+import {betRecordInit} from '../src/redux/store/betRecordInit';
 
 var {syncHistoryWithStore} = require('react-router-redux');
 
@@ -89,6 +89,7 @@ var getRoutes = ()=>{
         <Route path="/Cities" component={Cities}></Route>
         <Route path="/Areas" component={Areas}></Route>
         <Route path="/MyAsset" component={MyAsset}></Route>
+        <Route path="/MyRecord" component={MyRecord}></Route>
     </Router>
     )};
 
@@ -115,7 +116,8 @@ function initState(){
         provinces:provincesInit,
         cities:citiesInit,
         areas:areasInit,
-        order:orderInit
+        order:orderInit,
+        betRecord:betRecordInit
     }
 }
 

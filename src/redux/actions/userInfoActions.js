@@ -35,7 +35,8 @@ export const userInfoActions = {
                     phone_num:userInfo.openId,
                     signature:hex_md5(userInfo.appSecret + userInfo.openId),
                     loginType:'weixin'
-                }
+                },
+                sex:1
             };
 
             _h.ajax.resource('/login').save({},postData)

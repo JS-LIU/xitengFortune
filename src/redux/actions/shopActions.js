@@ -2,7 +2,7 @@
  * Created by LDQ on 2016/8/15.
  */
 
-import {GET_PRODUCTS} from './shopActionKeys';
+import {GET_PRODUCTS,PREVENT_MULTIPLE_POST} from './shopActionKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 
