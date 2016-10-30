@@ -23,7 +23,7 @@ export const userInfoActions = {
                 })
         }
     },
-    logIn: ()=>{
+    testLogin: ()=>{
         return (dispatch,getState)=>{
             let userInfo = getState().userInfo;
             let postData = {
@@ -42,6 +42,33 @@ export const userInfoActions = {
             _h.ajax.resource('/login').save({},postData)
                 .then((data)=>{
                     dispatch({type:'LOGIN', data})
+                })
+                .catch((error)=>{
+                    console.log("error",error);
+                })
+        }
+    },
+    wxLogin : ()=>{
+
+    },
+    phoneNumLogin: (num) =>{
+        return (dispatch,getState)=>{
+            let userInfo = getState().userInfo;
+            let postData = {
+                userName:num,
+                app_key:userInfo.appKey,
+                accessInfo:{
+                    app_key:userInfo.appKey,
+                    access_token:"",
+                    phone_num:userInfo.openId,
+                    signature:hex_md5(userInfo.appSecret + num),
+                    loginType:'phonenum'
+                }
+            };
+
+            _h.ajax.resource('/login').save({},postData)
+                .then((data)=>{
+                    dispatch({type:'LOGIN', data});
                 })
                 .catch((error)=>{
                     console.log("error",error);

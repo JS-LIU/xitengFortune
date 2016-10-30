@@ -3,7 +3,6 @@
  */
 var React = require('react');
 var {Header,BackBtn,Title} = require('../components/Header');
-var ConfirmBtn = require('../components/ConfirmBtn');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
@@ -29,9 +28,12 @@ var Login = React.createClass({
                         back={{text:'取消',src:'/nav_btn_back@2x.png',link:backUrl}}
                     />
                 </Header>
-                <LoginBtn logIn={this.props.userInfoActionKeys.logIn}>
-                    <ConfirmBtn confirm={{link:backUrl,text:'使用微信授权登录'}} historyUrlsActionKeys={this.props.historyUrlsActionKeys}/>
-                </LoginBtn>
+                <div className="login_logo tc"></div>
+
+                <LoginInput />
+                <LoginBtn userInfoActionKeys={this.props.userInfoActionKeys}/>
+
+                <WxBtn userInfoActionKeys={this.props.userInfoActionKeys} />
 
             </div>
 
@@ -39,15 +41,47 @@ var Login = React.createClass({
     }
 });
 
-var LoginBtn = React.createClass({
-    logIn:function(){
+var LoginInput = React.createClass({
+    render: function () {
+        return (
+            <ul className="login_input ml15 mr15 f16">
+                <li>
+                    <span className="pr30">帐号</span>
+                    <input type="text" placeholder="请输入绑定的手机号" className="login_phone_num f16"/>
+                </li>
+                <li>
+                    <span className="pr30">密码</span>
+                    <input type="password" placeholder="请输入密码" className="login_password f16"/>
+                </li>
+            </ul>
+        )
+    }
+});
 
-        this.props.logIn();
+var LoginBtn = React.createClass({
+    login:function(){
+        // this.props.userInfoActionKeys.testLogin();
+        this.props.userInfoActionKeys.phoneNumLogin();
     },
     render: function () {
         return (
-            <div className="login_btn cfff f20" onClick={this.logIn}>
-                {this.props.children}
+            <div className="login_btn cfff tc f20" onClick={this.login}>
+                <span>登录</span>
+            </div>
+        )
+    }
+});
+
+
+var WxBtn = React.createClass({
+    logIn:function(){
+
+        this.props.userInfoActionKeys.login();
+    },
+    render: function () {
+        return (
+            <div className="cblue f16 tc login_wx w" onClick={this.logIn}>
+                <span className="login_wx_btn">使用微信注册/登录</span>
             </div>
         )
     }
