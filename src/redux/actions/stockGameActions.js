@@ -5,9 +5,8 @@
 import {COUNT_INIT,COUNT_DOWN,GET_GAMELIST,REFRESH} from './stockGameActionKeys';
 
 import _h from '../../Util/HB';
-import {hex_md5} from '../../Util/md5';
 
-export var stockGameActions = {
+export const stockGameActions = {
     countDown: (nowTime,startTime,endTime,step = 1000)=>{
         return {
             type : COUNT_DOWN,
@@ -27,36 +26,27 @@ export var stockGameActions = {
 
     getGameList:()=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
             let stockGameInfo = getState().stockGame;
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret),
-                },
+                accessInfo:loginInfo.baseLoginData,
                 pageNo:stockGameInfo.pageNo,
                 size:stockGameInfo.size
             };
             _h.ajax.resource('/stockGameList').save({},postData)
                 .then((data)=>{
-                    dispatch({type:'GET_GAMELIST', data})
+                    dispatch({type:'GET_GAMELIST', data});
                 })
                 .catch((error)=>{
                     console.log("error",error);
                 })
         }
     },
-
     refresh:(id)=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret),
-                },
+                accessInfo:loginInfo.baseLoginData,
                 stockGameId:id
             };
             _h.ajax.resource('/stockGameDetail').save({},postData)

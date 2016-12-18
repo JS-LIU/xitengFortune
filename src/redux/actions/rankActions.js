@@ -7,26 +7,19 @@
 
 import {GET_RANK,SELECTED} from './rankActionKeys';
 import _h from '../../Util/HB';
-import {hex_md5} from '../../Util/md5';
 
 export const rankActions= {
 
-    getRank:(pageNo=0,type="currentWeek",size=3)=>{
+    getRank:(pageNo=0,type="currentYear",size=3)=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
 
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:"",
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret),
-                },
+                accessInfo:loginInfo.baseLoginData,
                 pageNo:pageNo,
                 size:size,
                 type:type
             };
-            console.log(postData);
 
             _h.ajax.resource('/rakingList').save({},postData)
                 .then((data)=>{

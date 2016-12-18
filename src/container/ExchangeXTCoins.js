@@ -14,7 +14,7 @@ var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} 
 
 require('../css/exchangeXTCoinsStyle.css');
 
-import {userInfoActions} from '../redux/actions/userInfoActions';
+import {loginInfoActions} from '../redux/actions/loginInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {accountActions} from '../redux/actions/accountActions';
 import {XTCoinsActions} from '../redux/actions/XTCoinsActions';
@@ -34,7 +34,7 @@ var ExchangeXTCoins = React.createClass({
     render: function () {
         var backUrl = this.props.historyUrls.last;
         let src = "/ExchangeXTCoins";
-        if(!this.props.userInfo.logIn){
+        if(!this.props.loginInfo.login){
             src = "/Login";
         }else if(!this.props.showDialog.showDialog){
             src = "/PaySuccess";
@@ -142,7 +142,7 @@ var  PurchaseQuantity = React.createClass({
 
 function mapStatetoProps(state){
     return {
-        userInfo:state.userInfo,
+        loginInfo:state.loginInfo,
         historyUrls:state.historyUrls,
         account:state.account,
         XTCoins:state.XTCoins,
@@ -152,7 +152,7 @@ function mapStatetoProps(state){
 function mapDispatchToProps(dispatch){
 
     return{
-        userInfoActionKeys : bindActionCreators(userInfoActions,dispatch),
+        loginInfoActionKeys : bindActionCreators(loginInfoActions,dispatch),
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         accountActionKeys : bindActionCreators(accountActions,dispatch),
         XTCoinsActionKeys : bindActionCreators(XTCoinsActions,dispatch),

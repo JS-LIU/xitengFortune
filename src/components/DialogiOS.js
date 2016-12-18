@@ -10,9 +10,13 @@ var DialogiOS = React.createClass({
     render: function () {
 
         return (
-            <div className="pr dialog_body">
-                {this.props.children}
+            <div className="dialog_big_box w h">
+                <div className="dialog_body">
+                    {this.props.children}
+                </div>
+                <div className="dialog_mask w h"></div>
             </div>
+
         )
     }
 });
@@ -46,14 +50,14 @@ var DialogFooter = React.createClass({
     }
 });
 var DialogConfirm = React.createClass({
+
     render:function() {
         return (
             <div className="dialog_btn">
-                <Link to={this.props.url} className="tc f14 dialog_btn_color">
-                    确定
+                <Link to={this.props.certain.url} className="tc f14 dialog_btn_color">
+                    <span>{this.props.certain.text}</span>
                 </Link>
             </div>
-
         )
     }
 });
@@ -64,7 +68,10 @@ var DialogCancel = React.createClass({
     render:function() {
         return (
             <div className="dialog_btn tc f14 dialog_btn_color" onClick={this.hideDialog}>
-                取消
+                <Link to={this.props.cancel.url}>
+                    <span className="dialog_btn_color">{this.props.cancel.text}</span>
+                </Link>
+
             </div>
         )
     }

@@ -25,25 +25,17 @@ var CreateAddress = React.createClass({
     render: function () {
         return (
             <div className="create_address po w f5f5f5">
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
-                    />
-                    <div className="create_address_save pr15" onClick={this.saveAddress}>
-                        <Link to='/SelectAddress'>
-                            <span className="cfff">保存</span>
-                        </Link>
-                    </div>
-                    <Title title={{text:this.props.address.newAddressInfo.title+"地址"}} />
-                </Header>
                 <NewAddressInfo
                     address={this.props.address}
                     areaActionKeys={this.props.areaActionKeys}
                     addressActionKeys={this.props.addressActionKeys}
                 />
+                <div className="create_address_save pr15 tc" onClick={this.saveAddress}>
+                    <Link to='/SelectAddress'>
+                        <span className="cfff">保存</span>
+                    </Link>
+                </div>
+
             </div>
         )
     }

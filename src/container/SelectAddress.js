@@ -31,25 +31,25 @@ var SelectAddress = React.createClass({
     render: function () {
         return (
             <div className="selected_address_body f5f5f5 po w">
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:'/ConfirmOrder'}}
-                    />
-                    <Title title={{text:'选择地址'}}></Title>
-                    <div className="selected_address_save pr15" onClick={this.saveCurrent}>
-                        <Link to='/ConfirmOrder'>
-                            <span className="cfff">保存</span>
-                        </Link>
-                    </div>
-                </Header>
-                <div className="create_address_btn f16 pl15" onClick={this.setNewAddress({})}>
-                    <Link to="/CreateAddress">
+                {/*<Header*/}
+                    {/*historyUrls={this.props.historyUrls}*/}
+                    {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}>*/}
+                    {/*<BackBtn*/}
+                        {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
+                        {/*back={{text:'返回',src:'/nav_btn_back@2x.png',link:'/ConfirmOrder'}}*/}
+                    {/*/>*/}
+                    {/*<Title title={{text:'选择地址'}}></Title>*/}
+                {/*</Header>*/}
+                <div className="create_address_btn f16 pl15 clearfix" onClick={this.setNewAddress({})}>
+                    <Link to="/CreateAddress" className="fl">
                         <span>+</span>
                         <span>新建收货地址</span>
                     </Link>
+                    <div className="selected_address_save pr15 fr" onClick={this.saveCurrent}>
+                        <Link to='/ConfirmOrder'>
+                            保存选择
+                        </Link>
+                    </div>
                 </div>
                 <AddressList
                     address={this.props.address}

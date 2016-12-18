@@ -13,10 +13,10 @@ var _h = require('../Util/HB');
 require('../css/shopStyle.css');
 
 import {accountActions} from '../redux/actions/accountActions';
-import {userInfoActions} from '../redux/actions/userInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shopActions} from '../redux/actions/shopActions';
 import {storageActions} from '../redux/actions/storageActions';
+
 
 var Shop = React.createClass({
     componentWillMount:function(){
@@ -43,15 +43,15 @@ var Shop = React.createClass({
 
         return (
             <div className="f5f5f5">
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
-                    />
-                    <Title title={{text:'礼品商城'}}></Title>
-                </Header>
+                {/*<Header*/}
+                    {/*historyUrls={this.props.historyUrls}*/}
+                    {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}>*/}
+                    {/*<BackBtn*/}
+                        {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
+                        {/*back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}*/}
+                    {/*/>*/}
+                    {/*<Title title={{text:'礼品商城'}}></Title>*/}
+                {/*</Header>*/}
                 <p className="shop_xtbTotalAmount pl15 f14 f5f5f">
                     <span>可兑换礼品金额：</span>
                     <span className="xt_money">{this.props.account.xtbTotalAmount||0}</span>
@@ -85,7 +85,7 @@ var PruductList = React.createClass({
                         </div>
                         <div className="shop_product_footer fff f14 pl15 pr15">
                             <p className="shop_product_name">{item.productName}</p>
-                            <p className="shop_product_price cred">{item.price/100}</p>
+                            <p className="shop_product_price cred red_XT_icon pl15">{item.price / 100}</p>
                         </div>
                     </Link>
                 </li>
@@ -136,7 +136,6 @@ var ProductType = React.createClass({
 
 function mapStatetoProps(state){
     return {
-        userInfo:state.userInfo,
         historyUrls:state.historyUrls,
         shop:state.shop,
         storage:state.storage,
@@ -145,7 +144,6 @@ function mapStatetoProps(state){
 }
 function mapDispatchToProps(dispatch){
     return{
-        userInfoActionKeys : bindActionCreators(userInfoActions,dispatch),
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         accountActionKeys : bindActionCreators(accountActions,dispatch),
         shopActionKeys : bindActionCreators(shopActions,dispatch),

@@ -11,7 +11,7 @@
     display: flex;
     flex-direction:row;/* 默认 row 横向排列 */
     flex-wrap:wrap;
-    justify-content:center;
+    justify-content:flex-start;
     padding:1% 0 0 1%;
 }
 
@@ -48,7 +48,7 @@
 }
 .xt_money{
     padding-left: 20px;
-    background:url('/icon_big@2x.png') no-repeat left center;
+    background:url('/xitenggame/xitengWapApp/src/images/icon_big@2x.png') no-repeat left center;
     -webkit-background-size:15px;
     background-size:15px;
 }

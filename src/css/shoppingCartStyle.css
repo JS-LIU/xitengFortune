@@ -11,15 +11,20 @@
     color:#FF4242;
 }
 .cart_shop_name{
+    position:fixed;
+    top:0;
     height:44px;
     line-height: 44px;
     background:#FFF;
 }
 .cart_shop_name_icon{
-    background:url("/icon_mall@2x.png") no-repeat 10px center;
+    background:url("/xitenggame/xitengWapApp/src/icon_mall@2x.png") no-repeat 10px center;
     -webkit-background-size: 20px;
     background-size:20px;
-    padding:3px 0 3px 40px;
+    padding:3px 0 3px 15px;
+}
+.cart_shop_edit{
+    width:60px;
 }
 .cart_product{
     height:95px;
@@ -44,7 +49,7 @@
     justify-content: center;
 }
 .red_XT_icon{
-    background:url("/icon_maddle_red@2x.png") no-repeat left center;
+    background:url("/xitenggame/xitengWapApp/src/images/icon_maddle_red@2x.png") no-repeat left center;
     -webkit-background-size:15px;
     background-size:15px;
 }
@@ -93,5 +98,9 @@
     min-height:calc(100% - 47px);
 }
 .cart_edit{
-    z-index:1;
+    height:44px;
+    margin:40px 15px;
+    border-radius: 3px;
+    background:#0A89FE;
+    line-height:44px;
 }

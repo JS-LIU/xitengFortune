@@ -11,7 +11,7 @@
     color:#FF4242;
 }
 .red_XT_icon{
-    background:url("/icon_maddle_red@2x.png") no-repeat left center;
+    background:url("/xitenggame/xitengWapApp/src/images/icon_maddle_red@2x.png") no-repeat left center;
     -webkit-background-size:12px;
     background-size:12px;
 }
@@ -32,7 +32,7 @@
 }
 .red_checked{
     padding-left:20px;
-    background:url('/iconfont-duihao@2x.png') no-repeat left center;
+    background:url('/xitenggame/xitengWapApp/src/images/iconfont-duihao@2x.png') no-repeat left center;
     -webkit-background-size:15px;
     background-size:15px;
 }
@@ -53,7 +53,7 @@
     border-right:1px solid #E2E2E2;
 }
 .shop_service_phone_icon{
-    background:#FFF url('/iconfont-dianhua@2x.png') no-repeat center 5px;
+    background:#FFF url('/xitenggame/xitengWapApp/src/images/iconfont-dianhua@2x.png') no-repeat center 5px;
     background-size: 20px;
     padding-top:25px;
 }
@@ -64,7 +64,7 @@
     justify-content: center;
 }
 .shop_cart_icon{
-    background:#FFF url("/iconfont-gouwuche@2x.png") no-repeat center 5px;
+    background:#FFF url("/xitenggame/xitengWapApp/src/images/iconfont-gouwuche@2x.png") no-repeat center 5px;
     background-size: 20px;
     padding-top:25px;
 }

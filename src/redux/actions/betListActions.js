@@ -4,20 +4,21 @@
 
 import { GET_BETLIST } from './betListActionKeys';
 import _h from '../../Util/HB';
-import {hex_md5} from '../../Util/md5';
+import {getJustNowWithStockList} from '../../Util/xitengBaseConfig';
+
 
 export const betListActions = {
-    getBetList : (pageNo=0,size=3,sortProperties=["time"],direction="DESC")=>{
+    getBetList : (
+        pageNo=getJustNowWithStockList.pageNo,
+        size=getJustNowWithStockList.size,
+        sortProperties=getJustNowWithStockList.sortProperties.time,
+        direction=getJustNowWithStockList.direction
+    )=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
 
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:"",
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret),
-                },
+                accessInfo:loginInfo.baseLoginData,
                 pageNo:pageNo,
                 size:size,
             };

@@ -8,14 +8,9 @@ import {hex_md5} from '../../Util/md5';
 export var areaActions = {
     getArea : (path,key,parentArea={})=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
             let postData = Object.assign({},{
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:"",
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret)
-                },
+                accessInfo:loginInfo.loginData,
                 size:50,
                 pageNo:0
             },parentArea);
@@ -23,7 +18,6 @@ export var areaActions = {
 
             _h.ajax.resource('/area/:area').save(path,postData)
                 .then((data)=>{
-                    console.log('key---',key);
                     if(key==0){
                         dispatch({type:'GET_PROVINCES', data});
                     }

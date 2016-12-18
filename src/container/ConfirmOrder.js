@@ -30,21 +30,12 @@ var ConfirmOrder = React.createClass({
     render:function(){
         return(
             <div className="cart_body f5f5f5 po w">
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:'/ShoppingCart'}}
-                    />
-                    <Title title={{text:'确认订单'}}></Title>
-                </Header>
                 {this.props.address.hasCurrentAddress?(
                     <CurrentAddress address={this.props.address} />
                 ):(<div className="address_list pl15 f16">
                     <Link to="/SelectAddress">请选择地址</Link>
                 </div>)}
-                <ProductList />
+                <ProductList shoppingCart={this.props.shoppingCart}/>
 
                 <div className="cart_footer f16 w">
                     <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
@@ -53,10 +44,10 @@ var ConfirmOrder = React.createClass({
 
                 {this.props.showDialog.showDialog?<DialogiOS >
                     <DialogHeader title={this.props.order.isSuccess?"兑换确认":"喜腾币不足"}/>
-                    <DialogBody content={this.props.order.isSuccess?"确认兑换以上商品吗":"你在账户的喜腾币不足，是否立即兑换喜腾币"}/>
+                    <DialogBody content={this.props.order.isSuccess?"确认兑换以上商品吗":"喜腾币不足，是否立即购买钻石"}/>
                     <DialogFooter>
                         <DialogCancel showDialogActionKeys={this.props.showDialogActionKeys}/>
-                        <DialogConfirm url={this.props.order.isSuccess?"/PaySuccess":"/ExchangeXTCoins"} />
+                        <DialogConfirm url={this.props.order.isSuccess?"/PaySuccess":"/BuyDiamonds"} />
                     </DialogFooter>
                 </DialogiOS>:""}
             </div>
@@ -88,10 +79,25 @@ var CurrentAddress = React.createClass({
 
 var ProductList = React.createClass({
     render: function () {
-
+        let productNodes = this.props.shoppingCart.products.map((item,index)=>{
+            return (
+                <li key={index} className={item.checked?"cart_product pl15 pr":"none"}>
+                    <div className="cart_product_pic m10 tc">
+                        <img src={item.smallPicture} alt="" className="w"/>
+                    </div>
+                    <div className="cart_product_info">
+                        <p className="f16">{item.productName}</p>
+                        <p className="f16 mt10">
+                            <span className="cred red_XT_icon pl15">{item.price / 100}</span>
+                            <span>*{item.num}</span>
+                        </p>
+                    </div>
+                </li>
+            )
+        });
         return (
-            <ul>
-
+            <ul className="fff mt5">
+                {productNodes}
             </ul>
         )
     }

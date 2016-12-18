@@ -6,8 +6,6 @@ var EntranceList = require('./../components/EntranceList');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var { Link } = require('react-router');
-var { Header,Title,BackBtn } = require('../components/Header');
-var $ = require('jquery');
 var _h = require('../Util/HB');
 
 require('../css/MyStyle.css');
@@ -15,33 +13,29 @@ require('../css/MyStyle.css');
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {betRecordActions} from '../redux/actions/betRecordActions';
+import {loginInfoActions} from '../redux/actions/loginInfoActions';
 
 var MyRecord = React.createClass({
     componentWillMount:function(){
-        this.props.historyUrlsActionKeys.pushUrl('/MyAsset');
-        this.props.betRecordActionKeys.getBetRecord();
-        this.props.betRecordActionKeys.getBetList();
+        this.props.loginInfoActionKeys.wxLogin();
+        this.props.historyUrlsActionKeys.pushUrl('/MyRecord');
+        setTimeout(()=>{
+            this.props.betRecordActionKeys.getBetRecord();
+            this.props.betRecordActionKeys.getBetList();
+        },100);
+
     },
     componentDidMount:function(){
         _h.ui.scrollToTheBottom(()=>{
             if(!this.props.betRecord.last){
                 let pageNo = this.props.betRecord.pageNo + 1;
-                this.props.betRecordActionKeys.getBetList(['time'],pageNo);
+                this.props.betRecordActionKeys.getBetList(pageNo);
             }
         });
     },
     render: function () {
         return (
             <div className="h po f5f5f5 w">
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:"/My"}}
-                    />
-                    <Title title={{text:'投注记录'}}></Title>
-                </Header>
                 <RecordOverView betRecord={this.props.betRecord}/>
                 <BetRecordList betRecord={this.props.betRecord}/>
             </div>
@@ -113,37 +107,35 @@ var BetRecordList = React.createClass({
     render: function () {
         let betRecordNodes = this.props.betRecord.detailList.map((item,index)=>{
             return (
-                <li key={index}>
+                <li key={index} className="mt10 ml15 mr15 bet_record_list">
                     <ul>
-                        <li>
-                            <span>投注时间：{item.guessTime}</span>
-                        </li>
-                        <li>
-                            <span className="record_praise">{item.praiseAmount}</span>
+                        <li className="bet_record_time f14 clearfix">
+                            <span className="fl pl15">投注时间：{item.guessTime}</span>
+                            <span className="record_praise fr pr15">{item.praiseAmount}人赞赏</span>
                         </li>
                     </ul>
-                    <ul>
-                        <li>
+                    <ul className="clearfix pb5">
+                        <li className="fl pl15">
                             <span>名称：{item.stockName}</span>
                         </li>
-                        <li>
-                            <span className="record_praise">{item.stockNumber}期</span>
+                        <li className="fr pr15 c000">
+                            <span className="record_praise">{item.stage}期</span>
                         </li>
                     </ul>
-                    <ul>
-                        <li>
+                    <ul className="clearfix pb5">
+                        <li className="fl pl15">
                             <span>投注：{item.guessType}</span>
                         </li>
-                        <li>
+                        <li className="fr pr15">
                             <span className="record_praise">数额：{item.guessAmount}喜腾币</span>
                         </li>
                     </ul>
-                    <ul>
-                        <li>
-                            <span>收盘：{item.stockResultType}</span>
+                    <ul className="clearfix pb5">
+                        <li className="fl pl15">
+                            <span>收盘：{item.stockResultType=="wrong"?"未收盘":"已收盘"}</span>
                         </li>
-                        <li>
-                            <span className="record_praise">盈亏：{item.guessResultAmount}喜腾币</span>
+                        <li className="fr pr15">
+                            <span className="record_praise">盈亏：{isNaN(item.guessResultAmount)?item.guessResultAmount:item.guessResultAmount+"喜腾币"}</span>
                         </li>
                     </ul>
                 </li>
@@ -163,7 +155,7 @@ function mapStatetoProps(state){
     return {
         historyUrls:state.historyUrls,
         betRecord:state.betRecord,
-        userInfo:state.userInfo
+        loginInfo:state.loginInfo,
     };
 }
 
@@ -171,7 +163,8 @@ function mapDispatchToProps(dispatch){
 
     return{
         historyUrlsActionKeys: bindActionCreators(historyUrlsActions,dispatch),
-        betRecordActionKeys:bindActionCreators(betRecordActions,dispatch)
+        betRecordActionKeys:bindActionCreators(betRecordActions,dispatch),
+        loginInfoActionKeys:bindActionCreators(loginInfoActions,dispatch)
     }
 }
 

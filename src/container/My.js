@@ -9,46 +9,54 @@ var { Link } = require('react-router');
 var { Header,Title } = require('../components/Header');
 var $ = require('jquery');
 
+require('../css/MyStyle.css');
+
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
+import {userInfoActions} from '../redux/actions/userInfoActions';
+
 
 var My = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/My');
+        this.props.historyUrlsActionKeys.mark('/My');
+        this.props.userInfoActionKeys.getUserInfo();
     },
     render: function () {
         return (
             <div>
-                <Header>
-                    <Title title={{text:'我'}}></Title>
-                </Header>
                 <div className="discover_body po f5f5f5 w">
+                    <div className="w">
+                        <div className="my_header">
+                            <div className="my_header_icon tc m10">
+                                <img src={this.props.userInfo.icon} alt="" className="w h"/>
+                            </div>
+                            <div className="my_info">
+                                <p className="f14 cblue">{this.props.userInfo.cnName}</p>
+                                <p className="f14">
+                                    <span>喜腾号：{this.props.userInfo.xtNumber}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <EntranceList itemList={[{
                         name:'我的资产',
-                        url:this.props.userInfo.logIn?'/MyAsset':'/Login',
-                        icon:'/me_icon_assets@2x.png'
+                        url:'/MyAsset',
+                        icon:'src/images/me_icon_assets@2x.png'
                     },{
                         name:'投注记录',
-                        url:this.props.userInfo.logIn?'/MyRecord':'/Login',
-                        icon:'/me_icon-_record@2x.png'
+                        url:'/MyRecord',
+                        icon:'src/images/me_icon-_record@2x.png'
                     }]}/>
                     <EntranceList itemList={[{
                         name:'购物车',
-                        url:this.props.userInfo.logIn?'/ShoppingCart':'/Login',
-                        icon:'/me_icon-_cart@2x.png'
+                        url:'/ShoppingCart',
+                        icon:'src/images/me_icon-_cart@2x.png'
                     },{
                         name:'订单',
-                        url:this.props.userInfo.logIn?'/OrderDetails':'/Login',
-                        icon:'/me_icon-_order@2x.png'
+                        url:'/OrderDetails',
+                        icon:'src/images/me_icon-_order@2x.png'
                     }]}/>
-                    <EntranceList itemList={[{
-                        name:'消息',
-                        url:this.props.userInfo.logIn?'/News':'/Login',
-                        icon:'/me_icon-_news@2x.png'
-                    },{
-                        name:'通用',
-                        url:this.props.userInfo.logIn?'/Common':'/Login',
-                        icon:'/me_icon_common@2x.png'
-                    }]}/>
+
                 </div>
             </div>
         )
@@ -59,8 +67,8 @@ var My = React.createClass({
 
 function mapStatetoProps(state){
     return {
-        userInfo:state.userInfo,
-        historyUrls:state.historyUrls
+        historyUrls:state.historyUrls,
+        userInfo:state.userInfo
 
     };
 }
@@ -69,7 +77,7 @@ function mapDispatchToProps(dispatch){
 
     return{
         historyUrlsActionKeys: bindActionCreators(historyUrlsActions,dispatch),
-
+        userInfoActionKeys: bindActionCreators(userInfoActions,dispatch)
     }
 }
 

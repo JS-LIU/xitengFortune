@@ -9,7 +9,7 @@
     width:70px;
     height:70px;
     overflow: hidden;
-    background:url("/logo@2x.png") no-repeat center;
+    background:url("/xitenggame/xitengWapApp/src/images//logo@2x.png") no-repeat center;
     -webkit-background-size:contain;
     background-size:contain;
 }
@@ -39,7 +39,7 @@
     height:44px;
 }
 .login_wx_btn{
-    background:url("/icon_weixin-@2x.png") no-repeat top center;
+    background:url("/xitenggame/xitengWapApp/src/images/icon_weixin-@2x.png") no-repeat top center;
     -webkit-background-size:55px;
     background-size:55px;
     padding-top:60px;

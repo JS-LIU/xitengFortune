@@ -7,6 +7,22 @@
 .cgold{
     color:#FBEC00;
 }
+.my_header{
+    height:95px;
+    display: flex;
+    flex-direction: row;
+    background:#FFF;
+}
+.my_header_icon{
+    width:73px;
+    height:73px;
+    overflow: hidden;
+}
+.my_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 .my_assert{
     top:44px;
 }
@@ -14,7 +30,7 @@
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    height:110px;
+    height:55px;
     background:#FFF;
     border-bottom:1px solid #E2E2E2;
 }
@@ -25,25 +41,30 @@
     justify-content: center;
     border-left: 1px solid #E2E2E2;
 }
-.my_account_diamonds{
-    padding-top:40px;
-    background:url('/assets_icon_diamon@2x.png') no-repeat center top;
+.my_account_big_XTCoins{
+    padding-top:70px;
+    background:#FFF url('/xitenggame/xitengWapApp/src/images/xt_coins_2.png') no-repeat center;
     background-size: 40px;
+    line-height:50px;
+    border-bottom:1px solid #E2E2E2;
 }
 .my_account_XTCoins{
-    padding-top:40px;
-    background:url('/assets_icon_xitengbi@2x.png') no-repeat center top;
-    background-size: 40px;
+    background:url('/xitenggame/xitengWapApp/src/images/xt_coins_2.png') no-repeat 25px center ;
+    background-size: 17px;
+}
+.my_account_color_coins{
+    background:url('/xitenggame/xitengWapApp/src/images/color_coins.png') no-repeat 25px center;
+    background-size: 17px;
 }
 .record_bet{
-    background:url("/touzhu_record_bg.png") no-repeat center;
+    background:url("/xitenggame/xitengWapApp/src/images/touzhu_record_bg.png") no-repeat center;
     background-size: cover;
 }
 .record_bet_info_money{
     display: flex;
     align-items: flex-end;
     height:110px;
-    background:url("/touzhu_record_icon1.png") no-repeat center 15px ;
+    background:url("/xitenggame/xitengWapApp/src/images/touzhu_record_icon1.png") no-repeat center 15px ;
     -webkit-background-size:30px;
     background-size:30px;
 }
@@ -51,7 +72,7 @@
     display: flex;
     align-items: flex-end;
     height:110px;
-    background:url("/touzhu_record_icon2.png") no-repeat center 15px ;
+    background:url("/xitenggame/xitengWapApp/src/images/touzhu_record_icon2.png") no-repeat center 15px ;
     -webkit-background-size:30px;
     background-size:30px;
 }
@@ -59,7 +80,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background:url("/touzhu_record_bg_line.png") no-repeat center bottom;
+    background:url("/xitenggame/xitengWapApp/src/images/touzhu_record_bg_line.png") no-repeat center bottom;
     -webkit-background-size:contain;
     background-size:contain;
 }
@@ -73,4 +94,23 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+.unLogin{
+    height:44px;
+    line-height:44px;
+    border-top:1px solid #E2E2E2;
+    border-bottom:1px solid #E2E2E2;
+    background:#FFF;
+}
+.my_toLogin{
+    background:#FFF;
+    height:44px;
+    line-height: 44px;
+}
+.bet_record_list{
+    background:#D5EDFF;
+
+}
+.bet_record_time{
+    line-height:40px;
 }

@@ -18,6 +18,7 @@ var ShoppingCart = React.createClass({
     componentWillMount:function () {
         this.props.historyUrlsActionKeys.pushUrl('/ShoppingCart');
         this.props.shoppingCartActionKeys.calcTotalMoney();
+        this.props.historyUrlsActionKeys.mark('/ShoppingCart');
     },
     allCheck:function(){
         this.props.shoppingCartActionKeys.allCheck();
@@ -25,25 +26,19 @@ var ShoppingCart = React.createClass({
     deleteProducts:function(){
         this.props.shoppingCartActionKeys.deleteProducts();
     },
-    edit:function(){
-        this.props.shoppingCartActionKeys.edit();
-    },
     render:function(){
         return(
             <div className="cart_body f5f5f5 po w">
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                    shoppingCart={this.props.shoppingCart}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
-                    />
-                    <Title title={{text:'购物车'}}></Title>
-                    <div className="cart_edit pr15 cfff" onClick={this.edit}>
-                        <span>{this.props.shoppingCart.edit?"完成":"编辑"}</span>
-                    </div>
-                </Header>
+                {/*<Header*/}
+                    {/*historyUrls={this.props.historyUrls}*/}
+                    {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
+                    {/*shoppingCart={this.props.shoppingCart}>*/}
+                    {/*<BackBtn*/}
+                        {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
+                        {/*back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}*/}
+                    {/*/>*/}
+                    {/*<Title title={{text:'购物车'}}></Title>*/}
+                {/*</Header>*/}
                 <ProductList
                     shoppingCart={this.props.shoppingCart}
                     shoppingCartActionKeys={this.props.shoppingCartActionKeys}
@@ -55,11 +50,14 @@ var ShoppingCart = React.createClass({
                            className="ml15"
                     />
                     <span className="f14 ml5">全选</span>
-                    <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
+                    <span className="ml15">
+                        <span>合计：</span>
+                        <span className="cred red_XT_icon pl15">{this.props.shoppingCart.realCount / 100}</span>
+                    </span>
                     {this.props.shoppingCart.edit?(
                         <span onClick={this.deleteProducts} className="cart_delete_all fr cfff f20 tc">删除</span>
                     ):(
-                        <Link to={this.props.userInfo.logIn?"/ConfirmOrder":"/Login"} className="cart_payment_btn fr cfff f20 tc">去结算</Link>
+                        <Link to="/ConfirmOrder" className="cart_payment_btn fr cfff f20 tc">去结算</Link>
                     )}
 
                 </div>
@@ -74,6 +72,9 @@ var ProductList = React.createClass({
         return ()=>{
             this.props.shoppingCartActionKeys.checkedItem(index);
         }
+    },
+    edit:function(){
+        this.props.shoppingCartActionKeys.edit();
     },
     increase:function(index){
         return ()=>{
@@ -118,15 +119,17 @@ var ProductList = React.createClass({
             )
         });
         return (
-            <ul className="fff mt10">
-                <li className="cart_shop_name pl15">
+            <ul className="fff">
+                <li className="cart_shop_name pl15 w">
                     <input
                         type="checkbox"
                         checked={this.props.shoppingCart.allChecked}
                         onChange={this.allCheck}
                     />
                     <span className="cart_shop_name_icon pl15">礼品商城</span>
+                    <p className="fr pr15 cart_shop_edit tc" onClick={this.edit}>{this.props.shoppingCart.edit?"完成":"编辑"}</p>
                 </li>
+                <li className="mt50"></li>
                 {productNodes}
             </ul>
         )
@@ -141,7 +144,6 @@ function mapStatetoProps(state){
     return {
         shoppingCart:state.shoppingCart,
         historyUrls:state.historyUrls,
-        userInfo:state.userInfo
     }
 }
 function mapDispatchToProps(dispatch){

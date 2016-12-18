@@ -1,13 +1,16 @@
-.footer{
+.footer-guess{
     display: flex;
     position: fixed;
-    height:50px;
-    bottom:0px;
+    height:65px;
+    bottom:0;
     flex-direction:row;/* 默认 row 横向排列 */
+    background:url('/xitenggame/xitengWapApp/src/images/home_lg@2x.png') no-repeat center;
+    -webkit-background-size:cover;
+    background-size:cover;
 }
 .guessBtn{
     flex-grow:1;
-    line-height:50px;
+    line-height:100px;
 }
 .red{
     background:#DE3031;
@@ -19,14 +22,17 @@
     color:#FFF;
 }
 .guessUp{
-    padding-left:25px;
-    background:url('/guessUpBtn.png') no-repeat left center;
-    -webkit-background-size:20px;
-    background-size:20px;
+    padding-top:40px;
+    background:url('/xitenggame/xitengWapApp/src/images/bet_up.png') no-repeat center 10px;
+    -webkit-background-size:30px;
+    background-size:30px;
 }
 .guessDown{
-    padding-left:25px;
-    background:url('/guessDownBtn.png') no-repeat left center;
-    -webkit-background-size:20px;
-    background-size:20px;
+    padding-top:40px;
+    background:url('/xitenggame/xitengWapApp/src/images/bet_down.png') no-repeat center 10px;
+    -webkit-background-size:30px;
+    background-size:30px;
+}
+.margin_footer{
+    margin-bottom:65px;
 }

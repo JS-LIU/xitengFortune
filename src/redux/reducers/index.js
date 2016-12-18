@@ -10,7 +10,7 @@ import {storage} from './storage';
 import {productInfo} from './productInfo';
 import {shoppingCart} from './shoppingCart';
 import {diamonds} from './diamonds';
-import {userInfo} from './userInfo';
+import {loginInfo} from './loginInfo';
 import {showDialog} from './showDialog';
 import {stockGameDetail} from './stockGameDetail';
 import {historyUrls} from './historyUrls'
@@ -25,30 +25,38 @@ import {cities} from './cities';
 import {areas} from './areas';
 import {order} from './order';
 import {betRecord} from './betRecord';
+import {WXInfo} from './WXInfo';
+import {pay} from './pay';
+import {betInfo} from './betInfo';
+import {userInfo} from './userInfo'
 
 var rootReducer = combineReducers({
+    account,
+    address,
+    areas,
+    award,
+    betInfo,
+    betList,
+    betRecord,
+    cities,
+    diamonds,
+    historyUrls,
+    loginInfo,
+    order,
+    pay,
+    productInfo,
+    provinces,
+    rank,
     routing,
+    shop,
+    shoppingCart,
+    showDialog,
+    storage,
     stockGame,
     stockGameDetail,
-    shop,
-    diamonds,
-    storage,
-    productInfo,
-    shoppingCart,
     userInfo,
-    showDialog,
-    historyUrls,
-    account,
     XTCoins,
-    rank,
-    betList,
-    award,
-    address,
-    provinces,
-    cities,
-    areas,
-    order,
-    betRecord
+    WXInfo
 });
 
 module.exports = rootReducer;

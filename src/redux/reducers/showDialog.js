@@ -6,9 +6,14 @@ import {SHOW_DIALOG,HIDE_DIALOG} from '../actions/dialogActionKeys';
 export const showDialog = function (state = {},action) {
     switch (action.type) {
         case 'SHOW_DIALOG':
-
+            console.log('----dialogData',action.data);
+            let data = action.data||{};
             return Object.assign({},state,{
-                showDialog:true
+                showDialog:true,
+                title:data.title,
+                body:data.body,
+                cancel:data.cancel,
+                certain:data.certain
             });
 
         case 'HIDE_DIALOG':

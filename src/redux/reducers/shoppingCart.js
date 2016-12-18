@@ -49,8 +49,12 @@ function isAllChecked(products){
     });
     return allChecked;
 }
-function allCheck(state){
+function allCheck(state,bool){
     var allChecked = !state.allChecked;
+    if(!bool){
+        allChecked = false;
+    }
+
     var productList = [...state.products];
     productList.map((goods,index)=>{
         goods.checked = allChecked;
@@ -65,7 +69,9 @@ function increase(products,index){
     return products;
 }
 function reduce(products,index){
-    products[index].num -= 1;
+    if(products[index].num > 0){
+        products[index].num -= 1;
+    }
     return products;
 }
 function deleteProducts(products){
@@ -110,7 +116,7 @@ export const shoppingCart = function(state = {},action){
             });
 
         case 'ALLCHECKED':
-            let newState = allCheck(state);
+            let newState = allCheck(state,action.bool);
             return Object.assign({},state,{
                 products:newState.productList,
                 allChecked:newState.allChecked,

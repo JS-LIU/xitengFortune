@@ -13,7 +13,12 @@
  *      HB.valid.toPhoneNum
  *  HB.ui
  *      HB.ui.scrollToTheBottom
- *
+ *  HB.url
+ *      HB.url.getBaseUrl
+ *      HB.url.getKey
+ *      HB.url.history
+ *  HB.save
+ *      HB.save.storage
  */
 
 var $ = require('jquery');
@@ -38,18 +43,26 @@ HB.obj = (function(){
 
     //  用途：是否为空对象
     var isEmpty = function(obj){
+        if(typeof obj == "object"){
+            var proparr = [];
 
-        var proparr = [];
+            for(var prop in obj){
+                proparr.push(prop);
+            }
 
-        for(var prop in obj){
-            proparr.push(prop);
-        }
-
-        if(proparr.length == 0){
-            return true;
+            if(proparr.length == 0){
+                return true;
+            }else{
+                return false;
+            }
         }else{
-            return false;
+            if(obj == ''){
+                return true;
+            }else{
+                return false;
+            }
         }
+
     };
 
     return {
@@ -101,7 +114,7 @@ HB.ajax = (function(){
             return new Promise((resolve,reject)=>{
                 $.ajax({
                     type:type,
-                    url:url,
+                    url:"/xitenggame"+url,
                     data:data,
                     contentType:'application/json; charset=utf-8',
                     async:bool
@@ -136,7 +149,7 @@ HB.ajax = (function(){
 HB.valid = (function(){
     /*
     *   用途：按一定规则分割字符串
-    *   第1个参数是分割哪个电话号码 比如：18801233565
+    *   第1个参数是分割哪个字符串 比如：18801233565
     *   第2个参数是每隔多少个字符分割 比如：18801233565 分成 188 0123 3565 就传[3,4,4]
     *   第3个参数是用什么来分割 比如：18801233565 分成 188-0123-3565 就传'-'
     * */
@@ -168,7 +181,7 @@ HB.valid = (function(){
 
     //  用途：将阿拉伯数子转换为汉字
     function parseChinese(number){
-        let chinese = ['零','一','二','三','四','五','六','七','八','九'];
+        let chinese = ['零','一','二','三','四','五','六','日','八','九'];
         let arrNumber = parseArr(parseString(number));
         let chineseNumber = "";
 
@@ -211,12 +224,84 @@ HB.ui = (function(){
         });
     };
 
+    const setBaseFontSize = function(designWidth,rem2px){
+        var d = window.document.createElement('div');
+        d.style.width = '1rem';
+        d.style.display = "none";
+        var head = window.document.getElementsByTagName('head')[0];
+        head.appendChild(d);
+        var defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+        d.remove();
+        document.documentElement.style.fontSize = window.innerWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+        var st = document.createElement('style');
+        var portrait = "@media screen and (min-width: "+window.innerWidth+"px) {html{font-size:"+ ((window.innerWidth/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}";
+        var landscape = "@media screen and (min-width: "+window.innerHeight+"px) {html{font-size:"+ ((window.innerHeight/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}"
+        st.innerHTML = portrait + landscape;
+        head.appendChild(st);
+        return defaultFontSize
+    };
 
     return {
-        scrollToTheBottom:scrollToTheBottom
+        scrollToTheBottom:scrollToTheBottom,
+        setBaseFontSize:setBaseFontSize
     }
 })();
 
+HB.url = (function(){
+
+    var getBaseUrl = function(){
+        var host = window.location.host;
+        var contextPath = document.location.pathname;
+        var index = contextPath.substr(1).indexOf("/");
+        contextPath = contextPath.substr(0, index + 1);
+        var url = "http://" + host + contextPath;
+
+        return url;
+    };
+
+    var getSearchKey = function(name){
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    };
+
+    var getHashKey = function(name){
+        var reg = new RegExp("(^|&|/?)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.hash.substr(1).match(reg);
+        if (r != null) return unescape(r[2]); return null;
+    };
+    //  从哪个URL之前的所有URL都要 （之后的不要）第二个参数就是来标记从哪开始之后的URL都不要（包括第二个参数在内）
+    var setBrowserHistoryFromBefore = function(urls,url){
+        let urlIndex = urls.indexOf(url);
+        let last = urlIndex + 1;
+        urls.splice(last);
+        for(let i = 0;i < urls.length;i++){
+            var setUrl = "#" + urls[i];
+            history.pushState({},"", setUrl);
+        }
+    };
+
+    return {
+        getBaseUrl:getBaseUrl,
+        getSearchKey:getSearchKey,
+        getHashKey:getHashKey,
+        setBrowserHistoryFromBefore:setBrowserHistoryFromBefore
+    }
+})();
+
+HB.save = (function(){
+
+    const setStorage = function(obj){
+        for(let prop in obj){
+            localStorage[prop] = JSON.stringify(obj[prop]);
+        }
+    };
+
+
+    return {
+        setStorage:setStorage,
+    }
+})();
 
 
 module.exports = HB;

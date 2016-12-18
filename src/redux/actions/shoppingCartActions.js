@@ -32,9 +32,10 @@ export const shoppingCartActions = {
             index
         }
     },
-    allCheck:()=>{
+    allCheck:(bool=true)=>{
         return {
-            type:ALLCHECKED
+            type:ALLCHECKED,
+            bool
         }
     },
     increase:(index)=>{

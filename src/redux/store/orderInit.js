@@ -3,5 +3,6 @@
  */
 export const orderInit = {
     isSuccess:true,
-    tradeOrder:""
+    tradeOrder:{},
+    amount:""
 };

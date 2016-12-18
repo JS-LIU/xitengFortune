@@ -11,7 +11,6 @@ require('../css/stockDetailStyle.css');
 
 import {storageActions} from '../redux/actions/storageActions'
 import {stockGameDetailActions} from '../redux/actions/stockGameDetailActions'
-import {userInfoActions} from '../redux/actions/userInfoActions'
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 
 var StockDetails = React.createClass({
@@ -20,6 +19,7 @@ var StockDetails = React.createClass({
         var stockGameId = this.props.storage.stockGameId;
         this.props.stockGameDetailActionKeys.getStockDetail(stockGameId);
         this.props.historyUrlsActionKeys.pushUrl('/StockDetails');
+        this.props.historyUrlsActionKeys.mark('/StockDetails');
     },
     componentDidMount:function(){
         var time = 5000;
@@ -35,14 +35,6 @@ var StockDetails = React.createClass({
 
         return (
             <div>
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'猜猜',src:'/nav_btn_back@2x.png',link:'/Guess'}}/>
-                    <Title title={{text:'喜腾'}} />
-                </Header>
                 <StockGameDetail
                     stockGameDetail={this.props.stockGameDetail.detail}
                     getStockKLine={this.props.stockGameDetailActionKeys.getStockKLine}
@@ -51,7 +43,6 @@ var StockDetails = React.createClass({
                 <UpDownRate stockGameDetail={this.props.stockGameDetail.detail}/>
                 <StockDetailFooter
                     storageActionKeys={this.props.storageActionKeys}
-                    userInfo={this.props.userInfo}
                 />
             </div>
         )
@@ -66,10 +57,10 @@ var StockGameDetail = React.createClass({
         return (
             <div className="pb15" style={stockDetailStyle}>
                 <ul className="pl15 pr15 clearfix">
-                    <li className="w">
-                        <span>{stockGameDetail.stockModel.currentPoint}</span>
-                        <span>{stockGameDetail.stockModel.chg}</span>
-                        <span>{stockGameDetail.stockModel.changeRate}</span>
+                    <li className="w pt10 cred" style={stockGameDetail.stockModel.changeRate>0?cred:cgreen}>
+                        <span className="f16">{stockGameDetail.stockModel.currentPoint}</span>
+                        <span className="f14 pl15">{stockGameDetail.stockModel.changeRate>0?"+":""}{stockGameDetail.stockModel.chg}</span>
+                        <span className="f14 pl15">{stockGameDetail.stockModel.changeRate>0?"+":""}{stockGameDetail.stockModel.changeRate}%</span>
                     </li>
                     <li className="fl tl" style={stockDetailListStyle}>
                         <span>昨收</span>
@@ -164,21 +155,26 @@ var UpDownRate = React.createClass({
     render: function () {
 
         var stockGameDetail = this.props.stockGameDetail;
-
         return (
-            <ul className="m15 f14">
+            <ul className="m15 f14 margin_footer">
+                <li className="tc f12">
+                    <span>{stockGameDetail.stockGameName}{stockGameDetail.stage}期</span>
+                    <span className="pl15">开奖时间{stockGameDetail.comesTime}</span>
+                </li>
                 <li className="clearfix" style={guessUpDownRateStyle}>
                     <span className="fl" style={guessUpRateStyle}>看涨：{stockGameDetail.guessUpRate}</span>
                     <span className="fr" style={guessDownRateStyle}>看跌：{stockGameDetail.guessDownRate}</span>
                 </li>
-                <li className="clearfix">
-                    <div className="fl tc" style={guessUpXtBAmountStyle}>合计：{stockGameDetail.guessUpXtBAmount}XT币</div>
+                <li className="clearfix mb50">
+                    <div className="fl tc" style={guessUpXtBAmountStyle}>
+                        <span>合计：</span>
+                        <span className="xt_money">{stockGameDetail.guessUpXtBAmount}</span>
+                    </div>
                     <div className="fl tc fb f20" style={vsStyle}>vs</div>
-                    <div className="fr tc" style={guessDownXtBAmountStyle}>合计：{stockGameDetail.guessDownXtBAmount}XT币</div>
-                </li>
-                <li className="mt30 f12 clearfix" >
-                    <span className="fl">截止时间：{stockGameDetail.gameEndTime.slice(5)}</span>
-                    <span className="fr">开奖时间：{stockGameDetail.gameStartTime.slice(5)}</span>
+                    <div className="fr tc" style={guessDownXtBAmountStyle}>
+                        <span>合计：</span>
+                        <span className="xt_money">{stockGameDetail.guessDownXtBAmount}</span>
+                    </div>
                 </li>
             </ul>
         )
@@ -195,15 +191,15 @@ var StockDetailFooter = React.createClass({
     render: function () {
 
         return (
-            <ul className="footer w">
-                <li className="guessBtn h tc red f20 ">
-                    <Link to={this.props.userInfo.logIn?"/Bet":"/Login"} onClick={this.setGuessType(0)}>
-                        <span className="guessUp cfff">猜涨</span>
+            <ul className="footer-guess w">
+                <li className="guessBtn h tc f16 ">
+                    <Link to="/Bet" onClick={this.setGuessType(0)}>
+                        <span className="guessUp cfff">猜涨投注</span>
                     </Link>
                 </li>
-                <li className="guessBtn h tc f20 green ">
-                    <Link to={this.props.userInfo.logIn?"/Bet":"/Login"} onClick={this.setGuessType(1)}>
-                        <span className="guessDown cfff">猜跌</span>
+                <li className="guessBtn h tc f16">
+                    <Link to="/Bet" onClick={this.setGuessType(1)}>
+                        <span className="guessDown cfff">猜跌投注</span>
                     </Link>
                 </li>
             </ul>
@@ -211,10 +207,34 @@ var StockDetailFooter = React.createClass({
     }
 });
 
+function mapStatetoProps(state){
+    return {
+        stockGameDetail:state.stockGameDetail,
+        storage:state.storage,
+        historyUrls:state.historyUrls
+    };
+}
+
+function mapDispatchToProps(dispatch){
+
+    return{
+        stockGameDetailActionKeys:bindActionCreators(stockGameDetailActions,dispatch),
+        storageActionKeys:bindActionCreators(storageActions,dispatch),
+        historyUrlsActionKeys:bindActionCreators(historyUrlsActions,dispatch)
+    }
+}
+module.exports = connect(mapStatetoProps,mapDispatchToProps)(StockDetails);
+
 const stockDetailStyle = {
     background:"#24232B",
-
 };
+const cred = {
+    color:"#FF4242"
+};
+const cgreen = {
+    color:"#03c56c"
+};
+
 const stockDetailListStyle = {
     width:"30%",
     lineHeight:"30px"
@@ -237,13 +257,13 @@ const guessUpDownRateStyle = {
     lineHeight:"40px"
 };
 const guessUpRateStyle = {
-    background:'url("/flag_red@2x.png") no-repeat left center',
+    background:'url("/xitenggame/xitengWapApp/src/images/flag_red@2x.png") no-repeat left center',
     backgroundSize:'15px',
     paddingLeft:'20px',
     color:"#DE3031"
 };
 const guessDownRateStyle = {
-    background:'url("/flag_green@2x.png") no-repeat left center',
+    background:'url("/xitenggame/xitengWapApp/src/images/flag_green@2x.png") no-repeat left center',
     backgroundSize:'15px',
     paddingLeft:'20px',
     color:"#03C56C"
@@ -254,7 +274,7 @@ const guessUpXtBAmountStyle = {
     height:"33px",
     lineHeight:"33px",
     color:"#FFF",
-    background:'url("/red@2x.png") no-repeat center',
+    background:'url("/xitenggame/xitengWapApp/src/images//red@2x.png") no-repeat center',
     backgroundSize:"contain"
 };
 
@@ -263,7 +283,7 @@ const guessDownXtBAmountStyle = {
     height:"33px",
     lineHeight:"33px",
     color:"#FFF",
-    background:'url("/green@2x.png") no-repeat center',
+    background:'url("/xitenggame/xitengWapApp/src/images//green@2x.png") no-repeat center',
     backgroundSize:"contain"
 };
 const vsStyle = {
@@ -291,26 +311,3 @@ const maxStockDateStyle = {
 const minStockDateStyle = {
     color:"#02C56B"
 };
-
-function mapStatetoProps(state){
-    return {
-        stockGameDetail:state.stockGameDetail,
-        storage:state.storage,
-        userInfo:state.userInfo,
-        historyUrls:state.historyUrls
-
-    };
-}
-
-function mapDispatchToProps(dispatch){
-
-    return{
-        stockGameDetailActionKeys:bindActionCreators(stockGameDetailActions,dispatch),
-        storageActionKeys:bindActionCreators(storageActions,dispatch),
-        userInfoActionKeys:bindActionCreators(userInfoActions,dispatch),
-        historyUrlsActionKeys:bindActionCreators(historyUrlsActions,dispatch)
-    }
-}
-
-
-module.exports = connect(mapStatetoProps,mapDispatchToProps)(StockDetails);

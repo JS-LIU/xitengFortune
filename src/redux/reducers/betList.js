@@ -7,7 +7,6 @@ export const betList = function(state = {},action){
 
     switch (action.type) {
         case 'GET_BETLIST':
-            console.log(action.data);
             if(!action.data.last){
                 action.pageNo += 1;
             }

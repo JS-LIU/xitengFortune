@@ -5,8 +5,6 @@ var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
-var {Header,Title} = require('../components/Header');
-var $ = require('jquery');
 
 require("../css/guessStyle.css");
 
@@ -23,14 +21,13 @@ import _h from '../Util/HB';
 var Guess = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Guess');
+        this.props.stockGameActionKeys.getGameList();
     },
     render: function () {
-        var stockGame = this.props.stockGame;
+        const stockGame = this.props.stockGame;
+        console.log(stockGame);
         return (
             <div>
-                <Header>
-                    <Title title={{text:'喜腾'}}></Title>
-                </Header>
                 <div>
                     <StockMarketList
                         gameList={stockGame.gameList}
@@ -50,7 +47,6 @@ var Guess = React.createClass({
                         rankActionKeys={this.props.rankActionKeys}
                     />
                 </div>
-
             </div>
         )
     }
@@ -61,7 +57,7 @@ var StockMarketList = React.createClass({
     timer:function(){
         var time = 60000;
         if(this.props.gameList.length <= 3){
-            time = 5000;
+            time = 30000;
         }
 
         this.timer = setInterval(()=>{
@@ -71,14 +67,7 @@ var StockMarketList = React.createClass({
         },time);
     },
     componentWillMount:function(){
-        if(this.props.gameList.length == 0){
-            this.props.stockGameActionKeys.getGameList();
-        }
-    },
-    componentDidMount:function(){
         this.timer();
-
-
     },
     componentWillUnmount:function(){
         clearInterval(this.timer);
@@ -95,6 +84,7 @@ var StockMarketList = React.createClass({
                     gameTime={this.props.gameTime}
                     stockGameActionKeys={this.props.stockGameActionKeys}
                     countDown={this.props.countDown}
+                    gameList={this.props.gameList}
                 />
                 <ul className="common_bg">
                     {stockMarketNodes}
@@ -114,22 +104,21 @@ var GameTime = React.createClass({
             );
         },1000);
     },
-    componentDidMount:function(){
+    componentWillMount:function(){
         this.timer();
     },
     componentWillUnmount:function(){
         clearInterval(this.timer);
     },
     render: function () {
-        var date = new Date();
-        var month = date.getMonth()+1;
-        var ri = date.getDate();
-        var day = date.getDay();
+
         return (
             <ul className="time_bg">
-                <li className="count_down_title fb tc f14 pt10 cfff">猜股市涨跌</li>
-                <li className="tc f18 pt10 cfff" >{month}月{ri}日（周{_h.valid.parseDay(day)}）</li>
-                <li className="cfff tc f16 pt5 pb15">
+                <li className="tc pt10 cfff guess_next_stage_time" >
+                    <span className="guess_next_stage">{this.props.gameList.length==0?"":this.props.gameList[0].stage}期</span>
+                    <span>{this.props.gameTime.endMonth + 1}月{this.props.gameTime.endDate}日（周{_h.valid.parseDay(this.props.gameTime.endDay)}）</span>
+                </li>
+                <li className="cfff tc pt5">
                     <span className="count_down_icon">截止投注:{this.props.countDown.countDownTime}</span>
                 </li>
             </ul>
@@ -145,17 +134,21 @@ var GameItem = React.createClass({
         }
     },
     render: function () {
-        var gameItem = this.props.gameItem;
+        const gameItem = this.props.gameItem;
         return (
-            <li className="game_item pb30">
-                <p className="tc f20 cfff pt20">{gameItem.stockGameName}</p>
+            <li className="game_item">
+                <div className="tc">
+                    <img src={gameItem.picUrl} className="tc stock_game_name_pic"></img>
+                </div>
+
+
                 <p className="pt15 f16 tc cred">
                     <span className="pr15 f20" style={(gameItem.stockModel.chg>0)?upStyle:downStyle}>{gameItem.stockModel.currentPoint}</span>
-                    <span className="pl10" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg}</span>
-                    <span className="pl10" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.changeRate}%</span>
+                    <span className="pl10" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.chg}</span>
+                    <span className="pl10" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.changeRate}%</span>
                 </p>
                 <Link to="/StockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
-                    <img src="/btn_go@2x.png" alt="" className="stockMarketPic pt15"/>
+                    <img src="src/images/btn_go@2x.png" alt="" className="stockMarketPic pt15"/>
                     <ul className="clearfix guessUpDown" >
                         <li className="fl tc f16 cfff">
                             <p className="f16">
@@ -297,12 +290,12 @@ module.exports = connect(mapStatetoProps,mapDispatchToProps)(Guess);
 
 const upStyle={
     color:"#FF4242",
-    background:'url("/icon_arrow_up-@2x.png") no-repeat right center',
+    background:'url("/xitenggame/xitengWapApp/src/images/icon_arrow_up-@2x.png") no-repeat right center',
     backgroundSize:"12px",
 };
 const downStyle={
     color:"#02C56B",
-    background:'url("/icon_arrow_down@2x.png") no-repeat right center',
+    background:'url("/xitenggame/xitengWapApp/src/images/icon_arrow_down@2x.png") no-repeat right center',
     backgroundSize:"12px",
 };
 const cred={

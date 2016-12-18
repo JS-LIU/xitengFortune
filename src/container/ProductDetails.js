@@ -15,6 +15,7 @@ require('../css/productDetailStyle.css');
 import {productActions} from '../redux/actions/productInfoActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
+import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
 
 var ProductDetails = React.createClass({
     componentWillMount:function(){
@@ -25,15 +26,6 @@ var ProductDetails = React.createClass({
         var productInfo = this.props.productInfo.productInfo;
         return (
             <div>
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
-                    />
-                    <Title title={{text:'商品详情'}}></Title>
-                </Header>
                 <Carousel pictures={productInfo.pictures}/>
                 <div className="detail_product_info pl15">
                     <p className="f16 c000">商品名称：{productInfo.productName}</p>
@@ -52,6 +44,8 @@ var ProductDetails = React.createClass({
                     addProductItem={this.props.shoppingCartActionKeys.addProductItem}
                     productInfo={productInfo}
                     shoppingCart={this.props.shoppingCart}
+                    shoppingCartActionKeys={this.props.shoppingCartActionKeys}
+                    createTradeOrderActionKeys={this.props.createTradeOrderActionKeys}
                 />
             </div>
         )
@@ -63,6 +57,21 @@ var ShopFooter = React.createClass({
     addProductItem:function(){
         let productInfo = this.props.productInfo;
         this.props.addProductItem(productInfo);
+
+    },
+    exchangeProduct:function(productItem){
+        var productArr = [{
+            productId:productItem.productId,
+            totalCount:1,
+            price:productItem.price,
+            shopId:productItem.shopId
+        }];
+        return ()=>{
+            //  shoppingCart操作
+            // this.props.shoppingCartActionKeys.allCheck(false);
+            this.props.createTradeOrderActionKeys.exchangeProduct(productArr);
+        }
+
 
     },
     render:function(){
@@ -81,9 +90,9 @@ var ShopFooter = React.createClass({
                 <li className="shop_put_cart tc f16 cfff" onClick={this.addProductItem} >
                     加入购物车
                 </li>
-                <li className="shop_buy tc f16 cfff">
-                    立即兑换
-                </li>
+                {/*<li className="shop_buy tc f16 cfff" onClick={this.exchangeProduct(this.props.productInfo)}>*/}
+                    {/*<span>立即兑换</span>*/}
+                {/*</li>*/}
             </ul>
         )
 
@@ -104,7 +113,8 @@ function mapDispatchToProps(dispatch){
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         productInfoActionKeys:bindActionCreators(productActions,dispatch),
-        shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch)
+        shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
+        createTradeOrderActionKeys:bindActionCreators(createTradeOrderActions,dispatch)
     }
 }
 

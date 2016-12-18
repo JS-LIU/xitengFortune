@@ -34,19 +34,18 @@ module.exports = {
     devServer:{
         proxy: {
             '**': {
-                target: 'http://114.251.53.22/xitenggamejar',
+                target: 'https://www.xiteng.com/',
                 secure: false,
                 bypass: function (req, res, proxyOptions) {
                     if (req.headers.accept.indexOf('html') !== -1) {
+                        console.log('.html');
                         return '/index.html';
                     }
                     if (req.headers.accept.indexOf('css') !== -1) {
                         return '/src/Util/base.css';
                     }
                     if (req.headers.accept.indexOf('image') !== -1) {
-                        console.log('Skipping proxy for browser request.png');
-                        console.log(req.url);
-                        return "/src/images"+req.url;
+                        return req.url;
                     }
                 }
             }

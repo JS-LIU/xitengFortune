@@ -17,22 +17,16 @@ import {
     SET_DEFAULT,
     SET_NEW_ADDRESS
 } from './addressActionKeys';
+
 import _h from '../../Util/HB';
-import {hex_md5} from '../../Util/md5';
 
 export var addressActions = {
     getDefault : ()=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:userInfo.access_token,
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret)
-                }
+                accessInfo:loginInfo.loginData
             };
-            console.log(postData);
 
             _h.ajax.resource('/deliveryAddress/getDefault').save({},postData).then((data)=>{
                 dispatch({type:'GET_DEFAULT',data})
@@ -43,18 +37,12 @@ export var addressActions = {
     },
     getList:()=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:userInfo.access_token,
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret)
-                },
+                accessInfo:loginInfo.loginData,
                 size:10,
                 pageNo:0
             };
-            console.log(postData);
 
             _h.ajax.resource('/deliveryAddress/list').save({},postData).then((data)=>{
                 dispatch({type:'GET_LIST',data})
@@ -65,18 +53,14 @@ export var addressActions = {
     },
     createAddress:()=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
+
             let newAddressInfo = getState().address.newAddressInfo;
             let postData = Object.assign({},{
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:userInfo.access_token,
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret)
-                },
+                accessInfo:loginInfo.loginData,
                 provinceId:newAddressInfo.provinceId,
                 cityId:newAddressInfo.cityId,
-                fullAddress:newAddressInfo.districtAddress+newAddressInfo.detailAddress,
+                fullAddress:newAddressInfo.districtAddress + newAddressInfo.detailAddress,
                 districtAddress:newAddressInfo.districtAddress,
                 positionX:"0",
                 positionY:"0",
@@ -85,13 +69,11 @@ export var addressActions = {
                 recievName:newAddressInfo.recievName,
                 detailAddress:newAddressInfo.detailAddress
             });
-            console.log(postData);
             let path = "create";
             if(newAddressInfo.id){
                 path = "edit";
                 postData.id=newAddressInfo.id;
             }
-            console.log(path);
             _h.ajax.resource('/deliveryAddress/:path').save({path:path},postData).then((data)=>{
                 dispatch({type:'CREATE_ADDRESS',data})
             }).catch((error)=>{

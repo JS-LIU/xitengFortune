@@ -21,15 +21,15 @@ var Cities = React.createClass({
     render: function () {
         return (
             <div>
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:"/Provinces"}}
-                    />
-                    <Title title={{text:"选取城市"}} />
-                </Header>
+                {/*<Header*/}
+                    {/*historyUrls={this.props.historyUrls}*/}
+                    {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}>*/}
+                    {/*<BackBtn*/}
+                        {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
+                        {/*back={{text:'返回',src:'/nav_btn_back@2x.png',link:"/Provinces"}}*/}
+                    {/*/>*/}
+                    {/*<Title title={{text:"选取城市"}} />*/}
+                {/*</Header>*/}
                 <CityList
                     cities={this.props.cities}
                     areaActionKeys={this.props.areaActionKeys}

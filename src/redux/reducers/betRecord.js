@@ -7,15 +7,14 @@ export const betRecord = function(state = {},action){
 
     switch (action.type) {
         case 'GET_BET_RECORD':
-            console.log(action.data);
             return Object.assign({},state,{
                 overView:action.data
             });
 
         case 'GET_BET_LIST':
-            console.log(action.data);
+
             return Object.assign({},state,{
-                detailList:action.data.content,
+                detailList:state.detailList.concat(action.data.content),
                 isLast:action.data.last,
                 pageNo:action.pageNo,
             });

@@ -4,22 +4,18 @@
 
 import {GET_AWARD} from './awardActionKeys';
 import _h from '../../Util/HB';
-import {hex_md5} from '../../Util/md5';
+import {award} from '../../Util/xitengBaseConfig';
+
 
 export var awardActions = {
-    getAward : (awardType=1)=>{
+    getAward : (awardType=award.list.week)=>{
 
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret),
-                },
+                accessInfo:loginInfo.baseLoginData,
                 awardType:awardType
             };
-            console.log(postData);
 
             _h.ajax.resource('/award/list').save({},postData).then((data)=>{
                 dispatch({type:'GET_AWARD',data})

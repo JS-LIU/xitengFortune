@@ -6,7 +6,6 @@ var ReactDom = require('react-dom');
 var { Router, Route, hashHistory,IndexRedirect} = require('react-router');
 var Store = require('../src/redux/store/store');
 var {Provider} = require('react-redux');
-import {DevTools} from 'Util/3rd/DevTools'
 
 var HomePage = require('../src/components/HomePage');
 var AskBar = require('../src/components/AskBar');
@@ -34,10 +33,13 @@ var Cities = require('../src/container/Cities');
 var Areas = require('../src/container/Areas');
 var MyAsset = require('../src/container/MyAsset');
 var MyRecord = require('../src/container/MyRecord');
+var SetPassword = require('../src/container/SetPassword');
+var PayFail = require('../src/container/PayFail');
 
-import {gameListInit} from  '../src/redux/store/gameListInit';
+
+import {stockGameInit} from  '../src/redux/store/stockGameInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
-import {userInfoInit} from  '../src/redux/store/userInfoInit';
+import {loginInfoInit} from  '../src/redux/store/loginInfoInit';
 import {stockGameDetail} from '../src/redux/store/stockGameDetailInit';
 import {storageInit} from '../src/redux/store/storageInit';
 import {accountInit} from '../src/redux/store/accountInit'
@@ -54,7 +56,14 @@ import {citiesInit} from '../src/redux/store/citiesInit';
 import {areasInit} from '../src/redux/store/areasInit';
 import {orderInit} from '../src/redux/store/orderInit';
 import {betRecordInit} from '../src/redux/store/betRecordInit';
+import {WXInfoInit} from '../src/redux/store/WXInfoInit';
+import {diamondListInit} from '../src/redux/store/diamondListInit';
+import {payInit} from '../src/redux/store/payInit';
+import {dialogInit} from '../src/redux/store/dialogInit';
+import {betInfoInit} from '../src/redux/store/betInfoInit';
+import {userInfoInit} from '../src/redux/store/userInfoInit';
 
+import _h from '../src/Util/HB';
 var {syncHistoryWithStore} = require('react-router-redux');
 
 const store = Store(initState());
@@ -90,23 +99,26 @@ var getRoutes = ()=>{
         <Route path="/Areas" component={Areas}></Route>
         <Route path="/MyAsset" component={MyAsset}></Route>
         <Route path="/MyRecord" component={MyRecord}></Route>
+        <Route path='/SetPassword' component={SetPassword}></Route>
+        <Route path='/PayFail' component={PayFail}></Route>
     </Router>
-    )};
+)};
 
+_h.ui.setBaseFontSize(750,100);
 
 
 function initState(){
     return {
-        stockGame:gameListInit,
+        stockGame:stockGameInit,
         stockGameDetail:stockGameDetail,
         shop:shopInit,
-        diamonds:{diamondList:[]},
-        storage:storageInit,
+        diamonds:diamondListInit,
+        storage:localStorage.storageInit?JSON.parse(localStorage.storageInit):storageInit,
         productInfo:productInfoInit,
         shoppingCart:shoppingCartInit,
-        userInfo:userInfoInit,
-        showDialog:{},
-        historyUrls:historyUrlsInit,
+        loginInfo:localStorage.loginInfoInit?JSON.parse(localStorage.loginInfoInit):loginInfoInit,
+        showDialog:dialogInit,
+        historyUrls:localStorage.historyUrlsInit?JSON.parse(localStorage.historyUrlsInit):historyUrlsInit,
         account:accountInit,
         XTCoins:XTCoinsInit,
         rank:rankInit,
@@ -116,8 +128,12 @@ function initState(){
         provinces:provincesInit,
         cities:citiesInit,
         areas:areasInit,
-        order:orderInit,
-        betRecord:betRecordInit
+        order:localStorage.orderInit?JSON.parse(localStorage.orderInit):orderInit,
+        betRecord:betRecordInit,
+        WXInfo:WXInfoInit,
+        pay:localStorage.payInit?JSON.parse(localStorage.payInit):payInit,
+        betInfo:betInfoInit,
+        userInfo:localStorage.userInfoInit?JSON.parse(localStorage.userInfoInit):userInfoInit
     }
 }
 
@@ -127,7 +143,6 @@ function initState(){
 ReactDom.render(
     <Provider store={store}>
         <div>
-            {/*<DevTools />*/}
             {getRoutes()}
         </div>
 

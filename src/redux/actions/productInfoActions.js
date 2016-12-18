@@ -9,15 +9,10 @@ export var productActions = {
 
     getProductInfo:()=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
             let productId = getState().storage.productId;
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:"",
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret)
-                },
+                accessInfo:loginInfo.baseLoginData,
                 productId:productId
             };
 

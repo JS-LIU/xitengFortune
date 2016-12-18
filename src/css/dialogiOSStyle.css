@@ -1,6 +1,21 @@
+.cfff{
+    color:#FFF;
+}
+.dialog_big_box{
+    position:fixed;
+    top:0;
+}
+.dialog_mask{
+    position:fixed;
+    z-index: 9;
+    background:#000;
+    opacity: 0.3;
+}
 .dialog_body{
+    position:fixed;
+    margin:0 50px;
     width:calc(100% - 100px);
-    margin:50% auto;
+    top:35%;
     background:#FFF;
     opacity: 0.96;
     -webkit-border-radius:6px;
@@ -12,13 +27,13 @@
     line-height:25px;
 }
 .dailog_content{
-    border-bottom:1px solid #E2E2E2;
 }
 .dialog_footer{
     display:flex;
     height:44px;
-    border-radius-bottomleft:3px;
-    border-radius-bottomright:3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top:1px solid #E2E2E2;
     overflow: hidden;
 }
 .dialog_btn{

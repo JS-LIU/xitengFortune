@@ -44,7 +44,7 @@ color:#000;
     border-bottom:1px solid #E2E2E2;
 }
 .selected{
-    background:#FFF url("/btn_choose_s@2x.png") no-repeat 95% center;
+    background:#FFF url("/xitenggame/xitengWapApp/src/images/btn_choose_s@2x.png") no-repeat 95% center;
     -webkit-background-size:20px;
     background-size:20px;
 }

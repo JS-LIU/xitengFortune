@@ -6,7 +6,6 @@ var EntranceList = require('./../components/EntranceList');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var { Link } = require('react-router');
-var { Header,Title,BackBtn } = require('../components/Header');
 var $ = require('jquery');
 
 require('../css/MyStyle.css');
@@ -23,25 +22,16 @@ var MyAssert = React.createClass({
     render: function () {
         return (
             <div className="h po f5f5f5 w">
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:"/My"}}
-                    />
-                    <Title title={{text:'资产'}}></Title>
-                </Header>
                 <Myaccount account={this.props.account} />
                 <div>
                     <EntranceList itemList={[{
                         name:'购买钻石',
                         url:"BuyDiamonds",
-                        icon:'/me_icon_assets@2x.png'
+                        icon:'src/images/buy_diamonds_2.png'
                     },{
-                        name:'兑换喜腾币',
-                        url:'ExchangeXTCoins',
-                        icon:'/me_icon-_record@2x.png'
+                        name:'购买商品',
+                        url:"Shop",
+                        icon:'src/images/shop_2.png'
                     }]}/>
                 </div>
             </div>
@@ -52,21 +42,30 @@ var MyAssert = React.createClass({
 var Myaccount = React.createClass({
     render: function () {
         return (
-            <ul className="my_account f14">
-                <li className="tc">
-                    <span className="my_account_diamonds">
-                        <span className="cblue f20">{this.props.account.diamondAmount}</span>
-                        <span>颗钻石</span>
-                    </span>
-
-                </li>
-                <li className="tc">
-                    <span className="my_account_XTCoins">
-                        <span className="cred f20">{this.props.account.xtbTotalAmount}</span>
-                        <span>喜腾币</span>
-                    </span>
-                </li>
-            </ul>
+            <div>
+                <div className="my_account_big_XTCoins tc">
+                    <p>
+                        <span className="f20 cred">{this.props.account.xtbTotalAmount}</span>
+                        <span className="f14">喜腾币</span>
+                    </p>
+                </div>
+                <ul className="my_account f14">
+                    <li className="tc">
+                        <span>{this.props.account.xtbProfitAmount}</span>
+                        <span className="my_account_XTCoins f12">
+                            <span>普通币</span>
+                            <span className="cred">(全场通用)</span>
+                        </span>
+                    </li>
+                    <li className="tc">
+                        <span>{this.props.account.xtbCapitalAmount}</span>
+                        <span className="my_account_color_coins f12">
+                            <span>彩色币</span>
+                            <span className="cred">(仅限投注)</span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
         )
     }
 });
@@ -76,7 +75,6 @@ function mapStatetoProps(state){
     return {
         historyUrls:state.historyUrls,
         account:state.account,
-        userInfo:state.userInfo
     };
 }
 

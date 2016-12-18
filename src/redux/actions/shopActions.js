@@ -4,13 +4,12 @@
 
 import {GET_PRODUCTS,PREVENT_MULTIPLE_POST} from './shopActionKeys';
 import _h from '../../Util/HB';
-import {hex_md5} from '../../Util/md5';
 
 export const shopActions = {
 
     getProductList:(mannerId={tagName:"推荐"},index=0,pageNo=0,size=6)=>{
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
 
             let myManner = mannerId;
             for(let prop in mannerId){
@@ -22,12 +21,7 @@ export const shopActions = {
             dispatch({type:'PREVENT_MULTIPLE_POST'});
 
             let postData = Object.assign({},{
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:"",
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret),
-                },
+                accessInfo:loginInfo.baseLoginData,
                 pageNo:pageNo,
                 size:size
             },myManner);

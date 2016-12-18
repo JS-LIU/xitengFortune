@@ -22,28 +22,21 @@ var Discover = React.createClass({
     render: function () {
         return (
             <div>
-                <Header>
-                    <Title title={{text:'发现'}}></Title>
-                </Header>
                 <div className="discover_body po f5f5f5 w">
-                    <EntranceList itemList={[{
-                        name:'股神争霸',
-                        url:'/Rank',
-                        icon:'/fing_icon_ranking-list@2x.png'
-                    }]}/>
+                    {/*<EntranceList itemList={[{*/}
+                        {/*name:'股神争霸',*/}
+                        {/*url:'/Rank',*/}
+                        {/*icon:'src/images/fing_icon_ranking-list@2x.png'*/}
+                    {/*}]}/>*/}
                     <EntranceList itemList={[{
                         name:'购买钻石',
                         url:'/BuyDiamonds',
-                        icon:'/fing_icon_diamonds@2x.png'
-                    },{
-                        name:'兑换喜腾币',
-                        url:'/ExchangeXTCoins',
-                        icon:'/fing_icon_XT@2x.png'
+                        icon:'src/images/fing_icon_diamonds@2x.png'
                     }]}/>
                     <EntranceList itemList={[{
                         name:'兑换礼品',
                         url:'/Shop',
-                        icon:'/fing_icon_mall@2x.png'
+                        icon:'src/images/fing_icon_mall@2x.png'
                     }]}/>
                 </div>
             </div>

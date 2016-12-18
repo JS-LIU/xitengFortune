@@ -8,7 +8,6 @@ export const areas = function(state = {},action){
 
     switch (action.type) {
         case 'GET_AREA':
-            console.log(action.data.areas);
             return Object.assign({},state,{
                 list:action.data.areas
             });

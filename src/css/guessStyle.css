@@ -8,19 +8,31 @@
     font-size:18px;
 }
 .game_item{
-    margin:0 15px 20px;
-    background: #2c3256;
+    margin:0 0.25rem 0.3rem;
+    background: #1c242a;
     -webkit-border-radius:6px;
     -moz-border-radius:6px;
     border-radius:6px;
 }
+.stock_game_name_pic{
+    width:1.47rem;
+    padding-top:0.42rem;
+}
 .time_bg{
-    background:url('/home_lg1@2x.png') no-repeat top center;
-    background-size: cover;
+    /*background:url("/xitenggame/xitengWapApp/src/images/home_lg1@2x.png") no-repeat top center;*/
+    /*background-size: cover;*/
+    background:#2e343e;
+}
+.guess_next_stage_time{
+    font-size: 0.28rem;
+    padding-top:0.48rem;
+}
+.guess_next_stage{
+    padding-right:0.46rem;
 }
 .common_bg{
-    background:url('/home_lg@2x.png') repeat-y center;
-    background-size: contain;
+    padding-top: 0.38rem;
+    background:#2e343e;
 }
 .stockMarketPic{
     display:block;
@@ -28,12 +40,11 @@
     width:calc(100% - 100px);
 }
 .guessUpDown{
-    margin:5px 30px;
+    margin:5px 20px;
     line-height:25px;
 }
 .xt_money{
-    padding-right: 20px;
-    background:url('/icon_big@2x.png') no-repeat right center;
+    background:url('/xitenggame/xitengWapApp/src/images/icon_big@2x.png') no-repeat right center;
     -webkit-background-size:15px;
     background-size:15px;
 }
@@ -41,10 +52,11 @@
     font-size:34px;
 }
 .count_down_icon{
-    padding-left:25px;
-    background:url('/home_icon_time@2x.png') no-repeat left center;
-    -webkit-background-size:20px;
-    background-size:20px;
+    padding-left:0.4rem;
+    background:url('/xitenggame/xitengWapApp/src/images/home_icon_time@2x.png') no-repeat left center;
+    -webkit-background-size:0.28rem;
+    background-size:0.28rem;
+    font-size: 0.24rem;
 }
 .bet_user_box,
 .rank_user_box{
@@ -74,11 +86,11 @@
 .bet_user_bet,
 .rank_user_bet{
     padding-left:20px;
-    background:url('/icon_big@2x.png') no-repeat left center;
+    background:url('/xitenggame/xitengWapApp/src/images/icon_big@2x.png') no-repeat left center;
     background-size: 15px;
 }
 .pk_title{
-    background:url('/home_line@2x.png') no-repeat top center;
+    background:url('/xitenggame/xitengWapApp/src/images/home_line@2x.png') no-repeat top center;
     -webkit-background-size:contain;
     background-size: contain;
     line-height:50px;
@@ -88,8 +100,8 @@
 }
 .pk_box{
     padding-bottom:50px;
-    -webkit-background-size:cover;
-    background-size:cover;
+    -webkit-background-size:contain;
+    background-size:contain;
 }
 .prize_pic{
     display: block;

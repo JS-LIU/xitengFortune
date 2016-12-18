@@ -5,47 +5,36 @@ var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
-var { Header,BackBtn,Title } = require('../components/Header');
+var $ = require('jquery');
+
 
 require("../css/diamondsStyle.css");
 
 import {accountActions} from '../redux/actions/accountActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
-import {diamondsActions} from '../redux/actions/diamondsActions';
 import {storageActions} from '../redux/actions/storageActions';
 import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
+import {diamondsActions} from '../redux/actions/diamondsActions';
 
 var BuyDiamonds = React.createClass({
 
     componentWillMount:function(){
-        this.props.diamondsActionKeys.getDiamonds();
-        this.props.accountActionKeys.getAccount();
         this.props.historyUrlsActionKeys.pushUrl('/BuyDiamonds');
+        this.props.diamondsActionKeys.selectedDiamonds(0);
+        this.props.historyUrlsActionKeys.mark('/BuyDiamonds');
+        console.log('BuyDiamonds-componentWillMount-',this.props.historyUrls);
     },
     render: function () {
         return (
             <div>
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}
-                    />
-                    <Title title={{text:'购买钻石'}}></Title>
-                </Header>
                 <div className="pt15 pl15">
-                    <span className="c000">钻石余额：</span>
-                    <span className="cred">{this.props.account.diamondAmount||0}</span>
-                    <span className="c000">颗</span>
-                    <span>(钻石兑换喜腾币为1:12)</span>
+                    <span>一次购买每满1000钻石赠送100喜腾币</span>
                 </div>
 
                 <PruductItems
-                    diamondList={this.props.diamonds.diamondList}
-                    setProductId={this.props.storageActionKeys.setProductId}
+                    diamonds={this.props.diamonds}
                     createTradeOrderActionKeys={this.props.createTradeOrderActionKeys}
-                    userInfo={this.props.userInfo}
+                    diamondsActionKeys={this.props.diamondsActionKeys}
                 />
             </div>
         )
@@ -54,37 +43,60 @@ var BuyDiamonds = React.createClass({
 
 var PruductItems = React.createClass({
 
-    buyDiamonds:function(item){
+    buyDiamonds:function(){
+
+        this.props.createTradeOrderActionKeys.createTradeOrder(this.props.diamonds.amount);
+    },
+    selectedDiamonds:function(index){
         return ()=>{
-            this.props.createTradeOrderActionKeys.createTradeOrder(item,2,1)
+            $('.J_customPrince').val("");
+            this.props.diamondsActionKeys.clearSelected();
+            this.props.diamondsActionKeys.selectedDiamonds(index);
         }
     },
-
+    selectedCustom:function(){
+        this.props.diamondsActionKeys.clearSelected();
+    },
+    inputPrice:function(){
+        this.props.diamondsActionKeys.setAmount(parseInt($('.J_customPrince').val()));
+    },
     render: function () {
 
-        var diamondsNodes = this.props.diamondList.map((item,index)=>{
+        var diamondsNodes = this.props.diamonds.diamondList.map((item,index)=>{
             return(
-                <li className="diamond mr15 mt10 fl" key={index}>
-                    <div className="diamond_count pr">
-                        <img src={item.picture} alt="" className="diamond_pic po w h"/>
-                        <p className="pt20 f16 cred tc pr">{item.diamondCount}颗钻</p>
-                    </div>
-                    <div className="pb10">
-                        <p className="price pl10">
-                            <span className="cred">￥</span>
-                            <span className="f16 cred">{item.price / 100}</span>
-                            <span className="tag cfff ml10">{item.tagName}</span>
-                            <span className="cblue pl10">{(item.giveDiamondCount==0)?"":"赠送"+item.giveDiamondCount+"颗钻石"}</span>
-                        </p>
-                        <Link to={this.props.userInfo.logIn?"/Pay":"/Login"} className="buy_btn f16 cred tc" onClick={this.buyDiamonds(item)}>立即购买</Link>
-                    </div>
+                <li
+                    className="diamond mr15 mt10 fl"
+                    key={index}
+                    onClick={this.selectedDiamonds(index)}
+                    style={item.selected?diamonds_selected:{}}>
+                    <p className="diamond_count f16 cred tc pr">{item.amount}颗</p>
                 </li>
             )
         });
         return (
-            <ul className="diamonds_list ml15 clearfix">
-                {diamondsNodes}
-            </ul>
+            <div>
+                <ul className="diamonds_list ml15 clearfix">
+                    {diamondsNodes}
+                    <li className="diamond_bg mr15 mt10 fl" onClick={this.selectedCustom}>
+                        <input
+                            type="text"
+                            placeholder="自定义数额"
+                            className="tc input_diamonds cred J_customPrince"
+                            onKeyUp={this.inputPrice}
+                        />
+                    </li>
+                </ul>
+                <div className="fr pr15">
+                    <span className="f14">金额：</span>
+                    <span>￥{this.props.diamonds.amount}</span>
+                </div>
+                <div className="tc buy_diamonds_btn" onClick={this.buyDiamonds}>
+                    <Link to="/Pay" className="cfff f16">
+                        立即购买
+                    </Link>
+                </div>
+            </div>
+
         )
     }
 });
@@ -97,7 +109,6 @@ function mapStatetoProps(state){
         historyUrls:state.historyUrls,
         diamonds:state.diamonds,
         storage:state.storage,
-        userInfo:state.userInfo
     }
 }
 function mapDispatchToProps(dispatch){
@@ -113,3 +124,8 @@ function mapDispatchToProps(dispatch){
 
 
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(BuyDiamonds);
+
+
+const diamonds_selected = {
+    border:"1px solid #FF4242"
+};

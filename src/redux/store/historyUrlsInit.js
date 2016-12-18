@@ -4,5 +4,6 @@
 export const historyUrlsInit = {
     urlList:[],
     last:"/",
-    now:""
+    now:"",
+    mark:""
 };

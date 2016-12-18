@@ -3,6 +3,9 @@
  */
 import { CREATE_SUCCESS,CREATE_FAIL,SET_TRADEORDER } from '../actions/createTradeOrderActionKeys'
 
+let diamondsAmount = function (price){
+    return price;
+};
 
 export const order = function (state={},action){
     switch (action.type) {
@@ -16,7 +19,8 @@ export const order = function (state={},action){
             });
         case SET_TRADEORDER:
             return Object.assign({},state,{
-                tradeOrder:action.tradeInfo
+                tradeOrder:action.tradeInfo,
+                amount:diamondsAmount(action.price)
             });
         default:
             return state

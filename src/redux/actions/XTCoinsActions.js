@@ -17,7 +17,7 @@ export const XTCoinsActions = {
     exchangeXTCoins : (tradeWay)=>{
 
         return (dispatch,getState)=>{
-            let userInfo = getState().userInfo;
+            let loginInfo = getState().loginInfo;
             let diamondsPrice = getState().XTCoins.price;
             let xtbCount = getState().XTCoins.XTCoinList.map((item,index)=>{
                 if(item.selected){
@@ -27,12 +27,7 @@ export const XTCoinsActions = {
 
 
             let postData = {
-                accessInfo:{
-                    app_key:userInfo.appKey,
-                    access_token:userInfo.access_token,
-                    phone_num:userInfo.openId,
-                    signature:hex_md5(userInfo.appSecret + '&' +  userInfo.access_token_secret)
-                },
+                accessInfo:loginInfo.loginData,
                 xtbCount:xtbCount,
                 diamondPrice:diamondsPrice,
                 tradeWay:tradeWay
