@@ -8,7 +8,7 @@ import {stockGameList} from '../../Util/xitengBaseConfig';
 export const stockGame = function (state = {},action){
     switch (action.type) {
         case 'GET_GAMELIST':
-            let myGameList = state.gameList.concat(action.data.content);
+            let myGameList = action.data.content;
 
             let startTime = myGameList[0].gameStartTime;
             let endTime = myGameList[0].gameEndTime;

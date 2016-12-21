@@ -7,14 +7,12 @@ export const betList = function(state = {},action){
 
     switch (action.type) {
         case 'GET_BETLIST':
-            if(!action.data.last){
-                action.pageNo += 1;
-            }
+
+            let betList = action.data.content;
 
             return Object.assign({},state,{
-                betList:action.data.content,
+                betList:betList,
                 last:action.data.last,
-                pageNo:action.pageNo
             });
 
         default:

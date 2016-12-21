@@ -46,12 +46,6 @@
 .shop_product_price{
     line-height:30px;
 }
-.xt_money{
-    padding-left: 20px;
-    background:url('/xitenggame/xitengWapApp/src/images/icon_big@2x.png') no-repeat left center;
-    -webkit-background-size:15px;
-    background-size:15px;
-}
 .shop_type_list{
     display: flex;
     flex-direction: row;

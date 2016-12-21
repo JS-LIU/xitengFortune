@@ -16,7 +16,7 @@ import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {betActions} from '../redux/actions/betActions';
 import {dialogActions} from '../redux/actions/dialogActions';
 import {accountActions} from '../redux/actions/accountActions';
-
+import {stockGameDetailActions} from '../redux/actions/stockGameDetailActions'
 
 var Bet = React.createClass({
 
@@ -25,6 +25,7 @@ var Bet = React.createClass({
         this.props.accountActionKeys.getAccount();
         this.props.historyUrlsActionKeys.pushUrl('/Bet');
         this.props.betActionKeys.getOdds();
+        this.props.stockGameDetailActionKeys.getStockDetail(this.props.storage.stockGameId);
 
     },
     bet:function(){
@@ -36,8 +37,8 @@ var Bet = React.createClass({
     render: function () {
         return (
             <div>
-                <div className="center po w">
-                    <img src="/xitenggame/xitengWapApp/src/images/lg_light1@2x.png" alt="" className="bgLight po"/>
+                <div className="bet_body po w">
+                    <img src="src/images/cai3-light-@2x.png" alt="" className="bgLight po"/>
                     <BetHeader
                         storage={this.props.storage}
                         stockGameDetail={this.props.stockGameDetail}
@@ -46,7 +47,7 @@ var Bet = React.createClass({
                         inputMoneyAction={this.props.betActionKeys}
                         account={this.props.account}
                     />
-                    <div className="betBtn po tc f16 w" onClick={this.bet()}>立即投注</div>
+                    <div className="betBtn po tc f16 w" onClick={this.bet()}></div>
                 </div>
 
                 {this.props.showDialog.showDialog?<DialogiOS showDialog={this.props.showDialog}>
@@ -114,7 +115,7 @@ var BetCenter = React.createClass({
                         <p>喜腾币</p>
                     </div>
                 </li>
-                <li className="ml20 mr20 cfff f14">
+                <li className="balance_box cfff ">
                     <span>余额：</span>
                     <span className="xt_money">{this.props.account.xtbTotalAmount}</span>
                     <Link to="/BuyDiamonds" className="fr cfff">获取喜腾币</Link>
@@ -123,7 +124,6 @@ var BetCenter = React.createClass({
         )
     }
 });
-module.exports = BetCenter;
 
 function mapStatetoProps(state){
     return {
@@ -132,7 +132,7 @@ function mapStatetoProps(state){
         showDialog:state.showDialog,
         stockGameDetail:state.stockGameDetail,
         account:state.account,
-        betInfo:state.betInfo
+        betInfo:state.betInfo,
     }
 }
 function mapDispatchToProps(dispatch){
@@ -143,6 +143,7 @@ function mapDispatchToProps(dispatch){
         betActionKeys: bindActionCreators(betActions,dispatch),
         showDialogActionKeys:bindActionCreators(dialogActions,dispatch),
         accountActionKeys : bindActionCreators(accountActions,dispatch),
+        stockGameDetailActionKeys:bindActionCreators(stockGameDetailActions,dispatch),
     }
 }
 

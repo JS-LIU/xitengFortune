@@ -28,7 +28,11 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
             },
-            { test: /\.css$/, loader: 'style-loader!css-loader' }
+            { test: /\.css$/, loader: 'style-loader!css-loader' },
+            {
+                test: /\.(png|jpg)$/,
+                loader: 'url-loader?limit=8192'
+            }
         ]
     },
     devServer:{
@@ -38,7 +42,6 @@ module.exports = {
                 secure: false,
                 bypass: function (req, res, proxyOptions) {
                     if (req.headers.accept.indexOf('html') !== -1) {
-                        console.log('.html');
                         return '/index.html';
                     }
                     if (req.headers.accept.indexOf('css') !== -1) {

@@ -3,14 +3,10 @@
  */
 var React = require('react');
 var Footer = require('../components/Footer');
-var { bindActionCreators } = require('redux');
-var { connect } = require('react-redux');
-import {loginInfoActions} from '../redux/actions/loginInfoActions';
 
 var HomePage = React.createClass({
     componentWillMount:function(){
-        localStorage.clear();
-        // this.props.loginInfoActionKeys.wxLogin();
+
     },
     render: function () {
         return (
@@ -29,18 +25,4 @@ var HomePage = React.createClass({
 });
 
 
-function mapStatetoProps(state){
-    return {
-        loginInfo:state.loginInfo,
-        pay:state.pay
-    };
-}
-
-function mapDispatchToProps(dispatch){
-
-    return{
-        loginInfoActionKeys:bindActionCreators(loginInfoActions,dispatch)
-    }
-}
-
-module.exports = connect(mapStatetoProps,mapDispatchToProps)(HomePage);
+module.exports = HomePage;

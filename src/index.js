@@ -7,6 +7,8 @@ var { Router, Route, hashHistory,IndexRedirect} = require('react-router');
 var Store = require('../src/redux/store/store');
 var {Provider} = require('react-redux');
 
+
+var PreLoading = require('../src/container/PreLoading');
 var HomePage = require('../src/components/HomePage');
 var AskBar = require('../src/components/AskBar');
 
@@ -71,37 +73,40 @@ const history = syncHistoryWithStore(hashHistory, store);
 
 
 var getRoutes = ()=>{
-    return (<Router history={history}>
-        <Route path="/" component={HomePage}>
-            <IndexRedirect to="/Guess"/>
-            <Route path="/Guess" component={Guess}></Route>
-            <Route path="/AskBar" component={AskBar}></Route>
-            <Route path="/Discover" component={Discover}></Route>
-            <Route path="/My" component={My}></Route>
-        </Route>
-        <Route path="/Shop" component={Shop}></Route>
-        <Route path="/ProductDetails" component={ProductDetails}></Route>
-        <Route path="/BuyDiamonds" component={BuyDiamonds}></Route>
-        <Route path="/ShoppingCart" component={ShoppingCart}></Route>
-        <Route path="/Register" component={Register}></Route>
-        <Route path="/CheckCode" component={CheckCode}></Route>
-        <Route path="/Login" component={Login}></Route>
-        <Route path="/StockDetails" component={StockDetails}></Route>
-        <Route path="/Bet" component={Bet}></Route>
-        <Route path="/ExchangeXTCoins" component={ExchangeXTCoins}></Route>
-        <Route path="/Pay" component={Pay}></Route>
-        <Route path="/PaySuccess" component={PaySuccess}></Route>
-        <Route path="/ConfirmOrder" component={ConfirmOrder}></Route>
-        <Route path="/SelectAddress" component={SelectAddress}></Route>
-        <Route path="/CreateAddress" component={CreateAddress}></Route>
-        <Route path="/Provinces" component={Provinces}></Route>
-        <Route path="/Cities" component={Cities}></Route>
-        <Route path="/Areas" component={Areas}></Route>
-        <Route path="/MyAsset" component={MyAsset}></Route>
-        <Route path="/MyRecord" component={MyRecord}></Route>
-        <Route path='/SetPassword' component={SetPassword}></Route>
-        <Route path='/PayFail' component={PayFail}></Route>
-    </Router>
+    return (
+        <Router history={history}>
+            <Route path="/" component={PreLoading}></Route>
+
+            <Route path="/HomePage" component={HomePage}>
+                <IndexRedirect to="/Guess"/>
+                <Route path="/Guess" component={Guess}></Route>
+                <Route path="/AskBar" component={AskBar}></Route>
+                <Route path="/Discover" component={Discover}></Route>
+                <Route path="/My" component={My}></Route>
+            </Route>
+            <Route path="/Shop" component={Shop}></Route>
+            <Route path="/ProductDetails" component={ProductDetails}></Route>
+            <Route path="/BuyDiamonds" component={BuyDiamonds}></Route>
+            <Route path="/ShoppingCart" component={ShoppingCart}></Route>
+            <Route path="/Register" component={Register}></Route>
+            <Route path="/CheckCode" component={CheckCode}></Route>
+            <Route path="/Login" component={Login}></Route>
+            <Route path="/StockDetails" component={StockDetails}></Route>
+            <Route path="/Bet" component={Bet}></Route>
+            <Route path="/ExchangeXTCoins" component={ExchangeXTCoins}></Route>
+            <Route path="/Pay" component={Pay}></Route>
+            <Route path="/PaySuccess" component={PaySuccess}></Route>
+            <Route path="/ConfirmOrder" component={ConfirmOrder}></Route>
+            <Route path="/SelectAddress" component={SelectAddress}></Route>
+            <Route path="/CreateAddress" component={CreateAddress}></Route>
+            <Route path="/Provinces" component={Provinces}></Route>
+            <Route path="/Cities" component={Cities}></Route>
+            <Route path="/Areas" component={Areas}></Route>
+            <Route path="/MyAsset" component={MyAsset}></Route>
+            <Route path="/MyRecord" component={MyRecord}></Route>
+            <Route path='/SetPassword' component={SetPassword}></Route>
+            <Route path='/PayFail' component={PayFail}></Route>
+        </Router>
 )};
 
 _h.ui.setBaseFontSize(750,100);

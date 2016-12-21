@@ -12,6 +12,7 @@ require('../css/stockDetailStyle.css');
 import {storageActions} from '../redux/actions/storageActions'
 import {stockGameDetailActions} from '../redux/actions/stockGameDetailActions'
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
+import {stockGameActions} from '../redux/actions/stockGameActions';
 
 var StockDetails = React.createClass({
     timer:{},
@@ -34,13 +35,19 @@ var StockDetails = React.createClass({
     render: function () {
 
         return (
-            <div>
+            <div className="stock_game_detail_body w h">
                 <StockGameDetail
                     stockGameDetail={this.props.stockGameDetail.detail}
                     getStockKLine={this.props.stockGameDetailActionKeys.getStockKLine}
                     KLineTags={this.props.stockGameDetail.KLineTags}
                 />
-                <UpDownRate stockGameDetail={this.props.stockGameDetail.detail}/>
+                <UpDownRate
+                    stockGameDetail={this.props.stockGameDetail.detail}
+                    stockGameActionKeys={this.props.stockGameActionKeys}
+                    countDown={this.props.stockGame.countDown}
+                    gameTime={this.props.stockGame.gameTime}
+                />
+
                 <StockDetailFooter
                     storageActionKeys={this.props.storageActionKeys}
                 />
@@ -50,41 +57,40 @@ var StockDetails = React.createClass({
 });
 
 var StockGameDetail = React.createClass({
-
     render: function () {
         var stockGameDetail = this.props.stockGameDetail;
         var stockCode = stockGameDetail.stockCode;
         return (
             <div className="pb15" style={stockDetailStyle}>
-                <ul className="pl15 pr15 clearfix">
-                    <li className="w pt10 cred" style={stockGameDetail.stockModel.changeRate>0?cred:cgreen}>
-                        <span className="f16">{stockGameDetail.stockModel.currentPoint}</span>
-                        <span className="f14 pl15">{stockGameDetail.stockModel.changeRate>0?"+":""}{stockGameDetail.stockModel.chg}</span>
-                        <span className="f14 pl15">{stockGameDetail.stockModel.changeRate>0?"+":""}{stockGameDetail.stockModel.changeRate}%</span>
+                <ul className="stock_game_detail_header clearfix">
+                    <li className="w cred" style={stockGameDetail.stockModel.changeRate>0?cred:cgreen}>
+                        <span className="stock_game_detail_index">{stockGameDetail.stockModel.currentPoint}</span>
+                        <span className="stock_game_detail_up_down_index">{stockGameDetail.stockModel.changeRate>0?"+":""}{stockGameDetail.stockModel.chg}</span>
+                        <span className="stock_game_detail_up_down_rate">{stockGameDetail.stockModel.changeRate>0?"+":""}{stockGameDetail.stockModel.changeRate}%</span>
                     </li>
-                    <li className="fl tl" style={stockDetailListStyle}>
-                        <span>昨收</span>
-                        <span className="pl5" style={stockDetailDateStyle}>{this.props.stockGameDetail.stockModel.yesterDayClosed}</span>
+                    <li className="fl tl stock_game_detail_header_detail" style={stockDetailListStyle}>
+                        <span className="stock_game_detail_header_detail_title">昨收</span>
+                        <span className="pl5 cfff">{this.props.stockGameDetail.stockModel.yesterDayClosed}</span>
                     </li>
-                    <li className="fl tl" style={stockDetailListStyle}>
-                        <span>最高</span>
+                    <li className="fl tl stock_game_detail_header_detail" style={stockDetailListStyle}>
+                        <span className="stock_game_detail_header_detail_title">最高</span>
                         <span className="pl5" style={maxStockDateStyle}>{stockGameDetail.stockModel.todayMaxPrice}</span>
                     </li>
-                    <li className="fl tl" style={stockDetailListLongStyle}>
-                        <span>成交量</span>
-                        <span className="pl5" style={stockDetailDateStyle}>{stockGameDetail.stockModel.turnoverStockAmount}</span>
+                    <li className="fl tl stock_game_detail_header_detail_title" style={stockDetailListLongStyle}>
+                        <span className="stock_game_detail_header_detail_title">成交量</span>
+                        <span className="pl5 cfff">{stockGameDetail.stockModel.turnoverStockAmount}</span>
                     </li>
-                    <li className="fl tl" style={stockDetailListStyle}>
-                        <span>今开</span>
-                        <span className="pl5" style={stockDetailDateStyle}>{stockGameDetail.stockModel.todayOpend}</span>
+                    <li className="fl tl stock_game_detail_header_detail_title" style={stockDetailListStyle}>
+                        <span className="stock_game_detail_header_detail_title">今开</span>
+                        <span className="pl5 cfff" style={stockDetailDateStyle}>{stockGameDetail.stockModel.todayOpend}</span>
                     </li>
-                    <li className="fl tl" style={stockDetailListStyle}>
-                        <span>最低</span>
+                    <li className="fl tl stock_game_detail_header_detail_title" style={stockDetailListStyle}>
+                        <span className="stock_game_detail_header_detail_title">最低</span>
                         <span className="pl5" style={minStockDateStyle}>{stockGameDetail.stockModel.todayMinPrice}</span>
                     </li>
-                    <li className="fl tl" style={stockDetailListLongStyle}>
-                        <span>成交额</span>
-                        <span className="pl5" style={stockDetailDateStyle}>{stockGameDetail.stockModel.turnoverStockMoney}</span>
+                    <li className="fl tl stock_game_detail_header_detail_title" style={stockDetailListLongStyle}>
+                        <span className="stock_game_detail_header_detail_title">成交额</span>
+                        <span className="pl5 cfff" style={stockDetailDateStyle}>{stockGameDetail.stockModel.turnoverStockMoney}</span>
                     </li>
                 </ul>
                 <StockPic
@@ -141,39 +147,58 @@ var StockPic = React.createClass({
         });
 
         return (
-            <div className="m15" style={stockDetailPicStyle}>
+            <div className="stock_game_detail_pic_box" style={stockDetailPicStyle}>
                 <ul className="clearfix" style={stockDetailHeader}>
                     {KLineTagNodes}
                 </ul>
-                <img src={src} alt="" className="w"/>
+                <img src={src} alt="" className="w stock_game_detail_pic"/>
             </div>
         )
     }
 });
 
 var UpDownRate = React.createClass({
+    timer:function(){
+        setInterval(()=>{
+            this.props.stockGameActionKeys.countDown(
+                new Date(),
+                this.props.gameTime.startTime,
+                this.props.gameTime.endTime
+            );
+        },1000);
+    },
+    componentWillMount:function(){
+        this.timer();
+    },
+    componentWillUnmount:function(){
+        clearInterval(this.timer);
+    },
     render: function () {
 
         var stockGameDetail = this.props.stockGameDetail;
         return (
-            <ul className="m15 f14 margin_footer">
-                <li className="tc f12">
+            <ul className="stock_game_detail_info_box">
+                <li className="tc stock_game_detail_info">
                     <span>{stockGameDetail.stockGameName}{stockGameDetail.stage}期</span>
-                    <span className="pl15">开奖时间{stockGameDetail.comesTime}</span>
+                    <span className="stock_game_detail_open_time">开奖时间{stockGameDetail.comesTime}</span>
                 </li>
-                <li className="clearfix" style={guessUpDownRateStyle}>
-                    <span className="fl" style={guessUpRateStyle}>看涨：{stockGameDetail.guessUpRate}</span>
-                    <span className="fr" style={guessDownRateStyle}>看跌：{stockGameDetail.guessDownRate}</span>
+                <li className="tc stock_game_detail_end_time">
+                    <span className="stock_game_detail_count_down_icon">截止投注:{this.props.countDown.countDownTime}</span>
                 </li>
-                <li className="clearfix mb50">
-                    <div className="fl tc" style={guessUpXtBAmountStyle}>
-                        <span>合计：</span>
-                        <span className="xt_money">{stockGameDetail.guessUpXtBAmount}</span>
+                <li className="clearfix stock_game_detail_guess_up_down_statistics">
+                    <div className="stock_game_detail_guess_up fl tc">
+                        <div className="stock_game_detail_guess_up_cow">{stockGameDetail.guessUpRate}</div>
+                        <div className="stock_game_detail_guess_up_line">
+                            <span>看涨：</span>
+                            <span className="black_xt_money">{stockGameDetail.guessUpXtBAmount}</span>
+                        </div>
                     </div>
-                    <div className="fl tc fb f20" style={vsStyle}>vs</div>
-                    <div className="fr tc" style={guessDownXtBAmountStyle}>
-                        <span>合计：</span>
-                        <span className="xt_money">{stockGameDetail.guessDownXtBAmount}</span>
+                    <div className="stock_game_detail_guess_down fr tc">
+                        <div className="stock_game_detail_guess_down_bear tr">{stockGameDetail.guessDownRate}</div>
+                        <div className="stock_game_detail_guess_down_line">
+                            <span>看跌：</span>
+                            <span className="black_xt_money">{stockGameDetail.guessDownXtBAmount}</span>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -192,13 +217,13 @@ var StockDetailFooter = React.createClass({
 
         return (
             <ul className="footer-guess w">
-                <li className="guessBtn h tc f16 ">
-                    <Link to="/Bet" onClick={this.setGuessType(0)}>
+                <li className="guessBtn h tc f16">
+                    <Link to="/Bet" onClick={this.setGuessType(0)} className="red">
                         <span className="guessUp cfff">猜涨投注</span>
                     </Link>
                 </li>
-                <li className="guessBtn h tc f16">
-                    <Link to="/Bet" onClick={this.setGuessType(1)}>
+                <li className="guessBtn h tc f16 ">
+                    <Link to="/Bet" onClick={this.setGuessType(1)} className="green">
                         <span className="guessDown cfff">猜跌投注</span>
                     </Link>
                 </li>
@@ -211,7 +236,8 @@ function mapStatetoProps(state){
     return {
         stockGameDetail:state.stockGameDetail,
         storage:state.storage,
-        historyUrls:state.historyUrls
+        historyUrls:state.historyUrls,
+        stockGame:state.stockGame
     };
 }
 
@@ -220,13 +246,15 @@ function mapDispatchToProps(dispatch){
     return{
         stockGameDetailActionKeys:bindActionCreators(stockGameDetailActions,dispatch),
         storageActionKeys:bindActionCreators(storageActions,dispatch),
-        historyUrlsActionKeys:bindActionCreators(historyUrlsActions,dispatch)
+        historyUrlsActionKeys:bindActionCreators(historyUrlsActions,dispatch),
+        stockGameActionKeys : bindActionCreators(stockGameActions,dispatch)
     }
 }
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(StockDetails);
 
 const stockDetailStyle = {
-    background:"#24232B",
+    paddingBottom:"0.42rem",
+    background:"#24232B"
 };
 const cred = {
     color:"#FF4242"

@@ -303,5 +303,40 @@ HB.save = (function(){
     }
 })();
 
+HB.loading = (function(){
+    var picLoad = function(picArr,baseUrl=""){
+        let successCounter = 0;
+        let isSuccess = false;
+        for(let i = 0;i < picArr.length;i++){
+            var url = baseUrl + picArr[i];
+            $.ajax({
+                type:'GET',
+                url:url,
+                async:false
+            }).success(function(){
+                console.log("加在成功")
+                successCounter ++;
+            });
+
+        }
+        if(successCounter == picArr.length){
+            isSuccess = true;
+        }
+        return isSuccess;
+    };
+
+    return {
+        picLoad:picLoad
+    }
+})();
+HB.load = function(arr,func){
+    for(let i = 0;i < arr.length;i++){
+        if(arr[i] == false){
+            alert("未连接到网络 请重新尝试");
+            return false;
+        }
+    }
+    func();
+};
 
 module.exports = HB;

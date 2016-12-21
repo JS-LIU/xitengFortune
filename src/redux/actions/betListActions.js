@@ -21,6 +21,8 @@ export const betListActions = {
                 accessInfo:loginInfo.baseLoginData,
                 pageNo:pageNo,
                 size:size,
+                sortProperties:sortProperties,
+                direction:direction
             };
 
             _h.ajax.resource('/getJustNowWithStockList').save({},postData)
@@ -32,6 +34,4 @@ export const betListActions = {
                 })
         }
     }
-
-
 };

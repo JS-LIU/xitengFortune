@@ -25,28 +25,25 @@ var Guess = React.createClass({
     },
     render: function () {
         const stockGame = this.props.stockGame;
-        console.log(stockGame);
         return (
-            <div>
-                <div>
-                    <StockMarketList
-                        gameList={stockGame.gameList}
-                        gameTime={stockGame.gameTime}
-                        countDown={stockGame.countDown}
-                        stockGameActionKeys={this.props.stockGameActionKeys}
-                        storageActionKeys={this.props.storageActionKeys}
-                    />
-                    <BetList
-                        betListActionKeys={this.props.betListActionKeys}
-                        betList={this.props.betList}
-                    />
-                    <Rank
-                        awardList={this.props.award.awardList}
-                        awardActionKeys={this.props.awardActionKeys}
-                        rank={this.props.rank}
-                        rankActionKeys={this.props.rankActionKeys}
-                    />
-                </div>
+            <div className="common_bg">
+                <StockMarketList
+                    gameList={stockGame.gameList}
+                    gameTime={stockGame.gameTime}
+                    countDown={stockGame.countDown}
+                    stockGameActionKeys={this.props.stockGameActionKeys}
+                    storageActionKeys={this.props.storageActionKeys}
+                />
+                <BetList
+                    betListActionKeys={this.props.betListActionKeys}
+                    betList={this.props.betList}
+                />
+                <Rank
+                    awardList={this.props.award.awardList}
+                    awardActionKeys={this.props.awardActionKeys}
+                    rank={this.props.rank}
+                    rankActionKeys={this.props.rankActionKeys}
+                />
             </div>
         )
     }
@@ -60,7 +57,7 @@ var StockMarketList = React.createClass({
             time = 30000;
         }
 
-        this.timer = setInterval(()=>{
+        setInterval(()=>{
             this.props.gameList.map((stockItem,index)=>{
                 this.props.stockGameActionKeys.refresh(stockItem.stockGameId);
             });
@@ -86,7 +83,7 @@ var StockMarketList = React.createClass({
                     countDown={this.props.countDown}
                     gameList={this.props.gameList}
                 />
-                <ul className="common_bg">
+                <ul className="guess_stock">
                     {stockMarketNodes}
                 </ul>
             </div>
@@ -133,6 +130,11 @@ var GameItem = React.createClass({
             this.props.storageActionKeys.setStockGameId(stockGameId);
         }
     },
+    setGuessType:function(guessType){
+        return ()=>{
+            this.props.storageActionKeys.setGuessType(guessType);
+        }
+    },
     render: function () {
         const gameItem = this.props.gameItem;
         return (
@@ -140,32 +142,43 @@ var GameItem = React.createClass({
                 <div className="tc">
                     <img src={gameItem.picUrl} className="tc stock_game_name_pic"></img>
                 </div>
-
-
-                <p className="pt15 f16 tc cred">
-                    <span className="pr15 f20" style={(gameItem.stockModel.chg>0)?upStyle:downStyle}>{gameItem.stockModel.currentPoint}</span>
-                    <span className="pl10" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.chg}</span>
-                    <span className="pl10" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.changeRate}%</span>
+                <p className="guess_stock_fund tc">
+                    <span className="f20 guess_fund" style={(gameItem.stockModel.chg>0)?upStyle:downStyle}>{gameItem.stockModel.currentPoint}</span>
+                    <span className="guess_fund_details" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.chg}</span>
+                    <span className="guess_fund_details_rate" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.changeRate}%</span>
                 </p>
+
                 <Link to="/StockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
-                    <img src="src/images/btn_go@2x.png" alt="" className="stockMarketPic pt15"/>
+
                     <ul className="clearfix guessUpDown" >
-                        <li className="fl tc f16 cfff">
-                            <p className="f16">
-                                <span className="">猜涨:</span>
-                                <span className="pl5 xt_money">{gameItem.guessUpXtBAmount}</span>
+                        <li className="fl tc ">
+                            <p className="guess_icon_cow guess_bet_money tc">
+                                <span className="guess_total_money">
+                                    <img src="src/images/Home-red-flag@2x.png" alt="" className="guess_money_flag"/>
+                                    <span className="guess_xt_money">{gameItem.guessUpXtBAmount}</span>
+                                </span>
                             </p>
+
                         </li>
-                        <li className="fr tc f16 cfff">
-                            <p className="f16">
-                                <span className="">猜跌:</span>
-                                <span className="pl5 xt_money">{gameItem.guessDownXtBAmount}</span>
+                        <li className="fr tc">
+                            <p className="guess_icon_bear guess_bet_money tc">
+                                <span className="guess_total_money">
+                                    <img src="src/images/Home-green-flag@2x.png" alt="" className="guess_money_flag"/>
+                                    <span className="guess_xt_money">{gameItem.guessDownXtBAmount}</span>
+                                </span>
                             </p>
+
                         </li>
                     </ul>
                 </Link>
+                <div className="guess_btn clearfix" onClick={this.setStockId(gameItem.stockGameId)}>
+                    <Link to="/Bet" className="guess_guess_up_btn fl" onClick={this.setGuessType(0)}/>
+                    <Link to="/Bet" className="guess_guess_down_btn fl" onClick={this.setGuessType(1)}/>
+                </div>
             </li>
         )
+
+
     }
 });
 
@@ -173,31 +186,45 @@ var BetList = React.createClass({
     componentWillMount:function(){
         this.props.betListActionKeys.getBetList();
     },
-
+    timer:function(){
+        let time = 140000;
+        setInterval(()=>{
+            this.props.betListActionKeys.getBetList();
+        },time);
+    },
+    componentDidMount:function(){
+        this.timer();
+    },
+    componentWillUnmount:function(){
+        clearInterval(this.timer);
+    },
     render: function () {
         let betNodes = this.props.betList.betList.map((item,index)=>{
             return (
                 <li className="bet_user clearfix f14" key={index}>
                     <div className="bet_user_header fl">
-                        <img src={item.userIconUrl} alt="" className="w"/>
+                        <img src={item.userIconUrl} alt="" className="w h"/>
                     </div>
-                    <div className="bet_user_name pl10 fl cfff">
+                    <div className="bet_user_name fl cfff">
                         <span>{item.userName}</span>
                     </div>
-                    <div className="fl">
-                        <span>刚刚投注</span>
+                    <div className="fl ">
+                        <span className="bet_time">刚刚</span>
                     </div>
                     <div className="fr">
-                        <span className="bet_user_bet cfff">{item.guessXitbAmount}</span>
+                        <span className="guess_bet_current_money">投注</span>
+                        <span className="guess_xt_money cfff">{item.guessXitbAmount}</span>
                     </div>
                 </li>
             )
         });
 
         return (
-            <ul className="bet_user_box common_bg">
-                {betNodes}
-            </ul>
+            <div className="bet_user_box">
+                <ul className="roll_up">
+                    {betNodes}
+                </ul>
+            </div>
         )
     }
 });
@@ -236,7 +263,7 @@ var Rank = React.createClass({
                     <div className="rank_user_name pl10 fl cfff">
                         <span>{item.userName}</span>
                     </div>
-                    <span className="fr rank_user_bet cfff">
+                    <span className="fr rank_user_bet cfff guess_xt_money">
                         {item.bonusXtbAmount}
                     </span>
                 </li>
@@ -244,19 +271,19 @@ var Rank = React.createClass({
         });
 
         return (
-            <div className="common_bg pk_box">
-                <div className="pk_title cfff pl15 clearfix">
-                    <p className="f20 fl">股神争霸</p>
-                    <ul className="fr clearfix f14 pr10">
+            <div className="pk_box">
+                <div className="cfff clearfix guess_stock_god">
+                    <p className="fl guess_stock_god_title">股神争霸</p>
+                    <ul className="fr clearfix guess_stock_god_classify">
                         {rankTypeNodes}
                     </ul>
                 </div>
+                <ul className="guess_rank_list">
+                    {rankUserNodes}
+                </ul>
                 <div className="pk_pic ml15">
                     <img src={pic_src} alt="" className="prize_pic w"/>
                 </div>
-                <ul className="rank_user_box common_bg pt10">
-                    {rankUserNodes}
-                </ul>
             </div>
         )
     }
@@ -290,13 +317,13 @@ module.exports = connect(mapStatetoProps,mapDispatchToProps)(Guess);
 
 const upStyle={
     color:"#FF4242",
-    background:'url("/xitenggame/xitengWapApp/src/images/icon_arrow_up-@2x.png") no-repeat right center',
-    backgroundSize:"12px",
+    background:'url("../../src/images/icon_arrow_up-@2x.png") no-repeat right 0.15rem',
+    backgroundSize:"0.15rem",
 };
 const downStyle={
     color:"#02C56B",
-    background:'url("/xitenggame/xitengWapApp/src/images/icon_arrow_down@2x.png") no-repeat right center',
-    backgroundSize:"12px",
+    background:'url("../../src/images/icon_arrow_down@2x.png") no-repeat right 0.15rem',
+    backgroundSize:"0.15rem",
 };
 const cred={
     color:"#FF4242"
