@@ -37,7 +37,7 @@ var MyAsset = require('../src/container/MyAsset');
 var MyRecord = require('../src/container/MyRecord');
 var SetPassword = require('../src/container/SetPassword');
 var PayFail = require('../src/container/PayFail');
-
+var OnePiece = require('../src/container/OnePiece');
 
 import {stockGameInit} from  '../src/redux/store/stockGameInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -64,6 +64,9 @@ import {payInit} from '../src/redux/store/payInit';
 import {dialogInit} from '../src/redux/store/dialogInit';
 import {betInfoInit} from '../src/redux/store/betInfoInit';
 import {userInfoInit} from '../src/redux/store/userInfoInit';
+import {activityInit} from '../src/redux/store/activityInit';
+import {purchaseGameInit} from '../src/redux/store/purchaseGameInit';
+
 
 import _h from '../src/Util/HB';
 var {syncHistoryWithStore} = require('react-router-redux');
@@ -106,6 +109,7 @@ var getRoutes = ()=>{
             <Route path="/MyRecord" component={MyRecord}></Route>
             <Route path='/SetPassword' component={SetPassword}></Route>
             <Route path='/PayFail' component={PayFail}></Route>
+            <Route path='/OnePiece' component={OnePiece}></Route>
         </Router>
 )};
 
@@ -138,7 +142,9 @@ function initState(){
         WXInfo:WXInfoInit,
         pay:localStorage.payInit?JSON.parse(localStorage.payInit):payInit,
         betInfo:betInfoInit,
-        userInfo:localStorage.userInfoInit?JSON.parse(localStorage.userInfoInit):userInfoInit
+        userInfo:localStorage.userInfoInit?JSON.parse(localStorage.userInfoInit):userInfoInit,
+        activity:activityInit,
+        purchaseGame:purchaseGameInit
     }
 }
 

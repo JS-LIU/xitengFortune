@@ -14,21 +14,21 @@ import {picUrl} from '../Util/xitengBaseConfig';
 var PreLoading = React.createClass({
 
     componentDidMount:function(){
-        // localStorage.clear();
+        localStorage.clear();
         // this.props.loginInfoActionKeys.wxLogin();
         _h.load([_h.loading.picLoad(picUrl,"src/images")],function(){
             window.location.hash = "#/HomePage";
         });
     },
-    // componentWillReceiveProps:function(){
-    //
-    //     if(this.props.loginInfo.loginData){
-    //         _h.load([_h.loading.picLoad(picUrl,"src/images")],function(){
-    //            window.location.hash = "#/HomePage";
-    //         });
-    //     }
-    //
-    // },
+    componentWillReceiveProps:function(){
+        //
+        // if(this.props.loginInfo.loginData){
+        //     _h.load([_h.loading.picLoad(picUrl,"src/images")],function(){
+        //        window.location.hash = "#/HomePage";
+        //     });
+        // }
+
+    },
     render: function () {
         return (
             <div className="tc">

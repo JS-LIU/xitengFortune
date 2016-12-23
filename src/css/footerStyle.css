@@ -21,5 +21,6 @@
     flex-direction:column;
 }
 .footer_pic{
-    height:25px;
+    height:0.46rem;
+    width:0.46rem;
 }

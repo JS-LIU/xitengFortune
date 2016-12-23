@@ -30,7 +30,7 @@
     padding-left:0.3rem;
 }
 .stock_game_name_pic{
-    width:1.47rem;
+    width:1.72rem;
     padding-top:0.42rem;
 }
 .time_bg{
@@ -220,4 +220,40 @@
 {
     from {top:0}
     to {top: -21.6rem;}
+}
+
+
+.guess_header_carouser_box{
+    height:2.8rem;
+}
+.header_carouser_img_box{
+    top:0;
+    left:0;
+
+}
+
+
+.o_hide{
+    opacity: 0;
+}
+.o_show{
+    opacity:1;
+}
+@keyframes opacityChange
+{
+    from {opacity:0;}
+    to {opacity:1;}
+}
+@-webkit-keyframes opacityChange /* Safari 与 Chrome */
+{
+ from {opacity:0;}
+ to {opacity:1;}
+}
+.opacity_show{
+    animation: opacityChange 1s;
+    -webkit-animation: opacityChange 1s;
+    transition-timing-function: ease-out;
+    -moz-transition-timing-function: ease-out; /* Firefox 4 */
+    -webkit-transition-timing-function: ease-out; /* Safari 和 Chrome */
+    -o-transition-timing-function: ease-out; /* Opera */
 }

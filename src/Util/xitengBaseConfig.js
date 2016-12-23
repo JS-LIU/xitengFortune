@@ -30,13 +30,20 @@ export const stockGameList = {
     name2pic:[
         {
             name:'上证综指',
-            pic:'src/images/home_shangzhengzongzhi@2x.png'
+            pic:'src/images/shangzhengzongzhi@2x.png'
         },
         {
             name:'创业板指',
-            pic:'src/images/home_chuangyebanzhi@2x.png'
+            pic:'src/images/chuangyebanzhi@2x.png'
         }
     ]
+};
+
+export const activityList = {
+    activityCategory:{
+        home:"home",
+        purchaseGame:"purchaseGame"
+    }
 };
 
 
@@ -58,5 +65,13 @@ export const picUrl = [
     "/PK@2x.png",
     "/xt_coins_2.png",
     "/cai3-bg@2x.png",
-    "/cai3-light-@2x.png"
+    "/cai3-light-@2x.png",
+    "/tab_faxian@2x.png",
+    "/tab_faxian_s@2x.png",
+    "/tab_me@2x.png",
+    "/tab_me_s@2x.png",
+    "/tab_xiteng@2x.png",
+    "/tab_xiteng_s@2x.png",
+    "/shangzhengzongzhi@2x.png",
+    "/chuangyebanzhi@2x.png"
 ];

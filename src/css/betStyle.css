@@ -16,7 +16,7 @@
 }
 .betBtn{
     margin:0 auto;
-    bottom:27%;
+    bottom:33%;
     color:#FFF004;
     background:url("../../src/images/bet-imm-btn@2x.png") no-repeat center center;
     -webkit-background-size:3.4rem;
@@ -25,7 +25,7 @@
 }
 .bgLight{
     width:7.5rem;
-    height:13.5rem;
+    height:11.5rem;
 }
 .bet_header{
     display: flex;

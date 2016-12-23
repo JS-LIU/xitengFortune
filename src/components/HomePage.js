@@ -13,9 +13,9 @@ var HomePage = React.createClass({
             <div>
                 {this.props.children}
                 <Footer footerData={[
-                    {name:'猜猜',url:'/Guess',checked:"src/images/caicai_s@2x.png",unchecked:"src/images/caicai_d@2x.png",isChecked:false},
-                    {name:'发现',url:'/Discover',checked:"src/images/faxian_s@2x.png",unchecked:"src/images/faxian_d@2x.png",isChecked:false},
-                    {name:'我',url:'/My',checked:"src/images/me_s@2x.png",unchecked:"src/images/me_d@2x.png",isChecked:false}
+                    {name:'喜腾',url:'/Guess',checked:"src/images/tab_xiteng@2x.png",unchecked:"src/images/tab_xiteng_s@2x.png",isChecked:false},
+                    {name:'发现',url:'/Discover',checked:"src/images/tab_faxian@2x.png",unchecked:"src/images/tab_faxian_s@2x.png",isChecked:false},
+                    {name:'我',url:'/My',checked:"src/images/tab_me@2x.png",unchecked:"src/images/tab_me_s@2x.png",isChecked:false}
                     ]}
                     pathName={this.props.location.pathname}
                 />

@@ -114,7 +114,7 @@ HB.ajax = (function(){
             return new Promise((resolve,reject)=>{
                 $.ajax({
                     type:type,
-                    url:"/xitenggame"+url,
+                    url:"/xitenggamejar"+url,
                     data:data,
                     contentType:'application/json; charset=utf-8',
                     async:bool
@@ -313,11 +313,10 @@ HB.loading = (function(){
                 type:'GET',
                 url:url,
                 async:false
-            }).success(function(){
-                console.log("加在成功")
+            }).done(function(){
+                console.log("加在成功");
                 successCounter ++;
             });
-
         }
         if(successCounter == picArr.length){
             isSuccess = true;

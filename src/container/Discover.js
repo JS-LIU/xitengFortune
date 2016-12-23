@@ -32,11 +32,14 @@ var Discover = React.createClass({
                         name:'购买钻石',
                         url:'/BuyDiamonds',
                         icon:'src/images/fing_icon_diamonds@2x.png'
-                    }]}/>
-                    <EntranceList itemList={[{
+                    },{
                         name:'兑换礼品',
                         url:'/Shop',
                         icon:'src/images/fing_icon_mall@2x.png'
+                    },{
+                        name:'0元夺宝',
+                        url:'/OnePiece',
+                        icon:'src/images/find_icon_o@2x.png'
                     }]}/>
                 </div>
             </div>

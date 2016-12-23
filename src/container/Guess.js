@@ -5,7 +5,9 @@ var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
+// var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
+var $ = require('jquery');
 require("../css/guessStyle.css");
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -14,6 +16,7 @@ import {storageActions} from '../redux/actions/storageActions';
 import {betListActions} from '../redux/actions/betListActions';
 import {awardActions} from '../redux/actions/awardActions';
 import {rankActions} from '../redux/actions/rankActions';
+import {activityActions} from '../redux/actions/activityActions';
 import _h from '../Util/HB';
 
 
@@ -22,11 +25,40 @@ var Guess = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Guess');
         this.props.stockGameActionKeys.getGameList();
+        this.props.activityActionKeys.getActivityList({path:"list"});
+    },
+    timer:function(){
+        if($('.header_carouser_img_box').length > 1){
+            var i = 1;
+            setInterval(function(){
+                $('.header_carouser_img_box').removeClass('opacity_show o_show');
+                $('.header_carouser_img_box').eq(i).addClass('opacity_show o_show');
+                i++;
+                if(i == $('.guess_header_carouser_box').length + 1){
+                    i = 0;
+                }
+            },10000);
+        }
+    },
+    componentDidMount:function(){
+        $('.header_carouser_img_box').eq(0).addClass('o_show');
+        this.timer();
+    },
+    componentWillUnmount:function(){
+        clearInterval(this.timer)
     },
     render: function () {
         const stockGame = this.props.stockGame;
         return (
             <div className="common_bg">
+                <ul className="guess_header_carouser_box pr">
+                    <li className="w po header_carouser_img_box o_hide">
+                        <img src="src/images/banner@2x.png" alt="" className="w h"/>
+                    </li>
+                    <li className="w po header_carouser_img_box o_hide">
+                        <img src="src/images/home-Prize banner@2x (2).png" alt="" className="w h"/>
+                    </li>
+                </ul>
                 <StockMarketList
                     gameList={stockGame.gameList}
                     gameTime={stockGame.gameTime}
@@ -296,7 +328,8 @@ function mapStatetoProps(state){
         storage:state.storage,
         betList:state.betList,
         award:state.award,
-        rank:state.rank
+        rank:state.rank,
+        activity:state.activity
     };
 }
 
@@ -308,7 +341,8 @@ function mapDispatchToProps(dispatch){
         storageActionKeys:bindActionCreators(storageActions,dispatch),
         betListActionKeys:bindActionCreators(betListActions,dispatch),
         awardActionKeys:bindActionCreators(awardActions,dispatch),
-        rankActionKeys:bindActionCreators(rankActions,dispatch)
+        rankActionKeys:bindActionCreators(rankActions,dispatch),
+        activityActionKeys:bindActionCreators(activityActions,dispatch)
 
     }
 }
@@ -317,12 +351,12 @@ module.exports = connect(mapStatetoProps,mapDispatchToProps)(Guess);
 
 const upStyle={
     color:"#FF4242",
-    background:'url("../../src/images/icon_arrow_up-@2x.png") no-repeat right 0.15rem',
+    background:'url("src/images/icon_arrow_up-@2x.png") no-repeat right 0.15rem',
     backgroundSize:"0.15rem",
 };
 const downStyle={
     color:"#02C56B",
-    background:'url("../../src/images/icon_arrow_down@2x.png") no-repeat right 0.15rem',
+    background:'url("src/images/icon_arrow_down@2x.png") no-repeat right 0.15rem',
     backgroundSize:"0.15rem",
 };
 const cred={

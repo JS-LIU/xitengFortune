@@ -32,9 +32,7 @@ var My = React.createClass({
                             </div>
                             <div className="my_info">
                                 <p className="f14 cblue">{this.props.userInfo.cnName}</p>
-                                <p className="f14">
-                                    <span>喜腾号：{this.props.userInfo.xtNumber}</span>
-                                </p>
+                                <p className="f14">喜腾号：{this.props.userInfo.xtNumber}</p>
                             </div>
                         </div>
                     </div>

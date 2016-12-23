@@ -38,7 +38,7 @@ module.exports = {
     devServer:{
         proxy: {
             '**': {
-                target: 'https://www.xiteng.com/',
+                target: 'http://114.251.53.22/',
                 secure: false,
                 bypass: function (req, res, proxyOptions) {
                     if (req.headers.accept.indexOf('html') !== -1) {

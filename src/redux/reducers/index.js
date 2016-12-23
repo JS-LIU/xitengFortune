@@ -28,12 +28,16 @@ import {betRecord} from './betRecord';
 import {WXInfo} from './WXInfo';
 import {pay} from './pay';
 import {betInfo} from './betInfo';
-import {userInfo} from './userInfo'
+import {userInfo} from './userInfo';
+import {activity} from './activity';
+import {purchaseGame} from './purchaseGame';
+
 
 var rootReducer = combineReducers({
     account,
     address,
     areas,
+    activity,
     award,
     betInfo,
     betList,
@@ -46,6 +50,7 @@ var rootReducer = combineReducers({
     pay,
     productInfo,
     provinces,
+    purchaseGame,
     rank,
     routing,
     shop,
@@ -56,7 +61,7 @@ var rootReducer = combineReducers({
     stockGameDetail,
     userInfo,
     XTCoins,
-    WXInfo
+    WXInfo,
 });
 
 module.exports = rootReducer;

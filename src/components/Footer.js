@@ -40,7 +40,7 @@ var Footer = React.createClass({
                 <Link to={footerItem.url} className="fl footer_item tc" key={index} onClick={this.cutTag(index)}>
                     <div className="footer_pic_box">
                         <img src={footerItem.isChecked?footerItem.checked:footerItem.unchecked} alt="" className="footer_pic"/>
-                        <span style={footerItem.isChecked?{color:"#0A89FE"}:{}}>{footerItem.name}</span>
+                        <span style={footerItem.isChecked?{color:"#4964ef"}:{color:"#a4a3a3"}}>{footerItem.name}</span>
                     </div>
                 </Link>
             )

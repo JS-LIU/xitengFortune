@@ -9,7 +9,6 @@ export const provinces = function(state = {},action){
 
     switch (action.type) {
         case 'GET_PROVINCES':
-            console.log(action.data.areas);
             return Object.assign({},state,{
                 list:action.data.areas
             });

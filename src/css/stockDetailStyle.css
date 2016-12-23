@@ -9,7 +9,11 @@
     flex-grow:1;
     line-height:0.9rem;
     color:#FFF;
-    padding:0.2rem 0.25rem;
+    margin:0.2rem 0.25rem;
+    -webkit-border-radius:0.8rem;
+    -moz-border-radius:0.8rem;
+    border-radius:0.8rem;
+    overflow: hidden;
 }
 .red{
     background:#FF4243;
@@ -21,15 +25,13 @@
     color:#FFF;
 }
 .stock_game_detail_body{
-    position: fixed;
     background:#F5F5F5;
-
 }
 .stock_game_detail_guess_up_down_statistics{
     margin-top:0.28rem;
 }
 .stock_game_detail_header{
-    padding:0.5rem 0.25rem 0;
+    padding:0.1rem 0.25rem 0;
 }
 .stock_game_detail_index{
     font-size: 0.42rem;
@@ -59,6 +61,7 @@
 .stock_game_detail_info_box{
     padding:0.36rem 0 0.38rem;
     background:#FFF;
+    margin-bottom:1.62rem;
 }
 .stock_game_detail_info{
     font-size:0.24rem;
