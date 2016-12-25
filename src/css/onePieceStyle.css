@@ -55,7 +55,7 @@
 
 
 
-@keyframes rollUp_spe
+@keyframes rollUp_first
 {
     from {
         transform: translate(0rem,0rem);
@@ -82,17 +82,18 @@
         -webkit-transform: translate(0rem,-0.88rem);
     }
 }
-@-webkit-keyframes rollUp_first /* Safari 与 Chrome */
+
+@keyframes rollUp_sec /* Safari 与 Chrome */
 {
     from {
-        transform: translate(0rem,0rem);
-        -ms-transform: translate(0rem,0rem);
-        -webkit-transform: translate(0rem,0rem);
-    }
-    to {
         transform: translate(0rem,-0.88rem);
         -ms-transform: translate(0rem,-0.88rem);
         -webkit-transform: translate(0rem,-0.88rem);
+    }
+    to {
+        transform: translate(0rem,-1.76rem);
+        -ms-transform: translate(0rem,-1.76rem);
+        -webkit-transform: translate(0rem,-1.76rem);
     }
 }
 @-webkit-keyframes rollUp_sec /* Safari 与 Chrome */
@@ -103,21 +104,28 @@
         -webkit-transform: translate(0rem,-0.88rem);
     }
     to {
-        transform: translate(0.88rem,-1.76rem);
-        -ms-transform: translate(0.88rem,-1.76rem);
-        -webkit-transform: translate(0.88rem,-1.76rem);
+        transform: translate(0rem,-1.76rem);
+        -ms-transform: translate(0rem,-1.76rem);
+        -webkit-transform: translate(0rem,-1.76rem);
     }
 }
-@-webkit-keyframes rollUp_sec /* Safari 与 Chrome */
+.rollUp_first
 {
-    from {
-        transform: translate(0rem,-0.88rem);
-        -ms-transform: translate(0rem,-0.88rem);
-        -webkit-transform: translate(0rem,-0.88rem);
-    }
-    to {
-        transform: translate(0.88rem,-1.76rem);
-        -ms-transform: translate(0.88rem,-1.76rem);
-        -webkit-transform: translate(0.88rem,-1.76rem);
-    }
+    animation: rollUp_first 1s;
+    -webkit-animation: rollUp_first 1s; /* Safari 与 Chrome */
+}
+.rollUp_sec
+{
+    animation: rollUp_sec 1s;
+    -webkit-animation: rollUp_sec 1s; /* Safari 与 Chrome */
+}
+.rollUp_first_over{
+    transform: translate(0rem,-0.88rem);
+    -ms-transform: translate(0rem,-0.88rem);
+    -webkit-transform: translate(0rem,-0.88rem);
+}
+.rollUp_sec_over{
+    transform: translate(0rem,-1.76rem);
+    -ms-transform: translate(0rem,-1.76rem);
+    -webkit-transform: translate(0rem,-1.76rem);
 }

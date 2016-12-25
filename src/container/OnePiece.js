@@ -53,14 +53,42 @@ var OnePieceHeader = React.createClass({
         this.props.purchaseGameActionKeys.getNewestWinList({win:"newestWin"});
     },
     timer:function(){
+        var beginIndex = 0;
+        let endIndex = this.props.purchaseGame.newestWin.length;
         setInterval(function(){
-
-        },100);
+            // let nextIndex = beginIndex + 1;
+            // if(beginIndex == 0 && nextIndex < endIndex){
+            //
+            //     $('.purchase_broadcast_icon').eq(beginIndex).addClass('rollUp_first');
+            //     $('.purchase_broadcast_icon').eq(nextIndex).addClass('rollUp_first');
+            //     setTimeout(function(){
+            //         $('.purchase_broadcast_icon').eq(beginIndex).addClass('rollUp_first_over');
+            //         $('.purchase_broadcast_icon').eq(nextIndex).addClass('rollUp_first_over');
+            //         beginIndex = nextIndex;
+            //     },990)
+            //
+            // }else if(beginIndex != 0 && nextIndex < endIndex){
+            //     $('.purchase_broadcast_icon').eq(beginIndex).addClass('rollUp_sec');
+            //     $('.purchase_broadcast_icon').eq(nextIndex).addClass('rollUp_first');
+            //     setTimeout(function(){
+            //         $('.purchase_broadcast_icon').eq(beginIndex).addClass('rollUp_sec_over');
+            //         $('.purchase_broadcast_icon').eq(nextIndex).addClass('rollUp_first_over');
+            //         beginIndex = nextIndex;
+            //     },990)
+            // }else if(nextIndex == endIndex){
+            //     beginIndex = 0;
+            //     $('.purchase_broadcast_icon').removeClass("rollUp_first rollUp_first_over rollUp_sec rollUp_sec_over")
+            // }
+            setTimeout(function(){
+                $('.purchase_broadcast_icon').eq(0).css(red);
+            })
+        },2000);
     },
-    componentDidMount:function(){
-        // $('.purchase_broadcast_icon').addClass('roll_ready');
-
-    },
+    // componentDidMount:function(){
+    //     // $('.purchase_broadcast_icon').addClass('roll_ready');
+    //     this.timer();
+    //     console.log(this.props.purchaseGame.newestWin);
+    // },
     render: function () {
         let h = 0.88;
         let winNodes = this.props.purchaseGame.newestWin.map((item,index)=>{
@@ -94,7 +122,7 @@ var OnePieceHeader = React.createClass({
                         </Link>
                     </li>
                 </ul>
-                <div className="purchase_broadcast " >
+                <div className="purchase_broadcast" onClick={this.timer()}>
                     {winNodes}
                 </div>
             </div>
@@ -122,3 +150,9 @@ function mapDispatchToProps(dispatch){
 }
 
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(OnePiece);
+const red = {
+    background:"#be122a"
+};
+const green = {
+    background:"#00ff0f"
+};
