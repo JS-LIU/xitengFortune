@@ -43,15 +43,6 @@ var Shop = React.createClass({
 
         return (
             <div className="f5f5f5">
-                {/*<Header*/}
-                    {/*historyUrls={this.props.historyUrls}*/}
-                    {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}>*/}
-                    {/*<BackBtn*/}
-                        {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
-                        {/*back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}*/}
-                    {/*/>*/}
-                    {/*<Title title={{text:'礼品商城'}}></Title>*/}
-                {/*</Header>*/}
                 <p className="shop_xtbTotalAmount pl15 f14 f5f5f">
                     <span>可兑换礼品金额：</span>
                     <span className="xt_money">{this.props.account.xtbTotalAmount||0}</span>

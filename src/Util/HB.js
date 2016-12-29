@@ -214,7 +214,7 @@ HB.valid = (function(){
 HB.ui = (function(){
 
     var scrollToTheBottom = function(func){
-        $(window).scroll(function(){
+        $(window).bind("scroll",function(){
             var $_scrollTop = $(this).scrollTop();
             var $_scrollHeight = $(document).height();
             var $_windowHeight = $(this).height();

@@ -31,7 +31,7 @@ import {betInfo} from './betInfo';
 import {userInfo} from './userInfo';
 import {activity} from './activity';
 import {purchaseGame} from './purchaseGame';
-
+import {bidOrder} from './bidOrder';
 
 var rootReducer = combineReducers({
     account,
@@ -42,6 +42,7 @@ var rootReducer = combineReducers({
     betInfo,
     betList,
     betRecord,
+    bidOrder,
     cities,
     diamonds,
     historyUrls,

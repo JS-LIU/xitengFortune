@@ -9,6 +9,7 @@ import {
     GET_STOCKGAMEID,
     SET_GUESSTYPE,
     GET_GUESSTYPE,
+    SET_PURCHASEGAMEID
 } from './storageActionKeys';
 
 export const storageActions = {
@@ -51,6 +52,13 @@ export const storageActions = {
         return {
             type : GET_GUESSTYPE,
         }
+    },
+    setPurchaseGameId: (id)=>{
+        return {
+            type:SET_PURCHASEGAMEID,
+            id
+        }
     }
+
 
 };

@@ -77,7 +77,10 @@ export const loginInfoActions = {
                 let hash = window.location.hash;
                 let fullUrl = url + "/xitengWapApp/index.html"+hash;
                 let encodeUrl = encodeURIComponent(fullUrl);
-
+                let nowState = getState();
+                _h.save.setStorage({
+                    storageInit:nowState.storage
+                });
                 window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appId+"&redirect_uri="+encodeUrl+"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
             }
         }

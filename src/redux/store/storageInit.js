@@ -6,6 +6,7 @@ export const storageInit = {
     productId:'',
     stockGameId:'',
     guessType:'',
+    purchaseGameId:"",
     tradeInfo:{
     },
     productInfo:{

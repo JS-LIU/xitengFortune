@@ -45,7 +45,13 @@ export const activityList = {
         purchaseGame:"purchaseGame"
     }
 };
-
+export const purchaseGameConfig = {
+    purchaseGameStatus:[
+        {key:"bidding",id:1,text:"正在夺宝"},
+        {key:"finish_bid",id:2,text:"夺宝结束"},
+        {key:"have_lottery",id:3,text:"已经开奖"}
+    ]
+};
 
 export const picUrl = [
     "/Home-green-flag@2x.png",

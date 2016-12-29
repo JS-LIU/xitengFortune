@@ -11,6 +11,7 @@ import {
     SET_GUESSTYPE,
     GET_GUESSTYPE,
     SET_TRADEORDER,
+    SET_PURCHASEGAMEID
 } from '../actions/storageActionKeys'
 
 export const storage = function(state = {},action){
@@ -57,6 +58,10 @@ export const storage = function(state = {},action){
         case 'SET_AREA':
             return Object.assign({},state,{
                 areaInfo:action.item
+            });
+        case 'SET_PURCHASEGAMEID':
+            return Object.assign({},state,{
+                purchaseGameId:action.id
             });
         default:
             return state

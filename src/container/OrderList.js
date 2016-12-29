@@ -1,0 +1,82 @@
+/**
+ * Created by LDQ on 2016/12/29.
+ */
+var React = require('react');
+var { bindActionCreators } = require('redux');
+var { connect } = require('react-redux');
+var {Link} = require('react-router');
+var $ = require('jquery');
+var _h = require('../Util/HB');
+
+require('../css/orderListStyle.css');
+
+import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
+import {bidOrderActions} from '../redux/actions/bidOrderActions';
+
+var OrderList = React.createClass({
+    componentWillMount:function(){
+        this.props.historyUrlsActionKeys.pushUrl('/OrderList');
+        let bidOrderStatus = _h.url.getHashKey('bidOrderStatus')||"";
+        this.props.bidOrderActionKeys.getOrderList({list:"list"},bidOrderStatus,0);
+    },
+    render: function () {
+        let orderNodes = this.props.bidOrder.list.list.map((item,index)=>{
+            let bidRecordNodes = item.bidRecords.map((code,i)=>{
+                return (
+                    <span className="bidRecordNodes" key={i}>
+                        {code.purchaseCode}
+                    </span>
+                )
+            });
+            return (
+                <li key={index} className="order_item">
+                    <div className="order_item_top">
+                        <div className="order_item_pic">
+                            <img src={item.picUrl} alt="" className="w h"/>
+                        </div>
+                        <ul className="order_item_detal">
+                            <li className="order_item_productName">
+                                {item.productName}
+                            </li>
+                            <li>期数：{item.stage}</li>
+                            <li>参与分数：{item.purchaseGameCount}</li>
+                            <li className="clearfix">
+                                <span className="order_item_code fl">夺宝号码：{bidRecordNodes}</span>
+                                {item.bidRecords.length > 2?(<span className="fr">查看全部</span>):""}
+                            </li>
+                        </ul>
+                    </div>
+                    <p className="order_item_bottom tr">
+                        {item.bidOrderStatus == "win"?(<span>去领奖</span>):""}
+                        {item.bidOrderStatus == "waiting"?(<span>等待揭晓</span>):""}
+                        {item.bidOrderStatus == "finish"?(<span>待晒单</span>):""}
+                    </p>
+                </li>
+            )
+        });
+        return (
+            <div>
+                <div className="f5f5f5 w h" style={{position:"fixed"}}></div>
+                <ul className="pr">
+                    {orderNodes}
+                </ul>
+            </div>
+        )
+    }
+});
+
+
+function mapStatetoProps(state){
+    return {
+        historyUrls:state.historyUrls,
+        bidOrder:state.bidOrder,
+    }
+}
+function mapDispatchToProps(dispatch){
+    return{
+        historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
+        bidOrderActionKeys:bindActionCreators(bidOrderActions,dispatch),
+    }
+}
+
+module.exports = connect(mapStatetoProps,mapDispatchToProps)(OrderList);

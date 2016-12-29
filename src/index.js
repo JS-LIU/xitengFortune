@@ -38,6 +38,16 @@ var MyRecord = require('../src/container/MyRecord');
 var SetPassword = require('../src/container/SetPassword');
 var PayFail = require('../src/container/PayFail');
 var OnePiece = require('../src/container/OnePiece');
+var OnePieceProductDetails = require('../src/container/OnePieceProductDetails');
+var OnePieceJoinDetail = require('../src/container/OnePieceJoinDetail');
+var OnePieceOldActivities = require('../src/container/OnePieceOldActivities');
+var OnePieceShow = require('../src/container/OnePieceShow');
+var OnePieceBuyNow = require('../src/container/OnePieceBuyNow');
+var OnePieceConfirmOrder = require('../src/container/OnePieceConfirmOrder');
+var OnePieceJoinResult = require('../src/container/OnePieceJoinResult');
+var OnePieceOldActivitiesHome = require('../src/container/OnePieceOldActivitiesHome');
+var OrderDetails = require('../src/container/OrderDetails');
+var OrderList = require('../src/container/OrderList');
 
 import {stockGameInit} from  '../src/redux/store/stockGameInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -66,7 +76,7 @@ import {betInfoInit} from '../src/redux/store/betInfoInit';
 import {userInfoInit} from '../src/redux/store/userInfoInit';
 import {activityInit} from '../src/redux/store/activityInit';
 import {purchaseGameInit} from '../src/redux/store/purchaseGameInit';
-
+import {bidOrderInit} from '../src/redux/store/bidOrderInit';
 
 import _h from '../src/Util/HB';
 var {syncHistoryWithStore} = require('react-router-redux');
@@ -110,6 +120,16 @@ var getRoutes = ()=>{
             <Route path='/SetPassword' component={SetPassword}></Route>
             <Route path='/PayFail' component={PayFail}></Route>
             <Route path='/OnePiece' component={OnePiece}></Route>
+            <Route path='/OnePieceProductDetails' component={OnePieceProductDetails}></Route>
+            <Route path='/OnePieceJoinDetail' component={OnePieceJoinDetail}></Route>
+            <Route path='/OnePieceOldActivities' component={OnePieceOldActivities}></Route>
+            <Route path='/OnePieceShow' component={OnePieceShow}></Route>
+            <Route path='/OnePieceBuyNow' component={OnePieceBuyNow}></Route>
+            <Route path='/OnePieceConfirmOrder' component={OnePieceConfirmOrder}></Route>
+            <Route path='/OnePieceJoinResult' component={OnePieceJoinResult}></Route>
+            <Route path='/OnePieceOldActivitiesHome' component={OnePieceOldActivitiesHome}></Route>
+            <Route path='/OrderDetails' component={OrderDetails}></Route>
+            <Route path='/OrderList' component={OrderList}></Route>
         </Router>
 )};
 
@@ -144,7 +164,8 @@ function initState(){
         betInfo:betInfoInit,
         userInfo:localStorage.userInfoInit?JSON.parse(localStorage.userInfoInit):userInfoInit,
         activity:activityInit,
-        purchaseGame:purchaseGameInit
+        purchaseGame:purchaseGameInit,
+        bidOrder:bidOrderInit
     }
 }
 
