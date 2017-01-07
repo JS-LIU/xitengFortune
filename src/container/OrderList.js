@@ -34,20 +34,27 @@ var OrderList = React.createClass({
                         <div className="order_item_pic">
                             <img src={item.picUrl} alt="" className="w h"/>
                         </div>
-                        <ul className="order_item_detal">
+                        <ul className="order_item_detal pr" style={item.bidOrderStatus == "win"?winLogo:{}}>
                             <li className="order_item_productName">
                                 {item.productName}
                             </li>
-                            <li>期数：{item.stage}</li>
-                            <li>参与分数：{item.purchaseGameCount}</li>
+                            <li className="clearfix">
+                                <span className="fl">期数：</span>
+                                <span className="fl">{item.stage}</span>
+                            </li>
+                            <li className="clearfix">
+                                <span className="fl">参与分数：</span>
+                                <span className="fl">{item.purchaseGameCount}</span>
+                            </li>
                             <li className="clearfix">
                                 <span className="order_item_code fl">夺宝号码：{bidRecordNodes}</span>
                                 {item.bidRecords.length > 2?(<span className="fr">查看全部</span>):""}
                             </li>
+
                         </ul>
                     </div>
                     <p className="order_item_bottom tr">
-                        {item.bidOrderStatus == "win"?(<span>去领奖</span>):""}
+                        {item.bidOrderStatus == "win"?(<Link to="/AcceptPrize">去领奖</Link>):""}
                         {item.bidOrderStatus == "waiting"?(<span>等待揭晓</span>):""}
                         {item.bidOrderStatus == "finish"?(<span>待晒单</span>):""}
                     </p>
@@ -80,3 +87,7 @@ function mapDispatchToProps(dispatch){
 }
 
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(OrderList);
+const winLogo = {
+    background:'url("src/images/fortune.png") no-repeat right center',
+    backgroundSize:"0.8rem"
+};

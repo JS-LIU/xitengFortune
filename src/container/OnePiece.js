@@ -9,7 +9,6 @@ var $ = require('jquery');
 var { Header,BackBtn,Title } = require('../components/Header');
 var _h = require('../Util/HB');
 
-import ReactSwipe from 'react-swipe';
 
 require('../css/onePieceStyle.css');
 
@@ -205,7 +204,7 @@ var OnePieceProducts = React.createClass({
         let productNodes = this.props.purchaseGame.products.productList.map((item,index)=>{
             return (
                 <li className="onePiece_product_item" key={index}>
-                    <Link to="/OnePieceProductDetails" className="onePiece_product_item_pic_box w">
+                    <Link to="/OnePieceProductDetails" className="onePiece_product_item_pic_box w" onClick={this.setPurchaseGameId(item)}>
                         <img src={item.pictures[0].picUrl} alt={item.productName} className="h onePiece_product_item_pic"/>
                     </Link>
                     <p className="onePiece_product_name">{item.productName}</p>

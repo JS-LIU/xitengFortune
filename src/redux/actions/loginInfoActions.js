@@ -93,7 +93,7 @@ export const loginInfoActions = {
             let postMD5Data = {
                 accessInfo:loginInfo.postMD5Data(trimPhoneNum)
             };
-            _h.ajax.resource('/userMD5').save({},postMD5Data)
+            _h.ajax.resource('/userMD5').save({},postMD5Data,false)
                 .then((uuid)=>{
 
                     let md5 = hex_md5(trimPhoneNum + password + uuid.userMD5).toUpperCase();
@@ -103,7 +103,7 @@ export const loginInfoActions = {
                         accessInfo:loginInfo.phoneNumLogin(trimPhoneNum,md5)
                     };
 
-                    return _h.ajax.resource('/login').save({},postLoginData)
+                    return _h.ajax.resource('/login').save({},postLoginData,false)
                 })
                 .then((loginInfo)=>{
 

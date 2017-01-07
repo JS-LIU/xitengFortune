@@ -48,6 +48,8 @@ var OnePieceJoinResult = require('../src/container/OnePieceJoinResult');
 var OnePieceOldActivitiesHome = require('../src/container/OnePieceOldActivitiesHome');
 var OrderDetails = require('../src/container/OrderDetails');
 var OrderList = require('../src/container/OrderList');
+var AcceptPrize = require('../src/container/AcceptPrize');
+
 
 import {stockGameInit} from  '../src/redux/store/stockGameInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -130,6 +132,7 @@ var getRoutes = ()=>{
             <Route path='/OnePieceOldActivitiesHome' component={OnePieceOldActivitiesHome}></Route>
             <Route path='/OrderDetails' component={OrderDetails}></Route>
             <Route path='/OrderList' component={OrderList}></Route>
+            <Route path='/AcceptPrize' component={AcceptPrize}></Route>
         </Router>
 )};
 

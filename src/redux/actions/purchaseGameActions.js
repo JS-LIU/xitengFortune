@@ -88,7 +88,7 @@ export var purchaseGameActions = {
                 accessInfo:loginInfo.loginData,
                 purchaseGameId:purchaseGameId
             };
-            _h.ajax.resource('/purchaseGame/:bidDetail').save(path,postData)
+            _h.ajax.resource('/purchaseGame/:bidDetail').save(path,postData,false)
                 .then((data)=>{
                     dispatch({type:'GET_BID_DETAIL', data})
                 })

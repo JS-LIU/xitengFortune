@@ -37,7 +37,9 @@ var OnePieceProductDetails = React.createClass({
             {detail:"detail"},
             purchaseGameId
         );
-        // this.props.purchaseGameActionKeys.getBidDetail({bidDetail:"bidDetail"},purchaseGameId);
+        setTimeout(()=>{
+            this.props.purchaseGameActionKeys.getBidDetail({bidDetail:"bidDetail"},purchaseGameId);
+        },100);
     },
     render: function () {
         let window_w = document.body.clientWidth;
@@ -52,9 +54,9 @@ var OnePieceProductDetails = React.createClass({
                 </li>
             )
         });
-        let bidRecordNodes = this.props.purchaseGame.bidDetail.bidRecords.map((item,index)=>{
+        let bidRecordNodes = this.props.purchaseGame.bidDetail.bidRecords.map((bidRecord,i)=>{
             return (
-                <span key={index}>{item.bidRecordId}</span>
+                <span key={i} className="onePiece_detail_bidDetail_record_item">{bidRecord.bidRecordId}</span>
             )
         });
         return (
@@ -95,7 +97,8 @@ var OnePieceProductDetails = React.createClass({
                                 <span>您还没有参与本期夺宝，</span>
                                 <span className="onePiece_detail_purchaseGame_isJoin_btn">立即参与!</span></p>
 
-                            )}
+                            )
+                        }
                         {this.props.purchaseGame.bidDetail.purchaseGameStatus == "have_lottery"?(
                                 <div>
                                     <div>
@@ -122,18 +125,27 @@ var OnePieceProductDetails = React.createClass({
                         }
                         {this.props.purchaseGame.bidDetail.bidRecords.length == 0?"":(
                             <div className="onePiece_detail_bidDetail_time_box">
-                                <div className="">
-                                    <span>期数：{this.props.purchaseGame.bidDetail.stage}</span>
-                                    <span>揭晓倒计时：{this.props.purchaseGame.bidDetail.bidRecords[0].createTime}</span>
+                                <div className="onePiece_detail_bidDetail_pruchaseGame_info">
+                                    <div className="onePiece_detail_bidDetail_pruchaseGame_info_left">
+                                        <span>期数：{this.props.purchaseGame.bidDetail.stage}</span>
+                                        <span>揭晓倒计时：{this.props.purchaseGame.bidDetail.bidRecords[0].createTime}</span>
+                                    </div>
                                 </div>
-                                <div>
+                                <div className="onePiece_detail_bidDetail_join_info">
                                     <p>
-                                        <span>您参与了：{this.props.purchaseGame.bidDetail.bidRecords}</span>
-                                        <span>夺宝号码：{bidRecordNodes}</span>
+                                        <span>您参与了：</span>
+                                        <span className="onePiece_detail_bidDetail_join_info_red">{this.props.purchaseGame.bidDetail.bidRecords.length}</span>
+                                        <span>份</span>
                                     </p>
+                                    <div className="onePiece_detail_bidDetail_records">
+                                        <p className="onePiece_detail_bidDetail_records_info">
+                                            <span>夺宝号码：</span>{bidRecordNodes}
+                                        </p>
+                                        <span>查看全部</span>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            </div>)
+                        }
                     </li>
                 </ul>
                 <ul className="onePiece_detail_other_function">
@@ -160,7 +172,8 @@ function mapStatetoProps(state){
     return {
         historyUrls:state.historyUrls,
         purchaseGame:state.purchaseGame,
-        storage:state.storage
+        storage:state.storage,
+        loginInfo:state.loginInfo
     }
 }
 function mapDispatchToProps(dispatch){

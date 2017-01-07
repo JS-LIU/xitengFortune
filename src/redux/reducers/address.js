@@ -32,7 +32,6 @@ function hasDefaultAddress(defaultAddress){
     }
 }
 function getCurrentAddress(currentAddress,defaultAddress){
-    console.log(defaultAddress);
     if(hasCurrentAddress(currentAddress)){
         return currentAddress;
     }else if(hasDefaultAddress(defaultAddress)){
@@ -77,7 +76,6 @@ function getTitle(item){
     return title;
 }
 function setNewAddress(item){
-    console.log(item);
     let title = getTitle(item);
     return Object.assign({},item,{
         title:title
@@ -99,7 +97,6 @@ export const address = function(state = {},action){
             var copyState = Object.assign({},state,{
                 listAddress:action.data.content
             });
-            console.log('copyState---',copyState);
             return Object.assign({},state,{
                 listAddress:getListAddress(copyState)
             });

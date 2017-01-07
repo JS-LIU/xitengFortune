@@ -86,7 +86,6 @@
     color:#F23030;
 }
 .onePiece_detail_purchaseGame_isJoin{
-    height:1.04rem;
     border-top:1px solid #E2E2E2;
     font-size:0.24rem;
 }
@@ -98,7 +97,45 @@
     color:#F23030;
 }
 .onePiece_detail_bidDetail_time_box{
-
+}
+.onePiece_detail_bidDetail_pruchaseGame_info{
+    padding:0.2rem 0;
+    border-bottom:1px solid #E2E2E2;
+}
+.onePiece_detail_bidDetail_pruchaseGame_info_left{
+    display: flex;
+    flex-direction: column;
+    padding:0 0.3rem;
+    background:#F23030;
+    color:#FFF;
+    line-height:0.5rem;
+    font-size: 0.24rem;
+}
+.onePiece_detail_bidDetail_join_info_red{
+    color:#F23030;
+}
+.onePiece_detail_bidDetail_records{
+    height:0.5rem;
+    line-height: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.onePiece_detail_bidDetail_record_item{
+    padding:0 0.2rem;
+}
+.onePiece_detail_bidDetail_records_info{
+    height:0.5rem;
+    line-height: 0.5rem;
+    overflow: hidden;
+    width: 80%;
+    display:block;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+.onePiece_detail_bidDetail_join_info{
+    font-size:0.24rem;
 }
 .onePiece_detail_other_function{
     margin:0.2rem 0 1rem;
