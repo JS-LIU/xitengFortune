@@ -47,4 +47,29 @@ export const bidOrderActions = {
                 })
         }
     },
+    acceptPrize:(path,bidOrderId)=>{
+        return (dispatch,getState)=>{
+            let loginInfo = getState().loginInfo;
+            let address = getState().address;
+
+            let postData = {
+                accessInfo:loginInfo.loginData,
+                bidOrderId:bidOrderId,
+                deliveryAddressId:address.currentAddress.id||"",
+                recievName:address.currentAddress.recievName||address.newAddressInfo.recievName,
+                phoneNum:address.currentAddress.phoneNum||address.newAddressInfo.phoneNum,
+                districtAddress:address.currentAddress.districtAddress||address.newAddressInfo.districtAddress,
+                detailAddress:address.currentAddress.detailAddress||address.newAddressInfo.detailAddress,
+                fullAddress:address.currentAddress.fullAddress||address.newAddressInfo.districtAddress + address.newAddressInfo.detailAddress,
+            };
+
+            _h.ajax.resource('/bidOrder/:acceptPrize').save(path,postData)
+                .then((data)=>{
+                    console.log(data);
+                })
+                .catch((error)=>{
+                    console.log(error);
+                })
+        }
+    }
 };

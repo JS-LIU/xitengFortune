@@ -12,12 +12,18 @@ require('../css/orderListStyle.css');
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {bidOrderActions} from '../redux/actions/bidOrderActions';
+import {storageActions} from '../redux/actions/storageActions';
 
 var OrderList = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/OrderList');
         let bidOrderStatus = _h.url.getHashKey('bidOrderStatus')||"";
         this.props.bidOrderActionKeys.getOrderList({list:"list"},bidOrderStatus,0);
+    },
+    setProductInfo:function(item){
+        return()=>{
+            this.props.storageActionKeys.setProductInfo(item);
+        }
     },
     render: function () {
         let orderNodes = this.props.bidOrder.list.list.map((item,index)=>{
@@ -54,7 +60,7 @@ var OrderList = React.createClass({
                         </ul>
                     </div>
                     <p className="order_item_bottom tr">
-                        {item.bidOrderStatus == "win"?(<Link to="/AcceptPrize">去领奖</Link>):""}
+                        {item.bidOrderStatus == "win"?(<Link to="/AcceptPrize" onClick={this.setProductInfo(item)}>去领奖</Link>):""}
                         {item.bidOrderStatus == "waiting"?(<span>等待揭晓</span>):""}
                         {item.bidOrderStatus == "finish"?(<span>待晒单</span>):""}
                     </p>
@@ -83,6 +89,7 @@ function mapDispatchToProps(dispatch){
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         bidOrderActionKeys:bindActionCreators(bidOrderActions,dispatch),
+        storageActionKeys:bindActionCreators(storageActions,dispatch),
     }
 }
 

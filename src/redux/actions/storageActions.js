@@ -9,7 +9,8 @@ import {
     GET_STOCKGAMEID,
     SET_GUESSTYPE,
     GET_GUESSTYPE,
-    SET_PURCHASEGAMEID
+    SET_PURCHASEGAMEID,
+    SET_PRODUCTINFO
 } from './storageActionKeys';
 
 export const storageActions = {
@@ -20,9 +21,10 @@ export const storageActions = {
             id
         }
     },
-    setProductInfo:()=>{
+    setProductInfo:(item)=>{
         return {
             type : SET_PRODUCTINFO,
+            item
         }
     },
 

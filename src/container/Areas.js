@@ -7,7 +7,7 @@ var $ = require('jquery');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var { Link } = require('react-router');
-var { Header,BackBtn,Title } = require('../components/Header');
+
 
 require('../css/areaStyle.css');
 
@@ -25,6 +25,7 @@ var Areas = React.createClass({
                 <AreaList
                     areas={this.props.areas}
                     addressActionKeys={this.props.addressActionKeys}
+                    historyUrls={this.props.historyUrls}
                 />
             </div>
         )
@@ -38,10 +39,11 @@ var AreaList = React.createClass({
         }
     },
     render: function () {
+        let markUrl = this.props.historyUrls.mark;
         let areaNodes = this.props.areas.list.map((item,index)=>{
             return (
                 <li className="pl15" key={index} onClick={this.saveArea(item)}>
-                    <Link to="/CreateAddress">{item.label}</Link>
+                    <Link to={markUrl}>{item.label}</Link>
                 </li>
             )
         });

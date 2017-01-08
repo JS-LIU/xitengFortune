@@ -12,5 +12,4 @@ export const bidOrderInit = {
         pageNo:0,
         list:[]
     }
-
 };

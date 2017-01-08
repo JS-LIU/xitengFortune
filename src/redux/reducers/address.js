@@ -17,46 +17,23 @@ import {
     SET_NEW_ADDRESS
 } from '../actions/addressActionKeys';
 
-function hasCurrentAddress(currentAddress){
-    if(currentAddress.id !== ""){
+function hasCurrentAddress(addressList){
+    if(addressList.length > 0){
         return true;
     }else{
         return false;
     }
 }
-function hasDefaultAddress(defaultAddress){
-    if(defaultAddress.id !== ""){
-        return true;
-    }else{
-        return false;
-    }
-}
-function getCurrentAddress(currentAddress,defaultAddress){
-    if(hasCurrentAddress(currentAddress)){
-        return currentAddress;
-    }else if(hasDefaultAddress(defaultAddress)){
-        return defaultAddress;
-    }
-}
-function getCheckedAddress(listAddress){
-    for(let i = 0;i < listAddress.length;i++){
-        if(listAddress[i].checked){
-            return listAddress[i];
-        }
-    }
-}
-function getListAddress(newState){
-    for(let i = 0;i < newState.listAddress.length;i++){
-        newState.listAddress[i].checked = false;
 
-        if(newState.hasCurrentAddress){
-            if(newState.listAddress[i].id == newState.currentAddress.id){
-                newState.listAddress[i].checked = true;
-            }
-        }
-    }
-    return newState.listAddress;
+function getDefAddress(ele){
+    return ele.isDefault == 1;
 }
+function getCurrentAddress(listAddress){
+    let defAddress = listAddress.find(getDefAddress);
+    let firstAddress = listAddress[0];
+    return defAddress || firstAddress || {};
+}
+
 function checkedAddress(listAddress,item) {
     for(let i = 0;i < listAddress.length;i++){
         listAddress[i].checked = false;
@@ -81,24 +58,17 @@ function setNewAddress(item){
         title:title
     })
 }
+
 export const address = function(state = {},action){
     var newState = Object.assign({},state);
 
     switch (action.type) {
-        case 'GET_DEFAULT':
-            var defaultAddress = action.data;
-            var currentAddress = getCurrentAddress(state.currentAddress,action.data);
-            return Object.assign({},state,{
-                defaultAddress:defaultAddress,
-                currentAddress:currentAddress,
-                hasCurrentAddress:hasCurrentAddress(currentAddress)
-            });
         case 'GET_LIST':
-            var copyState = Object.assign({},state,{
-                listAddress:action.data.content
-            });
+
             return Object.assign({},state,{
-                listAddress:getListAddress(copyState)
+                listAddress:action.data.content,
+                hasCurrentAddress:hasCurrentAddress(action.data.content),
+                currentAddress:getCurrentAddress(action.data.content)
             });
         case 'SET_PROVINCE':
 
@@ -132,15 +102,9 @@ export const address = function(state = {},action){
             newState.newAddressInfo.detailAddress = action.item;
             return Object.assign({},state,newState);
         case 'CHECKED_ADDRESS':
-
             return Object.assign({},state,{
-                listAddress:checkedAddress([...state.listAddress],action.item)
-            });
-        case 'SAVE_CURRENT':
-            console.log(getCheckedAddress([...state.listAddress]));
-            return Object.assign({},state,{
-                currentAddress:getCheckedAddress([...state.listAddress]),
-                hasCurrentAddress:true
+                listAddress:checkedAddress([...state.listAddress],action.item),
+                currentAddress:action.item
             });
         case 'SET_NEW_ADDRESS':
             return Object.assign({},state,{

@@ -21,20 +21,6 @@ import {
 import _h from '../../Util/HB';
 
 export var addressActions = {
-    getDefault : ()=>{
-        return (dispatch,getState)=>{
-            let loginInfo = getState().loginInfo;
-            let postData = {
-                accessInfo:loginInfo.loginData
-            };
-
-            _h.ajax.resource('/deliveryAddress/getDefault').save({},postData).then((data)=>{
-                dispatch({type:'GET_DEFAULT',data})
-            }).catch((error)=>{
-                console.log(error);
-            })
-        }
-    },
     getList:()=>{
         return (dispatch,getState)=>{
             let loginInfo = getState().loginInfo;
@@ -74,11 +60,13 @@ export var addressActions = {
                 path = "edit";
                 postData.id=newAddressInfo.id;
             }
-            _h.ajax.resource('/deliveryAddress/:path').save({path:path},postData).then((data)=>{
-                dispatch({type:'CREATE_ADDRESS',data})
-            }).catch((error)=>{
-                console.log(error);
-            })
+            _h.ajax.resource('/deliveryAddress/:path').save({path:path},postData)
+                .then((data)=>{
+                    dispatch({type:'CREATE_ADDRESS',data});
+                    window.location.hash = "#/SelectAddress"
+                }).catch((error)=>{
+                    console.log(error);
+                })
         }
     },
     setProvince: (item) =>{
@@ -121,11 +109,6 @@ export var addressActions = {
         return {
             type : CHECKED_ADDRESS,
             item
-        }
-    },
-    saveCurrent: ()=>{
-        return {
-            type : SAVE_CURRENT,
         }
     },
     setDefault: ()=>{

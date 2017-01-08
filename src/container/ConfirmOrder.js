@@ -21,7 +21,9 @@ var ConfirmOrder = React.createClass({
 
     componentWillMount:function () {
         this.props.historyUrlsActionKeys.pushUrl('/ConfirmOrder');
-        this.props.addressActionKeys.getDefault();
+        if(this.props.address.listAddress == 0){
+            this.props.addressActionKeys.getList();
+        }
         this.props.showDialogActionKeys.hideDialog();
     },
     exchangeProduct:function(){

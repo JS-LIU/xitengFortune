@@ -11,7 +11,8 @@ import {
     SET_GUESSTYPE,
     GET_GUESSTYPE,
     SET_TRADEORDER,
-    SET_PURCHASEGAMEID
+    SET_PURCHASEGAMEID,
+    SET_PRODUCTINFO
 } from '../actions/storageActionKeys'
 
 export const storage = function(state = {},action){
@@ -24,14 +25,16 @@ export const storage = function(state = {},action){
 
         case 'GET_PRODUCTID':
             return state.productId;
-
+        case 'SET_PRODUCTINFO':
+            return Object.assign({},state,{
+                productInfo:action.item
+            });
         case 'SET_STOCKGAMEID':
             return Object.assign({},state,{
                 stockGameId:action.id
             });
 
         case 'GET_STOCKGAMEID':
-            console.log(state.stockGameId);
             return state.stockGameId;
 
         case 'SET_GUESSTYPE':
@@ -39,7 +42,6 @@ export const storage = function(state = {},action){
                 guessType:action.id
             });
         case 'GET_GUESSTYPE':
-            console.log(state.guessType);
             return state.guessType;
 
         case 'SET_TRADEORDER':
