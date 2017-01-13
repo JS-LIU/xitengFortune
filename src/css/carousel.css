@@ -1,4 +1,9 @@
 .carousel_box{
-    height:300px;
     overflow: hidden;
+}
+.carousel_item{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

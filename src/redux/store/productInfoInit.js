@@ -3,7 +3,9 @@
  */
 export const productInfoInit = {
     productInfo:{
-        pictures:[]
+        pictures:[],
+        price:0,
+        inventory:0
     },
     commentInfo:[]
 };

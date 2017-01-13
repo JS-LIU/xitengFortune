@@ -24,9 +24,24 @@ var ProductDetails = React.createClass({
     },
     render: function () {
         var productInfo = this.props.productInfo.productInfo;
+        let window_w = document.body.clientWidth;
+        let totalDistance = window_w * productInfo.pictures.length;
+        let carouselStyle = {
+            bigBox:{
+                width:window_w+"px",
+                height:'7.5rem'
+            },
+            smBox:{
+                width:totalDistance + "px"
+            }
+        };
         return (
             <div>
-                <Carousel pictures={productInfo.pictures}/>
+                <Carousel
+                    pictures={productInfo.pictures}
+                    carouselStyle={carouselStyle}
+                    direction="slideLeft"
+                />
                 <div className="detail_product_info pl15">
                     <p className="f16 c000">商品名称：{productInfo.productName}</p>
                     <p>{productInfo.detail}</p>

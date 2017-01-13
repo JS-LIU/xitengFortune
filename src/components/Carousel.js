@@ -5,54 +5,57 @@ var React = require('react');
 var $ = require('jquery');
 require('../css/carousel.css');
 
+function getCSS3PropVal(name,index){
+    var reg = new RegExp("(^)" + name + "=([^&]*)(&|$)", "i");
+}
+
 
 var Carousel = React.createClass({
-    timer:{},
-    componentDidMount:function(){
-        let $_screenWidth = $(window).width();
-        let $_img = $('.carousel_img');
-        // console.log('$_img----',$_img.eq(0).css());
-        let $_carousel_box = $('.carousel_box');
-        $_img.css({opacity:1});
-        // let $_height = $_img.eq(0).css('height');
-        // console.log($_height);
-        $_carousel_box.css({overflow:"hidden",width:$_screenWidth+"px",height:"300px"});
+    timer:function(){
+        setInterval(()=>{
+            console.log(this.props.carouselStyle.smBox);
 
-        // let $_big_carousel_box = $('.carousel_big_box');
-        // let bigWidth = this.props.pictures.length * $_screenWidth;
-        // $_img.css("width",$_screenWidth+"px");
-        // $_big_carousel_box.css({width:bigWidth + "px",marginLeft:'0px'});
-
-        // let i = 0;
-        // console.log('$_img---',$_img);
-        // $_img.eq(i).css('opacity',1);
-        // this.timer = setInterval(function (){
-        //     $_img.css({opacity:0});
-        //     if(i+1 == $_img.length){
-        //         i = 0;
-        //     }else{
-        //         $_img.eq(i+1).animate({opacity:1},500);
-        //     }
-        // },1000)
+            // this.props.carouselStyle.smBox.transform="translate3d(-375px, 0px, 0px)"
+        },5000);
     },
-    componentWillUnmount:function(){
-        clearInterval(this.timer);
+    componentWillMount:function(){
+        console.log(this.props.direction);
+        console.log(this.props.carouselStyle);
+        console.log(this.props.pictures);
+        console.log(carouselStyleRow);
+        this.timer();
+    },
+    componentDidMount:function () {
+
+
     },
     render: function () {
+        var carouselStyle = {};
+        if(this.props.direction == "slideLeft" || this.props.direction == "slideRight"){
+            this.props.carouselStyle.smBox = Object.assign({},this.props.carouselStyle.smBox,carouselStyleRow)
+        }
         let imgNodes = this.props.pictures.map((item,index)=>{
             return (
-                <img src={item.picUrl} alt="" key={index} className="carousel_img w"/>
+                <li className="carousel_item" key={index}>
+                    <img src={item.picUrl} alt="" className="w"/>
+                </li>
             )
         });
         return (
-            <div className="carousel_box pr tc">
-                {imgNodes}
+            <div className="carousel_box pr tc" style={this.props.carouselStyle.bigBox}>
+                <ul style={this.props.carouselStyle.smBox}>
+                    {imgNodes}
+                </ul>
             </div>
         )
     }
 });
 
 
-
-
 module.exports = Carousel;
+var carouselStyleRow = {
+    display:"flex",
+    flexDirection:"row",
+    transitionDuration: "300ms",
+    transform: "translate3d(0px, 0px, 0px)"
+};
