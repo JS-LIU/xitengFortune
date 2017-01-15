@@ -26,7 +26,7 @@ var Carousel = React.createClass({
         this.timer();
     },
     componentDidMount:function () {
-
+        console.log(0);
 
     },
     render: function () {
