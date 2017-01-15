@@ -26,7 +26,7 @@ var ProductDetails = React.createClass({
         var productInfo = this.props.productInfo.productInfo;
         let window_w = document.body.clientWidth;
         let totalDistance = window_w * productInfo.pictures.length;
-        let carouselStyle = {
+        var carouselStyle = {
             bigBox:{
                 width:window_w+"px",
                 height:'7.5rem'
