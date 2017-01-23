@@ -19,6 +19,9 @@
  *      HB.url.history
  *  HB.save
  *      HB.save.storage
+ *  HB.CSS3
+ *  HB.slide
+ *      HB.slide.left
  */
 
 var $ = require('jquery');
@@ -336,6 +339,99 @@ HB.load = function(arr,func){
         }
     }
     func();
+};
+
+
+HB.CSS3 = (function () {
+
+    const getCSS3PropsVal = function(name){
+        var prop = "";
+        for(let i = name.length - 1;i >= 0;i-- ){
+            prop += name[i];
+            if(name[i] === "("){
+                return prop.split("").reverse().join("");
+            }
+        }
+    };
+    const toArray = function(name){
+        var css3PropsVal = getCSS3PropsVal(name);
+        var prop = "";
+        var propArrIndex = 0;
+        var propArr = [];
+
+        css3PropsVal = css3PropsVal.substr(1);
+        css3PropsVal = css3PropsVal.replace(/\)/g, ",");
+
+        for(let i = 0; i < css3PropsVal.length;i++){
+            if(css3PropsVal[i] != ","){
+                prop += css3PropsVal[i];
+            }else{
+                propArr[propArrIndex] = prop;
+                prop = "";
+                propArrIndex+=1;
+            }
+        }
+        return propArr;
+    };
+
+    const replaceProp = function(name,i,replaceVal){
+        var propArr = toArray(name);
+        var newCSS3 = "";
+
+        propArr[i] = replaceVal;
+        var valStr = propArr.join(',');
+
+        for(let i = 0;i < name.length;i++){
+
+            if(name[i] != "("){
+                newCSS3 += name[i];
+            }else{
+                return newCSS3 += ("(" + valStr +")");
+            }
+        }
+    };
+
+    return {
+        getCSS3PropsVal:getCSS3PropsVal,
+        toArray:toArray,
+        replaceProp:replaceProp
+    }
+})();
+
+HB.slide = function(str,func){
+    var touchStart_x = 0,
+        touchEnd_x = 0,
+        touchStart_y = 0,
+        touchEnd_y = 0;
+
+    const left = function(){
+        if(str === 'left'&&touchStart_x - touchEnd_x > 0 ){
+            console.log('left');
+            func();
+        }
+    };
+    const right = function(){
+        if(str === 'right'&&touchStart_x - touchEnd_x < 0 ){
+            console.log('right');
+            // func();
+        }
+    };
+
+    $('body').bind("touchstart",function(e){
+        touchStart_x = e.touches[0].clientX;
+        touchStart_y = e.touches[0].clientY;
+    });
+    $('body').bind("touchend",function(e){
+        touchEnd_x = e.changedTouches[0].clientX;
+        touchEnd_y = e.changedTouches[0].clientY;
+        return {
+            left:left(),
+            // right:right(),
+            // up:up(),
+            // down:down()
+        };
+
+    });
 };
 
 module.exports = HB;

@@ -41,6 +41,7 @@ var ProductDetails = React.createClass({
                     pictures={productInfo.pictures}
                     carouselStyle={carouselStyle}
                     direction="slideLeft"
+                    auto={true}
                 />
                 <div className="detail_product_info pl15">
                     <p className="f16 c000">商品名称：{productInfo.productName}</p>
