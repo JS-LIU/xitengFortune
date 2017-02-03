@@ -13,7 +13,7 @@ var Carousel = React.createClass({
         var slideX = parseFloat(this.props.carouselStyle.bigBox.width);
         setInterval(()=>{
             x -= slideX;
-            if(-x == parseFloat(this.state.smBox.width)){
+            if(-x === parseFloat(this.state.smBox.width)){
                 x = 0;
             }
             this.state.smBox.transform="translate3d("+x+"px, 0px, 0px)";
@@ -43,7 +43,6 @@ var Carousel = React.createClass({
             if(-x == parseFloat(this.state.smBox.width)){
                 x = 0;
             }
-            console.log(x);
             this.state.smBox.transform="translate3d("+x+"px, 0px, 0px)";
             this.setState({
                 smBox:this.state.smBox
