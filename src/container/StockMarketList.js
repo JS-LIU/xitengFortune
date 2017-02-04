@@ -5,6 +5,7 @@ var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
+var CountDown = require('../components/CountDown');
 
 require("../css/guessStyle.css");
 
@@ -63,12 +64,14 @@ var GameTime = React.createClass({
         },1000);
     },
     componentWillMount:function(){
-        this.gameTimer();
+        // this.gameTimer();
     },
     componentWillUnmount:function(){
         clearInterval(this.gameTimer);
     },
     render: function () {
+        // const endTime = parseEndTime(this.props.gameList[0].gameEndTime);
+        const startTime = new Date().getTime();
 
         return (
             <ul className="time_bg">
@@ -76,9 +79,14 @@ var GameTime = React.createClass({
                     <span className="guess_next_stage">{this.props.gameList.length==0?"":this.props.gameList[0].stage}期</span>
                     <span>{this.props.gameTime.endMonth + 1}月{this.props.gameTime.endDate}日（周{_h.valid.parseDay(this.props.gameTime.endDay)}）</span>
                 </li>
-                <li className="cfff tc pt5">
-                    <span className="count_down_icon">截止投注:{this.props.countDown.countDownTime}</span>
-                </li>
+                {/*<CountDown*/}
+                    {/*step="-1000"*/}
+                    {/*start={endTime - startTime}*/}
+                    {/*end={0}*/}
+                {/*/>*/}
+                {/*<li className="cfff tc pt5">*/}
+                    {/*<span className="count_down_icon">截止投注:{this.props.countDown.countDownTime}</span>*/}
+                {/*</li>*/}
             </ul>
         )
     }
@@ -160,6 +168,11 @@ function mapDispatchToProps(dispatch){
 }
 
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(StockMarketList);
+
+function parseEndTime(endTime){
+    return new Date(endTime.replace(new RegExp("-","gm"),"/")).getTime()
+}
+
 
 const upStyle={
     color:"#FF4242",
