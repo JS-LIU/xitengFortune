@@ -1,4 +1,4 @@
-/**
+ /**
  * Created by LDQ on 2017/2/3.
  */
 var React = require('react');
@@ -70,20 +70,21 @@ var GameTime = React.createClass({
         clearInterval(this.gameTimer);
     },
     render: function () {
-        // const endTime = parseEndTime(this.props.gameList[0].gameEndTime);
         const startTime = new Date().getTime();
-
+        const countTime = this.props.gameTime.endTime - startTime;
         return (
             <ul className="time_bg">
                 <li className="tc pt10 cfff guess_next_stage_time" >
                     <span className="guess_next_stage">{this.props.gameList.length==0?"":this.props.gameList[0].stage}期</span>
                     <span>{this.props.gameTime.endMonth + 1}月{this.props.gameTime.endDate}日（周{_h.valid.parseDay(this.props.gameTime.endDay)}）</span>
                 </li>
-                {/*<CountDown*/}
-                    {/*step="-1000"*/}
-                    {/*start={endTime - startTime}*/}
-                    {/*end={0}*/}
-                {/*/>*/}
+                <CountDown
+                    step={-1000}
+                    countTime={countTime}
+                    end={0}
+                    display={{day:{text:'天'},hour:{text:'时'},min:{text:'分'},sec:{text:'秒'}}}
+                    style={{color:'#FFF'}}
+                />
                 {/*<li className="cfff tc pt5">*/}
                     {/*<span className="count_down_icon">截止投注:{this.props.countDown.countDownTime}</span>*/}
                 {/*</li>*/}
@@ -168,11 +169,6 @@ function mapDispatchToProps(dispatch){
 }
 
 module.exports = connect(mapStatetoProps,mapDispatchToProps)(StockMarketList);
-
-function parseEndTime(endTime){
-    return new Date(endTime.replace(new RegExp("-","gm"),"/")).getTime()
-}
-
 
 const upStyle={
     color:"#FF4242",
