@@ -7,20 +7,14 @@ import _h from '../Util/HB';
 
 var CountDown = React.createClass({
 
-    timer:function(){
-        setInterval(()=>{
-            this.setState({
-                countTime:this.state.countTime += this.state.step
-            })
-        },Math.abs(this.state.step));
-
-    },
     getInitialState:function(){
         var countTime = isNaN(this.props.countTime)?0:this.props.countTime;
         return {
             countTime:countTime,
             end:this.props.end,
-            step:this.props.step
+            step:this.props.step,
+            displayMode:this.props.displayMode,
+            style:this.props.style||{},
         }
     },
     componentWillReceiveProps:function(nextProps){
@@ -29,15 +23,20 @@ var CountDown = React.createClass({
         });
     },
     componentDidMount:function () {
-        this.timer();
+
+        this.timer = setInterval(()=>{
+            this.setState({
+                countTime:this.state.countTime += this.state.step
+            })
+        },Math.abs(this.state.step));
     },
     componentWillUnmount:function(){
-        clearInterval(this.timer);
+        this.timer && clearInterval(this.timer);
     },
     render: function () {
         return (
-            <div>
-                {trimTime(this.state.countTime)}
+            <div style={this.state.style}>
+                {trimTime(this.state.countTime,this.state.displayMode)}
             </div>
         )
     }
@@ -50,23 +49,41 @@ function paddingZero(i){
     }
 }
 
-function trimTime(time){
-    var day = parseInt(time / 86400000);
 
-    var y = time % 86400000;
+function trimTime(time,timeMode){
+    var myTime = "";
+    if(timeMode.year){
 
-    var h = parseInt(y / 3600000);
-    h = paddingZero(h);
+    }
+    if(timeMode.month){
 
-    y = time % 3600000;
-    var min = parseInt( y / 60000);
-    min = paddingZero(min);
+    }
+    if(timeMode.day){
+        var day = parseInt(time / 86400000);
+        var y = time % 86400000;
+        myTime += (day + timeMode.day.text);
+    }
+    if(timeMode.hour){
+        var h = parseInt(y / 3600000);
+        y = time % 3600000;
+        paddingZero(h);
+        myTime += (h + timeMode.hour.text);
+    }
+    if(timeMode.min){
+        var min = parseInt( y / 60000);
+        paddingZero(min);
+        y = y % 60000;
+        myTime += (min + timeMode.min.text);
+    }
+    if(timeMode.sec){
+        var sec = parseInt(y / 1000);
+        sec = paddingZero(sec);
+        myTime += (sec + timeMode.sec.text);
+    }
+    if(timeMode.ms){
 
-    y = y % 60000;
-    var sec = parseInt(y / 1000);
-    sec = paddingZero(sec);
-
-    return day+"天"+h + "时" + min + "分" + sec + "秒";
+    }
+    return myTime;
 
 }
 

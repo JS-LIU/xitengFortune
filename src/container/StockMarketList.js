@@ -54,20 +54,8 @@ var StockMarketList = React.createClass({
 });
 
 var GameTime = React.createClass({
-    gameTimer:function(){
-        setInterval(()=>{
-            this.props.stockGameActionKeys.countDown(
-                new Date(),
-                this.props.gameTime.startTime,
-                this.props.gameTime.endTime
-            );
-        },1000);
-    },
     componentWillMount:function(){
         // this.gameTimer();
-    },
-    componentWillUnmount:function(){
-        clearInterval(this.gameTimer);
     },
     render: function () {
         const startTime = new Date().getTime();
@@ -78,16 +66,15 @@ var GameTime = React.createClass({
                     <span className="guess_next_stage">{this.props.gameList.length==0?"":this.props.gameList[0].stage}期</span>
                     <span>{this.props.gameTime.endMonth + 1}月{this.props.gameTime.endDate}日（周{_h.valid.parseDay(this.props.gameTime.endDay)}）</span>
                 </li>
-                <CountDown
-                    step={-1000}
-                    countTime={countTime}
-                    end={0}
-                    display={{day:{text:'天'},hour:{text:'时'},min:{text:'分'},sec:{text:'秒'}}}
-                    style={{color:'#FFF'}}
-                />
-                {/*<li className="cfff tc pt5">*/}
-                    {/*<span className="count_down_icon">截止投注:{this.props.countDown.countDownTime}</span>*/}
-                {/*</li>*/}
+                <div className="count_down">
+                    <span className="count_down_icon">截止投注：</span>
+                    <CountDown
+                        step={-1000}
+                        countTime={countTime}
+                        end={0}
+                        displayMode={{day:{text:'天'},hour:{text:'时'},min:{text:'分'},sec:{text:'秒'}}}
+                    />
+                </div>
             </ul>
         )
     }

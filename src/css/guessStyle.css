@@ -119,6 +119,12 @@
 .count_down_title{
     font-size:34px;
 }
+.count_down{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: #FFF;
+}
 .count_down_icon{
     padding-left:0.4rem;
     background:url('../../src/images/home_icon_time@2x.png') no-repeat left center;

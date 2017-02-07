@@ -21,6 +21,7 @@ var Carousel = React.createClass({
                 smBox:this.state.smBox
             })
         },5000);
+
     },
     getInitialState:function(){
         return {
@@ -28,8 +29,8 @@ var Carousel = React.createClass({
         }
     },
     componentWillReceiveProps:function(nextProps){
-        if(this.props.direction == "slideLeft" || this.props.direction == "slideRight"){
-            var smBox = Object.assign({},nextProps.carouselStyle.smBox,carouselStyleRow);
+        if(nextProps.direction == "slideLeft" || nextProps.direction == "slideRight"){
+            var smBox = Object.assign({},carouselStyleRow,nextProps.carouselStyle.smBox);
         }
         this.setState({
             smBox:smBox
@@ -63,6 +64,7 @@ var Carousel = React.createClass({
         });
         return (
             <div
+                ref="myRef"
                 className="carousel_box pr tc"
                 style={this.props.carouselStyle.bigBox}>
                 <ul style={this.state.smBox}>
