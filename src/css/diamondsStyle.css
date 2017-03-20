@@ -8,7 +8,7 @@
     color:#FF4242;
 }
 .cblue{
-    color:#6D7EF0;
+    color:#4964ef;
 }
 .diamonds_list{
     width:calc(100% - 15px);
@@ -17,8 +17,8 @@
     background-size:cover;
     border:1px solid #E2E2E2;
     width:calc(33% - 17px);
-    min-height:100px;
-    background:url('/xitenggame/xitengWapApp/src/images/buy-diamonds_img@2x.png') no-repeat center;
+    min-height:1.26rem;
+    background:url('/src/images/common_diamonds_package_bg_n@2x.png') no-repeat center;
     -webkit-background-size:cover;
 }
 .diamond_bg{
@@ -32,12 +32,13 @@
 .input_diamonds{
     outline: none;
     flex: 1;
-    background:url('/xitenggame/xitengWapApp/src/images/buy-diamonds_img_n@2x.png') no-repeat center;
+    /*background:url('/xitenggame/xitengWapApp/src/images/buy-diamonds_img_n@2x.png') no-repeat center;*/
+    background:url('/src/images/buy-diamonds_img_n@2x.png') no-repeat center;
     background-size:cover;
     -webkit-background-size:cover;
 }
 .diamond_count{
-    padding-top:70px;
+    padding-top:1rem;
 }
 .price{
     line-height: 40px;
@@ -72,3 +73,22 @@
 .diamonds_selected{
     border:1px solid #FF4242;
 }
+.buyDiaPage{
+    height: 100vh;
+    background: #F5F5F5;
+    overflow: hidden;
+}
+
+.parities{
+    font-size: 0.28rem;
+    color: #777777;
+    position: absolute;
+    bottom: 0.8rem;
+}
+
+
+
+
+
+
+

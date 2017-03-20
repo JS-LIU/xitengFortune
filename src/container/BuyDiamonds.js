@@ -27,10 +27,6 @@ var BuyDiamonds = React.createClass({
     render: function () {
         return (
             <div>
-                <div className="pt15 pl15">
-                    <span>一次购买每满1000钻石赠送100喜腾币</span>
-                </div>
-
                 <PruductItems
                     diamonds={this.props.diamonds}
                     createTradeOrderActionKeys={this.props.createTradeOrderActionKeys}
@@ -69,32 +65,32 @@ var PruductItems = React.createClass({
                     key={index}
                     onClick={this.selectedDiamonds(index)}
                     style={item.selected?diamonds_selected:{}}>
-                    <p className="diamond_count f16 cred tc pr">{item.amount}颗</p>
+                    <p className="diamond_count f16 cblue tc pr">{item.amount}颗</p>
                 </li>
             )
         });
         return (
-            <div>
+            <div className="buyDiaPage">
+                <div style={defAcount}>
+                    <span>购买数量：</span>
+                    <input
+                        type="text"
+                        placeholder="填写/选择钻石数量"
+                        className="tc"
+                        style={{outline: "none",flex: "1"}}
+                        onKeyUp={this.inputPrice}
+                    />
+                    <span>颗</span>
+                </div>
                 <ul className="diamonds_list ml15 clearfix">
                     {diamondsNodes}
-                    <li className="diamond_bg mr15 mt10 fl" onClick={this.selectedCustom}>
-                        <input
-                            type="text"
-                            placeholder="自定义数额"
-                            className="tc input_diamonds cred J_customPrince"
-                            onKeyUp={this.inputPrice}
-                        />
-                    </li>
                 </ul>
-                <div className="fr pr15">
-                    <span className="f14">金额：</span>
-                    <span>￥{this.props.diamonds.amount}</span>
-                </div>
                 <div className="tc buy_diamonds_btn" onClick={this.buyDiamonds}>
                     <Link to="/Pay" className="cfff f16">
                         立即购买
                     </Link>
                 </div>
+                <p className="parities tc w">(钻石价格：￥1 /颗)</p>
             </div>
 
         )
@@ -129,3 +125,13 @@ module.exports = connect(mapStatetoProps,mapDispatchToProps)(BuyDiamonds);
 const diamonds_selected = {
     border:"1px solid #FF4242"
 };
+
+const defAcount={
+    margin:"0.44rem 0.3rem 0.4rem",
+    lineHeight:"1.1rem",
+    background:"#fff",
+    fontSize:"0.34rem",
+    color:"#333",
+    display:"flex",
+    padding:"0 0.3rem"
+}
