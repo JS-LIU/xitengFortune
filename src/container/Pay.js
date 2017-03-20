@@ -28,7 +28,7 @@ var Pay = React.createClass({
             <div className="po w h f5f5f5">
                 <ProductItem order={this.props.order}/>
                 <PayWay />
-                <div className="pay_btn cfff tc f16" onClick={this.toPay}>立即支付</div>
+                <div className="pay_btn cfff tc f16" onClick={this.toPay}>确认支付</div>
             </div>
 
         )
@@ -38,19 +38,25 @@ var Pay = React.createClass({
 var ProductItem = React.createClass({
     render:function(){
         return(
-            <div className="product_info mt10 clearfix fff">
-                <img src="src/images/diamonds_photo_3@2x.png" alt="" className="product_pic fl"/>
-                <div className="fl">
-                    <p className="product_name f16 c000 pt10 clearfix">
-                        <span className="fl">钻石</span>
-                        <span className="fl">{this.props.order.amount}</span>
-                        <span className="fl">颗</span>
-                    </p>
-                    <p className="f14 cred">
-                        <span>￥{this.props.order.tradeOrder.realTotalFee / 100}</span>
-                    </p>
+            <div>
+                <div className="product_info clearfix fff tc">
+                    {/*<img src="src/images/diamonds_photo_3@2x.png" alt="" className="product_pic fl"/>*/}
+                    {/*<div className="fl">*/}
+                    {/*<p className="product_name f16 c000 pt10 clearfix">*/}
+                    {/*<span className="fl">钻石</span>*/}
+                    {/*<span className="fl">{this.props.order.amount}</span>*/}
+                    {/*<span className="fl">颗</span>*/}
+                    {/*</p>*/}
+                    {/*<p className="f14 cred">*/}
+                    {/*<span>￥{this.props.order.tradeOrder.realTotalFee / 100}</span>*/}
+                    {/*</p>*/}
+                    {/*</div>*/}
+                    <img src="src/images/diamond_unit_icon@2x.png" alt="" className="product_pic"/>
+                    <p className="product_name">{this.props.order.amount}颗</p>
                 </div>
+                <p className="fr cred realPay">实付金额：￥{this.props.order.tradeOrder.realTotalFee / 100}</p>
             </div>
+
         )
     }
 });
@@ -58,7 +64,7 @@ var ProductItem = React.createClass({
 var PayWay = React.createClass({
     render: function () {
         return (
-            <div className="mt10 fff">
+            <div className="fff" style={{marginTop:"0.8rem"}}>
                 <p className="payWay_title pl15 f16 c000">选择支付方式</p>
                 <ul className="payWay_box">
                     <li className="pr clearfix selected">

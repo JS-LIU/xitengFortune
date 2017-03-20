@@ -61,7 +61,7 @@ var PruductItems = React.createClass({
         var diamondsNodes = this.props.diamonds.diamondList.map((item,index)=>{
             return(
                 <li
-                    className="diamond mr15 mt10 fl"
+                    className="diamond"
                     key={index}
                     onClick={this.selectedDiamonds(index)}
                     style={item.selected?diamonds_selected:{}}>
@@ -71,18 +71,17 @@ var PruductItems = React.createClass({
         });
         return (
             <div className="buyDiaPage">
-                <div style={defAcount}>
+                <div className="defAcount">
                     <span>购买数量：</span>
                     <input
                         type="text"
                         placeholder="填写/选择钻石数量"
-                        className="tc"
-                        style={{outline: "none",flex: "1"}}
+                        className="tr pr5 defAcount_input"
                         onKeyUp={this.inputPrice}
                     />
                     <span>颗</span>
                 </div>
-                <ul className="diamonds_list ml15 clearfix">
+                <ul className="diamonds_list">
                     {diamondsNodes}
                 </ul>
                 <div className="tc buy_diamonds_btn" onClick={this.buyDiamonds}>
@@ -126,12 +125,3 @@ const diamonds_selected = {
     border:"1px solid #FF4242"
 };
 
-const defAcount={
-    margin:"0.44rem 0.3rem 0.4rem",
-    lineHeight:"1.1rem",
-    background:"#fff",
-    fontSize:"0.34rem",
-    color:"#333",
-    display:"flex",
-    padding:"0 0.3rem"
-}

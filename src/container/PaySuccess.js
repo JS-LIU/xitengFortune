@@ -24,22 +24,47 @@ var PaySuccess = React.createClass({
         _h.url.setBrowserHistoryFromBefore(urlList,markUrl);
     },
     render: function () {
+        const data = 1234567;
         return (
             <div className="po w h f5f5f5">
                 <div className="pay_success cblue tc f20 mt10">兑换成功</div>
 
-                <ul className="fff pl15 pr15 mt10 f14">
-                    <li>
-                        <span>交易单号：</span>
-                        <span>{this.props.order.tradeOrder.orderId}</span>
+                <ul className="fff pl15 pr15 mt10 f14 pt15 pb15">
+                    {/*<li>*/}
+                        {/*<span>交易单号：</span>*/}
+                        {/*<span>{this.props.order.tradeOrder.orderId}</span>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                        {/*<span>支付金额：</span>*/}
+                        {/*<span>{this.props.order.tradeOrder.realTotalFee / 100}元</span>*/}
+                    {/*</li>*/}
+                    {/*<li>*/}
+                        {/*<span>支付方式：</span>*/}
+                        {/*<span>微信支付</span>*/}
+                    {/*</li>*/}
+                    <li className="pay_item">
+                        <span>喜币充值 : </span>
+                        <sapn>{data}</sapn>
                     </li>
-                    <li>
-                        <span>支付金额：</span>
+                    <li className="pay_item">
+                        <span>实付钻石 : </span>
+                        <span>{data}</span>
+                    </li>
+                    <li className="pay_item">
+                        <span>支付方式 : </span>
+                        <span>微信支付</span>
+                    </li>
+                    <li className="pay_item">
+                        <span>支付金额 : </span>
                         <span>{this.props.order.tradeOrder.realTotalFee / 100}元</span>
                     </li>
-                    <li>
-                        <span>支付方式：</span>
-                        <span>微信支付</span>
+                    <li className="pay_item">
+                        <span>交易单号 : </span>
+                        <span>{this.props.order.tradeOrder.orderId}</span>
+                    </li>
+                    <li className="pay_item">
+                        <span>交易时间 : </span>
+                        <span>{data}</span>
                     </li>
                 </ul>
             </div>
