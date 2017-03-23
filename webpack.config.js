@@ -6,7 +6,7 @@ var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-    devtool: 'inline-source-map',
+    devtool: ['cheap-eval-source-map','inline-source-map'],
     entry: [
         'webpack-dev-server/client?http://localhost:8080/',
         'webpack/hot/only-dev-server',

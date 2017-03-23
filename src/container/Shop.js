@@ -12,16 +12,19 @@ var _h = require('../Util/HB');
 
 require('../css/shopStyle.css');
 
-import {accountActions} from '../redux/actions/accountActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shopActions} from '../redux/actions/shopActions';
 import {storageActions} from '../redux/actions/storageActions';
 
+//  todo 测试使用 提交时删除
+import {loginInfoActions} from '../redux/actions/loginInfoActions';
 
 var Shop = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Shop');
-        this.props.accountActionKeys.getAccount();
+
+        //  todo 测试使用 提交时删除
+        this.props.loginInfoActionKeys.phoneNumLogin('18801233565','123456');
     },
     componentDidMount:function(){
         _h.ui.scrollToTheBottom(()=>{
@@ -43,10 +46,6 @@ var Shop = React.createClass({
 
         return (
             <div className="f5f5f5">
-                <p className="shop_xtbTotalAmount pl15 f14 f5f5f">
-                    <span>可兑换礼品金额：</span>
-                    <span className="xt_money">{this.props.account.xtbTotalAmount||0}</span>
-                </p>
                 <PruductList
                     shop={this.props.shop}
                     shopActionKeys={this.props.shopActionKeys}
@@ -76,7 +75,10 @@ var PruductList = React.createClass({
                         </div>
                         <div className="shop_product_footer fff f14 pl15 pr15">
                             <p className="shop_product_name">{item.productName}</p>
-                            <p className="shop_product_price cred red_XT_icon pl15">{item.price / 100}</p>
+                            <p className="shop_product_price cred">
+                                <span>￥</span>
+                                <span>{item.price / 100}</span>
+                            </p>
                         </div>
                     </Link>
                 </li>
@@ -130,15 +132,16 @@ function mapStatetoProps(state){
         historyUrls:state.historyUrls,
         shop:state.shop,
         storage:state.storage,
-        account:state.account
     }
 }
 function mapDispatchToProps(dispatch){
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
-        accountActionKeys : bindActionCreators(accountActions,dispatch),
         shopActionKeys : bindActionCreators(shopActions,dispatch),
-        storageActionKeys: bindActionCreators(storageActions,dispatch)
+        storageActionKeys: bindActionCreators(storageActions,dispatch),
+
+        //  todo 测试使用 提交时删除
+        loginInfoActionKeys:bindActionCreators(loginInfoActions,dispatch)
     }
 }
 

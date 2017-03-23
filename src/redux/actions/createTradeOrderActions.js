@@ -5,7 +5,9 @@ import { DELETE_PRODUCTS } from './shoppingCartActionKeys';
 import { CREATE_SUCCESS,CREATE_FAIL,SET_TRADEORDER } from './createTradeOrderActionKeys';
 import { SHOW_DIALOG } from './dialogActionKeys';
 import _h from '../../Util/HB';
+import {chainOrderDiamonds} from '../actionModule/orderModule';
 import {createTradeOrder} from '../../Util/xitengBaseConfig';
+
 
 function checkedProducts(list){
     var newList = [];
@@ -23,32 +25,71 @@ function checkedProducts(list){
     return newList;
 }
 
+// const orderDiamonds = function(path,state){
+//     if(path == '/createTradeOrder'){
+//         let loginInfo = state.loginInfo;
+//
+//         let postData = {
+//             accessInfo:loginInfo.loginData,
+//             totalPrice:state.diamonds.amount,
+//             totalProductCount:state.diamonds.amount,
+//             productType:2,
+//             orderType:1
+//         };
+//         console.log('createTradeOrderActions-tradeInfo---',postData);
+//         return _h.ajax.resource('/createTradeOrder').save({},postData);
+//     }else{
+//         return 'nextSuccessor'
+//     }
+// };
+//
+// const orderProducts = function(path){
+//     if(path == '/exchange/product'){
+//
+//     }else{
+//         return 'nextSuccessor'
+//     }
+// };
+// const chainOrderDiamonds = new _h.design.Chain(orderDiamonds);
+// const chainOrderProducts = new _h.design.Chain(orderProducts);
+// chainOrderDiamonds.setNextSuccessor(chainOrderProducts);
 
 
 export const createTradeOrderActions = {
     createTradeOrder : (
-        price,
-        productType=createTradeOrder.productType.diamonds,
-        orderType=createTradeOrder.orderType.commonOrder
+        // price,
+        // productType=createTradeOrder.productType.diamonds,
+        // orderType=createTradeOrder.orderType.commonOrder
+        path
     )=>{
         return (dispatch,getState)=>{
-            let loginInfo = getState().loginInfo;
+            // let loginInfo = getState().loginInfo;
 
-            let postData = {
-                accessInfo:loginInfo.loginData,
-                totalPrice:price,
-                totalProductCount:price,
-                productType:productType,
-                orderType:orderType
-            };
+            // let postData = {
+            //     accessInfo:loginInfo.loginData,
+            //     totalPrice:price,
+            //     totalProductCount:price,
+            //     productType:productType,
+            //     orderType:orderType
+            // };
 
-            _h.ajax.resource('/createTradeOrder').save({},postData)
+            chainOrderDiamonds.passRequest(path,getState())
                 .then((tradeInfo)=>{
-                    dispatch({type:'SET_TRADEORDER', tradeInfo,price});
+                    console.log('createTradeOrderActions-tradeInfo---',tradeInfo);
+                    dispatch({type:'SET_TRADEORDER', tradeInfo});
                 })
                 .catch((error)=>{
                     console.log(error);
-                })
+                });
+            // _h.ajax.resource('/createTradeOrder').save({},postData)
+            //     .then((tradeInfo)=>{
+            //         dispatch({type:'SET_TRADEORDER', tradeInfo,price});
+            //     })
+            //     .catch((error)=>{
+            //         console.log(error);
+            //     })
+
+
         }
     },
     exchangeProduct : (productArr)=>{
@@ -80,7 +121,6 @@ export const createTradeOrderActions = {
                 })
         }
     },
-
     setTradeOrder : (tradeInfo,amount)=>{
         return {
             type:SET_TRADEORDER,

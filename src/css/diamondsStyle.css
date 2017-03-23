@@ -13,18 +13,19 @@
 .diamonds_list{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 0 0.3rem;
+    justify-content: flex-start;
+    padding: 0 0.06rem 0 0.3rem;
+    margin-top:0.1rem;
 }
 .diamond{
-    width: 2.12rem;
     height: 1.26rem;
+    width:calc(33% - 0.27rem);
+    margin: 0.3rem 0.24rem 0 0;
     background-size:cover;
     border:1px solid #E2E2E2;
     min-height:1.26rem;
     background:url('/src/images/common_diamonds_package_bg_n@2x.png') no-repeat center;
     -webkit-background-size:cover;
-    margin-top: 0.3rem;
     border-radius: 0.05rem;
 }
 .diamond_bg{
@@ -44,7 +45,13 @@
     -webkit-background-size:cover;
 }
 .diamond_count{
-    padding-top: 0.75rem;
+    padding-top: 0.65rem;
+}
+.diamond_num{
+    font-size:0.36rem;
+}
+.diamond_unit{
+    font-size:0.26rem;
 }
 .price{
     line-height: 40px;
@@ -92,7 +99,7 @@
     bottom: 0.8rem;
 }
 .defAcount{
-    margin:0.44rem 0.3rem 0.4rem;
+    margin:0.44rem 0.3rem 0;
     line-height:1.1rem;
     background:#fff;
     font-size:0.34rem;

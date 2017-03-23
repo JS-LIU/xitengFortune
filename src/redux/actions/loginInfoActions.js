@@ -62,6 +62,7 @@ export const loginInfoActions = {
                     code:code,
                     accessInfo:loginInfo.wxLoginPostData
                 };
+
                 _h.ajax.resource('/client/wap/login').save({},postData,false)
                     .then((data)=>{
                         data.code = code;

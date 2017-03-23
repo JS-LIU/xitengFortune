@@ -28,6 +28,7 @@ var ConfirmOrder = React.createClass({
     },
     exchangeProduct:function(){
         this.props.createTradeOrderActionKeys.exchangeProduct();
+
     },
     render:function(){
         return(
@@ -37,7 +38,7 @@ var ConfirmOrder = React.createClass({
                 ):(<div className="address_list pl15 f16">
                     <Link to="/SelectAddress">请选择地址</Link>
                 </div>)}
-                <ProductList shoppingCart={this.props.shoppingCart}/>
+                <ProductList settlement={this.props.settlement}/>
 
                 <div className="cart_footer f16 w">
                     <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
@@ -48,8 +49,11 @@ var ConfirmOrder = React.createClass({
                     <DialogHeader title={this.props.order.isSuccess?"兑换确认":"喜腾币不足"}/>
                     <DialogBody content={this.props.order.isSuccess?"确认兑换以上商品吗":"喜腾币不足，是否立即购买钻石"}/>
                     <DialogFooter>
-                        <DialogCancel showDialogActionKeys={this.props.showDialogActionKeys}/>
-                        <DialogConfirm url={this.props.order.isSuccess?"/PaySuccess":"/BuyDiamonds"} />
+                        <DialogCancel
+                            showDialogActionKeys={this.props.showDialogActionKeys}
+                            cancel={{url:'/ConfirmOrder',text:"取消"}}
+                        />
+                        <DialogConfirm certain={{url:this.props.order.isSuccess?"/PaySuccess":"/BuyDiamonds",text:"确定"}} />
                     </DialogFooter>
                 </DialogiOS>:""}
             </div>
@@ -81,9 +85,9 @@ var CurrentAddress = React.createClass({
 
 var ProductList = React.createClass({
     render: function () {
-        let productNodes = this.props.shoppingCart.products.map((item,index)=>{
+        let productNodes = this.props.settlement.productList.map((item,index)=>{
             return (
-                <li key={index} className={item.checked?"cart_product pl15 pr":"none"}>
+                <li key={index} className="cart_product pl15 pr">
                     <div className="cart_product_pic m10 tc">
                         <img src={item.smallPicture} alt="" className="w"/>
                     </div>
@@ -113,7 +117,8 @@ function mapStatetoProps(state){
         historyUrls:state.historyUrls,
         address:state.address,
         order:state.order,
-        showDialog:state.showDialog
+        showDialog:state.showDialog,
+        settlement:state.settlement
     }
 }
 function mapDispatchToProps(dispatch){
@@ -123,7 +128,7 @@ function mapDispatchToProps(dispatch){
         shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
         addressActionKeys:bindActionCreators(addressActions,dispatch),
         createTradeOrderActionKeys:bindActionCreators(createTradeOrderActions,dispatch),
-        showDialogActionKeys:bindActionCreators(dialogActions,dispatch)
+        showDialogActionKeys:bindActionCreators(dialogActions,dispatch),
     }
 }
 

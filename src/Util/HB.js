@@ -22,6 +22,8 @@
  *  HB.CSS3
  *  HB.slide
  *      HB.slide.left
+ *  HB.design
+ *      HB.design.chain
  */
 
 var $ = require('jquery');
@@ -129,7 +131,6 @@ HB.ajax = (function(){
         query(entity_obj,bool=true){
 
             let url = this.getRealUrl(entity_obj);
-            console.log(url);
             let type = 'GET';
             var data = "";
             return this.ajax(type,url,data,bool);
@@ -433,5 +434,35 @@ HB.slide = function(str,func){
 
     });
 };
+
+HB.design = (function(){
+
+    class Chain{
+        constructor(fn){
+            this.fn = fn;
+            this.success = null;
+        }
+        setNextSuccessor( successor ){
+            return this.successor = successor;
+        };
+        passRequest(){
+            let ret = this.fn.apply(this,arguments);
+            if ( ret === 'nextSuccessor' ){
+                return this.successor && this.successor.passRequest.apply( this.successor, arguments );
+            }
+            return ret;
+        }
+    }
+
+
+    return {
+        Chain:Chain
+    }
+
+})();
+
+
+
+
 
 module.exports = HB;

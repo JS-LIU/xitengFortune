@@ -32,6 +32,7 @@ import {userInfo} from './userInfo';
 import {activity} from './activity';
 import {purchaseGame} from './purchaseGame';
 import {bidOrder} from './bidOrder';
+import {settlement} from './settlement';
 
 var rootReducer = combineReducers({
     account,
@@ -54,6 +55,7 @@ var rootReducer = combineReducers({
     purchaseGame,
     rank,
     routing,
+    settlement,
     shop,
     shoppingCart,
     showDialog,

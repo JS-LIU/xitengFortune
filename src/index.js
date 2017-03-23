@@ -79,6 +79,7 @@ import {userInfoInit} from '../src/redux/store/userInfoInit';
 import {activityInit} from '../src/redux/store/activityInit';
 import {purchaseGameInit} from '../src/redux/store/purchaseGameInit';
 import {bidOrderInit} from '../src/redux/store/bidOrderInit';
+import {settlementInit} from '../src/redux/store/settlementInit';
 
 import _h from '../src/Util/HB';
 var {syncHistoryWithStore} = require('react-router-redux');
@@ -168,7 +169,8 @@ function initState(){
         userInfo:localStorage.userInfoInit?JSON.parse(localStorage.userInfoInit):userInfoInit,
         activity:activityInit,
         purchaseGame:purchaseGameInit,
-        bidOrder:bidOrderInit
+        bidOrder:bidOrderInit,
+        settlement:settlementInit
     }
 }
 

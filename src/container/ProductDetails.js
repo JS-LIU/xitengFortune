@@ -47,7 +47,10 @@ var ProductDetails = React.createClass({
                     <p className="f16 c000">商品名称：{productInfo.productName}</p>
                     <p>{productInfo.detail}</p>
                     <div className="clearfix">
-                        <p className="f16 fl cred red_XT_icon pl15">{productInfo.price / 100}</p>
+                        <p className="f16 fl cred">
+                            <span>￥</span>
+                            <span>{productInfo.price / 100}</span>
+                        </p>
                         <p className="fr pr15 f14">库存：{productInfo.inventory}</p>
                     </div>
                 </div>
@@ -75,21 +78,21 @@ var ShopFooter = React.createClass({
         this.props.addProductItem(productInfo);
 
     },
-    exchangeProduct:function(productItem){
-        var productArr = [{
-            productId:productItem.productId,
-            totalCount:1,
-            price:productItem.price,
-            shopId:productItem.shopId
-        }];
-        return ()=>{
-            //  shoppingCart操作
-            // this.props.shoppingCartActionKeys.allCheck(false);
-            this.props.createTradeOrderActionKeys.exchangeProduct(productArr);
-        }
-
-
-    },
+    // exchangeProduct:function(productItem){
+    //     var productArr = [{
+    //         productId:productItem.productId,
+    //         totalCount:1,
+    //         price:productItem.price,
+    //         shopId:productItem.shopId
+    //     }];
+    //     return ()=>{
+    //         //  shoppingCart操作
+    //         // this.props.shoppingCartActionKeys.allCheck(false);
+    //         this.props.createTradeOrderActionKeys.exchangeProduct(productArr);
+    //     }
+    //
+    //
+    // },
     render:function(){
 
         return (
@@ -106,9 +109,9 @@ var ShopFooter = React.createClass({
                 <li className="shop_put_cart tc f16 cfff" onClick={this.addProductItem} >
                     加入购物车
                 </li>
-                {/*<li className="shop_buy tc f16 cfff" onClick={this.exchangeProduct(this.props.productInfo)}>*/}
-                    {/*<span>立即兑换</span>*/}
-                {/*</li>*/}
+                <li className="shop_buy tc f16 cfff">
+                    <span>立即兑换</span>
+                </li>
             </ul>
         )
 

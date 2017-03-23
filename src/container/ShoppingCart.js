@@ -12,6 +12,7 @@ require('../css/shoppingCartStyle.css');
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
+import {settlementActions} from '../redux/actions/settlementActions';
 
 var ShoppingCart = React.createClass({
 
@@ -26,19 +27,14 @@ var ShoppingCart = React.createClass({
     deleteProducts:function(){
         this.props.shoppingCartActionKeys.deleteProducts();
     },
+    setSettlement:function(product){
+        return ()=>{
+            this.props.settlementActionKeys.pushProducts(product);
+        }
+    },
     render:function(){
         return(
             <div className="cart_body f5f5f5 po w">
-                {/*<Header*/}
-                    {/*historyUrls={this.props.historyUrls}*/}
-                    {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
-                    {/*shoppingCart={this.props.shoppingCart}>*/}
-                    {/*<BackBtn*/}
-                        {/*historyUrlsActionKeys={this.props.historyUrlsActionKeys}*/}
-                        {/*back={{text:'返回',src:'/nav_btn_back@2x.png',link:this.props.historyUrls.last}}*/}
-                    {/*/>*/}
-                    {/*<Title title={{text:'购物车'}}></Title>*/}
-                {/*</Header>*/}
                 <ProductList
                     shoppingCart={this.props.shoppingCart}
                     shoppingCartActionKeys={this.props.shoppingCartActionKeys}
@@ -57,7 +53,7 @@ var ShoppingCart = React.createClass({
                     {this.props.shoppingCart.edit?(
                         <span onClick={this.deleteProducts} className="cart_delete_all fr cfff f20 tc">删除</span>
                     ):(
-                        <Link to="/ConfirmOrder" className="cart_payment_btn fr cfff f20 tc">去结算</Link>
+                        <Link to="/ConfirmOrder" onClick={this.setSettlement()} className="cart_payment_btn fr cfff f20 tc">去结算</Link>
                     )}
 
                 </div>
@@ -144,13 +140,15 @@ function mapStatetoProps(state){
     return {
         shoppingCart:state.shoppingCart,
         historyUrls:state.historyUrls,
+        settlement:state.settlement
     }
 }
 function mapDispatchToProps(dispatch){
 
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
-        shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch)
+        shoppingCartActionKeys : bindActionCreators(shoppingCartActions,dispatch),
+        settlementActionKeys : bindActionCreators(settlementActions,dispatch)
     }
 }
 

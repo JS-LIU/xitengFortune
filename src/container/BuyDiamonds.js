@@ -16,13 +16,18 @@ import {storageActions} from '../redux/actions/storageActions';
 import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
 import {diamondsActions} from '../redux/actions/diamondsActions';
 
+//  todo 测试使用 提交时删除
+import {loginInfoActions} from '../redux/actions/loginInfoActions';
+
 var BuyDiamonds = React.createClass({
 
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/BuyDiamonds');
         this.props.diamondsActionKeys.selectedDiamonds(0);
         this.props.historyUrlsActionKeys.mark('/BuyDiamonds');
-        console.log('BuyDiamonds-componentWillMount-',this.props.historyUrls);
+
+        //  todo 测试使用 提交时删除
+        this.props.loginInfoActionKeys.phoneNumLogin('18801233565','123456');
     },
     render: function () {
         return (
@@ -41,7 +46,8 @@ var PruductItems = React.createClass({
 
     buyDiamonds:function(){
 
-        this.props.createTradeOrderActionKeys.createTradeOrder(this.props.diamonds.amount);
+        // this.props.createTradeOrderActionKeys.createTradeOrder(this.props.diamonds.amount);
+        this.props.createTradeOrderActionKeys.createTradeOrder('/createTradeOrder');
     },
     selectedDiamonds:function(index){
         return ()=>{
@@ -65,7 +71,10 @@ var PruductItems = React.createClass({
                     key={index}
                     onClick={this.selectedDiamonds(index)}
                     style={item.selected?diamonds_selected:{}}>
-                    <p className="diamond_count f16 cblue tc pr">{item.amount}颗</p>
+                    <p className="diamond_count cblue tc pr">
+                        <span className="diamond_num">{item.amount}</span>
+                        <span className="diamond_unit">颗</span>
+                    </p>
                 </li>
             )
         });
@@ -113,7 +122,9 @@ function mapDispatchToProps(dispatch){
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         diamondsActionKeys : bindActionCreators(diamondsActions,dispatch),
         storageActionKeys: bindActionCreators(storageActions,dispatch),
-        createTradeOrderActionKeys: bindActionCreators(createTradeOrderActions,dispatch)
+        createTradeOrderActionKeys: bindActionCreators(createTradeOrderActions,dispatch),
+        //  todo 测试使用 提交时删除
+        loginInfoActionKeys:bindActionCreators(loginInfoActions,dispatch)
     }
 }
 
