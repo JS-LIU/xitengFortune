@@ -5,7 +5,7 @@
 import _h from '../../Util/HB';
 
 const orderDiamonds = function(path,state){
-    if(path == '/createTradeOrder'){
+    if(path === '/createTradeOrder'){
         let loginInfo = state.loginInfo;
 
         let postData = {
@@ -22,7 +22,7 @@ const orderDiamonds = function(path,state){
 };
 
 const orderProducts = function(path,state){
-    if(path == '/exchange/product'){
+    if(path === '/exchange/product'){
         let loginInfo = state.loginInfo;
 
         let postData = {

@@ -35,8 +35,10 @@ export const settlementActions = {
         return (dispatch,getState)=>{
             let productListInfo,products;
 
-            if(product != undefined){
+            if(product !== undefined){
+                product.checked = true;
                 products = [product];
+
             }else{
                 products = getState().shoppingCart.products;
             }

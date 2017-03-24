@@ -15,7 +15,7 @@ require('../css/productDetailStyle.css');
 import {productActions} from '../redux/actions/productInfoActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
-import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
+import {settlementActions} from '../redux/actions/settlementActions';
 
 var ProductDetails = React.createClass({
     componentWillMount:function(){
@@ -64,7 +64,7 @@ var ProductDetails = React.createClass({
                     productInfo={productInfo}
                     shoppingCart={this.props.shoppingCart}
                     shoppingCartActionKeys={this.props.shoppingCartActionKeys}
-                    createTradeOrderActionKeys={this.props.createTradeOrderActionKeys}
+                    settlementActionKeys={this.props.settlementActionKeys}
                 />
             </div>
         )
@@ -93,6 +93,11 @@ var ShopFooter = React.createClass({
     //
     //
     // },
+    settlement:function(product){
+        return ()=>{
+            this.props.settlementActionKeys.pushProducts(product);
+        }
+    },
     render:function(){
 
         return (
@@ -109,8 +114,8 @@ var ShopFooter = React.createClass({
                 <li className="shop_put_cart tc f16 cfff" onClick={this.addProductItem} >
                     加入购物车
                 </li>
-                <li className="shop_buy tc f16 cfff">
-                    <span>立即兑换</span>
+                <li className="shop_buy tc f16 cfff" onClick={this.settlement(this.props.productInfo)}>
+                    <Link to="/ConfirmOrder">立即兑换</Link>
                 </li>
             </ul>
         )
@@ -133,7 +138,7 @@ function mapDispatchToProps(dispatch){
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         productInfoActionKeys:bindActionCreators(productActions,dispatch),
         shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
-        createTradeOrderActionKeys:bindActionCreators(createTradeOrderActions,dispatch)
+        settlementActionKeys : bindActionCreators(settlementActions,dispatch)
     }
 }
 

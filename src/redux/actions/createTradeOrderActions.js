@@ -75,7 +75,6 @@ export const createTradeOrderActions = {
 
             chainOrderDiamonds.passRequest(path,getState())
                 .then((tradeInfo)=>{
-                    console.log('createTradeOrderActions-tradeInfo---',tradeInfo);
                     dispatch({type:'SET_TRADEORDER', tradeInfo});
                 })
                 .catch((error)=>{

@@ -27,9 +27,9 @@ var ShoppingCart = React.createClass({
     deleteProducts:function(){
         this.props.shoppingCartActionKeys.deleteProducts();
     },
-    setSettlement:function(product){
+    setSettlement:function(){
         return ()=>{
-            this.props.settlementActionKeys.pushProducts(product);
+            this.props.settlementActionKeys.pushProducts();
         }
     },
     render:function(){
