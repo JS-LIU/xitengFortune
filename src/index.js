@@ -1,55 +1,54 @@
 /**
  * Created by LDQ on 2016/8/6.
  */
-var React = require('react');
-var ReactDom = require('react-dom');
-var { Router, Route, hashHistory,IndexRedirect} = require('react-router');
-var Store = require('../src/redux/store/store');
-var {Provider} = require('react-redux');
+const React = require('react');
+const ReactDom = require('react-dom');
+const { Router, Route, hashHistory,IndexRedirect} = require('react-router');
+const Store = require('../src/redux/store/store');
+const {Provider} = require('react-redux');
 
 
-var PreLoading = require('../src/container/PreLoading');
-var HomePage = require('../src/components/HomePage');
-var AskBar = require('../src/components/AskBar');
+const PreLoading = require('../src/container/PreLoading');
+const HomePage = require('../src/components/HomePage');
+const AskBar = require('../src/components/AskBar');
 
-var Guess = require('../src/container/Guess');
-var Discover = require('../src/container/Discover');
-var My = require('../src/container/My');
-var Shop = require('../src/container/Shop');
-var ShoppingCart = require('../src/container/ShoppingCart');
-var ProductDetails = require('../src/container/ProductDetails');
-var BuyDiamonds = require('../src/container/BuyDiamonds');
-var Register = require('../src/container/Register');
-var CheckCode = require('../src/container/CheckCode');
-var Login = require('../src/container/Login');
-var StockDetails = require('../src/container/StockDetails');
-var Bet = require('../src/container/Bet');
-var ExchangeXTCoins = require('../src/container/ExchangeXTCoins');
-var Pay = require('../src/container/Pay');
-var PaySuccess = require('../src/container/PaySuccess');
-var ConfirmOrder = require('../src/container/ConfirmOrder');
-var SelectAddress = require('../src/container/SelectAddress');
-var CreateAddress = require('../src/container/CreateAddress');
-var Provinces = require('../src/container/Provinces');
-var Cities = require('../src/container/Cities');
-var Areas = require('../src/container/Areas');
-var MyAsset = require('../src/container/MyAsset');
-var MyRecord = require('../src/container/MyRecord');
-var SetPassword = require('../src/container/SetPassword');
-var PayFail = require('../src/container/PayFail');
-var OnePiece = require('../src/container/OnePiece');
-var OnePieceProductDetails = require('../src/container/OnePieceProductDetails');
-var OnePieceJoinDetail = require('../src/container/OnePieceJoinDetail');
-var OnePieceOldActivities = require('../src/container/OnePieceOldActivities');
-var OnePieceShow = require('../src/container/OnePieceShow');
-var OnePieceBuyNow = require('../src/container/OnePieceBuyNow');
-var OnePieceConfirmOrder = require('../src/container/OnePieceConfirmOrder');
-var OnePieceJoinResult = require('../src/container/OnePieceJoinResult');
-var OnePieceOldActivitiesHome = require('../src/container/OnePieceOldActivitiesHome');
-var OrderDetails = require('../src/container/OrderDetails');
-var OrderList = require('../src/container/OrderList');
-var AcceptPrize = require('../src/container/AcceptPrize');
-
+const Guess = require('../src/container/Guess');
+const Discover = require('../src/container/Discover');
+const My = require('../src/container/My');
+const Shop = require('../src/container/Shop');
+const ShoppingCart = require('../src/container/ShoppingCart');
+const ProductDetails = require('../src/container/ProductDetails');
+const BuyDiamonds = require('../src/container/BuyDiamonds');
+const Register = require('../src/container/Register');
+const CheckCode = require('../src/container/CheckCode');
+const Login = require('../src/container/Login');
+const StockDetails = require('../src/container/StockDetails');
+const Bet = require('../src/container/Bet');
+const ExchangeXTCoins = require('../src/container/ExchangeXTCoins');
+const Pay = require('../src/container/Pay');
+const PaySuccess = require('../src/container/PaySuccess');
+const ConfirmOrder = require('../src/container/ConfirmOrder');
+const SelectAddress = require('../src/container/SelectAddress');
+const CreateAddress = require('../src/container/CreateAddress');
+const Provinces = require('../src/container/Provinces');
+const Cities = require('../src/container/Cities');
+const Areas = require('../src/container/Areas');
+const MyAsset = require('../src/container/MyAsset');
+const MyRecord = require('../src/container/MyRecord');
+const SetPassword = require('../src/container/SetPassword');
+const PayFail = require('../src/container/PayFail');
+const OnePiece = require('../src/container/OnePiece');
+const OnePieceProductDetails = require('../src/container/OnePieceProductDetails');
+const OnePieceJoinDetail = require('../src/container/OnePieceJoinDetail');
+const OnePieceOldActivities = require('../src/container/OnePieceOldActivities');
+const OnePieceShow = require('../src/container/OnePieceShow');
+const OnePieceBuyNow = require('../src/container/OnePieceBuyNow');
+const OnePieceConfirmOrder = require('../src/container/OnePieceConfirmOrder');
+const OnePieceJoinResult = require('../src/container/OnePieceJoinResult');
+const OnePieceOldActivitiesHome = require('../src/container/OnePieceOldActivitiesHome');
+const OrderDetails = require('../src/container/OrderDetails');
+const OrderList = require('../src/container/OrderList');
+const AcceptPrize = require('../src/container/AcceptPrize');
 
 import {stockGameInit} from  '../src/redux/store/stockGameInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
@@ -80,15 +79,16 @@ import {activityInit} from '../src/redux/store/activityInit';
 import {purchaseGameInit} from '../src/redux/store/purchaseGameInit';
 import {bidOrderInit} from '../src/redux/store/bidOrderInit';
 import {settlementInit} from '../src/redux/store/settlementInit';
+import {specificationInit} from '../src/redux/store/specificationInit';
 
 import _h from '../src/Util/HB';
-var {syncHistoryWithStore} = require('react-router-redux');
+const {syncHistoryWithStore} = require('react-router-redux');
 
 const store = Store(initState());
 const history = syncHistoryWithStore(hashHistory, store);
 
 
-var getRoutes = ()=>{
+const getRoutes = ()=>{
     return (
         <Router history={history}>
             <Route path="/" component={PreLoading}></Route>
@@ -170,7 +170,8 @@ function initState(){
         activity:activityInit,
         purchaseGame:purchaseGameInit,
         bidOrder:bidOrderInit,
-        settlement:settlementInit
+        settlement:settlementInit,
+        specification:specificationInit
     }
 }
 

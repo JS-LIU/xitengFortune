@@ -13,12 +13,26 @@ import {
     EDIT
 } from '../actions/shoppingCartActionKeys';
 
+import { SYNC_SPEC_PRO } from '../actions/specificationActionKeys';
+import specOperator from '../actionModule/specificationModule';
+
 export const shoppingCartActions = {
 
     addProductItem:(item)=>{
-        return {
-            type:ADD_PRODUCTITEM,
-            item
+        return (dispatch,getState)=>{
+
+
+            if(spec.allSelected){
+
+                dispatch({type:'ADD_PRODUCTITEM',item});
+            }else{
+
+                dispatch({type:'SYNC_SPEC_PRO', specInfo});
+            }
+
+
+
+
         }
     },
     calcTotalMoney:()=>{

@@ -78,21 +78,6 @@ var ShopFooter = React.createClass({
         this.props.addProductItem(productInfo);
 
     },
-    // exchangeProduct:function(productItem){
-    //     var productArr = [{
-    //         productId:productItem.productId,
-    //         totalCount:1,
-    //         price:productItem.price,
-    //         shopId:productItem.shopId
-    //     }];
-    //     return ()=>{
-    //         //  shoppingCart操作
-    //         // this.props.shoppingCartActionKeys.allCheck(false);
-    //         this.props.createTradeOrderActionKeys.exchangeProduct(productArr);
-    //     }
-    //
-    //
-    // },
     settlement:function(product){
         return ()=>{
             this.props.settlementActionKeys.pushProducts(product);
