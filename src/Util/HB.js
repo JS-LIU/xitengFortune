@@ -69,10 +69,13 @@ HB.obj = (function(){
         }
 
     };
-
+    let isArray = function isArray(o) {
+        return Object.prototype.toString.call(o) === "[object Array]";
+    };
     return {
         toEquals:toEquals,
-        isEmpty:isEmpty
+        isEmpty:isEmpty,
+        isArray:isArray
     }
 
 })();

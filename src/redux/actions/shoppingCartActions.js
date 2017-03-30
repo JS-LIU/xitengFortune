@@ -13,26 +13,22 @@ import {
     EDIT
 } from '../actions/shoppingCartActionKeys';
 
-import { SYNC_SPEC_PRO } from '../actions/specificationActionKeys';
-import specOperator from '../actionModule/specificationModule';
+import { SHOW_SPEC_PRO,HIDE_SPEC_PRO } from '../actions/specificationActionKeys';
+import spec from '../actionModule/specificationModule';
 
 export const shoppingCartActions = {
 
     addProductItem:(item)=>{
         return (dispatch,getState)=>{
 
+            let isAllSelected = spec(getState()).isAllSelected;
 
-            if(spec.allSelected){
-
+            if(isAllSelected){
+                dispatch({type:'HIDE_SPEC_PRO'});
                 dispatch({type:'ADD_PRODUCTITEM',item});
             }else{
-
-                dispatch({type:'SYNC_SPEC_PRO', specInfo});
+                dispatch({type:'SHOW_SPEC_PRO'});
             }
-
-
-
-
         }
     },
     calcTotalMoney:()=>{

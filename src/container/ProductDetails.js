@@ -16,6 +16,9 @@ import {productActions} from '../redux/actions/productInfoActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {settlementActions} from '../redux/actions/settlementActions';
+import {specificationActions} from '../redux/actions/specificationActions'
+
+import _h from '../Util/HB';
 
 var ProductDetails = React.createClass({
     componentWillMount:function(){
@@ -66,10 +69,55 @@ var ProductDetails = React.createClass({
                     shoppingCartActionKeys={this.props.shoppingCartActionKeys}
                     settlementActionKeys={this.props.settlementActionKeys}
                 />
+                {this.props.specification.isShowSpec?
+                    <Specifications
+                        productInfo={this.props.productInfo}
+                        specificationActionKeys={this.props.specificationActionKeys}
+                    />:""}
             </div>
         )
     }
 });
+
+
+const Specifications  = React.createClass({
+    increaseNum:function(item){
+        return ()=>{
+
+            this.props.specificationActionKeys.increaseNum(item);
+        }
+    },
+    render: function () {
+        let specNodes = this.props.productInfo.productInfo.specifications.map((item,index)=>{
+            let contentNodes = _h.obj.isArray(item.content)?
+                item.content.map((contentItem,index)=>{
+                return (
+                    <li key={index}>
+                        <span>{contentItem}</span>}
+                    </li>
+                )
+            }):(<div><div>减</div><div>{item.content}</div><div onClick={this.increaseNum(item)}>加</div></div>);
+            return (
+
+                <li key={index}>
+                    <span>{item.name}</span>
+                    <ul>
+                        {contentNodes}
+                    </ul>
+
+                </li>
+            )
+        });
+        return (
+            <div>
+                <ul>
+                    {specNodes}
+                </ul>
+            </div>
+        )
+    }
+});
+
 
 var ShopFooter = React.createClass({
 
@@ -115,6 +163,7 @@ function mapStatetoProps(state){
         productInfo:state.productInfo,
         shoppingCart:state.shoppingCart,
         historyUrls:state.historyUrls,
+        specification:state.specification
     }
 }
 function mapDispatchToProps(dispatch){
@@ -123,7 +172,8 @@ function mapDispatchToProps(dispatch){
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         productInfoActionKeys:bindActionCreators(productActions,dispatch),
         shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
-        settlementActionKeys : bindActionCreators(settlementActions,dispatch)
+        settlementActionKeys : bindActionCreators(settlementActions,dispatch),
+        specificationActionKeys:bindActionCreators(specificationActions,dispatch)
     }
 }
 

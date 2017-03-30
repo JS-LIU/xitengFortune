@@ -5,7 +5,7 @@
 
 import _h from '../../Util/HB';
 
-const productInfo = {
+export const productInfo = {
     getProductInfo:{},
     addSpec:{}
 };
@@ -24,12 +24,14 @@ productInfo.getProductInfo = function(state){
 
 
 productInfo.addSpec = function(productInfo){
-    let spec = productInfo.spec || {};
-    spec.num = null;
-    return Object.assign({},productInfo,spec)
+
+    let spec = productInfo.productInfo.specifications || [];
+    spec.push({name:'数量',content:'1',key:'num'});
+    productInfo.productInfo.specifications = spec;
+    return productInfo;
 
 };
 
 
 
-module.exports = productInfo;
+// module.exports = productInfo;

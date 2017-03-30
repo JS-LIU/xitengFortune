@@ -8,21 +8,7 @@ import _h from '../Util/HB';
 
 var Carousel = React.createClass({
 
-    timer:function(){
-        var x = 0;
-        var slideX = parseFloat(this.props.carouselStyle.bigBox.width);
-        setInterval(()=>{
-            x -= slideX;
-            if(-x === parseFloat(this.state.smBox.width)){
-                x = 0;
-            }
-            this.state.smBox.transform="translate3d("+x+"px, 0px, 0px)";
-            this.setState({
-                smBox:this.state.smBox
-            })
-        },5000);
-
-    },
+    timer:{},
     getInitialState:function(){
         return {
             smBox:carouselStyleRow
@@ -49,7 +35,21 @@ var Carousel = React.createClass({
                 smBox:this.state.smBox
             })
         });
-        this.timer();
+        var x = 0;
+        var slideX = parseFloat(this.props.carouselStyle.bigBox.width);
+        this.timer = setInterval(()=>{
+            x -= slideX;
+            if(-x === parseFloat(this.state.smBox.width)){
+                x = 0;
+            }
+            var smBox = Object.assign({},this.state.smBox,{
+                transform:"translate3d("+x+"px, 0px, 0px)"
+            });
+
+            this.setState({
+                smBox:smBox
+            })
+        },5000);
     },
     componentWillUnmount:function(){
         clearInterval(this.timer);
@@ -70,6 +70,7 @@ var Carousel = React.createClass({
                 <ul style={this.state.smBox}>
                     {imgNodes}
                 </ul>
+
             </div>
         )
     }
