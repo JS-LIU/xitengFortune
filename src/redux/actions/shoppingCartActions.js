@@ -13,19 +13,22 @@ import {
     EDIT
 } from '../actions/shoppingCartActionKeys';
 
-import { SHOW_SPEC_PRO,HIDE_SPEC_PRO } from '../actions/specificationActionKeys';
-import spec from '../actionModule/specificationModule';
+import { SHOW_SPEC_PRO,HIDE_SPEC_PRO,SYNC_CUSTOMER_SPECIFICATIONS } from '../actions/specificationActionKeys';
+import SpecOperator from '../actionModule/specificationModule';
 
 export const shoppingCartActions = {
 
     addProductItem:(item)=>{
         return (dispatch,getState)=>{
+            let specOperator = new SpecOperator(getState());
+            let newSpecifications = specOperator.syncCustomerSelectedSpec();
 
-            let isAllSelected = spec(getState()).isAllSelected;
-
+            let isAllSelected = specOperator.isAllSelected(newSpecifications);
+            let newProductItem = specOperator.connect(item,newSpecifications);
             if(isAllSelected){
                 dispatch({type:'HIDE_SPEC_PRO'});
-                dispatch({type:'ADD_PRODUCTITEM',item});
+                dispatch({type:'SYNC_CUSTOMER_SPECIFICATIONS',newSpecifications});
+                dispatch({type:'ADD_PRODUCTITEM',newProductItem});
             }else{
                 dispatch({type:'SHOW_SPEC_PRO'});
             }

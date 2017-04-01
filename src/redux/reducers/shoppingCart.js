@@ -15,7 +15,7 @@ import {
 
 
 function pushOrAdd(products,item){
-    let product = Object.assign({},item,{checked:true,num:1});
+    let product = Object.assign({},item,{checked:true});
     let productId= product.productId;
     for(let i = 0;i < products.length;i++){
         if(products[i].productId === productId){
@@ -95,7 +95,7 @@ export const shoppingCart = function(state = {},action){
 
     switch (action.type) {
         case 'ADD_PRODUCTITEM':
-            var productList = pushOrAdd([...state.products],action.item);
+            var productList = pushOrAdd([...state.products],action.newProductItem);
             return Object.assign({},state,{
                 products:productList,
                 realCount:calcTotalMoney(productList),

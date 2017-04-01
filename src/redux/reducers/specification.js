@@ -6,9 +6,7 @@ import {
     SHOW_SPEC_PRO,
     HIDE_SPEC_PRO,
     SYNC_SPEC_PRO,
-    SELECTED_SPEC_PRO,
-    INCREASE_NUM,
-    REDUCE_NUM
+    SYNC_CUSTOMER_SPECIFICATIONS
 } from '../actions/specificationActionKeys';
 
 
@@ -32,11 +30,10 @@ export const specification = function(state = {},action){
                 isShowSpec:false
             });
 
-        case 'INCREASE_NUM':
+        case 'SYNC_CUSTOMER_SPECIFICATIONS':
             return Object.assign({},state,{
-                spec:action.specProperties
+                spec:action.newSpecifications
             });
-
         default:
             return state
     }

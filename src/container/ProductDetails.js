@@ -68,11 +68,14 @@ var ProductDetails = React.createClass({
                     shoppingCart={this.props.shoppingCart}
                     shoppingCartActionKeys={this.props.shoppingCartActionKeys}
                     settlementActionKeys={this.props.settlementActionKeys}
+                    specificationActionKeys={this.props.specificationActionKeys}
                 />
                 {this.props.specification.isShowSpec?
                     <Specifications
                         productInfo={this.props.productInfo}
+                        productInfoActionKeys={this.props.productInfoActionKeys}
                         specificationActionKeys={this.props.specificationActionKeys}
+                        shoppingCartActionKeys={this.props.shoppingCartActionKeys}
                     />:""}
             </div>
         )
@@ -84,8 +87,11 @@ const Specifications  = React.createClass({
     increaseNum:function(item){
         return ()=>{
 
-            this.props.specificationActionKeys.increaseNum(item);
+            this.props.productInfoActionKeys.increaseNum(item);
         }
+    },
+    appendToShoppingCart:function(){
+        this.props.shoppingCartActionKeys.addProductItem(this.props.productInfo);
     },
     render: function () {
         let specNodes = this.props.productInfo.productInfo.specifications.map((item,index)=>{
@@ -96,7 +102,7 @@ const Specifications  = React.createClass({
                         <span>{contentItem}</span>}
                     </li>
                 )
-            }):(<div><div>减</div><div>{item.content}</div><div onClick={this.increaseNum(item)}>加</div></div>);
+            }):((<div><div>减</div><div>{item.content}</div><div onClick={this.increaseNum(item)}>加</div></div>));
             return (
 
                 <li key={index}>
@@ -113,6 +119,7 @@ const Specifications  = React.createClass({
                 <ul>
                     {specNodes}
                 </ul>
+                <div onClick={this.appendToShoppingCart}>确定</div>
             </div>
         )
     }
@@ -121,10 +128,8 @@ const Specifications  = React.createClass({
 
 var ShopFooter = React.createClass({
 
-    addProductItem:function(){
-        let productInfo = this.props.productInfo;
-        this.props.addProductItem(productInfo);
-
+    showSpecifications:function(){
+        this.props.specificationActionKeys.showSpecPro();
     },
     settlement:function(product){
         return ()=>{
@@ -144,7 +149,7 @@ var ShopFooter = React.createClass({
                         <span className="shop_cart_total cfff tc">{this.props.shoppingCart.totalNum}</span>
                     </Link>
                 </li>
-                <li className="shop_put_cart tc f16 cfff" onClick={this.addProductItem} >
+                <li className="shop_put_cart tc f16 cfff" onClick={this.showSpecifications} >
                     加入购物车
                 </li>
                 <li className="shop_buy tc f16 cfff" onClick={this.settlement(this.props.productInfo)}>

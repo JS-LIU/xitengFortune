@@ -1,113 +1,70 @@
 /**
  * Created by LDQ on 2017/3/27.
  */
-// const specOperator = {
-//     syncSpecProperties:{},
-//     selectedProperties:{},
-//     isAllSelected:{}
-// };
-//
-// specOperator.syncSpecProperties = function(state){
-//     let specInfo = state.specification;
-//     let nextSpecInfo = state.productInfo.productInfo.spec;
-//
-//     for(let prop in nextSpecInfo){
-//         if(!specInfo[ prop ]){
-//             specInfo[ prop ] = null;
-//         }
-//     }
-//
-//     return specInfo;
-// };
-//
-// specOperator.selectedProperties = function(properties){
-//
-// };
-// specOperator.isAllSelected = function(state){
-//     let specInfo = state.specification;
-//
-//     for(let prop in specInfo){
-//
-//         if(specInfo[ prop ] === null){
-//             return false;
-//         }
-//
-//     }
-//     return true;
-//
-// };
 
 class SpecOperator{
-    constructor(state,newProductInfo){
+    constructor(state){
 
         this.selectedSpecInfo = state.specification.spec;
-        if(newProductInfo){
-            this.productSpecInfo = newProductInfo.productInfo.specifications
-        }else{
-            this.productSpecInfo = state.productInfo.productInfo.specifications;
-        }
+        this.productSpecInfo = state.productInfo.productInfo.specifications;
 
         this.allSelected = false;
     }
 
-    syncSpecProperties(){
+    syncSpecProperties(specifications){
+        specifications.map((productProp,i)=>{
+            //  这里 将【下标统一】作为索引
+            this.selectedSpecInfo[i] = {name:productProp.name,key:productProp.key,content:null}
+        });
 
-        for(let i = 0,productProp;productProp = this.productSpecInfo[ i++ ];){
-            function findName(prop){
-                return prop.name === productProp.name;
-            }
-            if(!this.selectedSpecInfo.find(findName)){
-                this.selectedSpecInfo.push({name:productProp.name,key:productProp.key,content:null});
-            }
-        }
         return this.selectedSpecInfo;
     }
 
-    selectedProperties(item){
-        if(item.key === 'num'){
-        }
-    }
-
-    resetProductSpecInfo(item){
+    resetProductSpecInfo(item,func){
         for(let i = 0,productSpecInfo;productSpecInfo = this.productSpecInfo[ i++ ];){
             if(productSpecInfo.key === item.key){
-                if(item.key === 'num'){
-                    //  赋值
-                    productSpecInfo.content = item.content;
-                }else{
-                    for(let j = 0,content;content = productSpecInfo.content[ j++ ];){
-                        if(content.id === item.content.id){
-                            content.selected = true;
-                        }
-                    }
-                }
-            }
-        }
-        return this.productSpecInfo;
-    }
-
-    resetSelectedSpecProp(item,content){
-        for(let i = 0,selectedSpecInfo;selectedSpecInfo = this.selectedSpecInfo[ i++ ];){
-            if(selectedSpecInfo.key === item.key){
-                selectedSpecInfo.content = content
+                func(productSpecInfo);
             }
         }
     }
     increaseNum(item){
         let num = parseInt(item.content);
-        num+=1;
-        console.log(num);
+        num += 1;
 
-        this.resetSelectedSpecProp(item,num);
+        this.resetProductSpecInfo(item,function(productSpecInfo){
+            productSpecInfo.content = num;
+        });
+        return this.productSpecInfo;
+    }
+    reduceNum(item){
+        let num = parseInt(item.content);
+        num -= 1;
+
+        this.resetProductSpecInfo(item,function(productSpecInfo){
+            productSpecInfo.content = num;
+        });
+        return this.productSpecInfo;
+    }
+
+
+    syncCustomerSelectedSpec(){
+
+        this.productSpecInfo.map((productSpecProp,i)=>{
+            if(productSpecProp.key === 'num'){
+                this.selectedSpecInfo[i].content = productSpecProp.content;
+            }else{
+                productSpecProp.content.map((contentProp,j)=>{
+                    if(contentProp.selected){
+                        this.selectedSpecInfo[i].content = contentProp[j];
+                    }
+                });
+            }
+        });
         return this.selectedSpecInfo;
     }
-    fillInNum(){
+    isAllSelected(selectedSpecInfo){
 
-    }
-
-    isAllSelected(){
-
-        for(let i = 0,specInfoProp;specInfoProp = this.selectedSpecInfo[ i++ ];){
+        for(let i = 0,specInfoProp;specInfoProp = selectedSpecInfo[ i++ ];){
             if(!specInfoProp.content){
                 this.allSelected = false;
                 return this.allSelected;
@@ -118,38 +75,20 @@ class SpecOperator{
 
         return this.allSelected;
     }
+    connect(productInfo,specifications){
+
+        specifications.map((prop,index)=>{
+            if(prop.key === 'num'){
+                productInfo.productInfo.num = prop.content;
+            }
+        });
+        return Object.assign({},productInfo.productInfo,{
+            specifications:specifications
+        })
+
+    }
 
 }
 
-const spec = function(state,newProductInfo){
 
-    let specOperator = new SpecOperator(state,newProductInfo);
-    let isAllSelected = specOperator.isAllSelected();
-    let syncSpecProperties = specOperator.syncSpecProperties();
-
-    let increaseNum = specOperator.increaseNum;
-    let resetProductSpecInfo = specOperator.resetProductSpecInfo;
-    let reduceNum = function(item){
-
-        let num = parseInt(item.content);
-        return num -= 1;
-    };
-
-    return {
-        isAllSelected:isAllSelected,
-        syncSpecProperties:syncSpecProperties,
-        increaseNum:function(){
-            return increaseNum.apply(specOperator,arguments);
-        },
-        resetProductSpecInfo:function(){
-            return resetProductSpecInfo.apply(specOperator,arguments);
-        },
-        // reduceNum:reduceNum
-    }
-};
-
-
-
-
-
-module.exports = spec;
+module.exports = SpecOperator;

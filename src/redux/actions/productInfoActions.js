@@ -3,12 +3,13 @@
  */
 
 
-import {GET_PRODUCTINFO} from './productInfoActionKeys';
+import {GET_PRODUCTINFO,INCREASE_NUM} from './productInfoActionKeys';
 import {SYNC_SPEC_PRO,HIDE_SPEC_PRO} from './specificationActionKeys';
 import {productInfo} from '../actionModule/productInfoModule';
-import spec from '../actionModule/specificationModule';
+import SpecOperator from '../actionModule/specificationModule';
 
 import _h from '../../Util/HB';
+
 
 export const productActions = {
 
@@ -19,7 +20,8 @@ export const productActions = {
             productInfo.getProductInfo(getState())
                 .then((data)=>{
                 let newProductInfo = productInfo.addSpec(data);
-                let specProperties = spec(getState(),newProductInfo).syncSpecProperties;
+                let productSpecifications = newProductInfo.productInfo.specifications;
+                let specProperties = new SpecOperator(getState()).syncSpecProperties(productSpecifications);
 
                 dispatch({type:'GET_PRODUCTINFO', newProductInfo});
                 dispatch({type:'SYNC_SPEC_PRO', specProperties});
@@ -28,20 +30,13 @@ export const productActions = {
                 console.log("error",error);
             });
 
-            // let loginInfo = getState().loginInfo;
-            // let productId = getState().storage.productId;
-            // let postData = {
-            //     accessInfo:loginInfo.baseLoginData,
-            //     productId:productId
-            // };
-            //
-            // _h.ajax.resource('/product/detail').save({},postData)
-            //     .then((data)=>{
-            //         dispatch({type:'GET_PRODUCTINFO', data})
-            //     })
-            //     .catch((error)=>{
-            //         console.log("error",error);
-            //     })
+        }
+    },
+    increaseNum:(item)=>{
+        return (dispatch,getState)=>{
+
+            let productSpec = new SpecOperator(getState()).increaseNum(item);
+            dispatch({type:'INCREASE_NUM',productSpec});
         }
     }
 };
