@@ -3,30 +3,7 @@
  */
 import {PUSH_PRODUCTS,CLEAR_PRODUCTS} from './settlementActionKeys';
 import getProductListInfo from '../actionModule/settlementModule';
-
-// const checkedProducts = function(shopCartList){
-//     let productList = [];
-//     for(let i = 0 , product; product = shopCartList[ i++ ];){
-//         if(product.checked){
-//             productList.push(product);
-//         }
-//     }
-//
-//     return productList;
-// };
-//
-// const checkedProduct = {
-//     getProductList:{},
-//     getCount:{},
-//     getTotalPrice:{}
-// };
-//
-// checkedProduct.getProductList = function(){
-//
-// };
-
-
-
+import SpecOperator from '../actionModule/specificationModule';
 
 export const settlementActions = {
 
@@ -36,16 +13,28 @@ export const settlementActions = {
             let productListInfo,products;
 
             if(product !== undefined){
-                product.checked = true;
-                products = [product];
 
+                let specOperator = new SpecOperator(getState());
+                let newSpecifications = specOperator.syncCustomerSelectedSpec();
+                let isAllSelected = specOperator.isAllSelected(newSpecifications);
+                let newProductItem = specOperator.connect(product,newSpecifications);
+
+                newProductItem.checked = true;
+                products = [product];
+                productListInfo = getProductListInfo(products);
+                if(isAllSelected) {
+                    dispatch({type: 'HIDE_SPEC_PRO'});
+                    dispatch({type: 'SYNC_CUSTOMER_SPECIFICATIONS', newSpecifications});
+                    dispatch({type:'PUSH_PRODUCTS', productListInfo});
+                }
             }else{
                 products = getState().shoppingCart.products;
+                productListInfo = getProductListInfo(products);
+
+                dispatch({type:'PUSH_PRODUCTS', productListInfo});
             }
 
-            productListInfo = getProductListInfo(products);
 
-            dispatch({type:'PUSH_PRODUCTS', productListInfo});
         }
     },
     clearProducts: ()=>{

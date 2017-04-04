@@ -3,5 +3,6 @@
  */
 export const specificationInit = {
     isShowSpec:false,
-    spec:[]
+    spec:[],
+    isBuyNow:false
 };

@@ -6,9 +6,10 @@ import { SHOW_SPEC_PRO } from '../actions/specificationActionKeys';
 
 export const specificationActions = {
 
-    showSpecPro:()=>{
+    showSpecPro:(isBuyNow)=>{
         return {
-            type: "SHOW_SPEC_PRO"
+            type: "SHOW_SPEC_PRO",
+            isBuyNow
         }
     }
 

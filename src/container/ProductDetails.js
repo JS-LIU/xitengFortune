@@ -76,6 +76,7 @@ var ProductDetails = React.createClass({
                         productInfoActionKeys={this.props.productInfoActionKeys}
                         specificationActionKeys={this.props.specificationActionKeys}
                         shoppingCartActionKeys={this.props.shoppingCartActionKeys}
+                        specification={this.props.specification}
                     />:""}
             </div>
         )
@@ -90,8 +91,13 @@ const Specifications  = React.createClass({
             this.props.productInfoActionKeys.increaseNum(item);
         }
     },
-    appendToShoppingCart:function(){
-        this.props.shoppingCartActionKeys.addProductItem(this.props.productInfo);
+    buyProduct:function(){
+        if(this.props.specification.isBuyNow){
+            this.props.settlementActionKeys.pushProducts(this.props.productInfo);
+        }else{
+            this.props.shoppingCartActionKeys.addProductItem(this.props.productInfo);
+        }
+
     },
     render: function () {
         let specNodes = this.props.productInfo.productInfo.specifications.map((item,index)=>{
@@ -119,7 +125,7 @@ const Specifications  = React.createClass({
                 <ul>
                     {specNodes}
                 </ul>
-                <div onClick={this.appendToShoppingCart}>确定</div>
+                <div onClick={this.buyProduct}>确定</div>
             </div>
         )
     }
@@ -128,12 +134,9 @@ const Specifications  = React.createClass({
 
 var ShopFooter = React.createClass({
 
-    showSpecifications:function(){
-        this.props.specificationActionKeys.showSpecPro();
-    },
-    settlement:function(product){
+    showSpecifications:function(isBuyNow){
         return ()=>{
-            this.props.settlementActionKeys.pushProducts(product);
+            this.props.specificationActionKeys.showSpecPro(action);
         }
     },
     render:function(){
@@ -149,11 +152,11 @@ var ShopFooter = React.createClass({
                         <span className="shop_cart_total cfff tc">{this.props.shoppingCart.totalNum}</span>
                     </Link>
                 </li>
-                <li className="shop_put_cart tc f16 cfff" onClick={this.showSpecifications} >
+                <li className="shop_put_cart tc f16 cfff" onClick={this.showSpecifications(false)} >
                     加入购物车
                 </li>
-                <li className="shop_buy tc f16 cfff" onClick={this.settlement(this.props.productInfo)}>
-                    <Link to="/ConfirmOrder">立即兑换</Link>
+                <li className="shop_buy tc f16 cfff" onClick={this.showSpecifications(true)}>
+                    <div >立即兑换</div>
                 </li>
             </ul>
         )

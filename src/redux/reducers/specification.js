@@ -21,7 +21,8 @@ export const specification = function(state = {},action){
         case 'SHOW_SPEC_PRO':
 
             return Object.assign({},state,{
-                isShowSpec:true
+                isShowSpec:true,
+                isBuyNow:action.isBuyNow
             });
 
         case 'HIDE_SPEC_PRO':
