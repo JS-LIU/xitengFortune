@@ -50,10 +50,12 @@ var DialogFooter = React.createClass({
     }
 });
 var DialogConfirm = React.createClass({
-
+    hideDialog:function(){
+        this.props.showDialogActionKeys.hideDialog();
+    },
     render:function() {
         return (
-            <div className="dialog_btn">
+            <div className="dialog_btn" onClick={this.hideDialog}>
                 <Link to={this.props.certain.url} className="tc f14 dialog_btn_color">
                     <span>{this.props.certain.text}</span>
                 </Link>

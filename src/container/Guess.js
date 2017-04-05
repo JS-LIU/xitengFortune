@@ -17,6 +17,9 @@ import {betListActions} from '../redux/actions/betListActions';
 import {awardActions} from '../redux/actions/awardActions';
 import {rankActions} from '../redux/actions/rankActions';
 import {activityActions} from '../redux/actions/activityActions';
+
+//  todo 测试使用 提交时删除
+import {loginInfoActions} from '../redux/actions/loginInfoActions';
 import _h from '../Util/HB';
 
 
@@ -25,6 +28,10 @@ var Guess = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Guess');
         this.props.activityActionKeys.getActivityList({path:"list"});
+
+        //  todo 测试使用 提交时删除
+        this.props.loginInfoActionKeys.phoneNumLogin('18801233565','123456');
+
     },
     render: function () {
 
@@ -190,8 +197,9 @@ function mapDispatchToProps(dispatch){
         betListActionKeys:bindActionCreators(betListActions,dispatch),
         awardActionKeys:bindActionCreators(awardActions,dispatch),
         rankActionKeys:bindActionCreators(rankActions,dispatch),
-        activityActionKeys:bindActionCreators(activityActions,dispatch)
-
+        activityActionKeys:bindActionCreators(activityActions,dispatch),
+        //  todo 测试使用 提交时删除
+        loginInfoActionKeys:bindActionCreators(loginInfoActions,dispatch)
     }
 }
 

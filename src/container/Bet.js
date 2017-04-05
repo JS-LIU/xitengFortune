@@ -57,7 +57,8 @@ var Bet = React.createClass({
                         <DialogCancel
                             showDialogActionKeys={this.props.showDialogActionKeys}
                             cancel={this.props.showDialog.cancel}/>
-                        <DialogConfirm certain={this.props.showDialog.certain}/>
+                        <DialogConfirm showDialogActionKeys={this.props.showDialogActionKeys}
+                            certain={this.props.showDialog.certain}/>
                     </DialogFooter>
                 </DialogiOS>:''}
                 <div className="bet_footer tc w">
@@ -99,26 +100,26 @@ var BetCenter = React.createClass({
                            placeholder="请选择/输入金额"
                            className="J_betMoney input_money pl10 mr5"
                            ref="XTMoney"/>
-                    <p className="cfff">喜腾币</p>
+                    <p className="cfff">喜币</p>
                 </li>
                 <li className="selected_box">
                     <div className="selected_money cfff tc" onClick={this.betQuickly(100)}>
                         <p className="f14">100</p>
-                        <p>喜腾币</p>
+                        <p>喜币</p>
                     </div>
                     <div className="selected_money cfff tc ml15" onClick={this.betQuickly(1000)}>
                         <p className="f14" >1000</p>
-                        <p>喜腾币</p>
+                        <p>喜币</p>
                     </div>
                     <div className="selected_money cfff tc ml15" onClick={this.betQuickly(10000)}>
                         <p className="f14">10000</p>
-                        <p>喜腾币</p>
+                        <p>喜币</p>
                     </div>
                 </li>
                 <li className="balance_box cfff ">
                     <span>余额：</span>
                     <span className="xt_money">{this.props.account.xtbTotalAmount}</span>
-                    <Link to="/BuyDiamonds" className="fr cfff">获取喜腾币</Link>
+                    <Link to="/BuyDiamonds" className="fr cfff">获取喜币</Link>
                 </li>
             </ul>
         )

@@ -41,7 +41,7 @@ export var betActions = {
                         console.log(error);
                         var data = {
                             title:"投注失败",
-                            body:"喜腾币余额不足请去购买钻石",
+                            body:"喜币余额不足请去购买钻石",
                             certain:{
                                 text:"确定",
                                 url:"/BuyDiamonds"
@@ -54,7 +54,18 @@ export var betActions = {
                         dispatch({type:'SHOW_DIALOG',data});
                     })
             }else{
-                var data = {title:"提示",body:"投注金额至少10喜腾币",url:"/Bet"};
+                var data = {
+                    title:"投注失败",
+                    body:"不能少于10喜币",
+                    certain:{
+                        text:"确定",
+                        url:"/Bet"
+                    },
+                    cancel:{
+                        text:"取消",
+                        url:"/Bet"
+                    }
+                };
                 dispatch({type:'SHOW_DIALOG',data});
             }
 

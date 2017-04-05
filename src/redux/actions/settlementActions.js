@@ -11,21 +11,20 @@ export const settlementActions = {
     pushProducts: (product)=>{
         return (dispatch,getState)=>{
             let productListInfo,products;
-
             if(product !== undefined){
 
                 let specOperator = new SpecOperator(getState());
                 let newSpecifications = specOperator.syncCustomerSelectedSpec();
                 let isAllSelected = specOperator.isAllSelected(newSpecifications);
                 let newProductItem = specOperator.connect(product,newSpecifications);
-
                 newProductItem.checked = true;
-                products = [product];
+                products = [newProductItem];
                 productListInfo = getProductListInfo(products);
                 if(isAllSelected) {
                     dispatch({type: 'HIDE_SPEC_PRO'});
                     dispatch({type: 'SYNC_CUSTOMER_SPECIFICATIONS', newSpecifications});
                     dispatch({type:'PUSH_PRODUCTS', productListInfo});
+                    window.location.hash = "#/ConfirmOrder";
                 }
             }else{
                 products = getState().shoppingCart.products;

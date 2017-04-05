@@ -77,6 +77,7 @@ var ProductDetails = React.createClass({
                         specificationActionKeys={this.props.specificationActionKeys}
                         shoppingCartActionKeys={this.props.shoppingCartActionKeys}
                         specification={this.props.specification}
+                        settlementActionKeys={this.props.settlementActionKeys}
                     />:""}
             </div>
         )
@@ -116,7 +117,6 @@ const Specifications  = React.createClass({
                     <ul>
                         {contentNodes}
                     </ul>
-
                 </li>
             )
         });
@@ -136,7 +136,7 @@ var ShopFooter = React.createClass({
 
     showSpecifications:function(isBuyNow){
         return ()=>{
-            this.props.specificationActionKeys.showSpecPro(action);
+            this.props.specificationActionKeys.showSpecPro(isBuyNow);
         }
     },
     render:function(){

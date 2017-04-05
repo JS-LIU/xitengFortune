@@ -66,6 +66,7 @@
     -webkit-background-size:0.5rem;
     background-size:0.5rem;
     border:1px solid #FFF;
+    color:#FFF;
 }
 .selected_box{
     display: flex;
