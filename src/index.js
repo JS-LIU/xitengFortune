@@ -50,6 +50,7 @@ const OrderDetails = require('../src/container/OrderDetails');
 const OrderList = require('../src/container/OrderList');
 const AcceptPrize = require('../src/container/AcceptPrize');
 
+
 import {stockGameInit} from  '../src/redux/store/stockGameInit';
 import {shoppingCartInit} from '../src/redux/store/shoppingCartInit';
 import {loginInfoInit} from  '../src/redux/store/loginInfoInit';
@@ -80,6 +81,7 @@ import {purchaseGameInit} from '../src/redux/store/purchaseGameInit';
 import {bidOrderInit} from '../src/redux/store/bidOrderInit';
 import {settlementInit} from '../src/redux/store/settlementInit';
 import {specificationInit} from '../src/redux/store/specificationInit';
+import {payDialogInit} from '../src/redux/store/payDialogInit';
 
 import _h from '../src/Util/HB';
 const {syncHistoryWithStore} = require('react-router-redux');
@@ -171,7 +173,8 @@ function initState(){
         purchaseGame:purchaseGameInit,
         bidOrder:bidOrderInit,
         settlement:settlementInit,
-        specification:specificationInit
+        specification:specificationInit,
+        payDialog:payDialogInit
     }
 }
 

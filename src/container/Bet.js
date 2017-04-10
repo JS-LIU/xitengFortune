@@ -8,6 +8,7 @@ var { connect } = require('react-redux');
 var { Link } = require('react-router');
 var { Header,BackBtn,Title } = require('../components/Header');
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
+const {PayDialogHeader,PayDialogBody} = require('../components/PayDialog');
 
 require('../css/betStyle.css');
 
@@ -61,6 +62,21 @@ var Bet = React.createClass({
                             certain={this.props.showDialog.certain}/>
                     </DialogFooter>
                 </DialogiOS>:''}
+                {this.props.payDialog.isShowDialog?
+                    <DialogiOS>
+                        <PayDialogHeader title = {'支付'}/>
+                        <PayDialogBody body = {
+                            {
+                                title:"投注",
+                                money:{icon:"",much:"100"},
+                                payWay:"喜币账户余额支付",
+                                url:""
+                            }
+                        }/>
+                        <div onClick={this.bet()}>确认</div>
+                    </DialogiOS>:""}
+
+
                 <div className="bet_footer tc w">
                     <span>【当前参考】猜涨赔率：</span>
                     <span>{this.props.betInfo.upOdds}</span>
@@ -134,6 +150,7 @@ function mapStatetoProps(state){
         stockGameDetail:state.stockGameDetail,
         account:state.account,
         betInfo:state.betInfo,
+        payDialog:state.payDialog
     }
 }
 function mapDispatchToProps(dispatch){

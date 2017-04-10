@@ -5,6 +5,8 @@ import {SHOW_DIALOG,HIDE_DIALOG} from './dialogActionKeys';
 import _h from '../../Util/HB';
 import {hex_md5} from '../../Util/md5';
 import {GET_ODDS} from './betActionKeys';
+import isCanBet from '../actionModule/betModule';
+
 
 export var betActions = {
     immediatelyBet : (money)=>{
@@ -13,6 +15,11 @@ export var betActions = {
             let loginInfo = getState().loginInfo;
             let stockGameId = getState().storage.stockGameId;
             let guessType = getState().storage.guessType;
+            let accountMoney = getState().account.xtbTotalAmount;
+            isCanBet(money,accountMoney);
+            console.log(isCanBet);
+
+
             if(money >= 10){
                 let postData = {
                     accessInfo:loginInfo.loginData,
