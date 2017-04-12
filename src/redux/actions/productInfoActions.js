@@ -4,27 +4,30 @@
 
 
 import {GET_PRODUCTINFO,INCREASE_NUM} from './productInfoActionKeys';
+import {CREATE_PRODUCT} from './productActionKeys';
 import {SYNC_SPEC_PRO,HIDE_SPEC_PRO} from './specificationActionKeys';
 import {productInfo} from '../actionModule/productInfoModule';
+
 import SpecOperator from '../actionModule/specificationModule';
+
+import _product from '../actionModule/productModule';
 
 import _h from '../../Util/HB';
 
 
-export const productActions = {
+export const productInfoActions = {
 
     getProductInfo:()=>{
         return (dispatch,getState)=>{
             dispatch({type:'HIDE_SPEC_PRO'});
 
             productInfo.getProductInfo(getState())
-                .then((data)=>{
-                let newProductInfo = productInfo.addSpec(data);
-                let productSpecifications = newProductInfo.productInfo.specifications;
-                let specProperties = new SpecOperator(getState()).syncSpecProperties(productSpecifications);
+                .then((productInfo)=>{
 
-                dispatch({type:'GET_PRODUCTINFO', newProductInfo});
-                dispatch({type:'SYNC_SPEC_PRO', specProperties});
+                dispatch({type:'GET_PRODUCTINFO', productInfo});
+
+                let product = _product.createProduct(productInfo.productInfo);
+                dispatch({type:'CREATE_PRODUCT',product});
 
             }).catch((error)=>{
                 console.log("error",error);

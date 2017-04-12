@@ -82,6 +82,8 @@ import {bidOrderInit} from '../src/redux/store/bidOrderInit';
 import {settlementInit} from '../src/redux/store/settlementInit';
 import {specificationInit} from '../src/redux/store/specificationInit';
 import {payDialogInit} from '../src/redux/store/payDialogInit';
+import {productInit} from '../src/redux/store/productInit';
+
 
 import _h from '../src/Util/HB';
 const {syncHistoryWithStore} = require('react-router-redux');
@@ -150,6 +152,7 @@ function initState(){
         diamonds:diamondListInit,
         storage:localStorage.storageInit?JSON.parse(localStorage.storageInit):storageInit,
         productInfo:productInfoInit,
+        product:productInit,
         shoppingCart:shoppingCartInit,
         loginInfo:localStorage.loginInfoInit?JSON.parse(localStorage.loginInfoInit):loginInfoInit,
         showDialog:dialogInit,

@@ -1,16 +1,12 @@
 /**
- * Created by LDQ on 2016/8/18.
+ * Created by LDQ on 2017/4/12.
  */
 
+import { INCREASE_NUM } from '../actions/productActionKeys'
 
-import { GET_PRODUCTINFO,INCREASE_NUM } from '../actions/productInfoActionKeys'
 
-
-export const productInfo = function (state={},action){
+export const product = function (state={},action){
     switch (action.type) {
-        case 'GET_PRODUCTINFO':
-
-            return Object.assign({},state,action.productInfo);
 
         case 'INCREASE_NUM':
 

@@ -7,7 +7,6 @@ import _h from '../../Util/HB';
 
 export const productInfo = {
     getProductInfo:{},
-    addSpec:{}
 };
 
 productInfo.getProductInfo = function(state){
@@ -21,17 +20,3 @@ productInfo.getProductInfo = function(state){
 
     return _h.ajax.resource('/product/:path').save({path:"detail"},postData)
 };
-
-
-productInfo.addSpec = function(productInfo){
-
-    let spec = productInfo.productInfo.specifications || [];
-    spec.push({name:'数量',content:'1',key:'num'});
-    productInfo.productInfo.specifications = spec;
-    return productInfo;
-
-};
-
-
-
-// module.exports = productInfo;

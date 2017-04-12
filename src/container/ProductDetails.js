@@ -12,11 +12,12 @@ var Carousel = require('../components/Carousel');
 
 require('../css/productDetailStyle.css');
 
-import {productActions} from '../redux/actions/productInfoActions';
+import {productInfoActions} from '../redux/actions/productInfoActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {settlementActions} from '../redux/actions/settlementActions';
 import {specificationActions} from '../redux/actions/specificationActions'
+import {productActions} from '../redux/actions/productActions';
 
 import _h from '../Util/HB';
 
@@ -101,7 +102,7 @@ const Specifications  = React.createClass({
 
     },
     render: function () {
-        let specNodes = this.props.productInfo.productInfo.specifications.map((item,index)=>{
+        let specNodes = this.props.product.specifications.map((item,index)=>{
             let contentNodes = _h.obj.isArray(item.content)?
                 item.content.map((contentItem,index)=>{
                 return (
@@ -125,6 +126,16 @@ const Specifications  = React.createClass({
                 <ul>
                     {specNodes}
                 </ul>
+
+                <div>
+                    <span>数量</span>
+                    <div>
+                        <span>-</span>
+                        <input type="text"/>
+                        <span>+</span>
+                    </div>
+                </div>
+
                 <div onClick={this.buyProduct}>确定</div>
             </div>
         )
@@ -132,7 +143,7 @@ const Specifications  = React.createClass({
 });
 
 
-var ShopFooter = React.createClass({
+const ShopFooter = React.createClass({
 
     showSpecifications:function(isBuyNow){
         return ()=>{
@@ -171,14 +182,16 @@ function mapStatetoProps(state){
         productInfo:state.productInfo,
         shoppingCart:state.shoppingCart,
         historyUrls:state.historyUrls,
-        specification:state.specification
+        specification:state.specification,
+        product:state.product
     }
 }
 function mapDispatchToProps(dispatch){
 
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
-        productInfoActionKeys:bindActionCreators(productActions,dispatch),
+        productInfoActionKeys:bindActionCreators(productInfoActions,dispatch),
+        productActionKeys:bindActionCreators(productActions,dispatch),
         shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
         settlementActionKeys : bindActionCreators(settlementActions,dispatch),
         specificationActionKeys:bindActionCreators(specificationActions,dispatch)

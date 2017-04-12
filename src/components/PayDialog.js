@@ -2,6 +2,9 @@
  * Created by LDQ on 2017/4/6.
  */
 
+var React = require('react');
+var {Link} = require('react-router');
+
 const PayDialogHeader  = React.createClass({
 
     hideDialog:function(){

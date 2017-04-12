@@ -8,7 +8,7 @@ import {GET_ODDS} from './betActionKeys';
 import isCanBet from '../actionModule/betModule';
 
 
-export var betActions = {
+export const betActions = {
     immediatelyBet : (money)=>{
 
         return (dispatch,getState)=>{
@@ -16,9 +16,22 @@ export var betActions = {
             let stockGameId = getState().storage.stockGameId;
             let guessType = getState().storage.guessType;
             let accountMoney = getState().account.xtbTotalAmount;
-            isCanBet(money,accountMoney);
-            console.log(isCanBet);
+            // isCanBet(money,accountMoney);
 
+            let isCanBet = isCanBet(money,accountMoney);
+
+
+            if(isCanBet){
+                // postBetInfo().then(()=>{
+                //    确认投注弹出窗口信息data = {}
+                //    dispatch({type:'SHOW_DIALOG',data});
+                // })
+                console.log('投注成功');
+            }else{
+                console.log('投注失败-------',isCanBet)
+                // let failDialog = isCanBet;
+                // dispatch({type:'SHOW_DIALOG',failDialog});
+            }
 
             if(money >= 10){
                 let postData = {

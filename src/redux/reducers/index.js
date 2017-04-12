@@ -34,6 +34,8 @@ import {purchaseGame} from './purchaseGame';
 import {bidOrder} from './bidOrder';
 import {settlement} from './settlement';
 import {specification} from './specification';
+import {product} from './product';
+
 
 const rootReducer = combineReducers({
     account,
@@ -51,6 +53,7 @@ const rootReducer = combineReducers({
     loginInfo,
     order,
     pay,
+    product,
     productInfo,
     provinces,
     purchaseGame,
