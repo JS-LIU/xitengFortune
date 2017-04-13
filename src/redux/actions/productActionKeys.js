@@ -4,3 +4,4 @@
 
 export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const INCREASE_NUM = 'INCREASE_NUM';
+export const SET_BELONG = 'SET_BELONG';

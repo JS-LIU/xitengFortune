@@ -64,12 +64,9 @@ var ProductDetails = React.createClass({
                 </div>
 
                 <ShopFooter
-                    addProductItem={this.props.shoppingCartActionKeys.addProductItem}
-                    productInfo={productInfo}
                     shoppingCart={this.props.shoppingCart}
-                    shoppingCartActionKeys={this.props.shoppingCartActionKeys}
-                    settlementActionKeys={this.props.settlementActionKeys}
-                    specificationActionKeys={this.props.specificationActionKeys}
+                    shoppingCartActionKeys = {this.props.shoppingCartActionKeys}
+                    productActionKeys = {this.props.productActionKeys}
                 />
                 {this.props.specification.isShowSpec?
                     <Specifications
@@ -145,9 +142,9 @@ const Specifications  = React.createClass({
 
 const ShopFooter = React.createClass({
 
-    showSpecifications:function(isBuyNow){
+    setProductBelong:function(belong){
         return ()=>{
-            this.props.specificationActionKeys.showSpecPro(isBuyNow);
+            this.props.product.setBelong(belong);
         }
     },
     render:function(){
@@ -155,7 +152,7 @@ const ShopFooter = React.createClass({
         return (
             <ul className="shop_footer w">
                 <li className="shop_service_phone">
-                    <a href="tel:18801233565" className="shop_service_phone_icon w tc">客服</a>
+                    <a href="tel:400-607-8300" className="shop_service_phone_icon w tc">客服</a>
                 </li>
                 <li className="shop_product_cart">
                     <Link to="/ShoppingCart" className="shop_link_cart w">
@@ -163,10 +160,10 @@ const ShopFooter = React.createClass({
                         <span className="shop_cart_total cfff tc">{this.props.shoppingCart.totalNum}</span>
                     </Link>
                 </li>
-                <li className="shop_put_cart tc f16 cfff" onClick={this.showSpecifications(false)} >
+                <li className="shop_put_cart tc f16 cfff" onClick={this.setProductBelong('shoppingCart')} >
                     加入购物车
                 </li>
-                <li className="shop_buy tc f16 cfff" onClick={this.showSpecifications(true)}>
+                <li className="shop_buy tc f16 cfff" onClick={this.setProductBelong('order')}>
                     <div >立即兑换</div>
                 </li>
             </ul>

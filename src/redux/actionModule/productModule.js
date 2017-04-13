@@ -3,14 +3,14 @@
  */
 
 
-import Specification from './specificationModule';
+import _specification from './specificationModule';
 
 
 const product = {
 
     createProduct:{},
     increase:{},
-
+    specification:_specification
 };
 
 
@@ -21,6 +21,7 @@ product.createProduct = function(productInfo){
     });
 };
 
+
 product.increase = function(product){
     let num = product.num ++ ;
 
@@ -28,6 +29,7 @@ product.increase = function(product){
         num:num
     });
 };
+
 
 product.isAllSelected = function(){
 

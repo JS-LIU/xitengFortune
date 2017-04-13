@@ -90,5 +90,9 @@ class SpecOperator{
 
 }
 
+const specOperator = {
 
-module.exports = SpecOperator;
+};
+
+
+module.exports = specOperator;

@@ -12,26 +12,23 @@ import {
     REDUCE,
     EDIT
 } from '../actions/shoppingCartActionKeys';
+import { HIDE_SPEC_PRO } from '../actions/specificationActionKeys';
 
-import { SHOW_SPEC_PRO,HIDE_SPEC_PRO,SYNC_CUSTOMER_SPECIFICATIONS } from '../actions/specificationActionKeys';
-import SpecOperator from '../actionModule/specificationModule';
+import _shoppingCart from '../actionModule/shoppingCardModule';
+
 
 export const shoppingCartActions = {
 
-    addProductItem:(item)=>{
+    addProductItem:()=>{
         return (dispatch,getState)=>{
-            let specOperator = new SpecOperator(getState());
-            let newSpecifications = specOperator.syncCustomerSelectedSpec();
 
-            let isAllSelected = specOperator.isAllSelected(newSpecifications);
-            let newProductItem = specOperator.connect(item,newSpecifications);
-            if(isAllSelected){
-                dispatch({type:'HIDE_SPEC_PRO'});
-                dispatch({type:'SYNC_CUSTOMER_SPECIFICATIONS',newSpecifications});
-                dispatch({type:'ADD_PRODUCTITEM',newProductItem});
-            }else{
-                dispatch({type:'SHOW_SPEC_PRO'});
-            }
+            let products = getState().shoppingCart.products;
+            let product = getState().product.info;
+            let shoppingCartInfo = _shoppingCart.addProductItem(products,product);
+
+            dispatch({type:'HIDE_SPEC_PRO'});
+            dispatch({type:'ADD_PRODUCTITEM',shoppingCartInfo});
+
         }
     },
     calcTotalMoney:()=>{

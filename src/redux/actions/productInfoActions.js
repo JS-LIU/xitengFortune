@@ -3,17 +3,12 @@
  */
 
 
-import {GET_PRODUCTINFO,INCREASE_NUM} from './productInfoActionKeys';
+import {GET_PRODUCTINFO} from './productInfoActionKeys';
 import {CREATE_PRODUCT} from './productActionKeys';
-import {SYNC_SPEC_PRO,HIDE_SPEC_PRO} from './specificationActionKeys';
+import {HIDE_SPEC_PRO} from './specificationActionKeys';
+
 import {productInfo} from '../actionModule/productInfoModule';
-
-import SpecOperator from '../actionModule/specificationModule';
-
 import _product from '../actionModule/productModule';
-
-import _h from '../../Util/HB';
-
 
 export const productInfoActions = {
 
@@ -24,10 +19,10 @@ export const productInfoActions = {
             productInfo.getProductInfo(getState())
                 .then((productInfo)=>{
 
-                dispatch({type:'GET_PRODUCTINFO', productInfo});
-
                 let product = _product.createProduct(productInfo.productInfo);
+
                 dispatch({type:'CREATE_PRODUCT',product});
+                dispatch({type:'GET_PRODUCTINFO', productInfo});
 
             }).catch((error)=>{
                 console.log("error",error);
@@ -35,11 +30,4 @@ export const productInfoActions = {
 
         }
     },
-    increaseNum:(item)=>{
-        return (dispatch,getState)=>{
-
-            let productSpec = new SpecOperator(getState()).increaseNum(item);
-            dispatch({type:'INCREASE_NUM',productSpec});
-        }
-    }
 };

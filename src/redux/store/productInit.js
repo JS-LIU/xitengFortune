@@ -4,8 +4,11 @@
 
 
 export const productInit = {
-    pictures:[],
-    price:0,
-    inventory:0,
-    specifications:[]
+    info:{
+        pictures:[],
+        price:0,
+        inventory:0,
+        specifications:[]
+    },
+    belong:null
 };

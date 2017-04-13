@@ -13,19 +13,6 @@ import {
     EDIT
 } from '../actions/shoppingCartActionKeys';
 
-
-function pushOrAdd(products,item){
-    let product = Object.assign({},item,{checked:true});
-    let productId= product.productId;
-    for(let i = 0;i < products.length;i++){
-        if(products[i].productId === productId){
-            products[i].num += (product.num);
-            return products;
-        }
-    }
-    products = [...products,product];
-    return products;
-}
 function calcTotalMoney(products){
     let realCount = 0;
     products.map((goods,index)=>{
@@ -95,9 +82,9 @@ export const shoppingCart = function(state = {},action){
 
     switch (action.type) {
         case 'ADD_PRODUCTITEM':
-            var productList = pushOrAdd([...state.products],action.newProductItem);
+
             return Object.assign({},state,{
-                products:productList,
+                products:action.productList,
                 realCount:calcTotalMoney(productList),
                 totalNum:calcTotleNum(productList)
             });

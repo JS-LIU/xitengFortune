@@ -2,18 +2,22 @@
  * Created by LDQ on 2017/4/12.
  */
 
-import { INCREASE_NUM } from '../actions/productActionKeys'
+import { CREATE_PRODUCT,SET_BELONG,INCREASE_NUM } from '../actions/productActionKeys'
 
 
 export const product = function (state={},action){
     switch (action.type) {
 
-        case 'INCREASE_NUM':
+        case 'CREATE_PRODUCT':
 
-            let productInfo = state.productInfo;
-            productInfo.specifications = action.productSpec;
             return Object.assign({},state,{
-                productInfo:productInfo
+                info:action.product,
+                belong:null
+            });
+        case 'SET_BELONG':
+
+            return Object.assign({},state,{
+                belong:action.belong
             });
 
         default:
