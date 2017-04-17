@@ -39,7 +39,6 @@ var ConfirmOrder = React.createClass({
                     <Link to="/SelectAddress">请选择地址</Link>
                 </div>)}
                 <ProductList settlement={this.props.settlement}/>
-
                 <div className="cart_footer f16 w">
                     <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
                     <div className="cart_payment_btn fr cfff f20 tc" onClick={this.exchangeProduct}>提交订单</div>
