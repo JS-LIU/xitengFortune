@@ -19,12 +19,15 @@ import _shoppingCart from '../actionModule/shoppingCardModule';
 
 export const shoppingCartActions = {
 
-    addProductItem:()=>{
+    addProduct:(product)=>{
         return (dispatch,getState)=>{
 
             let products = getState().shoppingCart.products;
-            let product = getState().product.info;
-            let shoppingCartInfo = _shoppingCart.addProductItem(products,product);
+            let shoppingCartInfo = _shoppingCart.setShoppingCart({
+                changeList:function(){
+                    return _shoppingCart.addProduct(products,product)
+                }
+            });
 
             dispatch({type:'HIDE_SPEC_PRO'});
             dispatch({type:'ADD_PRODUCTITEM',shoppingCartInfo});

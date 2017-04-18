@@ -7,7 +7,7 @@ const shoppingCart = {
     totalNum:0,
     totalCount:0,
 
-    modificationShoppingCartProductList:{},
+    setShoppingCart:{},
 
     addProduct:{},
     checkProduct:{},
@@ -30,12 +30,12 @@ const iterator = function(productList, condition) {
     }
 };
 
-const compareId = function(product, dosometh, goOn) {
+const compareId = function(product, dosometh, go = true) {
 
     return function(item) {
         if (item.productId === product.productId) {
 
-            if (!goOn) {
+            if (!go) {
                 goOn = false
             }
             return dosometh(item);
@@ -69,7 +69,7 @@ const pushProduct = function(productList, product) {
 
 };
 shoppingCart.addProduct = function(productList,product){
-
+    product.checked = true;
     iterator(productList, compareId(product, addProduct(productList, product),false));
     if (goOn) {
         return pushProduct(productList, product)
@@ -120,20 +120,16 @@ shoppingCart.deleteProducts = function(productList){
     return shoppingCart.productList;
 };
 
-shoppingCart.calcTotalNum = function(){
-    return function(item){
-        shoppingCart.totalNum += item.num;
-    }
+shoppingCart.calcTotalNum = function(item){
+    shoppingCart.totalNum += item.num;
 
 };
-shoppingCart.calcTotalCount = function(){
-    return function(item){
-        shoppingCart.totalCount += (item.num * item.price)
-    }
+shoppingCart.calcTotalCount = function(item){
+    shoppingCart.totalCount += (item.num * item.price)
 
 };
 
-shoppingCart.modificationShoppingCartProductList = function(obj){
+shoppingCart.setShoppingCart = function(obj){
 
     const changeList = obj.changeList || function(){
             throw new Error('必须传changeList方法');
@@ -141,11 +137,10 @@ shoppingCart.modificationShoppingCartProductList = function(obj){
     const calc = function(){
         shoppingCart.totalNum = 0;
         shoppingCart.totalCount = 0;
-        iterator(shoppingCart.productList,isChecked(function(){
-            shoppingCart.calcTotalNum();
-            shoppingCart.calcTotalCount();
+        iterator(shoppingCart.productList,isChecked(function(item){
+            shoppingCart.calcTotalNum(item);
+            shoppingCart.calcTotalCount(item);
         }));
-
         return {
             totalNum:shoppingCart.totalNum,
             totalCount:shoppingCart.totalCount
@@ -154,7 +149,7 @@ shoppingCart.modificationShoppingCartProductList = function(obj){
 
 
     return {
-        newList:changeList(productList,product),
+        productList:changeList(),
         totalNum:calc().totalNum,
         totalCount:calc().totalCount
     }
@@ -163,4 +158,4 @@ shoppingCart.modificationShoppingCartProductList = function(obj){
 
 
 
-exports.module = shoppingCart;
+module.exports = shoppingCart;

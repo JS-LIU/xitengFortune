@@ -82,11 +82,11 @@ export const shoppingCart = function(state = {},action){
 
     switch (action.type) {
         case 'ADD_PRODUCTITEM':
-
+            console.log(action.shoppingCartInfo);
             return Object.assign({},state,{
-                products:action.productList,
-                realCount:calcTotalMoney(productList),
-                totalNum:calcTotleNum(productList)
+                products:action.shoppingCartInfo.productList,
+                realCount:action.shoppingCartInfo.totalCount,
+                totalNum:action.shoppingCartInfo.totalNum
             });
 
         case 'CALC_TOTALMONEY':

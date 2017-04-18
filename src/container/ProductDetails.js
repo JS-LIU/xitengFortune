@@ -70,11 +70,8 @@ var ProductDetails = React.createClass({
                 />
                 {this.props.specification.isShowSpec?
                     <Specifications
-                        productInfo={this.props.productInfo}
-                        productInfoActionKeys={this.props.productInfoActionKeys}
-                        specificationActionKeys={this.props.specificationActionKeys}
+                        product={this.props.product}
                         shoppingCartActionKeys={this.props.shoppingCartActionKeys}
-                        specification={this.props.specification}
                         settlementActionKeys={this.props.settlementActionKeys}
                     />:""}
             </div>
@@ -85,29 +82,35 @@ var ProductDetails = React.createClass({
 
 const Specifications  = React.createClass({
     increaseNum:function(item){
+        this.props.productActionKeys.increaseNum(item);
+    },
+    selectedSpecification:function(item,contentItem){
         return ()=>{
-
-            this.props.productInfoActionKeys.increaseNum(item);
+            this.props.productActionKeys.selectedSpecification(item,contentItem);
         }
     },
     buyProduct:function(){
-        if(this.props.specification.isBuyNow){
-            this.props.settlementActionKeys.pushProducts(this.props.productInfo);
-        }else{
-            this.props.shoppingCartActionKeys.addProductItem(this.props.productInfo);
+        // if(this.props.specification.isBuyNow){
+        //     this.props.settlementActionKeys.pushProducts(this.props.productInfo);
+        // }else{
+        // this.props.shoppingCartActionKeys.addProductItem(this.props.productInfo);
+        // }
+        if(this.props.product.belong == 'shoppingCart'){
+            this.props.shoppingCartActionKeys.addProduct(this.props.product.info);
         }
 
     },
     render: function () {
-        let specNodes = this.props.product.specifications.map((item,index)=>{
-            let contentNodes = _h.obj.isArray(item.content)?
-                item.content.map((contentItem,index)=>{
+        //  todo 暂时用不到这个节点
+        let specNodes = this.props.product.info.specifications.map((item,index)=>{
+            let contentNodes = _h.obj.isArray(item.type)?
+                item.type.map((contentItem,index)=>{
                 return (
-                    <li key={index}>
-                        <span>{contentItem}</span>}
+                    <li key={index} onClick={selectedSpecification(item,contentItem)}>
+                        <span>{contentItem.name}</span>}
                     </li>
                 )
-            }):((<div><div>减</div><div>{item.content}</div><div onClick={this.increaseNum(item)}>加</div></div>));
+            }):"";
             return (
 
                 <li key={index}>
@@ -127,9 +130,9 @@ const Specifications  = React.createClass({
                 <div>
                     <span>数量</span>
                     <div>
-                        <span>-</span>
+                        <span onClick={this.reduceNum}>-</span>
                         <input type="text"/>
-                        <span>+</span>
+                        <span onClick={this.increaseNum}>+</span>
                     </div>
                 </div>
 
@@ -144,7 +147,7 @@ const ShopFooter = React.createClass({
 
     setProductBelong:function(belong){
         return ()=>{
-            this.props.product.setBelong(belong);
+            this.props.productActionKeys.setBelong(belong);
         }
     },
     render:function(){
