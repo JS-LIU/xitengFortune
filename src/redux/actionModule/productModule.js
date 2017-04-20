@@ -3,9 +3,6 @@
  */
 
 
-import _specification from './specificationModule';
-
-
 const product = {
 
     createProduct:{},
@@ -72,7 +69,7 @@ product.specification = function(product){
 
     return {
         selected:selected,
-        isAllSelected:isAllSelected
+        isAllSelected:isAllSelected()
     }
 };
 

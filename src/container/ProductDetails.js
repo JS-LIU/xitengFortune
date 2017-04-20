@@ -90,13 +90,10 @@ const Specifications  = React.createClass({
         }
     },
     buyProduct:function(){
-        // if(this.props.specification.isBuyNow){
-        //     this.props.settlementActionKeys.pushProducts(this.props.productInfo);
-        // }else{
-        // this.props.shoppingCartActionKeys.addProductItem(this.props.productInfo);
-        // }
-        if(this.props.product.belong == 'shoppingCart'){
+        if(this.props.product.belong === 'shoppingCart'){
             this.props.shoppingCartActionKeys.addProduct(this.props.product.info);
+        }else{
+            this.props.settlementActionKeys.addProduct(this.props.product.info);
         }
 
     },

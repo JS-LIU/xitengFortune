@@ -15,7 +15,7 @@ import {
 import { HIDE_SPEC_PRO } from '../actions/specificationActionKeys';
 
 import _shoppingCart from '../actionModule/shoppingCardModule';
-
+import _product from '../actionModule/productModule';
 
 export const shoppingCartActions = {
 
@@ -23,15 +23,17 @@ export const shoppingCartActions = {
         return (dispatch,getState)=>{
 
             let products = getState().shoppingCart.products;
-            let shoppingCartInfo = _shoppingCart.setShoppingCart({
-                changeList:function(){
-                    return _shoppingCart.addProduct(products,product)
-                }
-            });
 
-            dispatch({type:'HIDE_SPEC_PRO'});
-            dispatch({type:'ADD_PRODUCTITEM',shoppingCartInfo});
+            if(_product.specification(product).isAllSelected){
+                let shoppingCartInfo = _shoppingCart.getListInfo({
+                    changeList:function(){
+                        return _shoppingCart.addProduct(products,product)
+                    }
+                });
 
+                dispatch({type:'HIDE_SPEC_PRO'});
+                dispatch({type:'ADD_PRODUCTITEM',shoppingCartInfo});
+            }
         }
     },
     calcTotalMoney:()=>{

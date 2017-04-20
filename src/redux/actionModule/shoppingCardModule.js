@@ -7,7 +7,7 @@ const shoppingCart = {
     totalNum:0,
     totalCount:0,
 
-    setShoppingCart:{},
+    getListInfo:{},
 
     addProduct:{},
     checkProduct:{},
@@ -53,29 +53,91 @@ const isChecked = function(dosometh){
     }
 };
 
+const isUnChecked = function(dosometh){
+    return function(item){
+        if(!item.checked){
+            return dosometh(item);
+        }
+    }
+};
+
 const addProduct = function(productList, product) {
 
     return function(item) {
         item.num += product.num;
-        shoppingCart.productList = productList;
-        return shoppingCart;
     }
 };
 
 const pushProduct = function(productList, product) {
-
-    shoppingCart.productList.push(product);
-    return shoppingCart.productList;
+    productList.push(product);
 
 };
+
 shoppingCart.addProduct = function(productList,product){
     product.checked = true;
-    iterator(productList, compareId(product, addProduct(productList, product),false));
+    shoppingCart.productList = productList;
+
+    iterator(shoppingCart.productList, compareId(product, addProduct(shoppingCart.productList, product),false));
     if (goOn) {
-        return pushProduct(productList, product)
+        pushProduct(shoppingCart.productList, product)
     }
     return shoppingCart.productList;
 };
+
+shoppingCart.calcTotalNum = function(item){
+    shoppingCart.totalNum += item.num;
+
+};
+shoppingCart.calcTotalCount = function(item){
+    shoppingCart.totalCount += (item.num * item.price)
+
+};
+
+//  获取 未选中 商品列表
+shoppingCart.deleteProducts = function(productList){
+    shoppingCart.productList = [];
+    iterator(productList, isUnChecked(function(item){
+        shoppingCart.productList.push(item);
+    }));
+};
+shoppingCart.checkedProduct = function(productList){
+    shoppingCart.productList = [];
+    iterator(productList, isChecked(function(item){
+        shoppingCart.productList.push(item);
+    }));
+};
+shoppingCart.getListInfo = function(obj){
+
+    const changeList = obj.changeList || function(){
+            throw new Error('必须传changeList方法');
+        };
+    const calc = function(){
+        shoppingCart.totalNum = 0;
+        shoppingCart.totalCount = 0;
+        iterator(shoppingCart.productList,isChecked(function(item){
+            shoppingCart.calcTotalNum(item);
+            shoppingCart.calcTotalCount(item);
+        }));
+        return {
+            totalNum:shoppingCart.totalNum,
+            totalCount:shoppingCart.totalCount
+        }
+    };
+
+
+    return {
+        productList:changeList(),
+        totalNum:calc().totalNum,
+        totalCount:calc().totalCount
+    }
+
+};
+
+
+
+module.exports = shoppingCart;
+
+
 
 shoppingCart.increase = function(productList,product){
 
@@ -119,43 +181,3 @@ shoppingCart.deleteProducts = function(productList){
     }
     return shoppingCart.productList;
 };
-
-shoppingCart.calcTotalNum = function(item){
-    shoppingCart.totalNum += item.num;
-
-};
-shoppingCart.calcTotalCount = function(item){
-    shoppingCart.totalCount += (item.num * item.price)
-
-};
-
-shoppingCart.setShoppingCart = function(obj){
-
-    const changeList = obj.changeList || function(){
-            throw new Error('必须传changeList方法');
-        };
-    const calc = function(){
-        shoppingCart.totalNum = 0;
-        shoppingCart.totalCount = 0;
-        iterator(shoppingCart.productList,isChecked(function(item){
-            shoppingCart.calcTotalNum(item);
-            shoppingCart.calcTotalCount(item);
-        }));
-        return {
-            totalNum:shoppingCart.totalNum,
-            totalCount:shoppingCart.totalCount
-        }
-    };
-
-
-    return {
-        productList:changeList(),
-        totalNum:calc().totalNum,
-        totalCount:calc().totalCount
-    }
-
-};
-
-
-
-module.exports = shoppingCart;
