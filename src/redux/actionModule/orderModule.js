@@ -43,7 +43,6 @@
 // const chainOrderProducts = new _h.design.Chain(orderProducts);
 // chainOrderDiamonds.setNextSuccessor(chainOrderProducts);
 
-import _shoppingCart from './shoppingCardModule';
 const order = {
     productList: [],
 
@@ -53,6 +52,15 @@ const order = {
     productType: ""
 };
 
+const setOrderProductList = function(products,fn) {
+    if (Array.isArray(products)) {
+        order.productList = fn;
+    } else {
+        order.productList = [products];
+    }
+    return order.productList;
+};
+
 const calcTotalMoney = function(item) {
     order.totalPrice += (item.num * item.price)
 };
@@ -60,26 +68,7 @@ const calcTotalNum = function(item) {
     order.totalProductCount += item.num;
 };
 
-
-const getOrderProductList = function(products) {
-    if (Array.isArray(products)) {
-        order.productList = _shoppingCart.getListInfo({
-            changeList: function() {
-                return _shoppingCart.checkedProducts(products)
-            }
-        });
-    } else {
-        order.productList = [products];
-    }
-
-
-    return order.productList;
-};
-
-
-order.orderListInfo = function(products) {
-
-
+order.orderListInfo = function(products,fn) {
     const calc = function() {
         order.totalPrice = 0;
         order.totalProductCount = 0;
@@ -89,16 +78,38 @@ order.orderListInfo = function(products) {
         }
     };
 
-
     return {
-        productList: getOrderProductList(products),
+        productList: setOrderProductList(),
         totalPrice: order.totalPrice,
         totalProductCount: order.totalProductCount
     }
 };
 
-order.createOrder = function(fn, path) {
+order.createOrder = function(path) {
 
+
+};
+const buyDiamonds = function(accessInfo){
+    if(path === "/createTradeOrder"){
+        let data = {
+            accessInfo:accessInfo,
+            productList:{},
+
+        }
+    }
+};
+
+
+
+Function.prototype.after = function(fn) {
+    let self = this;
+    return function() {
+        let ret = self.apply(this, arguments);
+        if (ret === "nextSuccessor") {
+            return fn.apply(this.arguments);
+        }
+        return ret;
+    }
 
 };
 module.exports = order;

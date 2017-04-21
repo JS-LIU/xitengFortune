@@ -15,9 +15,9 @@ require('../css/productDetailStyle.css');
 import {productInfoActions} from '../redux/actions/productInfoActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
-import {settlementActions} from '../redux/actions/settlementActions';
-import {specificationActions} from '../redux/actions/specificationActions'
 import {productActions} from '../redux/actions/productActions';
+import {orderActions} from '../redux/actions/orderActions';
+
 
 import _h from '../Util/HB';
 
@@ -72,7 +72,7 @@ var ProductDetails = React.createClass({
                     <Specifications
                         product={this.props.product}
                         shoppingCartActionKeys={this.props.shoppingCartActionKeys}
-                        settlementActionKeys={this.props.settlementActionKeys}
+                        orderActionKeys={this.props.orderActionKeys}
                     />:""}
             </div>
         )
@@ -93,7 +93,8 @@ const Specifications  = React.createClass({
         if(this.props.product.belong === 'shoppingCart'){
             this.props.shoppingCartActionKeys.addProduct(this.props.product.info);
         }else{
-            this.props.settlementActionKeys.addProduct(this.props.product.info);
+
+            this.props.orderActionKeys.createProductList(this.props.product.info);
         }
 
     },
@@ -190,8 +191,7 @@ function mapDispatchToProps(dispatch){
         productInfoActionKeys:bindActionCreators(productInfoActions,dispatch),
         productActionKeys:bindActionCreators(productActions,dispatch),
         shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
-        settlementActionKeys : bindActionCreators(settlementActions,dispatch),
-        specificationActionKeys:bindActionCreators(specificationActions,dispatch)
+        orderActionKeys:bindActionCreators(orderActions,dispatch)
     }
 }
 
