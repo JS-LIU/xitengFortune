@@ -4,7 +4,7 @@
 
 import { SET_BELONG } from './productActionKeys';
 import _product from '../actionModule/productModule';
-import {SHOW_SPEC_PRO} from './specificationActionKeys';
+import {SHOW_SPEC_PRO,INCREASE_NUM,REDUCE_NUM} from './specificationActionKeys';
 
 import _h from '../../Util/HB';
 
@@ -14,6 +14,22 @@ export const productActions = {
         return (dispatch,getState)=>{
             dispatch({type:'SHOW_SPEC_PRO'});
             dispatch({type:'SET_BELONG',belong});
+
+        }
+    },
+    increaseNum:(product)=>{
+        return (dispatch,getState)=>{
+
+            let productInfo = _product.increaseNum(product);
+            dispatch({type:'INCREASE_NUM',productInfo});
+
+        }
+    },
+    reduceNum:(product)=>{
+        return (dispatch,getState)=>{
+
+            let productInfo = _product.reduceNum(product);
+            dispatch({type:'REDUCE_NUM',productInfo});
 
         }
     }

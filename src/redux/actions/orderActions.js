@@ -2,27 +2,26 @@
  * Created by LDQ on 2017/4/20.
  */
 
+import { CREATE_ORDER_LIST_INFO,CREATE_ORDER } from './orderActionKeys';
+
 import _order from '../actionModule/orderModule';
 
 export const orderActions = {
 
-    createProductList: (products)=>{
+    createOrderListInfo: (products)=>{
         return (dispatch,getState)=>{
 
             let orderListInfo = _order.orderListInfo(products);
-            dispatch({type:'PUSH_PRODUCTS', orderListInfo});
+            dispatch({type:'CREATE_ORDER_LIST_INFO', orderListInfo});
         }
     },
-    clearProducts: ()=>{
-        return {
-            type: CLEAR_PRODUCTS
-        }
-    },
-    createOrder:()=>{
+    createOrder:(path)=>{
         return (dispatch,getState)=>{
 
-            _order.createOrder(getState()).then((orderInfo)=>{
-                dispatch({type:'PUSH_PRODUCTS', orderInfo});
+            _order.createOrder(path,getState()).then((dealInfo)=>{
+                console.log("success-orderActions-createOrder-dealInfo======",dealInfo);
+
+                dispatch({type:'CREATE_ORDER', dealInfo});
             });
 
         }

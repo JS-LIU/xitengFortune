@@ -8,7 +8,8 @@ export const productInit = {
         pictures:[],
         price:0,
         inventory:0,
-        specifications:[]
+        specifications:[],
+        num:1
     },
     belong:null
 };

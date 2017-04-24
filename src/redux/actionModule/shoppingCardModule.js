@@ -2,6 +2,8 @@
  * Created by LDQ on 2017/4/13.
  */
 
+import _product from './productModule';
+
 const shoppingCart = {
     productList:[],
     totalNum:0,
@@ -77,11 +79,14 @@ shoppingCart.addProduct = function(productList,product){
     product.checked = true;
     shoppingCart.productList = productList;
 
+    //  todo 是否选择了规格
+
     iterator(shoppingCart.productList, compareId(product, addProduct(shoppingCart.productList, product),false));
     if (goOn) {
         pushProduct(shoppingCart.productList, product)
     }
     return shoppingCart.productList;
+
 };
 
 shoppingCart.calcTotalNum = function(item){
@@ -114,6 +119,7 @@ shoppingCart.getListInfo = function(obj){
     const calc = function(){
         shoppingCart.totalNum = 0;
         shoppingCart.totalCount = 0;
+
         iterator(shoppingCart.productList,isChecked(function(item){
             shoppingCart.calcTotalNum(item);
             shoppingCart.calcTotalCount(item);

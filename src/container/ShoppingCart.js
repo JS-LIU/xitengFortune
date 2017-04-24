@@ -18,7 +18,6 @@ var ShoppingCart = React.createClass({
 
     componentWillMount:function () {
         this.props.historyUrlsActionKeys.pushUrl('/ShoppingCart');
-        this.props.shoppingCartActionKeys.calcTotalMoney();
         this.props.historyUrlsActionKeys.mark('/ShoppingCart');
     },
     allCheck:function(){

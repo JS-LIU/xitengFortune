@@ -2,7 +2,7 @@
  * Created by LDQ on 2017/4/12.
  */
 
-import { CREATE_PRODUCT,SET_BELONG,INCREASE_NUM } from '../actions/productActionKeys'
+import { CREATE_PRODUCT,SET_BELONG,INCREASE_NUM,REDUCE_NUM } from '../actions/productActionKeys'
 
 
 export const product = function (state={},action){
@@ -19,7 +19,16 @@ export const product = function (state={},action){
             return Object.assign({},state,{
                 belong:action.belong
             });
+        case 'INCREASE_NUM':
 
+            return Object.assign({},state,{
+                info:action.productInfo
+            });
+        case 'REDUCE_NUM':
+
+            return Object.assign({},state,{
+                info:action.productInfo
+            });
         default:
             return state
     }

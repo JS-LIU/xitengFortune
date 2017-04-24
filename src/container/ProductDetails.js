@@ -84,27 +84,23 @@ const Specifications  = React.createClass({
     increaseNum:function(item){
         this.props.productActionKeys.increaseNum(item);
     },
-    selectedSpecification:function(item,contentItem){
-        return ()=>{
-            this.props.productActionKeys.selectedSpecification(item,contentItem);
-        }
+    reduceNum:function(item){
+        this.props.productActionKeys.reduceNum(item);
     },
     buyProduct:function(){
         if(this.props.product.belong === 'shoppingCart'){
             this.props.shoppingCartActionKeys.addProduct(this.props.product.info);
         }else{
-
-            this.props.orderActionKeys.createProductList(this.props.product.info);
+            this.props.orderActionKeys.createOrderListInfo(this.props.product.info);
         }
-
     },
     render: function () {
-        //  todo 暂时用不到这个节点
+        //  todo 没有样式
         let specNodes = this.props.product.info.specifications.map((item,index)=>{
             let contentNodes = _h.obj.isArray(item.type)?
                 item.type.map((contentItem,index)=>{
                 return (
-                    <li key={index} onClick={selectedSpecification(item,contentItem)}>
+                    <li key={index}>
                         <span>{contentItem.name}</span>}
                     </li>
                 )
@@ -133,8 +129,8 @@ const Specifications  = React.createClass({
                         <span onClick={this.increaseNum}>+</span>
                     </div>
                 </div>
-
-                <div onClick={this.buyProduct}>确定</div>
+                //  todo 跳转页面的判断方式需要通过【规格是否全选】参数来判断
+                <Link to={this.props.product.belong === "shoppingCart"?'/ProductDetals':'/ConfirmOrder'} onClick={this.buyProduct}>确定</Link>
             </div>
         )
     }

@@ -6,7 +6,8 @@
 const product = {
 
     createProduct:{},
-    increase:{},
+    increaseNum:{},
+    reduceNum:{},
     specification:{}
 };
 
@@ -19,17 +20,29 @@ product.createProduct = function(productInfo){
 };
 
 
-product.increase = function(product){
-    let num = product.num ++ ;
+product.increaseNum = function(product,max = 99999){
+    let num = product.num--;
+    if(num < max){
+        return Object.assign({},product,{
+            num: num
+        });
+    }
+    return product;
 
-    return Object.assign({},product,{
-        num:num
-    });
 };
 
+product.reduceNum = function(product,min = 1){
+    let num = product.num--;
+    if(num > min){
+        return Object.assign({},product,{
+            num: num
+        });
+    }
+    return product;
+};
 
 product.specification = function(product){
-    //  todo 暂时不需要这个方法 之后再重构
+    //  todo 选择 缺少判断：isAllSelected  需要返回值 是否全选
     const selected = function(specification,type){
         for(let i = 0,item;item = product.specifications[ i++ ]; ){
             if(item.id === specification.id){
