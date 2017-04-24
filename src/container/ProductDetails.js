@@ -21,7 +21,7 @@ import {orderActions} from '../redux/actions/orderActions';
 
 import _h from '../Util/HB';
 
-var ProductDetails = React.createClass({
+const ProductDetails = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/ProductDetails');
         this.props.productInfoActionKeys.getProductInfo();

@@ -3,28 +3,28 @@
  */
 
 import _order from '../actionModule/orderModule';
-import _shoppingCart from '../actionModule/shoppingCardModule';
 
 export const orderActions = {
 
     createProductList: (products)=>{
         return (dispatch,getState)=>{
-            let orderListInfo;
-            if(!Array.isArray(products)){
-                let productList = Object.assign({},)
-            }else{
-                orderListInfo =
-            }
 
-
-            let productListInfo = _order.orderListInfo(products,_shoppingCart.checkedProduct);
-
-            dispatch({type:'PUSH_PRODUCTS', productListInfo});
+            let orderListInfo = _order.orderListInfo(products);
+            dispatch({type:'PUSH_PRODUCTS', orderListInfo});
         }
     },
     clearProducts: ()=>{
         return {
             type: CLEAR_PRODUCTS
+        }
+    },
+    createOrder:()=>{
+        return (dispatch,getState)=>{
+
+            _order.createOrder(getState()).then((orderInfo)=>{
+                dispatch({type:'PUSH_PRODUCTS', orderInfo});
+            });
+
         }
     }
 
