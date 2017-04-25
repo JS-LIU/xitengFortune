@@ -3,6 +3,7 @@
  */
 
 import _product from './productModule';
+import _h from '../../Util/HB';
 
 const shoppingCart = {
     productList:[],
@@ -14,7 +15,7 @@ const shoppingCart = {
     addProduct:{},
     checkProduct:{},
     deleteProducts:{},
-    increase:{},
+    changeNum:{},
     calcTotalNum:{},
     calcTotalMoney:{}
 };
@@ -73,6 +74,31 @@ const addProduct = function(productList, product) {
 const pushProduct = function(productList, product) {
     productList.push(product);
 
+};
+shoppingCart.increaseNum = function(productList,product){
+    shoppingCart.productList = productList;
+
+    iterator(shoppingCart.productList, compareId(product, function(item){
+        item.num ++;
+    }));
+    return shoppingCart.productList;
+
+};
+shoppingCart.reduceNum = function(productList,product){
+    shoppingCart.productList = productList;
+
+    iterator(shoppingCart.productList, compareId(product, function(item){
+        item.num --;
+    }));
+    return shoppingCart.productList;
+};
+shoppingCart.setNum = function(productList,product,num){
+    shoppingCart.productList = productList;
+
+    iterator(shoppingCart.productList, compareId(product, function(item,num){
+        item.num = num;
+    }));
+    return shoppingCart.productList;
 };
 
 shoppingCart.addProduct = function(productList,product){

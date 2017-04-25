@@ -80,18 +80,6 @@ const exchangeProductsOrder = function(path,state){
 
 order.createOrder = buyDiamondsOrder.after(exchangeProductsOrder);
 
-
-Function.prototype.after = function(fn) {
-    let self = this;
-    return function() {
-        let ret = self.apply(this, arguments);
-        if (ret === "nextSuccessor") {
-            return fn.apply(this.arguments);
-        }
-        return ret;
-    }
-
-};
 module.exports = order;
 
 
