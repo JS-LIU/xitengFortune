@@ -4,12 +4,12 @@
 
 import {
     ADD_PRODUCTITEM,
+    INCREASENUM,
+    REDUCENUM,
     CALC_TOTALMONEY,
     DELETE_PRODUCTS,
     CHECKED_ITEM,
     ALLCHECKED,
-    INCREASE,
-    REDUCE,
     EDIT
 } from '../actions/shoppingCartActionKeys';
 import { HIDE_SPEC_PRO } from '../actions/specificationActionKeys';
@@ -32,10 +32,77 @@ export const shoppingCartActions = {
                 });
 
                 dispatch({type:'HIDE_SPEC_PRO'});
-                dispatch({type:'ADD_PRODUCTITEM',shoppingCartInfo});
+                dispatch({type:'CHANGE_PRODUCT_LIST',shoppingCartInfo});
             }
         }
     },
+    increaseNum:(product)=>{
+        return (dispatch,getState)=>{
+            let products = getState().shoppingCart.products;
+            let shoppingCartInfo = _shoppingCart.getListInfo({
+                changeList:function(){
+                    return _shoppingCart.increaseNum(products,product)
+                }
+            });
+
+            dispatch({type:'CHANGE_PRODUCT_LIST',shoppingCartInfo});
+        }
+    },
+    reduceNum:(product)=>{
+        return (dispatch,getState)=>{
+            let products = getState().shoppingCart.products;
+            let shoppingCartInfo = _shoppingCart.getListInfo({
+                changeList:function(){
+                    return _shoppingCart.reduceNum(products,product)
+                }
+            });
+
+            dispatch({type:'CHANGE_PRODUCT_LIST',shoppingCartInfo});
+        }
+    },
+    checkProduct:(product)=>{
+        return (dispatch,getState)=>{
+            let products = getState().shoppingCart.products;
+            let shoppingCartInfo = _shoppingCart.getListInfo({
+                changeList:function(){
+                    return _shoppingCart.checkProduct(products,product)
+                }
+            });
+
+            dispatch({type:'CHANGE_PRODUCT_LIST',shoppingCartInfo});
+        }
+    },
+    allCheck:()=>{
+        return (dispatch,getState)=>{
+            let products = getState().shoppingCart.products;
+            let isAllChecked = getState().shoppingCart.allChecked;
+            let shoppingCartInfo = _shoppingCart.getListInfo({
+                changeList:function(){
+                    return _shoppingCart.allCheck(products,isAllChecked)
+                }
+            });
+
+            dispatch({type:'CHANGE_PRODUCT_LIST',shoppingCartInfo});
+        }
+    },
+    deleteProducts:()=>{
+        return (dispatch,getState)=>{
+            let products = getState().shoppingCart.products;
+            let shoppingCartInfo = _shoppingCart.getListInfo({
+                changeList:function(){
+                    return _shoppingCart.deleteProducts(products)
+                }
+            });
+
+            dispatch({type:'CHANGE_PRODUCT_LIST',shoppingCartInfo});
+        }
+    },
+    edit:()=>{
+        return {
+            type:EDIT
+        }
+    },
+
     calcTotalMoney:()=>{
         return {
             type:CALC_TOTALMONEY
@@ -47,12 +114,12 @@ export const shoppingCartActions = {
             index
         }
     },
-    allCheck:(bool=true)=>{
-        return {
-            type:ALLCHECKED,
-            bool
-        }
-    },
+    // allCheck:(bool=true)=>{
+    //     return {
+    //         type:ALLCHECKED,
+    //         bool
+    //     }
+    // },
     increase:(index)=>{
         return{
             type:INCREASE,
@@ -65,15 +132,11 @@ export const shoppingCartActions = {
             index
         }
     },
-    deleteProducts:()=>{
-        return {
-            type:DELETE_PRODUCTS
-        }
-    },
-    edit:()=>{
-        return {
-            type:EDIT
-        }
-    }
+    // deleteProducts:()=>{
+    //     return {
+    //         type:DELETE_PRODUCTS
+    //     }
+    // },
+
 
 };

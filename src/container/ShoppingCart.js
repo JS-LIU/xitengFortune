@@ -63,23 +63,23 @@ var ShoppingCart = React.createClass({
 
 
 var ProductList = React.createClass({
-    checkedProduct:function(index){
+    increaseNum:function(product){
         return ()=>{
-            this.props.shoppingCartActionKeys.checkedItem(index);
+            this.props.shoppingCartActionKeys.increaseNum(product)
+        }
+    },
+    reduceNum:function(product){
+        return ()=>{
+            this.props.shoppingCartActionKeys.reduceNum(product)
+        }
+    },
+    checkProduct:function(product){
+        return ()=>{
+            this.props.shoppingCartActionKeys.checkProduct(product);
         }
     },
     edit:function(){
         this.props.shoppingCartActionKeys.edit();
-    },
-    increase:function(index){
-        return ()=>{
-            this.props.shoppingCartActionKeys.increase(index)
-        }
-    },
-    reduce:function(index){
-        return ()=>{
-            this.props.shoppingCartActionKeys.reduce(index)
-        }
     },
     allCheck:function(){
         this.props.shoppingCartActionKeys.allCheck();
@@ -92,7 +92,7 @@ var ProductList = React.createClass({
                         <input
                             type="checkbox"
                             checked={item.checked}
-                            onChange={this.checkedProduct(index)}/>
+                            onChange={this.checkProduct(item)}/>
                     </div>
 
                     <div className="cart_product_pic m10 tc">
@@ -106,9 +106,9 @@ var ProductList = React.createClass({
                         </p>
                     </div>
                     <div className="cart_ctrl po">
-                        <span onClick={this.reduce(index)} className="cart_ctrl_reduce">-</span>
+                        <span onClick={this.reduceNum(item)} className="cart_ctrl_reduce">-</span>
                         <span className="cart_ctrl_num">{item.num}</span>
-                        <span onClick={this.increase(index)} className="cart_ctrl_increase">+</span>
+                        <span onClick={this.increaseNum(item)} className="cart_ctrl_increase">+</span>
                     </div>
                 </li>
             )

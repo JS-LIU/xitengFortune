@@ -168,6 +168,7 @@ HB.valid = (function(){
             num = num.substr(item);
             newPhoneNum.push(newNum);
         });
+        newPhoneNum.push(num);
         return newPhoneNum.join(str).trim();
     }
 

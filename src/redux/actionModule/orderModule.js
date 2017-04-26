@@ -15,7 +15,7 @@ const order = {
 
 const setOrderProductList = function(products) {
     if (Array.isArray(products)) {
-        order.productList = _shoppingCart.checkedProduct(products);
+        order.productList = _shoppingCart.getCheckededProducts(products);
     } else {
         //  todo 缺少判断：是否选择了规格
 

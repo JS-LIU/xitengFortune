@@ -129,7 +129,6 @@ const Specifications  = React.createClass({
                         <span onClick={this.increaseNum}>+</span>
                     </div>
                 </div>
-                //  todo 跳转页面的判断方式需要通过【规格是否全选】参数来判断
                 <Link to={this.props.product.belong === "shoppingCart"?'/ProductDetals':'/ConfirmOrder'} onClick={this.buyProduct}>确定</Link>
             </div>
         )

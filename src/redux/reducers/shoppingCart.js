@@ -3,13 +3,14 @@
  */
 
 import {
+    CHANGE_PRODUCT_LIST,
     ADD_PRODUCTITEM,
     CALC_TOTALMONEY,
-    DELETE_PRODUCTS,
+    INCREASENUM,
+    REDUCENUM,
     CHECKED_ITEM,
+    DELETE_PRODUCTS,
     ALLCHECKED,
-    INCREASE,
-    REDUCE,
     EDIT
 } from '../actions/shoppingCartActionKeys';
 
@@ -81,12 +82,55 @@ function calcTotleNum(products){
 export const shoppingCart = function(state = {},action){
 
     switch (action.type) {
-        case 'ADD_PRODUCTITEM':
-            console.log(action.shoppingCartInfo);
+
+        case 'CHANGE_PRODUCT_LIST':
             return Object.assign({},state,{
                 products:action.shoppingCartInfo.productList,
                 realCount:action.shoppingCartInfo.totalCount,
-                totalNum:action.shoppingCartInfo.totalNum
+                totalNum:action.shoppingCartInfo.totalNum,
+                allChecked:action.setProductInfo.isAllChecked
+            });
+
+        case 'ADD_PRODUCTITEM':
+            return Object.assign({},state,{
+                products:action.shoppingCartInfo.productList,
+                realCount:action.shoppingCartInfo.totalCount,
+                totalNum:action.shoppingCartInfo.totalNum,
+                allChecked:action.setProductInfo.isAllChecked
+            });
+        case 'INCREASENUM':
+            return Object.assign({},state,{
+                products:action.shoppingCartInfo.productList,
+                realCount:action.shoppingCartInfo.totalCount,
+                totalNum:action.shoppingCartInfo.totalNum,
+                allChecked:action.setProductInfo.isAllChecked
+            });
+
+        case 'REDUCENUM':
+            return Object.assign({},state,{
+                products:action.shoppingCartInfo.productList,
+                realCount:action.shoppingCartInfo.totalCount,
+                totalNum:action.shoppingCartInfo.totalNum,
+                allChecked:action.setProductInfo.isAllChecked
+            });
+        case 'DELETE_PRODUCTS':
+            return Object.assign({},state,{
+                products:action.shoppingCartInfo.productList,
+                realCount:action.shoppingCartInfo.totalCount,
+                totalNum:action.shoppingCartInfo.totalNum,
+                allChecked:action.setProductInfo.isAllChecked
+            });
+        case 'CHECKED_ITEM':
+            return Object.assign({},state,{
+                products:action.shoppingCartInfo.productList,
+                realCount:action.shoppingCartInfo.totalCount,
+                totalNum:action.shoppingCartInfo.totalNum,
+                allChecked:action.setProductInfo.isAllChecked
+            });
+        case 'EDIT':
+            let edit = state.edit;
+            return Object.assign({},state,{
+                edit:!edit
             });
 
         case 'CALC_TOTALMONEY':
@@ -94,13 +138,7 @@ export const shoppingCart = function(state = {},action){
                 realCount:calcTotalMoney(state.products)
             });
 
-        case 'CHECKED_ITEM':
-            let productList = checkedItem([...state.products],action.index);
-            return Object.assign({},state,{
-                products:productList,
-                realCount:calcTotalMoney(productList),
-                allChecked:isAllChecked(productList)
-            });
+
 
         case 'ALLCHECKED':
             let newState = allCheck(state,action.bool);
@@ -110,36 +148,8 @@ export const shoppingCart = function(state = {},action){
                 realCount:calcTotalMoney(newState.productList)
             });
 
-        case 'INCREASE':
-            var productList = increase([...state.products],action.index);
-            return Object.assign({},state,{
-                products:productList,
-                realCount:calcTotalMoney(productList),
-                totalNum:calcTotleNum(productList)
-            });
 
-        case 'REDUCE':
-            var productList = reduce([...state.products],action.index);
-            return Object.assign({},state,{
-                products:productList,
-                realCount:calcTotalMoney(productList),
-                totalNum:calcTotleNum(productList)
-            });
 
-        case 'DELETE_PRODUCTS':
-            var productList = deleteProducts([...state.products]);
-            return Object.assign({},state,{
-                products:productList,
-                realCount:calcTotalMoney(productList),
-                allChecked:isAllChecked(productList),
-                totalNum:calcTotleNum(productList)
-            });
-
-        case 'EDIT':
-            let edit = state.edit;
-            return Object.assign({},state,{
-                edit:!edit
-            });
         default:
             return state;
     }
