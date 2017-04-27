@@ -21,7 +21,7 @@ product.createProduct = function(productInfo){
 
 
 product.increaseNum = function(product,max = 99999){
-    let num = product.num--;
+    let num = product.num + 1;
     if(num < max){
         return Object.assign({},product,{
             num: num
@@ -31,8 +31,8 @@ product.increaseNum = function(product,max = 99999){
 
 };
 
-product.reduceNum = function(product,min = 1){
-    let num = product.num--;
+product.reduceNum = function(product,min = 0){
+    let num = product.num - 1;
     if(num > min){
         return Object.assign({},product,{
             num: num

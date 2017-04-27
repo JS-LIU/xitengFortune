@@ -3,13 +3,7 @@
  */
 
 import {
-    ADD_PRODUCTITEM,
-    INCREASENUM,
-    REDUCENUM,
-    CALC_TOTALMONEY,
-    DELETE_PRODUCTS,
-    CHECKED_ITEM,
-    ALLCHECKED,
+    CHANGE_PRODUCT_LIST,
     EDIT
 } from '../actions/shoppingCartActionKeys';
 import { HIDE_SPEC_PRO } from '../actions/specificationActionKeys';
@@ -81,7 +75,6 @@ export const shoppingCartActions = {
                     return _shoppingCart.allCheck(products,isAllChecked)
                 }
             });
-
             dispatch({type:'CHANGE_PRODUCT_LIST',shoppingCartInfo});
         }
     },
@@ -101,42 +94,5 @@ export const shoppingCartActions = {
         return {
             type:EDIT
         }
-    },
-
-    calcTotalMoney:()=>{
-        return {
-            type:CALC_TOTALMONEY
-        }
-    },
-    checkedItem:(index)=>{
-        return {
-            type:CHECKED_ITEM,
-            index
-        }
-    },
-    // allCheck:(bool=true)=>{
-    //     return {
-    //         type:ALLCHECKED,
-    //         bool
-    //     }
-    // },
-    increase:(index)=>{
-        return{
-            type:INCREASE,
-            index
-        }
-    },
-    reduce:(index)=>{
-        return {
-            type:REDUCE,
-            index
-        }
-    },
-    // deleteProducts:()=>{
-    //     return {
-    //         type:DELETE_PRODUCTS
-    //     }
-    // },
-
-
+    }
 };

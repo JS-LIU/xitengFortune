@@ -1,24 +1,22 @@
 /**
  * Created by LDQ on 2017/4/13.
  */
-
-import _product from './productModule';
-import _h from '../../Util/HB';
-
 const shoppingCart = {
+    //  static
     productList:[],
     totalNum:0,
     totalCount:0,
     isAllChecked:true,
-
+    //  模板
     getListInfo:{},
-
+    //  action(会生成新的productList)
     addProduct:{},
     checkProduct:{},
     deleteProducts:{},
     allCheck:{},
+    getCheckedProducts:{},
 
-    getCheckededProducts:{},
+    //  没用上
     changeNum:{},
 };
 let goOn = true;
@@ -73,15 +71,12 @@ const addProduct = function(productList, product) {
 };
 const pushProduct = function(productList, product) {
     productList.push(product);
-
 };
 const calcTotalNum = function(item){
     shoppingCart.totalNum += item.num;
-
 };
 const calcTotalCount = function(item){
     shoppingCart.totalCount += (item.num * item.price)
-
 };
 
 shoppingCart.increaseNum = function(productList,product){
@@ -125,7 +120,6 @@ shoppingCart.addProduct = function(productList,product){
 };
 
 shoppingCart.checkProduct = function(productList,product){
-    product.checked = true;
     shoppingCart.productList = productList;
 
     iterator(shoppingCart.productList, compareId(product, function(item){
@@ -142,25 +136,29 @@ shoppingCart.deleteProducts = function(productList){
     iterator(productList, isUnChecked(function(item){
         shoppingCart.productList.push(item);
     }));
+    return shoppingCart.productList;
 };
 //  获取 选中 商品列表
-shoppingCart.getCheckededProducts = function(productList){
+shoppingCart.getCheckedProducts = function(productList){
     shoppingCart.productList = [];
     iterator(productList, isChecked(function(item){
         shoppingCart.productList.push(item);
     }));
+    return shoppingCart.productList;
 };
 
 shoppingCart.allCheck = function(productList,isAllChecked){
+    shoppingCart.productList = productList;
     if(isAllChecked){
-        for(let i = 0,item;item = productList[i++];){
+        for(let i = 0,item;item = shoppingCart.productList[i++];){
             item.checked = false;
         }
     }else{
-        for(let i = 0,item;item = productList[i++];){
+        for(let i = 0,item;item = shoppingCart.productList[i++];){
             item.checked = true;
         }
     }
+    return shoppingCart.productList;
 };
 
 shoppingCart.getListInfo = function(obj){
@@ -203,46 +201,3 @@ shoppingCart.getListInfo = function(obj){
 module.exports = shoppingCart;
 
 
-
-shoppingCart.increase = function(productList,product){
-
-    for(let i = 0,item;item = productList[ i++ ];){
-        if(item.productId === product.productId){
-            item.num ++;
-            shoppingCart.productList = productList;
-            return shoppingCart.productList;
-        }
-    }
-};
-shoppingCart.reduce = function(productList,product){
-    for(let i = 0,item;item = productList[ i++ ];){
-        if(item.productId === product.productId){
-            if(item.num > 1){
-                item.num --;
-                shoppingCart.productList = productList;
-                return shoppingCart.productList;
-            }
-        }
-    }
-    shoppingCart.productList = productList;
-    return shoppingCart.productList;
-};
-// shoppingCart.checkProduct = function(productList,product){
-//     for(let i = 0,item;item = productList[ i++ ];){
-//         if(item.productId === product.productId){
-//             item.checked = !item.checked;
-//             shoppingCart.productList = productList;
-//             return shoppingCart.productList;
-//         }
-//     }
-// };
-
-shoppingCart.deleteProducts = function(productList){
-    shoppingCart.productList = [];
-    for(let i = 0,item;item = productList[ i++ ];){
-        if(!item.checked){
-            shoppingCart.productList.push(item);
-        }
-    }
-    return shoppingCart.productList;
-};

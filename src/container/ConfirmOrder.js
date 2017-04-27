@@ -21,7 +21,7 @@ var ConfirmOrder = React.createClass({
 
     componentWillMount:function () {
         this.props.historyUrlsActionKeys.pushUrl('/ConfirmOrder');
-        if(this.props.address.listAddress == 0){
+        if(this.props.address.listAddress === 0){
             this.props.addressActionKeys.getList();
         }
         this.props.showDialogActionKeys.hideDialog();
@@ -38,7 +38,7 @@ var ConfirmOrder = React.createClass({
                 ):(<div className="address_list pl15 f16">
                     <Link to="/SelectAddress">请选择地址</Link>
                 </div>)}
-                <ProductList settlement={this.props.settlement}/>
+                <ProductList order={this.props.order}/>
                 <div className="cart_footer f16 w">
                     <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
                     <div className="cart_payment_btn fr cfff f20 tc" onClick={this.exchangeProduct}>提交订单</div>
@@ -84,7 +84,7 @@ var CurrentAddress = React.createClass({
 
 var ProductList = React.createClass({
     render: function () {
-        let productNodes = this.props.settlement.productList.map((item,index)=>{
+        let productNodes = this.props.order.productList.map((item,index)=>{
             return (
                 <li key={index} className="cart_product pl15 pr">
                     <div className="cart_product_pic m10 tc">

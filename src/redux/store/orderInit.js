@@ -4,5 +4,9 @@
 export const orderInit = {
     isSuccess:true,
     tradeOrder:{},
-    amount:""
+    amount:"",
+
+    productList:[],
+    totalPrice:0,
+    totalProductCount:0
 };

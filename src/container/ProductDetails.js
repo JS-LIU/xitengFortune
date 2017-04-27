@@ -71,6 +71,7 @@ const ProductDetails = React.createClass({
                 {this.props.specification.isShowSpec?
                     <Specifications
                         product={this.props.product}
+                        productActionKeys = {this.props.productActionKeys}
                         shoppingCartActionKeys={this.props.shoppingCartActionKeys}
                         orderActionKeys={this.props.orderActionKeys}
                     />:""}
@@ -81,11 +82,11 @@ const ProductDetails = React.createClass({
 
 
 const Specifications  = React.createClass({
-    increaseNum:function(item){
-        this.props.productActionKeys.increaseNum(item);
+    increaseNum:function(){
+        this.props.productActionKeys.increaseNum(this.props.product.info);
     },
-    reduceNum:function(item){
-        this.props.productActionKeys.reduceNum(item);
+    reduceNum:function(){
+        this.props.productActionKeys.reduceNum(this.props.product.info);
     },
     buyProduct:function(){
         if(this.props.product.belong === 'shoppingCart'){
@@ -125,11 +126,12 @@ const Specifications  = React.createClass({
                     <span>数量</span>
                     <div>
                         <span onClick={this.reduceNum}>-</span>
-                        <input type="text"/>
+                        <span className="cart_ctrl_num">{this.props.product.info.num}</span>
                         <span onClick={this.increaseNum}>+</span>
                     </div>
                 </div>
-                <Link to={this.props.product.belong === "shoppingCart"?'/ProductDetals':'/ConfirmOrder'} onClick={this.buyProduct}>确定</Link>
+                {/*todo 跳转页面的方式还需要通过【规格是否全选】来判断*/}
+                <Link to={this.props.product.belong === "shoppingCart"?'/ProductDetails':'/ConfirmOrder'} onClick={this.buyProduct}>确定</Link>
             </div>
         )
     }

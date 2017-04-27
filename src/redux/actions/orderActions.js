@@ -23,8 +23,6 @@ export const orderActions = {
 
                 dispatch({type:'CREATE_ORDER', dealInfo});
             });
-
         }
     }
-
 };

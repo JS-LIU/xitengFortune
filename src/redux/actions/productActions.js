@@ -2,11 +2,9 @@
  * Created by LDQ on 2017/4/12.
  */
 
-import { SET_BELONG } from './productActionKeys';
+import { SET_BELONG,INCREASE_NUM,REDUCE_NUM } from './productActionKeys';
+import {SHOW_SPEC_PRO} from './specificationActionKeys';
 import _product from '../actionModule/productModule';
-import {SHOW_SPEC_PRO,INCREASE_NUM,REDUCE_NUM} from './specificationActionKeys';
-
-import _h from '../../Util/HB';
 
 export const productActions = {
 

@@ -12,9 +12,10 @@ require('../css/shoppingCartStyle.css');
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
-import {settlementActions} from '../redux/actions/settlementActions';
+import {orderActions} from '../redux/actions/orderActions';
 
-var ShoppingCart = React.createClass({
+
+const ShoppingCart = React.createClass({
 
     componentWillMount:function () {
         this.props.historyUrlsActionKeys.pushUrl('/ShoppingCart');
@@ -26,10 +27,8 @@ var ShoppingCart = React.createClass({
     deleteProducts:function(){
         this.props.shoppingCartActionKeys.deleteProducts();
     },
-    setSettlement:function(){
-        return ()=>{
-            this.props.settlementActionKeys.pushProducts();
-        }
+    createOrderListInfo:function(){
+        this.props.orderActionKeys.createOrderListInfo(this.props.shoppingCart.products);
     },
     render:function(){
         return(
@@ -52,7 +51,7 @@ var ShoppingCart = React.createClass({
                     {this.props.shoppingCart.edit?(
                         <span onClick={this.deleteProducts} className="cart_delete_all fr cfff f20 tc">删除</span>
                     ):(
-                        <Link to="/ConfirmOrder" onClick={this.setSettlement()} className="cart_payment_btn fr cfff f20 tc">去结算</Link>
+                        <Link to="/ConfirmOrder" onClick={this.createOrderListInfo} className="cart_payment_btn fr cfff f20 tc">去结算</Link>
                     )}
 
                 </div>
@@ -62,7 +61,7 @@ var ShoppingCart = React.createClass({
 });
 
 
-var ProductList = React.createClass({
+const ProductList = React.createClass({
     increaseNum:function(product){
         return ()=>{
             this.props.shoppingCartActionKeys.increaseNum(product)
@@ -147,7 +146,7 @@ function mapDispatchToProps(dispatch){
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         shoppingCartActionKeys : bindActionCreators(shoppingCartActions,dispatch),
-        settlementActionKeys : bindActionCreators(settlementActions,dispatch)
+        orderActionKeys: bindActionCreators(orderActions,dispatch)
     }
 }
 
