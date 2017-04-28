@@ -14,9 +14,10 @@ export const shoppingCart = function(state = {},action){
         case 'CHANGE_PRODUCT_LIST':
             return Object.assign({},state,{
                 products:action.shoppingCartInfo.productList,
-                realCount:action.shoppingCartInfo.totalCount,
+                totalPrice:action.shoppingCartInfo.totalPrice,
                 totalNum:action.shoppingCartInfo.totalNum,
-                allChecked:action.shoppingCartInfo.isAllChecked
+                allChecked:action.shoppingCartInfo.isAllChecked,
+                realCount:action.shoppingCartInfo.totalNum
             });
 
         case 'EDIT':

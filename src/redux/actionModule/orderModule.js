@@ -19,7 +19,6 @@ const setOrderProductList = function(products) {
         order.productList = _shoppingCart.getCheckedProducts(products);
 
     } else {
-
         //  todo 缺少判断：是否选择了规格
         order.productList = [products];
     }
@@ -27,10 +26,10 @@ const setOrderProductList = function(products) {
 };
 
 const calcTotalMoney = function(item) {
-    order.totalPrice += (item.num * item.price)
+    order.totalPrice += (item.totalCount * item.price)
 };
 const calcTotalNum = function(item) {
-    order.totalProductCount += item.num;
+    order.totalProductCount += item.totalCount;
 };
 const buyDiamondsOrder = function(path,state){
     if(path === "/createTradeOrder"){

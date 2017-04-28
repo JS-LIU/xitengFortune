@@ -5,7 +5,7 @@ const shoppingCart = {
     //  static
     productList:[],
     totalNum:0,
-    totalCount:0,
+    totalPrice:0,
     isAllChecked:true,
     //  模板
     getListInfo:{},
@@ -66,24 +66,24 @@ const isUnChecked = function(dosometh){
 const addProduct = function(productList, product) {
 
     return function(item) {
-        item.num += product.num;
+        item.totalCount += product.totalCount;
     }
 };
 const pushProduct = function(productList, product) {
     productList.push(product);
 };
 const calcTotalNum = function(item){
-    shoppingCart.totalNum += item.num;
+    shoppingCart.totalNum += item.totalCount;
 };
-const calcTotalCount = function(item){
-    shoppingCart.totalCount += (item.num * item.price)
+const calcTotalPrice = function(item){
+    shoppingCart.totalPrice += (item.totalCount * item.price)
 };
 
 shoppingCart.increaseNum = function(productList,product){
     shoppingCart.productList = productList;
 
     iterator(shoppingCart.productList, compareId(product, function(item){
-        item.num ++;
+        item.totalCount ++;
     }));
     return shoppingCart.productList;
 
@@ -92,7 +92,7 @@ shoppingCart.reduceNum = function(productList,product){
     shoppingCart.productList = productList;
 
     iterator(shoppingCart.productList, compareId(product, function(item){
-        item.num --;
+        item.totalCount --;
     }));
     return shoppingCart.productList;
 };
@@ -100,7 +100,7 @@ shoppingCart.setNum = function(productList,product,num){
     shoppingCart.productList = productList;
 
     iterator(shoppingCart.productList, compareId(product, function(item,num){
-        item.num = num;
+        item.totalCount = num;
     }));
     return shoppingCart.productList;
 };
@@ -168,20 +168,20 @@ shoppingCart.getListInfo = function(obj){
         };
     const calc = function(){
         shoppingCart.totalNum = 0;
-        shoppingCart.totalCount = 0;
+        shoppingCart.totalPrice = 0;
         shoppingCart.isAllChecked = true;
 
         for(let i = 0,item;item = shoppingCart.productList[i++];){
             if(item.checked){
                 calcTotalNum(item);
-                calcTotalCount(item);
+                calcTotalPrice(item);
             }else{
                 shoppingCart.isAllChecked = false;
             }
         }
         return {
             totalNum:shoppingCart.totalNum,
-            totalCount:shoppingCart.totalCount,
+            totalPrice:shoppingCart.totalPrice,
             isAllChecked:shoppingCart.isAllChecked
         }
     };
@@ -190,7 +190,7 @@ shoppingCart.getListInfo = function(obj){
     return {
         productList:changeList(),
         totalNum:calc().totalNum,
-        totalCount:calc().totalCount,
+        totalPrice:calc().totalPrice,
         isAllChecked:calc().isAllChecked
     }
 

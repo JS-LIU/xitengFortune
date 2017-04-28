@@ -9,7 +9,7 @@ export const productInit = {
         price:0,
         inventory:0,
         specifications:[],
-        num:1
+        totalCount:1
     },
     belong:null
 };

@@ -46,7 +46,7 @@ const ShoppingCart = React.createClass({
                     <span className="f14 ml5">全选</span>
                     <span className="ml15">
                         <span>合计：</span>
-                        <span className="cred red_XT_icon pl15">{this.props.shoppingCart.realCount / 100}</span>
+                        <span className="cred red_XT_icon pl15">{this.props.shoppingCart.totalPrice / 100}</span>
                     </span>
                     {this.props.shoppingCart.edit?(
                         <span onClick={this.deleteProducts} className="cart_delete_all fr cfff f20 tc">删除</span>
@@ -101,12 +101,12 @@ const ProductList = React.createClass({
                         <p className="f16">{item.productName}</p>
                         <p className="f16 mt10">
                             <span className="cred red_XT_icon pl15">{item.price / 100}</span>
-                            <span>*{item.num}</span>
+                            <span>*{item.totalCount}</span>
                         </p>
                     </div>
                     <div className="cart_ctrl po">
                         <span onClick={this.reduceNum(item)} className="cart_ctrl_reduce">-</span>
-                        <span className="cart_ctrl_num">{item.num}</span>
+                        <span className="cart_ctrl_num">{item.totalCount}</span>
                         <span onClick={this.increaseNum(item)} className="cart_ctrl_increase">+</span>
                     </div>
                 </li>

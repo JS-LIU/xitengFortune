@@ -33,7 +33,6 @@ const ProductDetails = React.createClass({
         var carouselStyle = {
             bigBox:{
                 width:window_w+"px",
-                height:'7.5rem'
             },
             smBox:{
                 width:totalDistance + "px"
@@ -126,7 +125,7 @@ const Specifications  = React.createClass({
                     <span>数量</span>
                     <div>
                         <span onClick={this.reduceNum}>-</span>
-                        <span className="cart_ctrl_num">{this.props.product.info.num}</span>
+                        <span className="cart_ctrl_num">{this.props.product.info.totalCount}</span>
                         <span onClick={this.increaseNum}>+</span>
                     </div>
                 </div>

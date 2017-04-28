@@ -15,16 +15,16 @@ const product = {
 product.createProduct = function(productInfo){
 
     return Object.assign({},productInfo,{
-        num:1
+        totalCount:1
     });
 };
 
 
 product.increaseNum = function(product,max = 99999){
-    let num = product.num + 1;
+    let num = product.totalCount + 1;
     if(num < max){
         return Object.assign({},product,{
-            num: num
+            totalCount: num
         });
     }
     return product;
@@ -32,10 +32,10 @@ product.increaseNum = function(product,max = 99999){
 };
 
 product.reduceNum = function(product,min = 0){
-    let num = product.num - 1;
+    let num = product.totalCount - 1;
     if(num > min){
         return Object.assign({},product,{
-            num: num
+            totalCount: num
         });
     }
     return product;
