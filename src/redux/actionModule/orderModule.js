@@ -10,7 +10,8 @@ const order = {
     createOrderList: {},
     totalPrice: "",
     totalProductCount: "",
-    productType: ""
+    productType: "",
+    createOrder:{}
 };
 
 const setOrderProductList = function(products) {
@@ -34,23 +35,26 @@ const calcTotalNum = function(item) {
 const buyDiamondsOrder = function(path,state){
     if(path === "/createTradeOrder"){
         let data = {
-            accessInfo:state.accessInfo,
-            productList:state.xxx,
+            accessInfo:state.loginInfo.loginData,
+            productList:state.order.productList,
         }
+    }else{
+        return "nextSuccessor";
     }
 };
 
 const exchangeProductsOrder = function(path,state){
     if(path === "/exchange/product"){
         let postData = {
-            accessInfo:state.accessInfo,
+            accessInfo:state.loginInfo.loginData,
             productList:state.order.productList,
-            addressId:state.address.id,
-            count:state.order.count,
-            xtbPrice:state.order.xtbPrice,
+            addressId:state.address.currentAddress.id,
+            count:state.order.totalProductCount,
+            xtbPrice:state.order.totalPrice,
             tradeWay:2
         };
-        return _h.ajax.resource(path).save(postData)
+        console.log(postData);
+        return _h.ajax.resource(path).save({},postData)
     }else{
         return "nextSuccessor";
     }

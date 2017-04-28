@@ -470,7 +470,7 @@ Function.prototype.after = function(fn) {
     return function() {
         let ret = self.apply(this, arguments);
         if (ret === "nextSuccessor") {
-            return fn.apply(this.arguments);
+            return fn.apply(this,arguments);
         }
         return ret;
     }

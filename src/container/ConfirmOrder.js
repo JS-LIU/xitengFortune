@@ -5,7 +5,6 @@ var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
-var {Header,BackBtn,Title} = require('../components/Header');
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
 require('../css/confirmOrderStyle.css');
@@ -13,11 +12,11 @@ require('../css/confirmOrderStyle.css');
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {addressActions} from '../redux/actions/addressActions';
-import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
 import {dialogActions} from '../redux/actions/dialogActions';
+import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
+import {orderActions} from '../redux/actions/orderActions';
 
-
-var ConfirmOrder = React.createClass({
+const ConfirmOrder = React.createClass({
 
     componentWillMount:function () {
         this.props.historyUrlsActionKeys.pushUrl('/ConfirmOrder');
@@ -28,7 +27,9 @@ var ConfirmOrder = React.createClass({
     },
     exchangeProduct:function(){
         this.props.createTradeOrderActionKeys.exchangeProduct();
-
+    },
+    createOrder:function(){
+        this.props.orderActionKeys.createOrder("/exchange/product");
     },
     render:function(){
         return(
@@ -40,8 +41,8 @@ var ConfirmOrder = React.createClass({
                 </div>)}
                 <ProductList order={this.props.order}/>
                 <div className="cart_footer f16 w">
-                    <span className="ml15">合计：{this.props.shoppingCart.realCount / 100}</span>
-                    <div className="cart_payment_btn fr cfff f20 tc" onClick={this.exchangeProduct}>提交订单</div>
+                    <span className="ml15">合计：{this.props.order.totalPrice / 100}</span>
+                    <div className="cart_payment_btn fr cfff f20 tc" onClick={this.createOrder}>提交订单</div>
                 </div>
 
                 {this.props.showDialog.showDialog?<DialogiOS >
@@ -84,6 +85,7 @@ var CurrentAddress = React.createClass({
 
 var ProductList = React.createClass({
     render: function () {
+        console.log(this.props.order);
         let productNodes = this.props.order.productList.map((item,index)=>{
             return (
                 <li key={index} className="cart_product pl15 pr">
@@ -117,7 +119,6 @@ function mapStatetoProps(state){
         address:state.address,
         order:state.order,
         showDialog:state.showDialog,
-        settlement:state.settlement
     }
 }
 function mapDispatchToProps(dispatch){
@@ -128,6 +129,7 @@ function mapDispatchToProps(dispatch){
         addressActionKeys:bindActionCreators(addressActions,dispatch),
         createTradeOrderActionKeys:bindActionCreators(createTradeOrderActions,dispatch),
         showDialogActionKeys:bindActionCreators(dialogActions,dispatch),
+        orderActionKeys:bindActionCreators(orderActions,dispatch)
     }
 }
 
