@@ -47,17 +47,6 @@ const isMoreThanAccount = function(betMoney,accountMoney){
 };
 
 
-Function.prototype.after = function( fn ){
-    let self = this;
-    return function(){
-        let ret = self.apply( this, arguments );
-        if ( ret === true ){
-            return fn.apply( this, arguments );
-        }
-        return ret;
-    }
-};
-
 
 const isCanBet = isMoreThan10.after(isMoreThanAccount);
 

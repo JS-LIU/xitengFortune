@@ -35,7 +35,7 @@ import {bidOrder} from './bidOrder';
 import {settlement} from './settlement';
 import {specification} from './specification';
 import {product} from './product';
-
+import {payDialog} from './payDialog';
 
 const rootReducer = combineReducers({
     account,
@@ -70,6 +70,7 @@ const rootReducer = combineReducers({
     userInfo,
     XTCoins,
     WXInfo,
+    payDialog
 });
 
 module.exports = rootReducer;

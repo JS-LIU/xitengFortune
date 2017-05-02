@@ -1,12 +1,13 @@
 /**
- * Created by LDQ on 2016/8/30.
+ * Created by LDQ on 2017/5/2.
  */
-import {SHOW_DIALOG,HIDE_DIALOG} from '../actions/dialogActionKeys';
 
-export const showDialog = function (state = {},action) {
+export const payDialog = function (state = {},action) {
     switch (action.type) {
         case 'SHOW_DIALOG':
-            let data = action.data||{};
+            console.log(state);
+            let data = action.data||state;
+
             return Object.assign({},state,{
                 showDialog:true,
                 title:data.title,

@@ -5,6 +5,6 @@ export const dialogInit = {
     showDialog:false,
     title:"",
     body:"",
-    cancel:{text:"取消",url:""},
-    certain:{text:"确定",url:""}
+    cancel:{text:"取消",url:"/"},
+    certain:{text:"确定",url:"/"}
 };

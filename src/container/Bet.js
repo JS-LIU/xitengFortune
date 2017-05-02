@@ -27,7 +27,6 @@ var Bet = React.createClass({
         this.props.historyUrlsActionKeys.pushUrl('/Bet');
         this.props.betActionKeys.getOdds();
         this.props.stockGameDetailActionKeys.getStockDetail(this.props.storage.stockGameId);
-
     },
     bet:function(){
         return ()=>{
@@ -58,7 +57,8 @@ var Bet = React.createClass({
                         <DialogCancel
                             showDialogActionKeys={this.props.showDialogActionKeys}
                             cancel={this.props.showDialog.cancel}/>
-                        <DialogConfirm showDialogActionKeys={this.props.showDialogActionKeys}
+                        <DialogConfirm
+                            showDialogActionKeys={this.props.showDialogActionKeys}
                             certain={this.props.showDialog.certain}/>
                     </DialogFooter>
                 </DialogiOS>:''}

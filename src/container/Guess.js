@@ -30,7 +30,7 @@ var Guess = React.createClass({
         this.props.activityActionKeys.getActivityList({path:"list"});
 
         //  todo 测试使用 提交时删除
-        this.props.loginInfoActionKeys.phoneNumLogin('18801233565','123456');
+        this.props.loginInfoActionKeys.phoneNumLogin('18801321546','123456');
 
     },
     render: function () {
