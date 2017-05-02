@@ -15,11 +15,11 @@ module.exports = {
     ],
     output: {
         path: path.join(__dirname, 'public'),
+        modulesDirectories: ['node_modules', 'src'],
+        extensions: ['', '.js', '.jsx', '.css'],
         filename: 'bundle.js'
     },
     resolve: {
-        modulesDirectories: ['node_modules', 'src'],
-        extensions: ['', '.js', '.jsx', '.css']
     },
     module: {
         loaders: [
@@ -28,7 +28,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015']
             },
-            { test: /\.css$/, loader: 'style-loader!css-loader' },
+            { test: /\.css$/, loader: 'style-loader!css-loader?modules' },
             {
                 test: /\.(png|jpg)$/,
                 loader: 'url-loader?limit=8192'

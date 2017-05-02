@@ -6,7 +6,8 @@ export const productInfoInit = {
         pictures:[],
         price:0,
         inventory:0,
-        specifications:[]
+        specifications:[],
+        detailPictures:[],
     },
     commentInfo:[]
 };

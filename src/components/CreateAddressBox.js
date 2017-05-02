@@ -3,7 +3,9 @@
  */
 var React = require('react');
 var {Link} = require('react-router');
-require('../css/createAddressBoxStyle.css');
+
+import createAddressStyle from '../css/createAddressStyle.css';
+import createAddressBoxStyle from '../css/createAddressBoxStyle.css';
 
 var CreateAddressBox = React.createClass({
     getProvinces:function(){
@@ -24,8 +26,8 @@ var CreateAddressBox = React.createClass({
     },
     render: function () {
         return (
-            <ul className="new_address_info fff">
-                <li className="new_address_name pl15">
+            <ul className={createAddressStyle.new_address_info}>
+                <li className={createAddressStyle.new_address_name}>
                     <p>收 货 人 ：</p>
                     <input type="text"
                            placeholder="请填写姓名"
@@ -34,7 +36,7 @@ var CreateAddressBox = React.createClass({
                            value={this.props.address.newAddressInfo.recievName}
                     />
                 </li>
-                <li className="new_address_phone pl15">
+                <li className={createAddressStyle.new_address_phone}>
                     <p>联系方式：</p>
                     <input type="text"
                            placeholder="请填写您的手机号"
@@ -43,13 +45,13 @@ var CreateAddressBox = React.createClass({
                            value={this.props.address.newAddressInfo.phoneNum}
                     />
                 </li>
-                <li className="new_address_district pl15" onClick={this.getProvinces}>
+                <li className={createAddressStyle.new_address_district} onClick={this.getProvinces}>
                     <p>所在地区：</p>
-                    <Link to='/Provinces' className="new_address_district_selected" >
+                    <Link to='/Provinces' className={createAddressStyle.new_address_district_selected}>
                         <span>{this.props.address.newAddressInfo.districtAddress}</span>
                     </Link>
                 </li>
-                <li className="new_address_detail pl15">
+                <li className={createAddressStyle.new_address_detail}>
                     <p>详细信息：</p>
                     <input type="text"
                            placeholder="请填写收获的详细地址"
@@ -58,7 +60,7 @@ var CreateAddressBox = React.createClass({
                            value={this.props.address.newAddressInfo.detailAddress}
                     />
                 </li>
-                <li className="pl15 new_address_set_default">
+                <li className={createAddressStyle.new_address_set_default}>
                     <p>设为默认</p>
                     <div onClick={this.setDefault} className="pr15">
                         {Boolean(this.props.address.newAddressInfo.isDefault)?"":"非"}默认

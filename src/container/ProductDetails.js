@@ -10,7 +10,7 @@ var $ = require('jquery');
 var { Header,BackBtn,Title } = require('../components/Header');
 var Carousel = require('../components/Carousel');
 
-require('../css/productDetailStyle.css');
+import productDetailStyle from '../css/productDetailStyle.css';
 
 import {productInfoActions} from '../redux/actions/productInfoActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
@@ -46,22 +46,24 @@ const ProductDetails = React.createClass({
                     direction="slideLeft"
                     auto={true}
                 />
-                <div className="detail_product_info pl15">
-                    <p className="f16 c000">商品名称：{productInfo.productName}</p>
+                <div className={productDetailStyle.detail_product_info}>
+                    <p className={productDetailStyle.detail_product_info_name}>商品名称：{productInfo.productName}</p>
                     <p>{productInfo.detail}</p>
                     <div className="clearfix">
-                        <p className="f16 fl cred">
+                        <p className={productDetailStyle.cred}>
                             <span>￥</span>
                             <span>{productInfo.price / 100}</span>
                         </p>
-                        <p className="fr pr15 f14">库存：{productInfo.inventory}</p>
+                        <p className={productDetailStyle.detail_product_inventory}>库存：{productInfo.inventory}</p>
                     </div>
                 </div>
-                <div className="detail_delivery pl15 f14">
-                    <span className="red_checked mr50" >快递：0.00</span>
-                    <span className="red_checked">已售：{productInfo.sales}</span>
+                <div className={productDetailStyle.detail_delivery}>
+                    <span className={productDetailStyle.red_checked} >快递：0.00</span>
+                    <span className={productDetailStyle.red_checked}>已售：{productInfo.sales}</span>
                 </div>
-
+                <ProductDetail
+                    productInfo = {productInfo}
+                />
                 <ShopFooter
                     shoppingCart={this.props.shoppingCart}
                     shoppingCartActionKeys = {this.props.shoppingCartActionKeys}
@@ -79,13 +81,33 @@ const ProductDetails = React.createClass({
     }
 });
 
+const ProductDetail = React.createClass({
+    render: function () {
+        let imgNodes = this.props.productInfo.detailPictures.map((item,index)=>{
+            return (
+                <img  src={item.picUrl} key={index} className="w"/>
+            )
+        });
+        return (
+            <div>
+                <p className={productDetailStyle.detail_product_title}>详情：</p>
+                <div className={productDetailStyle.detail_product_image}>
+                    {imgNodes}
+                </div>
 
+            </div>
+        )
+    }
+});
 const Specifications  = React.createClass({
     increaseNum:function(){
         this.props.productActionKeys.increaseNum(this.props.product.info);
     },
     reduceNum:function(){
         this.props.productActionKeys.reduceNum(this.props.product.info);
+    },
+    cancel:function(){
+        this.props.shoppingCartActionKeys.cancel();
     },
     buyProduct:function(){
         if(this.props.product.belong === 'shoppingCart'){
@@ -116,21 +138,23 @@ const Specifications  = React.createClass({
             )
         });
         return (
-            <div>
+            <div className={productDetailStyle.shop_choose}>
                 <ul>
                     {specNodes}
                 </ul>
-
-                <div>
-                    <span>数量</span>
-                    <div>
-                        <span onClick={this.reduceNum}>-</span>
-                        <span className="cart_ctrl_num">{this.props.product.info.totalCount}</span>
-                        <span onClick={this.increaseNum}>+</span>
+                <div className={productDetailStyle.shop_specifies_close_box}>
+                    <span className={productDetailStyle.shop_specifies_close} onClick={this.cancel}>x</span>
+                </div>
+                <div className={productDetailStyle.shop_specifies_num}>
+                    <span className={productDetailStyle.shop_choose_num}>选择数量</span>
+                    <div className={productDetailStyle.shop_choose_num_ctrl}>
+                        <span className={productDetailStyle.shop_choose_num_ctrl_item} onClick={this.reduceNum}>-</span>
+                        <span className={productDetailStyle.shop_choose_num_ctrl_item_num}>{this.props.product.info.totalCount}</span>
+                        <span className={productDetailStyle.shop_choose_num_ctrl_item} onClick={this.increaseNum}>+</span>
                     </div>
                 </div>
                 {/*todo 跳转页面的方式还需要通过【规格是否全选】来判断*/}
-                <Link to={this.props.product.belong === "shoppingCart"?'/ProductDetails':'/ConfirmOrder'} onClick={this.buyProduct}>确定</Link>
+                <Link to={this.props.product.belong === "shoppingCart"?'/ProductDetails':'/ConfirmOrder'} className={productDetailStyle.shop_choose_sure} onClick={this.buyProduct}>确定</Link>
             </div>
         )
     }
@@ -147,20 +171,20 @@ const ShopFooter = React.createClass({
     render:function(){
 
         return (
-            <ul className="shop_footer w">
-                <li className="shop_service_phone">
-                    <a href="tel:400-607-8300" className="shop_service_phone_icon w tc">客服</a>
+            <ul className={productDetailStyle.shop_footer}>
+                <li className={productDetailStyle.shop_service_phone}>
+                    <a href="tel:400-607-8300" className={productDetailStyle.shop_service_phone_icon}>客服</a>
                 </li>
-                <li className="shop_product_cart">
-                    <Link to="/ShoppingCart" className="shop_link_cart w">
-                        <span className="shop_cart_icon">购物车</span>
-                        <span className="shop_cart_total cfff tc">{this.props.shoppingCart.totalNum}</span>
+                <li className={productDetailStyle.shop_product_cart}>
+                    <Link to="/ShoppingCart" className={productDetailStyle.shop_link_cart}>
+                        <span className={productDetailStyle.shop_cart_icon}>购物车</span>
+                        <span className={productDetailStyle.shop_cart_total}>{this.props.shoppingCart.totalNum}</span>
                     </Link>
                 </li>
-                <li className="shop_put_cart tc f16 cfff" onClick={this.setProductBelong('shoppingCart')} >
+                <li className={productDetailStyle.shop_put_cart} onClick={this.setProductBelong('shoppingCart')} >
                     加入购物车
                 </li>
-                <li className="shop_buy tc f16 cfff" onClick={this.setProductBelong('order')}>
+                <li className={productDetailStyle.shop_buy} onClick={this.setProductBelong('order')}>
                     <div >立即兑换</div>
                 </li>
             </ul>

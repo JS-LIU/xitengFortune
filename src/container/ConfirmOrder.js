@@ -7,7 +7,8 @@ var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
-require('../css/confirmOrderStyle.css');
+import confirmOrderStyle from '../css/confirmOrderStyle.css';
+import shoppingCartStyle from '../css/shoppingCartStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
@@ -33,16 +34,16 @@ const ConfirmOrder = React.createClass({
     },
     render:function(){
         return(
-            <div className="cart_body f5f5f5 po w">
+            <div className={confirmOrderStyle.cart_body}>
                 {this.props.address.hasCurrentAddress?(
                     <CurrentAddress address={this.props.address} />
-                ):(<div className="address_list pl15 f16">
+                ):(<div className={confirmOrderStyle.address_list}>
                     <Link to="/SelectAddress">请选择地址</Link>
                 </div>)}
                 <ProductList order={this.props.order}/>
-                <div className="cart_footer f16 w">
+                <div className={confirmOrderStyle.cart_footer}>
                     <span className="ml15">合计：{this.props.order.totalPrice / 100}</span>
-                    <div className="cart_payment_btn fr cfff f20 tc" onClick={this.createOrder}>提交订单</div>
+                    <div className={shoppingCartStyle.cart_payment_btn} onClick={this.createOrder}>提交订单</div>
                 </div>
 
                 {this.props.showDialog.showDialog?<DialogiOS >
@@ -64,17 +65,17 @@ const ConfirmOrder = React.createClass({
 var CurrentAddress = React.createClass({
     render: function () {
         return (
-            <Link to="/SelectAddress" className="order_def_address pl15 fff">
-                <div className="order_user_info">
-                    <div className="order_user_name ">
+            <Link to="/SelectAddress" className={confirmOrderStyle.order_def_address}>
+                <div className={confirmOrderStyle.order_user_info}>
+                    <div className={confirmOrderStyle.order_user_name}>
                         <span className="f14 pl15">收货人：</span>
-                        <p className="order_user_n_m pr15">
+                        <p className={confirmOrderStyle.order_user_n_m}>
                             <span>{this.props.address.currentAddress.recievName}</span>
                             <span>{this.props.address.currentAddress.phoneNum}</span>
                         </p>
                     </div>
                 </div>
-                <div className="order_user_address">
+                <div className={confirmOrderStyle.order_user_address}>
                     <span className="f14">送货地址：</span>
                     <span>{this.props.address.currentAddress.fullAddress}</span>
                 </div>
@@ -88,15 +89,15 @@ var ProductList = React.createClass({
         console.log(this.props.order);
         let productNodes = this.props.order.productList.map((item,index)=>{
             return (
-                <li key={index} className="cart_product pl15 pr">
-                    <div className="cart_product_pic m10 tc">
+                <li key={index} className={shoppingCartStyle.cart_product}>
+                    <div className={shoppingCartStyle.cart_product_pic}>
                         <img src={item.smallPicture} alt="" className="w"/>
                     </div>
-                    <div className="cart_product_info">
+                    <div className={shoppingCartStyle.cart_product_info}>
                         <p className="f16">{item.productName}</p>
                         <p className="f16 mt10">
-                            <span className="cred red_XT_icon pl15">{item.price / 100}</span>
-                            <span>*{item.num}</span>
+                            <span className={shoppingCartStyle.red_XT_icon}>{item.price / 100}</span>
+                            <span >x{item.totalCount}</span>
                         </p>
                     </div>
                 </li>

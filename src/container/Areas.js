@@ -9,7 +9,7 @@ var { connect } = require('react-redux');
 var { Link } = require('react-router');
 
 
-require('../css/areaStyle.css');
+import areaStyle from '../css/areaStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {addressActions} from '../redux/actions/addressActions';
@@ -48,7 +48,7 @@ var AreaList = React.createClass({
             )
         });
         return (
-            <ul className="area_list">
+            <ul className={areaStyle.area_list}>
                 {areaNodes}
             </ul>
         )

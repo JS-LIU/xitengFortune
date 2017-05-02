@@ -4,3 +4,4 @@
 
 export const CHANGE_PRODUCT_LIST = "CHANGE_PRODUCT_LIST";
 export const EDIT = 'EDIT';
+export const CLOSE = 'CLOSE';

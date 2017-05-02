@@ -9,8 +9,7 @@ var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var CreateAddressBox = require('../components/CreateAddressBox');
 
-require('../css/createAddressStyle.css');
-require('../css/createAddressBoxStyle.css');
+import createAddressStyle from '../css/createAddressStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {addressActions} from '../redux/actions/addressActions';
@@ -26,14 +25,14 @@ var CreateAddress = React.createClass({
     },
     render: function () {
         return (
-            <div className="create_address po w h f5f5f5">
+            <div className={createAddressStyle.create_address}>
                 <CreateAddressBox
                     address={this.props.address}
                     areaActionKeys={this.props.areaActionKeys}
                     addressActionKeys={this.props.addressActionKeys}
                 />
-                <div className="create_address_save pr15 tc" onClick={this.saveAddress}>
-                    <span className="cfff">保存</span>
+                <div className={createAddressStyle.create_address_save} onClick={this.saveAddress}>
+                    <span className={createAddressStyle.cff}>保存</span>
                 </div>
 
             </div>

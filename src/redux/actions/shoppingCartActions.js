@@ -4,10 +4,10 @@
 
 import {
     CHANGE_PRODUCT_LIST,
-    EDIT
+    EDIT,
+    CLOSE
 } from '../actions/shoppingCartActionKeys';
 import { HIDE_SPEC_PRO } from '../actions/specificationActionKeys';
-
 import _shoppingCart from '../actionModule/shoppingCardModule';
 import _product from '../actionModule/productModule';
 
@@ -93,6 +93,11 @@ export const shoppingCartActions = {
     edit:()=>{
         return {
             type:EDIT
+        }
+    },
+    cancel:()=>{
+        return (dispatch,getState)=>{
+            dispatch({type:'HIDE_SPEC_PRO'})
         }
     }
 };

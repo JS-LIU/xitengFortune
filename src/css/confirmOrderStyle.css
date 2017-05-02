@@ -4,17 +4,34 @@
 .fff{
     background:#FFF;
 }
+.cart_body{
+    padding-bottom:47px;
+    min-height:calc(100% - 47px);
+    composes:f5f5f5;
+    composes:po w from '../Util/base.css';
+}
+.cart_footer{
+    position:fixed;
+    bottom:0;
+    height:47px;
+    line-height:47px;
+    background:#FFF;
+    composes:f16 w from '../Util/base.css';
+}
 .address_list{
     height:44px;
     line-height:44px;
     border-bottom:1px solid #E2E2E2;
     background:#FFF;
+    composes:pl15 f16 from '../Util/base.css';
 }
 .order_def_address{
     display: flex;
     flex-direction: column;
     justify-content: center;
     height:55px;
+    composes:fff;
+    composes:pl15 from '../Util/base.css';
 }
 .order_user_name{
     display: flex;
@@ -26,6 +43,7 @@
     flex-direction: row;
     justify-content: space-between;
     flex: 1;
+    composes:pr15 from '../Util/base.css';
 }
 .order_user_address{
     display: flex;

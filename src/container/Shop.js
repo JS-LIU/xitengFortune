@@ -1,7 +1,6 @@
 /**
  * Created by LDQ on 2016/8/13.
  */
-
 var React = require('react');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
@@ -10,7 +9,7 @@ var $ = require('jquery');
 var { Header,BackBtn,Title } = require('../components/Header');
 var _h = require('../Util/HB');
 
-require('../css/shopStyle.css');
+import shopStyle from '../css/shopStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shopActions} from '../redux/actions/shopActions';
@@ -22,7 +21,6 @@ import {loginInfoActions} from '../redux/actions/loginInfoActions';
 var Shop = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Shop');
-
         //  todo 测试使用 提交时删除
         this.props.loginInfoActionKeys.phoneNumLogin('18801321546','123456');
     },
@@ -45,7 +43,7 @@ var Shop = React.createClass({
     render: function () {
 
         return (
-            <div className="f5f5f5">
+            <div className={shopStyle.f5f5f5}>
                 <PruductList
                     shop={this.props.shop}
                     shopActionKeys={this.props.shopActionKeys}
@@ -68,14 +66,14 @@ var PruductList = React.createClass({
     render:function(){
         let productNodes = this.props.shop.productList.map((item,index)=>{
             return (
-                <li className="shop_product_item w fff mb10" key={index} onClick={this.setProductId(item)} >
+                <li className={shopStyle.shop_product_item} key={index} onClick={this.setProductId(item)} >
                     <Link to="/ProductDetails" className="w">
-                        <div className="shop_product_pic w tc fff tc">
+                        <div className={shopStyle.shop_product_pic}>
                             <img src={item.picUrl} alt="商品图片" className="h"/>
                         </div>
-                        <div className="shop_product_footer fff f14 pl15 pr15">
-                            <p className="shop_product_name">{item.productName}</p>
-                            <p className="shop_product_price cred">
+                        <div className={shopStyle.shop_product_footer}>
+                            <p className={shopStyle.shop_product_name}>{item.productName}</p>
+                            <p className={shopStyle.shop_product_price}>
                                 <span>￥</span>
                                 <span>{item.price / 100}</span>
                             </p>
@@ -91,7 +89,7 @@ var PruductList = React.createClass({
                     shopActionKeys={this.props.shopActionKeys}
                     shop={this.props.shop}
                 />
-                <ul className="shop_product_list">
+                <ul className={shopStyle.shop_product_list}>
                     {productNodes}
                 </ul>
             </div>
@@ -110,7 +108,7 @@ var ProductType = React.createClass({
             return (
                 <li
                     key={index}
-                    className="shop_type_item f16"
+                    className={shopStyle.shop_type_item}
                     onClick={this.cutType(item.mannerId,index)}
                 >
                     <span style={item.selected?cBlueStyle:{}}>
@@ -119,7 +117,7 @@ var ProductType = React.createClass({
             )
         });
         return (
-            <ul className="shop_type_list fff c16">
+            <ul className={shopStyle.shop_type_list}>
                 {typeNodes}
             </ul>
         )

@@ -8,7 +8,7 @@ var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var { Header,BackBtn,Title } = require('../components/Header');
 
-require('../css/shoppingCartStyle.css');
+import shoppingCartStyle from '../css/shoppingCartStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
@@ -32,12 +32,12 @@ const ShoppingCart = React.createClass({
     },
     render:function(){
         return(
-            <div className="cart_body f5f5f5 po w">
+            <div className={shoppingCartStyle.cart_body}>
                 <ProductList
                     shoppingCart={this.props.shoppingCart}
                     shoppingCartActionKeys={this.props.shoppingCartActionKeys}
                 />
-                <div className="cart_footer f16 w">
+                <div className={shoppingCartStyle.cart_footer}>
                     <input type="checkbox"
                            checked={this.props.shoppingCart.allChecked}
                            onChange={this.allCheck}
@@ -46,12 +46,12 @@ const ShoppingCart = React.createClass({
                     <span className="f14 ml5">全选</span>
                     <span className="ml15">
                         <span>合计：</span>
-                        <span className="cred red_XT_icon pl15">{this.props.shoppingCart.totalPrice / 100}</span>
+                        <span className={shoppingCartStyle.red_XT_icon}>{this.props.shoppingCart.totalPrice / 100}</span>
                     </span>
                     {this.props.shoppingCart.edit?(
-                        <span onClick={this.deleteProducts} className="cart_delete_all fr cfff f20 tc">删除</span>
+                        <span onClick={this.deleteProducts} className={shoppingCartStyle.cart_delete_all}>删除</span>
                     ):(
-                        <Link to="/ConfirmOrder" onClick={this.createOrderListInfo} className="cart_payment_btn fr cfff f20 tc">去结算</Link>
+                        <Link to="/ConfirmOrder" onClick={this.createOrderListInfo} className={shoppingCartStyle.cart_payment_btn}>去结算</Link>
                     )}
 
                 </div>
@@ -86,42 +86,42 @@ const ProductList = React.createClass({
     render:function(){
         let productNodes = this.props.shoppingCart.products.map((item,index)=>{
             return (
-                <li key={index} className="cart_product pl15 pr">
-                    <div className="cart_product_check">
+                <li key={index} className={shoppingCartStyle.cart_product}>
+                    <div className={shoppingCartStyle.cart_product_check}>
                         <input
                             type="checkbox"
                             checked={item.checked}
                             onChange={this.checkProduct(item)}/>
                     </div>
 
-                    <div className="cart_product_pic m10 tc">
+                    <div className={shoppingCartStyle.cart_product_pic}>
                         <img src={item.smallPicture} alt="" className="w"/>
                     </div>
-                    <div className="cart_product_info">
+                    <div className={shoppingCartStyle.cart_product_info}>
                         <p className="f16">{item.productName}</p>
                         <p className="f16 mt10">
-                            <span className="cred red_XT_icon pl15">{item.price / 100}</span>
+                            <span className={shoppingCartStyle.red_XT_icon}>{item.price / 100}</span>
                             <span>*{item.totalCount}</span>
                         </p>
                     </div>
-                    <div className="cart_ctrl po">
-                        <span onClick={this.reduceNum(item)} className="cart_ctrl_reduce">-</span>
-                        <span className="cart_ctrl_num">{item.totalCount}</span>
-                        <span onClick={this.increaseNum(item)} className="cart_ctrl_increase">+</span>
+                    <div className={shoppingCartStyle.cart_ctrl}>
+                        <span onClick={this.reduceNum(item)} className={shoppingCartStyle.cart_ctrl_reduce}>-</span>
+                        <span className={shoppingCartStyle.cart_ctrl_num}>{item.totalCount}</span>
+                        <span onClick={this.increaseNum(item)} className={shoppingCartStyle.cart_ctrl_increase}>+</span>
                     </div>
                 </li>
             )
         });
         return (
             <ul className="fff">
-                <li className="cart_shop_name pl15 w">
+                <li className={shoppingCartStyle.cart_shop_name}>
                     <input
                         type="checkbox"
                         checked={this.props.shoppingCart.allChecked}
                         onChange={this.allCheck}
                     />
-                    <span className="cart_shop_name_icon pl15">礼品商城</span>
-                    <p className="fr pr15 cart_shop_edit tc" onClick={this.edit}>{this.props.shoppingCart.edit?"完成":"编辑"}</p>
+                    <span className={shoppingCartStyle.cart_shop_name_icon}>礼品商城</span>
+                    <p className={shoppingCartStyle.cart_shop_edit} onClick={this.edit}>{this.props.shoppingCart.edit?"完成":"编辑"}</p>
                 </li>
                 <li className="mt50"></li>
                 {productNodes}

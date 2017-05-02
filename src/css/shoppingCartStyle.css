@@ -16,27 +16,32 @@
     height:44px;
     line-height: 44px;
     background:#FFF;
+    composes:pl15 w from '../Util/base.css';
 }
 .cart_shop_name_icon{
-    background:url("/xitenggame/xitengWapApp/src/icon_mall@2x.png") no-repeat 10px center;
+    background:url("../../src/images/icon_mall@2x.png") no-repeat 10px center;
     -webkit-background-size: 20px;
     background-size:20px;
-    padding:3px 0 3px 15px;
+    padding:3px 0 3px 35px;
+    composes: pl15 from '../Util/base.css';
 }
 .cart_shop_edit{
     width:60px;
+    composes:fr pr15 tc from '../Util/base.css';
 }
 .cart_product{
     height:95px;
     display:flex;
     flex-direction: row;
     border-top:1px solid #E2E2E2;
+    composes: pl15 pr from '../Util/base.css';
 }
 .cart_product_pic{
     width:73px;
     height:73px;
     border:1px solid #E2E2E2;
     overflow: hidden;
+    composes:m10 tc from '../Util/base.css';
 }
 .cart_product_check{
     display: flex;
@@ -49,9 +54,11 @@
     justify-content: center;
 }
 .red_XT_icon{
-    background:url("/xitenggame/xitengWapApp/src/images/icon_maddle_red@2x.png") no-repeat left center;
+    background:url("../../src/images/icon_maddle_red@2x.png") no-repeat left center;
     -webkit-background-size:15px;
     background-size:15px;
+    composes:cred;
+    composes:pl15 from '../Util/base.css';
 }
 .cart_ctrl{
     width:85px;
@@ -62,6 +69,7 @@
     justify-content: space-between;
     flex-direction: row;
     border:1px solid #E2E2E2;
+    composes:po from '../Util/base.css';
 }
 .cart_ctrl_reduce,
 .cart_ctrl_increase{
@@ -84,18 +92,23 @@
     height:47px;
     line-height:47px;
     background:#FFF;
+    composes:f16 w from '../Util/base.css';
 }
 .cart_delete_all{
     width:125px;
     background:#FF4242;
+    composes:fr f20 tc from '../Util/base.css';
 }
 .cart_payment_btn{
     width:125px;
     background:#FFBA26;
+    composes:fr f20 tc from '../Util/base.css';
 }
 .cart_body{
     padding-bottom:47px;
     min-height:calc(100% - 47px);
+    composes:f5f5f5;
+    composes:po w from '../Util/base.css';
 }
 .cart_edit{
     height:44px;

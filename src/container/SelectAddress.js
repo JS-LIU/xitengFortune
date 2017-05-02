@@ -8,7 +8,7 @@ var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var {Link} = require('react-router');
 
-require('../css/selectAddressStyle.css');
+import selectAddressStyle from '../css/selectAddressStyle.css';
 
 import _h from '../Util/HB';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -28,13 +28,13 @@ var SelectAddress = React.createClass({
     },
     render: function () {
         return (
-            <div className="selected_address_body f5f5f5 po w">
-                <div className="create_address_btn f16 pl15 clearfix" onClick={this.setNewAddress({})}>
+            <div className={selectAddressStyle.selected_address_body}>
+                <div className={selectAddressStyle.create_address_btn} onClick={this.setNewAddress({})}>
                     <Link to="/CreateAddress" className="fl">
                         <span>+</span>
                         <span>新建收货地址</span>
                     </Link>
-                    <div className="selected_address_save pr15 fr">
+                    <div className={selectAddressStyle.selected_address_save}>
                         <Link to='/ConfirmOrder'>
                             保存选择
                         </Link>
@@ -63,24 +63,24 @@ var AddressList = React.createClass({
     render: function () {
         let addressNodes = this.props.address.listAddress.map((item,index)=>{
             return(
-                <li className="address_item w fff" key={index}>
-                    <div className="address_item_select">
+                <li className={selectAddressStyle.address_item} key={index}>
+                    <div className={selectAddressStyle.address_item_select}>
                         <input
                             type="radio"
                             name="addressList"
                             onChange={this.checkedItem(item)}
                         />
                     </div>
-                    <div className="address_item_info">
-                        <p className="address_userInfo f14">
-                            <span className="address_name">{item.recievName}</span>
-                            <span className="address_phone_num">{item.phoneNum}</span>
+                    <div className={selectAddressStyle.address_item_info}>
+                        <p className="f14">
+                            <span className="pr15">{item.recievName}</span>
+                            <span>{item.phoneNum}</span>
                         </p>
                         <p>
                             {item.fullAddress}
                         </p>
                     </div>
-                    <div className="address_item_edit tr" onClick={this.setNewAddress(item)}>
+                    <div className={selectAddressStyle.address_item_edit} onClick={this.setNewAddress(item)}>
                         <Link to='/CreateAddress'>
                             编辑
                         </Link>
