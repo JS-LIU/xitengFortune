@@ -14,7 +14,6 @@ import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {addressActions} from '../redux/actions/addressActions';
 import {dialogActions} from '../redux/actions/dialogActions';
-import {createTradeOrderActions} from '../redux/actions/createTradeOrderActions';
 import {orderActions} from '../redux/actions/orderActions';
 
 const ConfirmOrder = React.createClass({
@@ -128,7 +127,6 @@ function mapDispatchToProps(dispatch){
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
         addressActionKeys:bindActionCreators(addressActions,dispatch),
-        createTradeOrderActionKeys:bindActionCreators(createTradeOrderActions,dispatch),
         showDialogActionKeys:bindActionCreators(dialogActions,dispatch),
         orderActionKeys:bindActionCreators(orderActions,dispatch)
     }

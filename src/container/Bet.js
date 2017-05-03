@@ -18,6 +18,7 @@ import {betActions} from '../redux/actions/betActions';
 import {dialogActions} from '../redux/actions/dialogActions';
 import {accountActions} from '../redux/actions/accountActions';
 import {stockGameDetailActions} from '../redux/actions/stockGameDetailActions'
+import {orderActions} from '../redux/actions/orderActions';
 
 var Bet = React.createClass({
 
@@ -29,10 +30,7 @@ var Bet = React.createClass({
         this.props.stockGameDetailActionKeys.getStockDetail(this.props.storage.stockGameId);
     },
     bet:function(){
-        return ()=>{
-            let money = parseInt($('.J_betMoney').val());
-            this.props.betActionKeys.immediatelyBet(money);
-        }
+        this.props.orderActionKeys.createOrder('/guessGame');
     },
     render: function () {
         return (
@@ -44,12 +42,14 @@ var Bet = React.createClass({
                         stockGameDetail={this.props.stockGameDetail}
                     />
                     <BetCenter
-                        inputMoneyAction={this.props.betActionKeys}
+                        betActionKeys = {this.props.betActionKeys}
                         account={this.props.account}
+                        betInfo = {this.props.betInfo}
                     />
-                    <div className="betBtn po tc f16 w" onClick={this.bet()}></div>
+                    <div className="betBtn po tc f16 w"/>
                 </div>
 
+                {/* 投注失败弹出窗口 */}
                 {this.props.showDialog.showDialog?<DialogiOS showDialog={this.props.showDialog}>
                     <DialogHeader title={this.props.showDialog.title}/>
                     <DialogBody content={this.props.showDialog.body}/>
@@ -62,6 +62,8 @@ var Bet = React.createClass({
                             certain={this.props.showDialog.certain}/>
                     </DialogFooter>
                 </DialogiOS>:''}
+
+                {/* 支付弹出窗口 */}
                 {this.props.payDialog.isShowDialog?
                     <DialogiOS>
                         <PayDialogHeader title = {'支付'}/>
@@ -73,7 +75,7 @@ var Bet = React.createClass({
                                 url:""
                             }
                         }/>
-                        <div onClick={this.bet()}>确认</div>
+                        <div onClick={this.bet}>确认</div>
                     </DialogiOS>:""}
 
 
@@ -88,7 +90,7 @@ var Bet = React.createClass({
     }
 });
 
-var BetHeader = React.createClass({
+const BetHeader = React.createClass({
     render: function () {
         return (
             <div className="bet_header pr f14 cfff mt50">
@@ -100,12 +102,12 @@ var BetHeader = React.createClass({
     }
 });
 
-var BetCenter = React.createClass({
-    betQuickly:function(money){
+const BetCenter = React.createClass({
+    setMoney:function(money){
         return ()=>{
-            $('.J_betMoney').val(money);
+            let betMoney = money||this.refs.xbMoney.value;
+            this.props.betActionKeys.setBetMoney(betMoney);
         };
-
     },
     render: function () {
         return (
@@ -113,21 +115,24 @@ var BetCenter = React.createClass({
                 <li className="input_money_box">
                     <p className="cfff">金额：</p>
                     <input type="number"
-                           placeholder="请选择/输入金额"
                            className="J_betMoney input_money pl10 mr5"
-                           ref="XTMoney"/>
+                           placeholder="请输入投注金额"
+                           onChange = {this.setMoney()}
+                           value={this.props.betInfo.betMoney}
+                           ref="xbMoney"
+                    />
                     <p className="cfff">喜币</p>
                 </li>
                 <li className="selected_box">
-                    <div className="selected_money cfff tc" onClick={this.betQuickly(100)}>
+                    <div className="selected_money cfff tc" onClick={this.setMoney('100')}>
                         <p className="f14">100</p>
                         <p>喜币</p>
                     </div>
-                    <div className="selected_money cfff tc ml15" onClick={this.betQuickly(1000)}>
+                    <div className="selected_money cfff tc ml15" onClick={this.setMoney('1000')}>
                         <p className="f14" >1000</p>
                         <p>喜币</p>
                     </div>
-                    <div className="selected_money cfff tc ml15" onClick={this.betQuickly(10000)}>
+                    <div className="selected_money cfff tc ml15" onClick={this.setMoney('10000')}>
                         <p className="f14">10000</p>
                         <p>喜币</p>
                     </div>
@@ -162,6 +167,7 @@ function mapDispatchToProps(dispatch){
         showDialogActionKeys:bindActionCreators(dialogActions,dispatch),
         accountActionKeys : bindActionCreators(accountActions,dispatch),
         stockGameDetailActionKeys:bindActionCreators(stockGameDetailActions,dispatch),
+        orderActionKeys:bindActionCreators(orderActions,dispatch)
     }
 }
 

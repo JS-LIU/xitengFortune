@@ -1,7 +1,7 @@
 /**
  * Created by LDQ on 2016/12/6.
  */
-import { GET_ODDS } from '../actions/betActionKeys';
+import { GET_ODDS,SET_BET_MONEY } from '../actions/betActionKeys';
 
 export const betInfo = function(state = {},action){
 
@@ -11,7 +11,10 @@ export const betInfo = function(state = {},action){
                 upOdds:action.data.upOdds,
                 downOdds:action.data.downOdds
             });
-
+        case 'SET_BET_MONEY':
+            return Object.assign({},state,{
+                betMoney:action.money
+            });
         default:
             return state
     }

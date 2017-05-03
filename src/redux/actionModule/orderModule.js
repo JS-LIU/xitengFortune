@@ -3,6 +3,7 @@
  */
 import _shoppingCart from '../actionModule/shoppingCardModule';
 import _h from '../../Util/HB';
+import _bet from './betModule';
 
 const order = {
     productList: [],

@@ -5,5 +5,6 @@
 
 export const betInfoInit = {
     upOdds:"",
-    downOdds:''
+    downOdds:'',
+    betMoney:""
 };
