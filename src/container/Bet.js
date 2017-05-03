@@ -10,7 +10,7 @@ var { Header,BackBtn,Title } = require('../components/Header');
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 const {PayDialogHeader,PayDialogBody} = require('../components/PayDialog');
 
-require('../css/betStyle.css');
+import betStyle from '../css/betStyle.css';
 
 import {storageActions} from '../redux/actions/storageActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -35,8 +35,8 @@ var Bet = React.createClass({
     render: function () {
         return (
             <div>
-                <div className="bet_body po w">
-                    <img src="src/images/cai3-light-@2x.png" alt="" className="bgLight po"/>
+                <div className={betStyle.bet_body}>
+                    <img src="src/images/cai3-light-@2x.png" alt="" className={betStyle.bgLight}/>
                     <BetHeader
                         storage={this.props.storage}
                         stockGameDetail={this.props.stockGameDetail}
@@ -46,7 +46,7 @@ var Bet = React.createClass({
                         account={this.props.account}
                         betInfo = {this.props.betInfo}
                     />
-                    <div className="betBtn po tc f16 w"/>
+                    <div className={betStyle.betBtn}/>
                 </div>
 
                 {/* 投注失败弹出窗口 */}
@@ -79,7 +79,7 @@ var Bet = React.createClass({
                     </DialogiOS>:""}
 
 
-                <div className="bet_footer tc w">
+                <div className={betStyle.bet_footer}>
                     <span>【当前参考】猜涨赔率：</span>
                     <span>{this.props.betInfo.upOdds}</span>
                     <span>猜跌赔率：</span>
@@ -93,10 +93,10 @@ var Bet = React.createClass({
 const BetHeader = React.createClass({
     render: function () {
         return (
-            <div className="bet_header pr f14 cfff mt50">
+            <div className={betStyle.bet_header}>
                 <span>{this.props.stockGameDetail.detail.stockGameName}</span>
-                <span className="pl15 pr15">{this.props.stockGameDetail.detail.stage}期</span>
-                <span className={this.props.storage.guessType?"cgreen":"cred"}>{this.props.storage.guessType?"猜跌":"猜涨"}</span>
+                <span className={betStyle.bet_header_stage}>{this.props.stockGameDetail.detail.stage}期</span>
+                <span className={this.props.storage.guessType?betStyle.cgreen:betStyle.cred}>{this.props.storage.guessType?"猜跌":"猜涨"}</span>
             </div>
         )
     }
@@ -111,36 +111,36 @@ const BetCenter = React.createClass({
     },
     render: function () {
         return (
-            <ul className="bet_center pr">
-                <li className="input_money_box">
-                    <p className="cfff">金额：</p>
+            <ul className={betStyle.bet_center}>
+                <li className={betStyle.input_money_box}>
+                    <p className={betStyle.cfff}>金额：</p>
                     <input type="number"
-                           className="J_betMoney input_money pl10 mr5"
+                           className={betStyle.input_money}
                            placeholder="请输入投注金额"
                            onChange = {this.setMoney()}
                            value={this.props.betInfo.betMoney}
                            ref="xbMoney"
                     />
-                    <p className="cfff">喜币</p>
+                    <p className={betStyle.cfff}>喜币</p>
                 </li>
-                <li className="selected_box">
-                    <div className="selected_money cfff tc" onClick={this.setMoney('100')}>
-                        <p className="f14">100</p>
+                <li className={betStyle.selected_box}>
+                    <div className={betStyle.selected_money} onClick={this.setMoney('100')}>
+                        <p>100</p>
                         <p>喜币</p>
                     </div>
-                    <div className="selected_money cfff tc ml15" onClick={this.setMoney('1000')}>
-                        <p className="f14" >1000</p>
+                    <div className={betStyle.selected_money} onClick={this.setMoney('1000')}>
+                        <p>1000</p>
                         <p>喜币</p>
                     </div>
-                    <div className="selected_money cfff tc ml15" onClick={this.setMoney('10000')}>
-                        <p className="f14">10000</p>
+                    <div className={betStyle.selected_money_last} onClick={this.setMoney('10000')}>
+                        <p>10000</p>
                         <p>喜币</p>
                     </div>
                 </li>
-                <li className="balance_box cfff ">
+                <li className={betStyle.balance_box}>
                     <span>余额：</span>
-                    <span className="xt_money">{this.props.account.xtbTotalAmount}</span>
-                    <Link to="/BuyDiamonds" className="fr cfff">获取喜币</Link>
+                    <span className={betStyle.xt_money}>{this.props.account.xtbTotalAmount}</span>
+                    <Link to="/BuyDiamonds" className={betStyle.xt_get}>获取喜币</Link>
                 </li>
             </ul>
         )

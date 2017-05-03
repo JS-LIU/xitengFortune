@@ -7,7 +7,7 @@ var { connect } = require('react-redux');
 var {Link} = require('react-router');
 var CountDown = require('../components/CountDown');
 
-require("../css/guessStyle.css");
+import guessStyle from "../css/guessStyle.css";
 
 import {stockGameActions} from '../redux/actions/stockGameActions';
 import {storageActions} from '../redux/actions/storageActions';
@@ -45,7 +45,7 @@ var StockMarketList = React.createClass({
                     countDown={this.props.stockGame.countDown}
                     gameList={this.props.stockGame.gameList}
                 />
-                <ul className="guess_stock">
+                <ul className={guessStyle.guess_stock}>
                     {stockMarketNodes}
                 </ul>
             </div>
@@ -61,13 +61,13 @@ var GameTime = React.createClass({
         const startTime = new Date().getTime();
         const countTime = this.props.gameTime.endTime - startTime;
         return (
-            <ul className="time_bg">
-                <li className="tc pt10 cfff guess_next_stage_time" >
-                    <span className="guess_next_stage">{this.props.gameList.length==0?"":this.props.gameList[0].stage}期</span>
+            <ul className={guessStyle.time_bg}>
+                <li className={guessStyle.guess_next_stage_time} >
+                    <span className={guessStyle.guess_next_stage}>{this.props.gameList.length==0?"":this.props.gameList[0].stage}期</span>
                     <span>{this.props.gameTime.endMonth + 1}月{this.props.gameTime.endDate}日（周{_h.valid.parseDay(this.props.gameTime.endDay)}）</span>
                 </li>
-                <div className="count_down">
-                    <span className="count_down_icon">截止投注：</span>
+                <div className={guessStyle.count_down}>
+                    <span className={guessStyle.count_down_icon}>截止投注：</span>
                     <CountDown
                         step={-1000}
                         countTime={countTime}
@@ -95,42 +95,42 @@ var GameItem = React.createClass({
     render: function () {
         const gameItem = this.props.gameItem;
         return (
-            <li className="game_item">
+            <li className={guessStyle.game_item}>
                 <div className="tc">
-                    <img src={gameItem.picUrl} className="tc stock_game_name_pic"></img>
+                    <img src={gameItem.picUrl} className={guessStyle.stock_game_name_pic}></img>
                 </div>
-                <p className="guess_stock_fund tc">
-                    <span className="f20 guess_fund" style={(gameItem.stockModel.chg>0)?upStyle:downStyle}>{gameItem.stockModel.currentPoint}</span>
-                    <span className="guess_fund_details" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.chg}</span>
-                    <span className="guess_fund_details_rate" style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.changeRate}%</span>
+                <p className={guessStyle.guess_stock_fund}>
+                    <span className={guessStyle.guess_fund} style={(gameItem.stockModel.chg>0)?upStyle:downStyle}>{gameItem.stockModel.currentPoint}</span>
+                    <span className={guessStyle.guess_fund_details} style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.chg}</span>
+                    <span className={guessStyle.guess_fund_details_rate} style={(gameItem.stockModel.chg>0)?cred:cgreen}>{gameItem.stockModel.chg>0?"+":""}{gameItem.stockModel.changeRate}%</span>
                 </p>
 
                 <Link to="/StockDetails" onClick={this.setStockId(gameItem.stockGameId)}>
 
-                    <ul className="clearfix guessUpDown" >
-                        <li className="fl tc ">
-                            <p className="guess_icon_cow guess_bet_money tc">
-                                <span className="guess_total_money">
-                                    <img src="src/images/Home-red-flag@2x.png" alt="" className="guess_money_flag"/>
-                                    <span className="guess_xt_money">{gameItem.guessUpXtBAmount}</span>
+                    <ul className={guessStyle.guessUpDown} >
+                        <li className="fl tc">
+                            <p className={guessStyle.guess_icon_cow}>
+                                <span className={guessStyle.guess_total_money}>
+                                    <img src="src/images/Home-red-flag@2x.png" alt="" className={guessStyle.guess_money_flag}/>
+                                    <span className={guessStyle.guess_xt_money}>{gameItem.guessUpXtBAmount}</span>
                                 </span>
                             </p>
 
                         </li>
                         <li className="fr tc">
-                            <p className="guess_icon_bear guess_bet_money tc">
-                                <span className="guess_total_money">
-                                    <img src="src/images/Home-green-flag@2x.png" alt="" className="guess_money_flag"/>
-                                    <span className="guess_xt_money">{gameItem.guessDownXtBAmount}</span>
+                            <p className={guessStyle.guess_icon_bear}>
+                                <span className={guessStyle.guess_total_money}>
+                                    <img src="src/images/Home-green-flag@2x.png" alt="" className={guessStyle.guess_money_flag}/>
+                                    <span className={guessStyle.guess_xt_money}>{gameItem.guessDownXtBAmount}</span>
                                 </span>
                             </p>
 
                         </li>
                     </ul>
                 </Link>
-                <div className="guess_btn clearfix" onClick={this.setStockId(gameItem.stockGameId)}>
-                    <Link to="/Bet" className="guess_guess_up_btn fl" onClick={this.setGuessType(0)}/>
-                    <Link to="/Bet" className="guess_guess_down_btn fl" onClick={this.setGuessType(1)}/>
+                <div className={guessStyle.guess_btn} onClick={this.setStockId(gameItem.stockGameId)}>
+                    <Link to="/Bet" className={guessStyle.guess_guess_up_btn} onClick={this.setGuessType(0)}/>
+                    <Link to="/Bet" className={guessStyle.guess_guess_down_btn} onClick={this.setGuessType(1)}/>
                 </div>
             </li>
         )

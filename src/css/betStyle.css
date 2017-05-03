@@ -13,6 +13,7 @@
     background:url("../../src/images/cai3-bg@2x.png");
     -webkit-background-size:0.5rem;
     background-size:0.5rem;
+    composes:po w from '../css/base_mobile.css';
 }
 .betBtn{
     margin:0 auto;
@@ -22,14 +23,21 @@
     -webkit-background-size:3.4rem;
     background-size:3.4rem;
     height:0.89rem;
+    composes: po w from '../css/base_mobile.css';
 }
 .bgLight{
     width:7.5rem;
     height:11.5rem;
+    composes: po from '../css/base_mobile.css';
 }
 .bet_header{
     display: flex;
     justify-content: center;
+    composes:cfff;
+    composes: pr24 f24 mt100 from '../css/base_mobile.css';
+}
+.bet_header_stage{
+    composes:pl24 pr24 from '../css/base_mobile.css';
 }
 .bet_header_item{
     display: flex;
@@ -46,6 +54,7 @@
 }
 .bet_center{
     margin-top:40px;
+    composes:pr from '../css/base_mobile.css';
 }
 .input_money_box{
     display: flex;
@@ -59,14 +68,15 @@
 }
 .input_money{
     flex: 3;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
+    -webkit-border-radius:0.06rem;
+    -moz-border-radius:0.06rem;
+    border-radius:0.06rem;
     background:url('../../src/images/cai3-bg@2x.png');
     -webkit-background-size:0.5rem;
     background-size:0.5rem;
     border:1px solid #FFF;
     color:#FFF;
+    composes: pl24 pr24 from '../css/base_mobile.css';
 }
 .selected_box{
     display: flex;
@@ -77,6 +87,11 @@
 .balance_box{
     margin:0.37rem 0.45rem 0;
     font-size:0.26rem;
+    composes:cfff;
+}
+.xt_get{
+    composes:cfff;
+    composes:fr from '../css/base_mobile.css';
 }
 .selected_money{
     display: flex;
@@ -87,10 +102,25 @@
     -webkit-border-radius:0.1rem;
     -moz-border-radius:0.1rem;
     border-radius:0.1rem;
+    composes: cfff;
+    composes:tc f24  mr24 from '../css/base_mobile.css';
+}
+.selected_money_last{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    background:#777;
+    -webkit-border-radius:0.1rem;
+    -moz-border-radius:0.1rem;
+    border-radius:0.1rem;
+    composes: cfff;
+    composes:tc f24 from '../css/base_mobile.css';
 }
 .bet_footer{
     position:fixed;
     bottom:0.66rem;
     font-size:0.24rem;
     color:#EEE;
+    composes:tc w from '../css/base_mobile.css';
 }

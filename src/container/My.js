@@ -9,7 +9,7 @@ var { Link } = require('react-router');
 var { Header,Title } = require('../components/Header');
 var $ = require('jquery');
 
-require('../css/MyStyle.css');
+import MyStyle from '../css/MyStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {userInfoActions} from '../redux/actions/userInfoActions';
@@ -24,14 +24,14 @@ var My = React.createClass({
     render: function () {
         return (
             <div>
-                <div className="discover_body po f5f5f5 w">
+                <div className={MyStyle.discover_body}>
                     <div className="w">
-                        <div className="my_header">
-                            <div className="my_header_icon tc m10">
+                        <div className={MyStyle.my_header}>
+                            <div className={MyStyle.my_header_icon}>
                                 <img src={this.props.userInfo.icon} alt="" className="w h"/>
                             </div>
-                            <div className="my_info">
-                                <p className="f14 cblue">{this.props.userInfo.cnName}</p>
+                            <div className={MyStyle.my_info}>
+                                <p className={MyStyle.my_info_name}>{this.props.userInfo.cnName}</p>
                                 <p className="f14">喜腾号：{this.props.userInfo.xtNumber}</p>
                             </div>
                         </div>

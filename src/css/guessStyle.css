@@ -16,10 +16,12 @@
 }
 .guess_stock_fund{
     padding-top:0.28rem;
+    composes:tc from '../css/base_mobile.css';
 }
 .guess_fund{
     font-size:0.34rem;
     padding-right:0.15rem;
+    composes: f24 from '../css/base_mobile.css';
 }
 .guess_fund_details{
     font-size:0.28rem;
@@ -32,6 +34,7 @@
 .stock_game_name_pic{
     width:1.72rem;
     padding-top:0.42rem;
+    composes:tc from '../css/base_mobile.css';
 }
 .time_bg{
     /*background:url("/xitenggame/xitengWapApp/src/images/home_lg1@2x.png") no-repeat top center;*/
@@ -41,6 +44,8 @@
 .guess_next_stage_time{
     font-size: 0.28rem;
     padding-top:0.48rem;
+    composes:cfff;
+    composes:tc pt24 from '../css/base_mobile.css';
 }
 .guess_next_stage{
     padding-right:0.46rem;
@@ -58,6 +63,7 @@
     -webkit-background-size:0.49rem;
     background-size:0.49rem;
     padding-top:0.4rem;
+    composes:clearfix from '../css/base_mobile.css';
 }
 .guessUpDown li{
     width:50%;
@@ -75,6 +81,7 @@
 .guess_btn{
     margin-top:0.34rem;
     padding-bottom:0.35rem;
+    composes:clearfix from '../css/base_mobile.css';
 }
 .guess_guess_up_btn{
     width:50%;
@@ -82,6 +89,7 @@
     -webkit-background-size:2.6rem;
     background-size:2.6rem;
     height:0.81rem;
+    composes:fl from '../css/base_mobile.css';
 
 }
 .guess_guess_down_btn{
@@ -90,7 +98,7 @@
     -webkit-background-size:2.6rem;
     background-size:2.6rem;
     height:0.81rem;
-
+    composes:fl from '../css/base_mobile.css';
 }
 .guess_xt_money{
     background:url('../../src/images/home-S-currency@2x.png') no-repeat left center;
@@ -98,6 +106,7 @@
     background-size:0.18rem;
     padding-left:0.25rem;
     font-size:0.29rem;
+    composes:cfff;
 }
 
 .guess_bet_money{
@@ -109,12 +118,16 @@
     -webkit-background-size:0.81rem;
     background-size:0.81rem;
     padding-top:1.49rem;
+    composes:guess_bet_money;
+    composes:tc from '../css/base_mobile.css';
 }
 .guess_icon_cow{
     background:url('../../src/images/icon_cow@2x.png') no-repeat center 0.13rem;
     -webkit-background-size:1.32rem;
     background-size:1.32rem;
     padding-top:1.49rem;
+    composes:guess_bet_money;
+    composes:tc from '../css/base_mobile.css';
 }
 .count_down_title{
     font-size:34px;
@@ -143,6 +156,7 @@
     line-height: 0.74rem;
     height:0.74rem;
     overflow: hidden;
+    composes: clearfix f24 from '../css/base_mobile.css';
 }
 .bet_user_header,
 .rank_user_header{
@@ -153,6 +167,7 @@
     -webkit-border-radius:0.05rem;
     -moz-border-radius:0.05rem;
     border-radius:0.05rem;
+    composes: fl from '../css/base_mobile.css';
 }
 .bet_user_name,
 .rank_user_name{
@@ -162,6 +177,8 @@
     overflow: hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
+    composes:cfff;
+    composes: fl from '../css/base_mobile.css';
 }
 .bet_time,
 .guess_bet_current_money{
@@ -171,10 +188,11 @@
 }
 .bet_user_bet,
 .rank_user_bet{
-
+    composes:cfff  guess_xt_money;
+    composes:fr from '../css/base_mobile.css'
 }
 .pk_title{
-    background:url('/xitenggame/xitengWapApp/src/images/home_line@2x.png') no-repeat top center;
+    background:url('../../src/images/home_line@2x.png') no-repeat top center;
     -webkit-background-size:contain;
     background-size: contain;
     line-height:50px;
@@ -183,12 +201,16 @@
     height:0.95rem;
     line-height:0.95rem;
     border-bottom:1px solid #DDDDDD;
+    composes:cfff;
+    composes:clearfix from '../css/base_mobile.css'
 }
 .guess_stock_god_title{
     font-size:0.32rem;
+    composes: fl from '../css/base_mobile.css'
 }
 .guess_stock_god_classify{
     font-size:0.24rem;
+    composes: fl clearfix from '../css/base_mobile.css'
 }
 .pk_box{
     border-top:0.3rem solid #1c242a ;
@@ -199,6 +221,7 @@
 }
 .pk_pic{
     margin:0.25rem 0 0.4rem;
+    composes: ml24 from '../css/base_mobile.css'
 }
 .prize_pic{
     display: block;

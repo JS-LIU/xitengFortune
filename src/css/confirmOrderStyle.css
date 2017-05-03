@@ -5,7 +5,7 @@
     background:#FFF;
 }
 .cart_body{
-    padding-bottom:47px;
+    padding-bottom: 0.88rem;
     min-height:calc(100% - 47px);
     composes:f5f5f5;
     composes:po w from '../Util/base.css';
@@ -13,25 +13,25 @@
 .cart_footer{
     position:fixed;
     bottom:0;
-    height:47px;
-    line-height:47px;
+    height: 0.88rem;
+    line-height: 0.88rem;
     background:#FFF;
-    composes:f16 w from '../Util/base.css';
+    composes:f26 w from '../css/base_mobile.css';
 }
 .address_list{
-    height:44px;
-    line-height:44px;
-    border-bottom:1px solid #E2E2E2;
+    height: 0.88rem;
+    line-height:0.88rem;
+    border-bottom: 0.01rem solid #E2E2E2;
     background:#FFF;
-    composes:pl15 f16 from '../Util/base.css';
+    composes:pl24 f26 from '../css/base_mobile.css';
 }
 .order_def_address{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height:55px;
+    height:1.1rem;
     composes:fff;
-    composes:pl15 from '../Util/base.css';
+    composes:pl24 from '../css/base_mobile.css';
 }
 .order_user_name{
     display: flex;
@@ -43,7 +43,7 @@
     flex-direction: row;
     justify-content: space-between;
     flex: 1;
-    composes:pr15 from '../Util/base.css';
+    composes:pr24 from '../css/base_mobile.css';
 }
 .order_user_address{
     display: flex;

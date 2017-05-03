@@ -3,7 +3,7 @@
  */
 var React = require('react');
 var {Link} = require('react-router');
-require('../css/footerStyle.css');
+import footerStyle from '../css/footerStyle.css';
 
 var Footer = React.createClass({
     getInitialState:function(){
@@ -37,9 +37,9 @@ var Footer = React.createClass({
     render: function () {
         var footerNodes = this.state.footerData.map((footerItem,index) => {
             return (
-                <Link to={footerItem.url} className="fl footer_item tc" key={index} onClick={this.cutTag(index)}>
-                    <div className="footer_pic_box">
-                        <img src={footerItem.isChecked?footerItem.checked:footerItem.unchecked} alt="" className="footer_pic"/>
+                <Link to={footerItem.url} className={footerStyle.footer_item} key={index} onClick={this.cutTag(index)}>
+                    <div className={footerStyle.footer_pic_box}>
+                        <img src={footerItem.isChecked?footerItem.checked:footerItem.unchecked} alt="" className={footerStyle.footer_pic}/>
                         <span style={footerItem.isChecked?{color:"#4964ef"}:{color:"#a4a3a3"}}>{footerItem.name}</span>
                     </div>
                 </Link>
@@ -47,7 +47,7 @@ var Footer = React.createClass({
         });
 
         return (
-            <div className="w main_footer fff">
+            <div className={footerStyle.main_footer}>
                 {footerNodes}
             </div>
         )

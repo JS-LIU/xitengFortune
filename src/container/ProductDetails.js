@@ -48,18 +48,18 @@ const ProductDetails = React.createClass({
                 />
                 <div className={productDetailStyle.detail_product_info}>
                     <p className={productDetailStyle.detail_product_info_name}>商品名称：{productInfo.productName}</p>
-                    <p>{productInfo.detail}</p>
+                    <p className={productDetailStyle.detail_product_info_detail}>{productInfo.detail}</p>
                     <div className="clearfix">
                         <p className={productDetailStyle.cred}>
                             <span>￥</span>
                             <span>{productInfo.price / 100}</span>
                         </p>
-                        <p className={productDetailStyle.detail_product_inventory}>库存：{productInfo.inventory}</p>
                     </div>
                 </div>
                 <div className={productDetailStyle.detail_delivery}>
                     <span className={productDetailStyle.red_checked} >快递：0.00</span>
                     <span className={productDetailStyle.red_checked}>已售：{productInfo.sales}</span>
+                    <span className={productDetailStyle.red_checked}>库存：{productInfo.inventory}</span>
                 </div>
                 <ProductDetail
                     productInfo = {productInfo}

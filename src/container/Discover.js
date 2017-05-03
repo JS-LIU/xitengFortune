@@ -11,7 +11,7 @@ var { Link } = require('react-router');
 var { Header,Title } = require('../components/Header');
 var $ = require('jquery');
 
-require("../css/discoverStyle.css");
+import discoverStyle from "../css/discoverStyle.css";
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 
@@ -22,7 +22,7 @@ var Discover = React.createClass({
     render: function () {
         return (
             <div>
-                <div className="discover_body po f5f5f5 w">
+                <div className={discoverStyle.discover_body}>
                     {/*<EntranceList itemList={[{*/}
                         {/*name:'股神争霸',*/}
                         {/*url:'/Rank',*/}

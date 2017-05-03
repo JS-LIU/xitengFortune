@@ -25,7 +25,7 @@
     composes: mb10 from '../Util/base.css';
 }
 .shop_product_pic{
-    height:180px;
+    height:3.65rem;
     overflow: hidden;
     composes: fff;
     composes: w tc from '../Util/base.css';
@@ -37,32 +37,36 @@
 
 
 .shop_product_footer{
-    height:70px;
-    border-top:1px solid #E2E2E2;
+    height: 1.3rem;
+    border-top: 0.01rem solid #E2E2E2;
     composes: fff;
-    composes: w pl12 pr12 from '../Util/base.css';
+    composes: pl24 pr24 from '../css/base_mobile.css';
 }
 .shop_product_name {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 40px;
+    height: 0.7rem;
     text-overflow: ellipsis;
     white-space:nowrap;
     overflow: hidden;
+    composes: f30 from '../css/base_mobile.css';
 }
 .shop_product_price{
-    line-height:30px;
+    line-height: 0.4rem;
     composes: cred;
+    composes: f32 from '../css/base_mobile.css';
 }
 .shop_type_list{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height:46px;
-    line-height:46px;
+    padding-top:0.19rem;
+    padding-bottom:0.19rem;
+    height: 0.6rem;
+    line-height:0.6rem;
     composes: fff;
-    composes: f16 from '../Util/base.css';
+    composes: f30 from '../css/base_mobile.css';
 }
 .shop_type_item{
     display: flex;
@@ -70,5 +74,5 @@
     border-left:1px solid #E2E2E2;
     margin-left:-1px;
     justify-content:center;
-    composes: f16 from '../Util/base.css';
+    composes: f30 from '../css/base_mobile.css';
 }

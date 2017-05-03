@@ -16,32 +16,36 @@
     height:44px;
     line-height: 44px;
     background:#FFF;
-    composes:pl15 w from '../Util/base.css';
+    composes:pl24 w from '../css/base_mobile.css';
 }
 .cart_shop_name_icon{
-    background:url("../../src/images/icon_mall@2x.png") no-repeat 10px center;
-    -webkit-background-size: 20px;
-    background-size:20px;
-    padding:3px 0 3px 35px;
-    composes: pl15 from '../Util/base.css';
+    background:url("../../src/images/icon_mall@2x.png") no-repeat 0.2rem center;
+    -webkit-background-size:0.33rem 0.29rem;
+    background-size:0.33rem 0.29rem;
+    padding: 0.06rem 0 0.06rem 0.7rem;
+    composes: pl24 f26 from '../css/base_mobile.css';
 }
 .cart_shop_edit{
-    width:60px;
-    composes:fr pr15 tc from '../Util/base.css';
+    width: 1.2rem;
+    composes:fr pr24 tc from '../css/base_mobile.css';
+}
+.cart_product_list{
+    composes:fff;
+    composes: mt24 from '../css/base_mobile.css';
 }
 .cart_product{
-    height:95px;
+    height: 1.9rem;
     display:flex;
     flex-direction: row;
     border-top:1px solid #E2E2E2;
-    composes: pl15 pr from '../Util/base.css';
+    composes: pl24 pr from '../css/base_mobile.css';
 }
 .cart_product_pic{
-    width:73px;
-    height:73px;
-    border:1px solid #E2E2E2;
+    width: 1.4rem;
+    height: 1.4rem;
+    border: 0.01rem solid #E2E2E2;
     overflow: hidden;
-    composes:m10 tc from '../Util/base.css';
+    composes:m20 tc from '../css/base_mobile.css';
 }
 .cart_product_check{
     display: flex;
@@ -52,23 +56,27 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
+    composes:f32 from '../css/base_mobile.css';
 }
 .red_XT_icon{
     background:url("../../src/images/icon_maddle_red@2x.png") no-repeat left center;
-    -webkit-background-size:15px;
-    background-size:15px;
+    -webkit-background-size:0.16rem 0.18rem;
+    background-size:0.16rem 0.18rem;
     composes:cred;
-    composes:pl15 from '../Util/base.css';
+    composes:pl24 from '../css/base_mobile.css';
+}
+.cart_product_info_price{
+    composes:mt24 from '../css/base_mobile.css';
 }
 .cart_ctrl{
-    width:85px;
-    height:20px;
-    right:15px;
-    bottom:15px;
+    width: 1.7rem;
+    height:0.4rem;
+    right:0.3rem;
+    bottom:0.3rem;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    border:1px solid #E2E2E2;
+    border: 0.01rem solid #E2E2E2;
     composes:po from '../Util/base.css';
 }
 .cart_ctrl_reduce,
@@ -89,20 +97,28 @@
 .cart_footer{
     position:fixed;
     bottom:0;
-    height:47px;
-    line-height:47px;
+    height:0.88rem;
+    line-height:0.88rem;
     background:#FFF;
-    composes:f16 w from '../Util/base.css';
+    composes:f26 w from '../css/base_mobile.css';
+}
+.cart_allCheck{
+    composes:f26 w ml15 from '../css/base_mobile.css';
+}
+.cart_total{
+    composes:f26 w ml40 from '../css/base_mobile.css';
 }
 .cart_delete_all{
-    width:125px;
+    width: 3rem;
+    color: #ffffff;
     background:#FF4242;
-    composes:fr f20 tc from '../Util/base.css';
+    composes:fr f32 tc from '../css/base_mobile.css';
 }
 .cart_payment_btn{
-    width:125px;
+    width: 3rem;
+    color: #ffffff;
     background:#FFBA26;
-    composes:fr f20 tc from '../Util/base.css';
+    composes:fr f32 tc from '../css/base_mobile.css';
 }
 .cart_body{
     padding-bottom:47px;
@@ -111,9 +127,9 @@
     composes:po w from '../Util/base.css';
 }
 .cart_edit{
-    height:44px;
-    margin:40px 15px;
-    border-radius: 3px;
+    height:0.88rem;
+    margin:0.8rem 0.3rem;
+    border-radius: 0.03rem;
     background:#0A89FE;
-    line-height:44px;
+    line-height:0.88rem;
 }

@@ -5,22 +5,22 @@
 var React = require('react');
 var {Link} = require('react-router');
 
-require("../css/entranceListStyle.css");
+import entranceListStyle from "../css/entranceListStyle.css";
 
 var EntranceList = React.createClass({
 
     render:function(){
         var listNodes = this.props.itemList.map((item,index)=>{
             return (
-                <li key={index} className="entrance_list">
+                <li key={index} className={entranceListStyle.entrance_list}>
                     <Link to={item.url}>
-                        <span className="entrance_name" style={entranceBgStyle(item.icon)}>{item.name}</span>
+                        <span className={entranceListStyle.entrance_name} style={entranceBgStyle(item.icon)}>{item.name}</span>
                     </Link>
                 </li>
             )
         });
         return (
-            <ul className="entrance f16">
+            <ul className={entranceListStyle.entrance}>
                 {listNodes}
             </ul>
         )

@@ -93,8 +93,8 @@ var ProductList = React.createClass({
                         <img src={item.smallPicture} alt="" className="w"/>
                     </div>
                     <div className={shoppingCartStyle.cart_product_info}>
-                        <p className="f16">{item.productName}</p>
-                        <p className="f16 mt10">
+                        <p >{item.productName}</p>
+                        <p className={shoppingCartStyle.cart_product_info_price}>
                             <span className={shoppingCartStyle.red_XT_icon}>{item.price / 100}</span>
                             <span >x{item.totalCount}</span>
                         </p>
@@ -103,7 +103,7 @@ var ProductList = React.createClass({
             )
         });
         return (
-            <ul className="fff mt5">
+            <ul className={shoppingCartStyle.cart_product_list}>
                 {productNodes}
             </ul>
         )

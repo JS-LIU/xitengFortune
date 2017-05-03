@@ -72,8 +72,8 @@ var AddressList = React.createClass({
                         />
                     </div>
                     <div className={selectAddressStyle.address_item_info}>
-                        <p className="f14">
-                            <span className="pr15">{item.recievName}</span>
+                        <p className={selectAddressStyle.address_item_info_main}>
+                            <span className={selectAddressStyle.address_item_info_main_item}>{item.recievName}</span>
                             <span>{item.phoneNum}</span>
                         </p>
                         <p>
@@ -92,7 +92,7 @@ var AddressList = React.createClass({
         });
 
         return (
-            <ul className="mt10">
+            <ul className={selectAddressStyle.address_list}>
                 {addressNodes}
             </ul>
         )

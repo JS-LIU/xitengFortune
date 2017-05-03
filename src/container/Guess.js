@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 var Carousel = require('../components/Carousel');
 var StockMarketList = require('./StockMarketList');
 
-require("../css/guessStyle.css");
+import guessStyle from "../css/guessStyle.css";
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {stockGameActions} from '../redux/actions/stockGameActions';
@@ -47,7 +47,7 @@ var Guess = React.createClass({
             }
         };
         return (
-            <div className="common_bg">
+            <div className={guessStyle.common_bg}>
                 <Carousel
                     pictures={this.props.activity.list}
                     carouselStyle={carouselStyle}
@@ -90,27 +90,27 @@ var BetList = React.createClass({
     render: function () {
         let betNodes = this.props.betList.betList.map((item,index)=>{
             return (
-                <li className="bet_user clearfix f14" key={index}>
-                    <div className="bet_user_header fl">
+                <li className={guessStyle.bet_user} key={index}>
+                    <div className={guessStyle.bet_user_header}>
                         <img src={item.userIconUrl} alt="" className="w h"/>
                     </div>
-                    <div className="bet_user_name fl cfff">
+                    <div className={guessStyle.bet_user_name}>
                         <span>{item.userName}</span>
                     </div>
                     <div className="fl ">
-                        <span className="bet_time">刚刚</span>
+                        <span className={guessStyle.bet_time}>刚刚</span>
                     </div>
                     <div className="fr">
-                        <span className="guess_bet_current_money">投注</span>
-                        <span className="guess_xt_money cfff">{item.guessXitbAmount}</span>
+                        <span className={guessStyle.guess_bet_current_money}>投注</span>
+                        <span className={guessStyle.guess_xt_money}>{item.guessXitbAmount}</span>
                     </div>
                 </li>
             )
         });
 
         return (
-            <div className="bet_user_box">
-                <ul className="roll_up">
+            <div className={guessStyle.bet_user_box}>
+                <ul className={guessStyle.roll_up}>
                     {betNodes}
                 </ul>
             </div>
@@ -144,15 +144,15 @@ var Rank = React.createClass({
         });
         let rankUserNodes = this.props.rank.rankList.map((item,index)=>{
             return (
-                <li className="rank_user clearfix f14" key={index}>
+                <li className={guessStyle.rank_user} key={index}>
                     <span className="cfff fl pl5 pr5">{index+1}</span>
-                    <div className="rank_user_header cfff fl">
+                    <div className={guessStyle.rank_user_header}>
                         <img src={item.iconUrl} alt="" className="w"/>
                     </div>
-                    <div className="rank_user_name pl10 fl cfff">
+                    <div className={ guessStyle.rank_user_name}>
                         <span>{item.userName}</span>
                     </div>
-                    <span className="fr rank_user_bet cfff guess_xt_money">
+                    <span className={guessStyle.rank_user_bet}>
                         {item.bonusXtbAmount}
                     </span>
                 </li>
@@ -160,17 +160,17 @@ var Rank = React.createClass({
         });
 
         return (
-            <div className="pk_box">
-                <div className="cfff clearfix guess_stock_god">
-                    <p className="fl guess_stock_god_title">股神争霸</p>
-                    <ul className="fr clearfix guess_stock_god_classify">
+            <div className={guessStyle.pk_box}>
+                <div className={guessStyle.guess_stock_god}>
+                    <p className={guessStyle.guess_stock_god_title}>股神争霸</p>
+                    <ul className={guessStyle.guess_stock_god_classify}>
                         {rankTypeNodes}
                     </ul>
                 </div>
-                <ul className="guess_rank_list">
+                <ul className={guessStyle.guess_rank_list}>
                     {rankUserNodes}
                 </ul>
-                <div className="pk_pic ml15">
+                <div className={guessStyle.pk_pic}>
                     <img src={pic_src} alt="" className="prize_pic w"/>
                 </div>
             </div>

@@ -100,6 +100,9 @@ a{
 .f26{
     font-size:0.26rem;
 }
+.f30{
+    font-size:0.30rem;
+}
 .f32{
     font-size:0.32rem;
 }
@@ -136,18 +139,22 @@ a{
 .h{height:100%;}
 
 /*边距*/
-.pl24{
-    padding-left:0.24rem;
-}
-.pr24{
-    padding-right:0.24rem;
-}
-.ml24{
-    margin-left:0.24rem;
-}
-.mr24{
-    margin-right:0.24rem;
-}
+.pt24{  padding-top:0.24rem;}
+.pl24{  padding-left:0.24rem;}
+.pl40{  padding-left:0.4rem;}
+.pr24{  padding-right:0.24rem;}
+.pr40{  padding-right:0.4rem;}
+.mt20{  margin-top:0.2rem;}
+.mt100{  margin-top:1rem;}
+.mt24{  margin-top:0.24rem;}
+.ml15{  margin-left:0.15rem;}
+.ml24{  margin-left:0.24rem;}
+.ml40{  margin-left:0.4rem;}
+.mr24{  margin-right:0.24rem;}
+.mr40{  margin-right:0.4rem;}
+
+
+.m20{margin:0.2rem;}
 /*overflow*/
 .o-y{
     overflow-y: auto;

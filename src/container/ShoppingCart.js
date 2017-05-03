@@ -16,7 +16,6 @@ import {orderActions} from '../redux/actions/orderActions';
 
 
 const ShoppingCart = React.createClass({
-
     componentWillMount:function () {
         this.props.historyUrlsActionKeys.pushUrl('/ShoppingCart');
         this.props.historyUrlsActionKeys.mark('/ShoppingCart');
@@ -43,8 +42,8 @@ const ShoppingCart = React.createClass({
                            onChange={this.allCheck}
                            className="ml15"
                     />
-                    <span className="f14 ml5">全选</span>
-                    <span className="ml15">
+                    <span className={shoppingCartStyle.cart_allCheck}>全选</span>
+                    <span className={shoppingCartStyle.cart_total}>
                         <span>合计：</span>
                         <span className={shoppingCartStyle.red_XT_icon}>{this.props.shoppingCart.totalPrice / 100}</span>
                     </span>
@@ -98,8 +97,8 @@ const ProductList = React.createClass({
                         <img src={item.smallPicture} alt="" className="w"/>
                     </div>
                     <div className={shoppingCartStyle.cart_product_info}>
-                        <p className="f16">{item.productName}</p>
-                        <p className="f16 mt10">
+                        <p>{item.productName}</p>
+                        <p className={shoppingCartStyle.cart_product_info_price}>
                             <span className={shoppingCartStyle.red_XT_icon}>{item.price / 100}</span>
                             <span>*{item.totalCount}</span>
                         </p>
@@ -113,7 +112,7 @@ const ProductList = React.createClass({
             )
         });
         return (
-            <ul className="fff">
+            <ul className={shoppingCartStyle.fff}>
                 <li className={shoppingCartStyle.cart_shop_name}>
                     <input
                         type="checkbox"
