@@ -1,6 +1,9 @@
 .f5f5f5{
     background:#F5F5F5;
 }
+.cfff{
+    color:#FFF;
+}
 .c000{
 color:#000;
 }
@@ -9,6 +12,10 @@ color:#000;
 }
 .cred{
     color:#FF4242;
+}
+.pay_head{
+    composes:f5f5f5;
+    composes:po w h from '../css/base_mobile.css';
 }
 .product_info{
     border-top: 1px solid #E2E2E2;
@@ -24,11 +31,14 @@ color:#000;
     margin:15px;
     width: 34px;
     height:34px;
+    composes:fl from '../css/base_mobile.css';
 }
 .payWay_title{
     height:40px;
     line-height:40px;
     border-top:1px solid #E2E2E2;
+    composes:c000;
+    composes:pl24 f32 from '../css/base_mobile.css';
 }
 .product_name{
     line-height:26px;
@@ -36,6 +46,8 @@ color:#000;
 .product_info{
     border-top:1px solid #E2E2E2;
     border-bottom:1px solid #E2E2E2;
+    composes:fff;
+    composes: clearfix tc from '../css/base_mobile.css';
 }
 .payWay_box{
     border-top:1px solid #E2E2E2;
@@ -44,9 +56,10 @@ color:#000;
     border-bottom:1px solid #E2E2E2;
 }
 .selected{
-    background:#FFF url("/xitenggame/xitengWapApp/src/images/btn_choose_s@2x.png") no-repeat 95% center;
+    background:#FFF url("../../src/images/btn_choose_s@2x.png") no-repeat 95% center;
     -webkit-background-size:20px;
     background-size:20px;
+    composes:pr clearfix from '../css/base_mobile.css';
 }
 .pay_btn{
     margin:40px 15px;
@@ -54,4 +67,15 @@ color:#000;
     background:#0A89FE;
     line-height:44px;
     height:44px;
+    composes: cfff;
+    composes: tc f32 from '../css/base_mobile.css';
+}
+
+.realPay{
+    composes:cred;
+    composes:fr from '../css/base_mobile.css';
+}
+.payWay_way{
+    composes: c000;
+    composes: f24 pt24 from '../css/base_mobile.css';
 }

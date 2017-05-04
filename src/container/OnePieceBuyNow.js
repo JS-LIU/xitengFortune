@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/onePieceBuyNowStyle.css');
+import onePieceBuyNowStyle from '../css/onePieceBuyNowStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {purchaseGameActions} from '../redux/actions/purchaseGameActions';
@@ -32,33 +32,33 @@ var OnePieceBuyNow = React.createClass({
     },
     render: function () {
         return (
-            <div className="f5f5f5 onePiece_order_wrap w h">
-                <div className="onePiece_order_productInfo">
-                    <div className="onePiece_order_productInfo_pic">
+            <div className={onePieceBuyNowStyle.onePiece_order_wrap}>
+                <div className={onePieceBuyNowStyle.onePiece_order_productInfo}>
+                    <div className={onePieceBuyNowStyle.onePiece_order_productInfo_pic}>
                         <img src={this.props.purchaseGame.detail.picUrl} alt="" className="w h"/>
                     </div>
-                    <ul className="onePiece_order_productInfo_detail">
-                        <li className="onePiece_order_product_name">{this.props.purchaseGame.detail.productName}</li>
+                    <ul className={onePieceBuyNowStyle.onePiece_order_productInfo_detail}>
+                        <li className={onePieceBuyNowStyle.onePiece_order_product_name}>{this.props.purchaseGame.detail.productName}</li>
                         <li>期数：{this.props.purchaseGame.detail.stage}</li>
                         <li>剩余：{this.props.purchaseGame.detail.restPurchaseCount}</li>
                     </ul>
                 </div>
 
-                <ul className="onePiece_order_much">
-                    <li className="onePiece_order_buy_much">
+                <ul className={onePieceBuyNowStyle.onePiece_order_much}>
+                    <li className={onePieceBuyNowStyle.onePiece_order_buy_much}>
                         <span>参与份数</span>
-                        <div className="onePiece_order_ctrl">
-                            <div className="tc onePiece_order_ctrl_reduce tc" onClick={this.setPurchaseGameCount(parseInt(this.props.purchaseGame.order.purchaseGameCount)-1)}>-</div>
+                        <div className={onePieceBuyNowStyle.onePiece_order_ctrl}>
+                            <div className={onePieceBuyNowStyle.onePiece_order_ctrl_reduce} onClick={this.setPurchaseGameCount(parseInt(this.props.purchaseGame.order.purchaseGameCount)-1)}>-</div>
                             <input type="number"
                                    className="tc"
                                    ref="counts"
                                    value={this.props.purchaseGame.order.purchaseGameCount}
                                    onChange={this.setPurchaseGameCount()}/>
-                            <div className="onePiece_order_ctrl_add tc" onClick={this.setPurchaseGameCount(parseInt(this.props.purchaseGame.order.purchaseGameCount)+1)}>+</div>
+                            <div className={onePieceBuyNowStyle.onePiece_order_ctrl_add} onClick={this.setPurchaseGameCount(parseInt(this.props.purchaseGame.order.purchaseGameCount)+1)}>+</div>
                         </div>
                     </li>
                     <li>
-                        <ul className="onePiece_order_buy_much_select_list">
+                        <ul className={onePieceBuyNowStyle.onePiece_order_buy_much_select_list}>
                             <li className="tc" onClick={this.setPurchaseGameCount(5)}>5</li>
                             <li className="tc" onClick={this.setPurchaseGameCount(20)}>20</li>
                             <li className="tc" onClick={this.setPurchaseGameCount(50)}>50</li>
@@ -66,12 +66,12 @@ var OnePieceBuyNow = React.createClass({
                             <li className="tc" onClick={this.setPurchaseGameCount(this.props.purchaseGame.detail.restPurchaseCount)}>包尾</li>
                         </ul>
                     </li>
-                    <li className="onePiece_order_buy_money tr ">
+                    <li className={onePieceBuyNowStyle.onePiece_order_buy_money}>
                         <span>合计：</span>
-                        <span className="red_money">{this.props.purchaseGame.detail.priceOfOneBidInRmb * this.props.purchaseGame.order.purchaseGameCount}</span>
+                        <span className={onePieceBuyNowStyle.red_money}>{this.props.purchaseGame.detail.priceOfOneBidInRmb * this.props.purchaseGame.order.purchaseGameCount}</span>
                     </li>
                 </ul>
-                <Link to="/OnePieceConfirmOrder" className="onePiece_confirm_btn tc">立即参与</Link>
+                <Link to="/OnePieceConfirmOrder" className={onePieceBuyNowStyle.onePiece_confirm_btn}>立即参与</Link>
             </div>
         )
     }

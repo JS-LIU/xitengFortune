@@ -65,6 +65,7 @@
     -webkit-border-radius:0.1rem;
     -moz-border-radius:0.1rem;
     border-radius:0.1rem;
+    composes:pr from '../css/base_mobile.css';
 }
 .onePiece_detail_purchaseGame_line_rate{
     top:0;
@@ -74,6 +75,7 @@
     -moz-border-radius:0.1rem;
     border-radius:0.1rem;
     background:#F23030;
+    composes:po from '../css/base_mobile.css';
 }
 .onePiece_detail_purchaseGame_data_other{
     padding:0.16rem 0 0.3rem;
@@ -92,6 +94,7 @@
 .onePiece_detail_purchaseGame_isJoin_no{
     font-size:0.24rem;
     line-height:1.04rem;
+    composes: tc from '../css/base_mobile.css';
 }
 .onePiece_detail_purchaseGame_isJoin_btn{
     color:#F23030;
@@ -170,6 +173,7 @@
     bottom:0;
     height:0.98rem;
     background:#FFF;
+    composes:w from '../css/base_mobile.css';
 }
 .onePiece_join_footer_btn{
     margin: 0.09rem 0.2rem;
@@ -179,4 +183,5 @@
     font-size:0.36rem;
     color:#FFF;
     border:0.06rem;
+    composes:tc from '../css/base_mobile.css';
 }

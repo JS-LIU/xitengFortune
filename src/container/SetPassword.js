@@ -10,7 +10,7 @@ var {Link} = require('react-router');
 var { Header,BackBtn,Title } = require('../components/Header');
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
-require('../css/registerStyle.css');
+import registerStyle from '../css/registerStyle.css';
 
 import _h from '../Util/HB';
 import {userInfoActions} from '../redux/actions/userInfoActions';
@@ -59,10 +59,10 @@ var SetPassword = React.createClass({
                         {/*back={{text:'取消',src:'/nav_btn_back@2x.png',link:backUrl}}*/}
                     {/*/>*/}
                 {/*</Header>*/}
-                <div className="tc f16 mt10">设置密码</div>
-                <div className="register_list">
+                <div className={registerStyle.register_list_set}>设置密码</div>
+                <div className={registerStyle.register_list}>
                     <span>密码</span>
-                    <input type="password" placeholder="请填写6位以上密码" className="register_input_none pl15 J_password"/>
+                    <input type="password" placeholder="请填写6位以上密码" className={registerStyle.J_password}/>
                 </div>
                 {this.props.showDialog.showDialog?<DialogiOS >
                     <DialogHeader title="验证码错误"/>
@@ -74,9 +74,9 @@ var SetPassword = React.createClass({
                         />
                     </DialogFooter>
                 </DialogiOS>:''}
-                <div className="next_btn tc cfff f16" onClick={this.inputPassWord}>
+                <div className={registerStyle.next_btn} onClick={this.inputPassWord}>
                     <Link to={this.props.userInfo.findPassword?"/Login":markUrl}>
-                        <span className="cfff">确定</span>
+                        <span className={registerStyle.cfff}>确定</span>
                     </Link>
                 </div>
             </div>

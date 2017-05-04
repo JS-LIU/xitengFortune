@@ -8,7 +8,7 @@ var { connect } = require('react-redux');
 var { Link } = require('react-router');
 var { Header,BackBtn,Title } = require('../components/Header');
 
-require('../css/paySuccessStyle.css');
+import paySuccessStyle from '../css/paySuccessStyle.css';
 
 import {userInfoActions} from '../redux/actions/userInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -27,7 +27,7 @@ var PaySuccess = React.createClass({
         const data = 1234567;
         return (
             <div className="po w h f5f5f5">
-                <div className="pay_success cblue tc f20 mt10">兑换成功</div>
+                <div className={paySuccessStyle.pay_success}>兑换成功</div>
 
                 <ul className="fff pl15 pr15 mt10 f14 pt15 pb15">
                     {/*<li>*/}

@@ -1,18 +1,31 @@
 .cblue{
     color:#0A89FE;
 }
+.cred{
+    color:#FF4242;
+}
+.pay_fail {
+    height: 2.2rem;
+    background: #FFF url("../../src/images/common_icon_pay-success@2x.png") no-repeat center 0.3rem;
+    background-size: 0.5rem;
+    line-height: 2.8rem;
+    composes: cred;
+    composes: tc f24 mt20 from '../css/base_mobile.css';
+}
 .pay_success{
-    height:110px;
-    background:#FFF url("/xitenggame/xitengWapApp/src/images/common_icon_pay-success@2x.png") no-repeat center 15px;
-    background-size: 25px;
-    line-height:140px;
+    height:2.2rem;
+    background:#FFF url("../../src/images/common_icon_pay-success@2x.png") no-repeat center 0.3rem;
+    background-size: 0.5rem;
+    line-height:2.8rem;
+    composes:cblue;
+    composes: tc f24 mt20 from '../css/base_mobile.css';
 }
 .pay_fail{
-    height:110px;
-    background:#FFF url("/xitenggame/xitengWapApp/src/images/pay_fail.png@2x.png") no-repeat center 15px;
-    background-size: 25px;
-    line-height:140px;
+    height:2.2rem;
+    background:#FFF url("../../src/images/pay_fail.png") no-repeat center 0.3rem;
+    background-size:0.5rem;
+    line-height:2.8rem;
 }
 .pay_order_result{
-    line-height: 40px;
+    line-height: 0.8rem;
 }

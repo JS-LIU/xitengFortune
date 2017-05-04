@@ -11,7 +11,7 @@ var { connect } = require('react-redux');
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
 
-require('../css/registerStyle.css');
+import registerStyle from '../css/registerStyle.css';
 
 import {userInfoActions} from '../redux/actions/userInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -54,21 +54,21 @@ var CheckCode = React.createClass({
                         {/*back={{text:'取消',src:'/nav_btn_back@2x.png',link:backUrl}}*/}
                     {/*/>*/}
                 {/*</Header>*/}
-                <div className="tc f16 mt10">短信验证码已发送至你的手机</div>
-                <div className="tc f16">请填写验证码</div>
-                <ul className="mt30">
-                    <li className="register_list">
+                <div className={registerStyle.register_hint}>短信验证码已发送至你的手机</div>
+                <div className={registerStyle.register_code}>请填写验证码</div>
+                <ul className={registerStyle.register_detail}>
+                    <li className={registerStyle.register_list}>
                         <span>手机号</span>
-                        <span className="pl15">{this.props.userInfo.phoneNum}</span>
+                        <span className={registerStyle.registe_num}>{this.props.userInfo.phoneNum}</span>
                     </li>
-                    <li className="register_list">
+                    <li className={registerStyle.register_list}>
                         <span>验证码</span>
                         <input
-                            className="register_input_none pl15 J_myCheckCode"
+                            className={registerStyle.J_myCheckCode}
                             type="text"
                             ref="checkCode"
                             onChange={this.inputCheckCode}/>
-                        <div className="register_send_checkcode pl15" onClick={this.getCheckCode}>
+                        <div className={registerStyle.register_send_checkcode} onClick={this.getCheckCode}>
                             <span>{this.props.userInfo.timer}</span>
                         </div>
                     </li>
@@ -82,8 +82,8 @@ var CheckCode = React.createClass({
                             cancel={{url:"/Register",text:"取消"}}/>
                     </DialogFooter>
                 </DialogiOS>:''}
-                <Link to={this.props.showDialog.showDialog?"/CheckCode":"/SetPassword"} className="next_btn tc cfff f16" onClick={this.checkCheckCode}>
-                    <span className="cfff">下一步</span>
+                <Link to={this.props.showDialog.showDialog?"/CheckCode":"/SetPassword"} className={registerStyle.next_btn} onClick={this.checkCheckCode}>
+                    <span className={registerStyle.cfff}>下一步</span>
                 </Link>
             </div>
         )

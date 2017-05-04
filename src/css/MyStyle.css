@@ -13,7 +13,7 @@
 
 .discover_body{
     top:0;
-    bottom:50px;
+    bottom:1rem;
     composes:f5f5f5;
     composes: po w from '../css/base_mobile.css';
 }
@@ -24,8 +24,8 @@
     background:#FFF;
 }
 .my_header_icon{
-    width:73px;
-    height:73px;
+    width:1.46rem;
+    height:1.46rem;
     overflow: hidden;
     composes:tc m20 from '../css/base_mobile.css';
 }
@@ -39,70 +39,86 @@
     composes:cblue;
 }
 .my_assert{
-    top:44px;
+    top:0.88rem;
 }
 .my_account{
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    height:55px;
+    height: 1.1rem;
     background:#FFF;
     border-bottom:1px solid #E2E2E2;
+    composes:f24 from '../css/base_mobile.css';
 }
 .my_account li{
     display: flex;
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    border-left: 1px solid #E2E2E2;
+    border-left: 0.01rem solid #E2E2E2;
 }
 .my_account_big_XTCoins{
-    padding-top:70px;
-    background:#FFF url('/xitenggame/xitengWapApp/src/images/xt_coins_2.png') no-repeat center;
-    background-size: 40px;
-    line-height:50px;
-    border-bottom:1px solid #E2E2E2;
+    padding-top:1.4rem;
+    background:#FFF url('../../src/images/xt_coins_2.png') no-repeat center;
+    background-size: 0.8rem;
+    line-height:1rem;
+    border-bottom:0.01rem solid #E2E2E2;
+    composes:tc from '../css/base_mobile.css';
 }
+.my_account_big_XTCoins_total{
+    composes:cred;
+    composes: f24 from '../css/base_mobile.css';
+}
+
 .my_account_XTCoins{
-    background:url('/xitenggame/xitengWapApp/src/images/xt_coins_2.png') no-repeat 25px center ;
-    background-size: 17px;
+    background:url('../../src/images/xt_coins_2.png') no-repeat 0.44rem center ;
+    background-size: 0.34rem;
+    composes:f24 from '../css/base_mobile.css';
 }
 .my_account_color_coins{
-    background:url('/xitenggame/xitengWapApp/src/images/color_coins.png') no-repeat 25px center;
-    background-size: 17px;
+    background:url('../../src/images/color_coins.png') no-repeat 0.44rem center;
+    background-size: 0.34rem;
+    composes:f24 from '../css/base_mobile.css';
 }
 .record_bet{
-    background:url("/xitenggame/xitengWapApp/src/images/touzhu_record_bg.png") no-repeat center;
+    /*background:url("../../src/images/touzhu_record_bg.png") no-repeat center;*/
     background-size: cover;
 }
 .record_bet_info_money{
     display: flex;
     align-items: flex-end;
-    height:110px;
-    background:url("/xitenggame/xitengWapApp/src/images/touzhu_record_icon1.png") no-repeat center 15px ;
-    -webkit-background-size:30px;
-    background-size:30px;
+    height: 2.2rem;
+    background:url("../../src/images/touzhu_record_icon1.png") no-repeat center 0.3rem ;
+    -webkit-background-size:0.6rem;
+    background-size:0.6rem;
+    composes:cgold;
 }
 .record_bet_info_num{
     display: flex;
     align-items: flex-end;
-    height:110px;
-    background:url("/xitenggame/xitengWapApp/src/images/touzhu_record_icon2.png") no-repeat center 15px ;
-    -webkit-background-size:30px;
-    background-size:30px;
+    height:2.2rem;
+    background:url("../../src/images/touzhu_record_icon2.png") no-repeat center 0.3rem ;
+    -webkit-background-size:0.6rem;
+    background-size:0.6rem;
+    composes:cgold;
 }
 .record_bet_info_top{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background:url("/xitenggame/xitengWapApp/src/images/touzhu_record_bg_line.png") no-repeat center bottom;
+    background:url("../../src/images/touzhu_record_bg_line.png") no-repeat center bottom;
     -webkit-background-size:contain;
     background-size:contain;
+    composes: w pb30 f24 from '../css/base_mobile.css'
+}
+.record_bet_info_detail{
+    composes:f26 from '../css/base_mobile.css';
 }
 .record_bet_info_bottom{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    composes: w pb30 f24 from '../css/base_mobile.css'
 }
 .record_bet_info_top li,
 .record_bet_info_bottom li{
@@ -111,21 +127,37 @@
     justify-content: center;
 }
 .unLogin{
-    height:44px;
-    line-height:44px;
-    border-top:1px solid #E2E2E2;
-    border-bottom:1px solid #E2E2E2;
+    height:0.88rem;
+    line-height: 0.88rem;
+    border-top: 0.01rem solid #E2E2E2;
+    border-bottom:0.01rem solid #E2E2E2;
     background:#FFF;
 }
 .my_toLogin{
     background:#FFF;
-    height:44px;
-    line-height: 44px;
+    height:0.88rem;
+    line-height: 0.88rem;
 }
 .bet_record_list{
     background:#D5EDFF;
-
+    composes:mt20 ml30 mr30 from '../css/base_mobile.css';
 }
 .bet_record_time{
-    line-height:40px;
+    line-height:0.8rem;
+    composes: f24 clearfix from '../css/base_mobile.css';
+}
+.record_praise_num{
+    composes: fr pr30 from '../css/base_mobile.css';
+}
+.bet_record_detail{
+    composes:clearfix pb10 from '../css/base_mobile.css';
+}
+.bet_record_detail_info{
+    composes:fl pb30 from '../css/base_mobile.css';
+}
+.bet_record_detail_stage{
+    composes:fr pr30 from '../css/base_mobile.css';
+}
+.bet_record_box{
+    composes:fl pl30 from '../css/base_mobile.css';
 }

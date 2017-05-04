@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/orderStyle.css');
+import orderStyle from '../css/orderStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {purchaseGameActions} from '../redux/actions/purchaseGameActions';
@@ -32,10 +32,10 @@ var OnePieceOrder = React.createClass({
             <div>
                 <div className="f5f5f5 w h" style={{position:"fixed"}}></div>
                 <div className="pr">
-                    <p className="order_title">
-                        <span className="order_title_icon">夺宝订单</span>
+                    <p className={orderStyle.order_title}>
+                        <span className={orderStyle.order_title_icon}>夺宝订单</span>
                     </p>
-                    <ul className="order_details_onePiece">
+                    <ul className={orderStyle.order_details_onePiece}>
                         <li>
                             <Link to={{ pathname: "/OrderList", query: { bidOrderStatus: "waiting" } }} className="order_item_wait tc">
                                 待揭晓

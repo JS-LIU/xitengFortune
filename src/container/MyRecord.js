@@ -8,7 +8,7 @@ var { connect } = require('react-redux');
 var { Link } = require('react-router');
 var _h = require('../Util/HB');
 
-require('../css/MyStyle.css');
+import MyStyle from '../css/MyStyle.css';
 
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -46,51 +46,51 @@ var MyRecord = React.createClass({
 var RecordOverView = React.createClass({
     render: function () {
         return (
-            <div className="record_bet">
+            <div className={MyStyle.record_bet}>
                 <ul>
-                    <li className="record_bet_info_money cgold">
-                        <ul className="record_bet_info_top w pb15 f14">
+                    <li className={MyStyle.record_bet_info_money}>
+                        <ul className={MyStyle.record_bet_info_top}>
                             <li>
                                 <p className="tc">
-                                    <span className="f20">{this.props.betRecord.overView.cumulativeBetAmount}</span>
+                                    <span className={MyStyle.record_bet_info_detail}>{this.props.betRecord.overView.cumulativeBetAmount}</span>
                                     <span>喜腾币</span>
                                 </p>
                                 <span>投注金额</span>
                             </li>
                             <li>
                                 <p className="tc">
-                                    <span className="f20">{this.props.betRecord.overView.addProfit}</span>
+                                    <span className={MyStyle.record_bet_info_detail}>{this.props.betRecord.overView.addProfit}</span>
                                     <span>喜腾币</span>
                                 </p>
                                 <span>累计盈利</span>
                             </li>
                             <li>
                                 <p className="tc">
-                                    <span className="f20">{this.props.betRecord.overView.yields}</span>
+                                    <span className={MyStyle.record_bet_info_detail}>{this.props.betRecord.overView.yields}</span>
                                 </p>
 
                                 <span>收益率</span>
                             </li>
                         </ul>
                     </li>
-                    <li className="record_bet_info_num cgold">
-                        <ul className="record_bet_info_bottom w pb15 f14">
+                    <li className={MyStyle.record_bet_info_num}>
+                        <ul className={MyStyle.record_bet_info_bottom}>
                             <li>
                                 <p className="tc">
-                                    <span className="f20">{this.props.betRecord.overView.addGuessAmount}</span>
+                                    <span className={MyStyle.record_bet_info_detail}>{this.props.betRecord.overView.addGuessAmount}</span>
                                 </p>
 
                                 <span>投注次数</span>
                             </li>
                             <li>
                                 <p className="tc">
-                                    <span className="f20">{this.props.betRecord.overView.hitAmount}</span>
+                                    <span className={MyStyle.record_bet_info_detail}>{this.props.betRecord.overView.hitAmount}</span>
                                 </p>
                                 <span>猜中次数</span>
                             </li>
                             <li>
                                 <p className="tc">
-                                    <span className="f20">{this.props.betRecord.overView.hitRate}</span>
+                                    <span className={MyStyle.record_bet_info_detail}>{this.props.betRecord.overView.hitRate}</span>
                                 </p>
                                 <span>收益率</span>
                             </li>
@@ -107,35 +107,35 @@ var BetRecordList = React.createClass({
     render: function () {
         let betRecordNodes = this.props.betRecord.detailList.map((item,index)=>{
             return (
-                <li key={index} className="mt10 ml15 mr15 bet_record_list">
+                <li key={index} className={MyStyle.bet_record_list}>
                     <ul>
-                        <li className="bet_record_time f14 clearfix">
-                            <span className="fl pl15">投注时间：{item.guessTime}</span>
-                            <span className="record_praise fr pr15">{item.praiseAmount}人赞赏</span>
+                        <li className={MyStyle.bet_record_time}>
+                            <span className={myStyle.bet_record_box}>投注时间：{item.guessTime}</span>
+                            <span className={MyStyle.record_praise_num}>{item.praiseAmount}人赞赏</span>
                         </li>
                     </ul>
-                    <ul className="clearfix pb5">
-                        <li className="fl pl15">
+                    <ul className={MyStyle.bet_record_detail}>
+                        <li className={myStyle.bet_record_detail_info}>
                             <span>名称：{item.stockName}</span>
                         </li>
-                        <li className="fr pr15 c000">
-                            <span className="record_praise">{item.stage}期</span>
+                        <li className={myStyle.bet_record_detail_stage}>
+                            <span className={MyStyle.record_praise}>{item.stage}期</span>
                         </li>
                     </ul>
-                    <ul className="clearfix pb5">
-                        <li className="fl pl15">
+                    <ul className={MyStyle.bet_record_detail}>
+                        <li className={myStyle.bet_record_box}>
                             <span>投注：{item.guessType}</span>
                         </li>
-                        <li className="fr pr15">
-                            <span className="record_praise">数额：{item.guessAmount}喜腾币</span>
+                        <li className={myStyle.bet_record_detail_stage}>
+                            <span className={MyStyle.record_praise}>数额：{item.guessAmount}喜腾币</span>
                         </li>
                     </ul>
-                    <ul className="clearfix pb5">
-                        <li className="fl pl15">
+                    <ul className={MyStyle.bet_record_detail}>
+                        <li className={myStyle.bet_record_box}>
                             <span>收盘：{item.stockResultType=="wrong"?"未收盘":"已收盘"}</span>
                         </li>
-                        <li className="fr pr15">
-                            <span className="record_praise">盈亏：{isNaN(item.guessResultAmount)?item.guessResultAmount:item.guessResultAmount+"喜腾币"}</span>
+                        <li className={myStyle.bet_record_detail_stage}>
+                            <span className={MyStyle.record_praise}>盈亏：{isNaN(item.guessResultAmount)?item.guessResultAmount:item.guessResultAmount+"喜腾币"}</span>
                         </li>
                     </ul>
                 </li>

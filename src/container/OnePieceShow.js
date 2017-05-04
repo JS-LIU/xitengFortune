@@ -9,7 +9,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/onePieceShowStyle.css');
+import onePieceShowStyle from '../css/onePieceShowStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {purchaseGameActions} from '../redux/actions/purchaseGameActions';
@@ -50,19 +50,19 @@ var OnePieceShow = React.createClass({
         let showNodes = this.props.purchaseGame.show.showList.map((item,index)=>{
             var picNodes = item.pictures.map((pic,i)=>{
                 return (
-                    <li className="onePiece_show_img_item" key={i}>
+                    <li className={onePieceShowStyle.onePiece_show_img_item} key={i}>
                         <img src={pic.head_img} alt="" className="w h"/>
                     </li>
                 )
             });
             return (
-                <div className="onePiece_show_item" key={index}>
-                    <div className="onePiece_show_top_box">
-                        <div className="onePiece_show_pic">
+                <div className={onePieceShowStyle.onePiece_show_item} key={index}>
+                    <div className={onePieceShowStyle.onePiece_show_top_box}>
+                        <div className={onePieceShowStyle.onePiece_show_pic}>
                             <img src={item.userIcon} alt="" className="w h"/>
                         </div>
-                        <ul className="onePiece_show_productDetail">
-                            <li className="onePiece_show_userName">
+                        <ul className={onePieceShowStyle.onePiece_show_productDetail}>
+                            <li className={onePieceShowStyle.onePiece_show_userName}>
                                 {item.userName}
                             </li>
                             <li>{item.time}</li>
@@ -70,11 +70,11 @@ var OnePieceShow = React.createClass({
                             <li>{item.purchaseGameInfo.productName}</li>
                         </ul>
                     </div>
-                    <div className="onePiece_show_bottom_box">
+                    <div className={onePieceShowStyle.onePiece_show_bottom_box}>
                         <div>
                             {item.content}
                         </div>
-                        <ul className="onePiece_show_img">
+                        <ul className={onePieceShowStyle.onePiece_show_img}>
                             {picNodes}
                         </ul>
                     </div>

@@ -43,7 +43,7 @@ var BackBtn = React.createClass({
 var Title = React.createClass({
     render: function () {
         return (
-            <li style={titleStyle} className="tc f16 po w">{this.props.title.text}</li>
+            <li style={titleStyle} className="tc po w">{this.props.title.text}</li>
         )
     }
 });
@@ -52,16 +52,16 @@ var Title = React.createClass({
 const headerStyle = {
     display:"flex",
     justifyContent:"space-between",
-    height:'44px',
-    lineHeight:'44px',
-    fontSize:'14px',
+    height:'0.88rem',
+    lineHeight:'0.88rem',
+    fontSize:'0.24rem',
     background:"#0A89FE"
 };
 const backStyle = {
     color:"#FFF",
-    backgroundSize:"10px",
+    backgroundSize:"0.2rem",
     backgroundRepeat:'no-repeat',
-    backgroundPositionX:"15px",
+    backgroundPositionX:"0.3rem",
     backgroundPositionY:'center',
     zIndex:'1'
 };
@@ -69,7 +69,8 @@ const backTextStyle = {
     color:'#FFF'
 };
 var titleStyle = {
-    // marginLeft:'-30px',
-    color:'#FFF'
+    // marginLeft:'-30px';
+    color:'#FFF',
+    fontSize:'0.32rem'
 };
 module.exports = {Header,BackBtn,Title};

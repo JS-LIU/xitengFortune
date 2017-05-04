@@ -1,6 +1,9 @@
 .c000{
     color:#000;
 }
+.cfff{
+    color:#FFF;
+}
 .cred{
     color:#FF4242;
 }
@@ -9,16 +12,23 @@
 }
 .buy_XTCoins{
     background:#F5F5F5;
-    height:calc(100% - 44px)
+    height:calc(100% - 44px);
+    composes: po w from '../css/base_mobile.css';
 }
 .my_diamonds{
     display: flex;
     height:44px;
     line-height:44px;
     background:#F5F5F5;
+    composes:f24 from '../css/base_mobile.css';
 }
 .selected_title{
     padding:17px 0 0 15px;
+    composes: f32 from '../css/base_mobile.css';
+}
+.my_diamonds_remain{
+    composes: c000;
+    composes: pl30 from '../css/base_mobile.css';
 }
 .XICoin_box{
     display: flex;
@@ -37,14 +47,25 @@
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
+    composes: cblue;
+    composes: mt10 tc  from '../css/base_mobile.css';
+}
+.XTCoin_count{
+    composes:f32 pt20 from '../css/base_mobile.css';
+}
+.XTCoin_sort{
+    composes:pb20 from '../css/base_mobile.css';
 }
 .pay_diamonds{
     float:right;
     margin:15px 15px;
+    composes: f32 from '../css/base_mobile.css';
 }
 .exchangeXTCoins{
     height:40px;
     line-height:40px;
     margin:100px 15px;
     background:#4964EF;
+    composes: cfff;
+    composes: tc f32 from '../css/base_mobile.css';
 }

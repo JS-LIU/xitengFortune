@@ -1,3 +1,21 @@
+.cfff{
+    color:#FFF;
+}
+.register_list_set{
+    composes:tc f32 mt20 from '../css/base_mobile.css';
+}
+.register_hint{
+    composes: tc f32 mt20 from '../css/base_mobile.css';
+}
+.register_code{
+    composes: tc f32 from '../css/base_mobile.css';
+}
+.register_detail{
+    composes: mt60 from '../css/base_mobile.css';
+}
+.registe_num{
+    composes: pl30 from '../css/base_mobile.css';
+}
 .register_user_header{
     margin:5px auto;
     width:70px;
@@ -5,6 +23,7 @@
     overflow: hidden;
     -webkit-background-size:contain;
     border-radius: 50px;
+    composes: tc from '../css/base_mobile.css';
 }
 .register_list{
     display: flex;
@@ -15,10 +34,24 @@
     line-height:44px;
     border-bottom:1px solid #E2E2E2;
 }
+.register_list_name{
+    composes: tc mt20 from '../css/base_mobile.css';
+}
+.register_list_detail{
+    composes: mt60 from '../css/base_mobile.css';
+}
+.register_list_natiob{
+    composes: pl30 from '../css/base_mobile.css';
+}
 .register_input_none{
     display: flex;
     flex:1;
     outline:none;
+    composes: h pl30 from '../css/base_mobile.css';
+}
+.login_btn{
+    composes: cfff;
+    composes: tc f24 from '../css/base_mobile.css';
 }
 .next_btn{
     margin:30px 15px 0;
@@ -28,4 +61,14 @@
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
+    composes: cfff;
+    composes: tc f32 from '../css/base_mobile.css';
 }
+.J_myCheckCode{
+    composes:register_input_none ;
+    composes:pl30 from '../css/base_mobile.css';
+}
+.register_send_checkcode{
+    composes:pl30 from '../css/base_mobile.css';
+}
+

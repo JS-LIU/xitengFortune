@@ -1,5 +1,6 @@
 .onePiece_order_wrap{
     position:fixed;
+    composes:f5f5f5  w h from '../css/base_mobile.css';
 }
 .onePiece_order_productInfo{
     margin-top:0.2rem;
@@ -56,6 +57,7 @@
     height:0.6rem;
     width:0.6rem;
     line-height: 0.6rem;
+    composes:tc from '../css/base_mobile.css';
 }
 .onePiece_order_ctrl input{
     width:1.1rem;
@@ -92,6 +94,7 @@
     padding: 0 0.2rem;
     color:#F23030;
     font-size:0.28rem;
+    composes:tr from '../css/base_mobile.css';
 }
 .onePiece_confirm_btn{
     color:#FFF;
@@ -103,6 +106,7 @@
     -webkit-border-radius:0.06rem;
     -moz-border-radius:0.06rem;
     border-radius:0.06rem;
+    composes:tc from '../css/base_mobile.css';
 }
 .red_money{
     background:url("../../src/images/icon_xitengbi-canyu@2x.png") no-repeat left center;

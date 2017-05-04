@@ -36,6 +36,7 @@
     padding-top:0.6rem;
     font-size:0.3rem;
     color:#4964ef;
+    composes:tc from '../css/base_mobile.css';
 }
 .onePiece_join_result_success{
     background:url("../../src/images/icon_pay-success@2x.png") no-repeat center top;
@@ -45,6 +46,7 @@
 }
 .onePiece_join_result_wait{
     padding-top:0.26rem;
+    composes:tc from '../css/base_mobile.css';
 }
 .onePiece_join_result_order_info{
     margin-top:0.2rem;
@@ -55,4 +57,16 @@
 }
 .onePiece_join_result_purchaseCode{
     padding-right:0.2rem;
+}
+.onePiece_confirm_btn{
+    color:#FFF;
+    height:0.8rem;
+    line-height:0.8rem;
+    margin:2.54rem 0.2rem 0;
+    font-size:0.3rem;
+    background:#0A89FE;
+    -webkit-border-radius:0.06rem;
+    -moz-border-radius:0.06rem;
+    border-radius:0.06rem;
+    composes:tc from '../css/base_mobile.css';
 }

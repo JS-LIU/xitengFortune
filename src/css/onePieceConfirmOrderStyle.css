@@ -25,6 +25,7 @@
     line-height: 1rem;
     padding:0 0.2rem;
     background:#FFF;
+    composes:tr from '../css/base_mobile.css';
 }
 .onePiece_confirm_btn{
     color:#FFF;
@@ -36,5 +37,6 @@
     -webkit-border-radius:0.06rem;
     -moz-border-radius:0.06rem;
     border-radius:0.06rem;
+    composes:tc from '../css/base_mobile.css'
 }
 

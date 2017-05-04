@@ -1,19 +1,30 @@
-.footer-guess{
+.footer_guess{
     display: flex;
     position: fixed;
     bottom:0;
     flex-direction:row; /* 默认 row 横向排列 */
     background:#FFF;
+    composes: w from '../css/base_mobile.css';
 }
 .guessBtn{
     flex-grow:1;
     line-height:0.9rem;
     color:#FFF;
-    margin:0.2rem 0.25rem;
+    margin:0.4rem 0.25rem;
     -webkit-border-radius:0.8rem;
     -moz-border-radius:0.8rem;
     border-radius:0.8rem;
     overflow: hidden;
+    composes: h tc f32 from '../css/base_mobile.css';
+}
+.stockGameList{
+    composes:pb30 from '../css/base_mobile.css';
+}
+.cred{
+    color:#FF4242;
+}
+.cgreen{
+    color:#03c56c;
 }
 .red{
     background:#FF4243;
@@ -24,14 +35,25 @@
 .cfff{
     color:#FFF;
 }
+.guessUp,
+.guessDown{
+    composes:cfff;
+}
 .stock_game_detail_body{
     background:#F5F5F5;
+    composes:w h from '../css/base_mobile.css';
 }
 .stock_game_detail_guess_up_down_statistics{
-    margin-top:0.28rem;
+    margin-top:0.38rem;
+    composes:clearfix from '../css/base_mobile.css';
 }
 .stock_game_detail_header{
     padding:0.1rem 0.25rem 0;
+    composes:clearfix from '../css/base_mobile.css';
+}
+.stock_game_detail_header_title{
+    composes:w from '../css/base_mobile.css';
+    composes:cred;
 }
 .stock_game_detail_index{
     font-size: 0.42rem;
@@ -46,9 +68,17 @@
 }
 .stock_game_detail_header_detail{
     font-size:0.26rem;
+    composes:fl tl from '../css/base_mobile.css';
 }
 .stock_game_detail_header_detail_title{
     color:#999999;
+}
+.stock_game_detail_header_detail_num{
+    composes:cfff;
+    composes:pl10 from '../css/base_mobile.css';
+}
+.stock_game_detail_header_detail_num_item{
+    composes:pl10 from '../css/base_mobile.css';
 }
 .stock_game_detail_pic_box{
     margin:0.3rem 0.25rem 0;
@@ -57,15 +87,17 @@
     display: block;
     height:3.75rem;
     overflow: hidden;
+    composes: w from '../css/base_mobile.css';
 }
 .stock_game_detail_info_box{
-    padding:0.36rem 0 0.38rem;
+    padding:0.36rem 0 0.58rem;
     background:#FFF;
-    margin-bottom:1.62rem;
+    margin-bottom:0.62rem;
 }
 .stock_game_detail_info{
     font-size:0.24rem;
     color:#FF4243;
+    composes:tc from '../css/base_mobile.css';
 }
 .stock_game_detail_open_time{
     padding-left:0.3rem;
@@ -80,15 +112,20 @@
     padding-top:0.3rem;
     font-size:0.3rem;
     color:#333333;
+    composes: tc from '../css/base_mobile.css';
 }
 
-.stock_game_detail_guess_up,
+.stock_game_detail_guess_up{
+    width:50%;
+    composes: fl tc from '../css/base_mobile.css';
+}
 .stock_game_detail_guess_down{
     width:50%;
+    composes: fr tc from '../css/base_mobile.css';
 }
 .stock_game_detail_guess_up_cow{
     display: inline-block;
-    padding:0.42rem 1.7rem 0 0;
+    padding:0.62rem 1.7rem 0 0;
     background:url('../../src/images/icon_cow@2x.png') no-repeat center;
     font-size:0.26rem;
     -webkit-background-size:0.69rem;
@@ -97,12 +134,13 @@
 }
 .stock_game_detail_guess_down_bear{
     display: inline-block;
-    padding:0.42rem 0 0 1.7rem;
+    padding:0.62rem 0 0 1.7rem;
     background:url('../../src/images/icon_bear@2x.png') no-repeat center;
     font-size:0.26rem;
     -webkit-background-size:0.43rem;
     background-size:0.43rem;
     color:#02C56B;
+    composes:tr from '../css/base_mobile.css';
 }
 .stock_game_detail_guess_up_line{
     margin-top:0.12rem;

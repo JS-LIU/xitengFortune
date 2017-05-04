@@ -1,5 +1,6 @@
 .carousel_box{
     overflow: hidden;
+    composes:pr tc from '../css/base_mobile.css';
 }
 .carousel_item{
     flex:1;

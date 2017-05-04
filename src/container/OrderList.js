@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/orderListStyle.css');
+import orderListStyle from '../css/orderListStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {bidOrderActions} from '../redux/actions/bidOrderActions';
@@ -29,19 +29,19 @@ var OrderList = React.createClass({
         let orderNodes = this.props.bidOrder.list.list.map((item,index)=>{
             let bidRecordNodes = item.bidRecords.map((code,i)=>{
                 return (
-                    <span className="bidRecordNodes" key={i}>
+                    <span className={orderListStyle.bidRecordNodes} key={i}>
                         {code.purchaseCode}
                     </span>
                 )
             });
             return (
-                <li key={index} className="order_item">
-                    <div className="order_item_top">
-                        <div className="order_item_pic">
+                <li key={index} className={orderListStyle.order_item}>
+                    <div className={orderListStyle.order_item_top}>
+                        <div className={orderListStyle.order_item_pic}>
                             <img src={item.picUrl} alt="" className="w h"/>
                         </div>
-                        <ul className="order_item_detal pr" style={item.bidOrderStatus == "win"?winLogo:{}}>
-                            <li className="order_item_productName">
+                        <ul className={orderListStyle.order_item_detal} style={item.bidOrderStatus == "win"?winLogo:{}}>
+                            <li className={orderListStyle.order_item_productName}>
                                 {item.productName}
                             </li>
                             <li className="clearfix">
@@ -53,13 +53,13 @@ var OrderList = React.createClass({
                                 <span className="fl">{item.purchaseGameCount}</span>
                             </li>
                             <li className="clearfix">
-                                <span className="order_item_code fl">夺宝号码：{bidRecordNodes}</span>
+                                <span className={orderListStyle.order_item_code}>夺宝号码：{bidRecordNodes}</span>
                                 {item.bidRecords.length > 2?(<span className="fr">查看全部</span>):""}
                             </li>
 
                         </ul>
                     </div>
-                    <p className="order_item_bottom tr">
+                    <p className={orderListStyle.order_item_bottom}>
                         {item.bidOrderStatus == "win"?(<Link to="/AcceptPrize" onClick={this.setProductInfo(item)}>去领奖</Link>):""}
                         {item.bidOrderStatus == "waiting"?(<span>等待揭晓</span>):""}
                         {item.bidOrderStatus == "finish"?(<span>待晒单</span>):""}

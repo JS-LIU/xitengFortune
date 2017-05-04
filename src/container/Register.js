@@ -12,7 +12,7 @@ var _h = require('../../src/Util/HB');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 
-require('../css/registerStyle.css');
+import registerStyle from '../css/registerStyle.css';
 
 import {userInfoActions} from '../redux/actions/userInfoActions';
 import {dialogActions} from '../redux/actions/dialogActions';
@@ -44,22 +44,21 @@ var Register = React.createClass({
                     {/*/>*/}
                 {/*</Header>*/}
                 {this.props.userInfo.findPassword?<div className="tc f16 mt10">请输入注册的手机号</div>:
-                <div className="register_user_header tc">
+                <div className={registerStyle.register_user_header}>
                     <img src={this.props.userInfo.icon} alt="" className="h"/>
                 </div>}
-
-                <div className="tc mt10">{this.props.userInfo.userName}</div>
-                <ul className="mt30">
-                    <li className="register_list">
+                <div className={registerStyle.register_list_name}>{this.props.userInfo.userName}</div>
+                <ul className={registerStyle.register_list_detail}>
+                    <li className={registerStyle.register_list}>
                         <span>国家/地区</span>
-                        <span className="pl15">中国</span>
+                        <span className={registerStyle.register_list_natiob}>中国</span>
                     </li>
-                    <li className="register_list">
+                    <li className={registerStyle.register_list}>
                         <span>+86 |</span>
                         <input
                             type="text"
                             placeholder="请输入电话号码"
-                            className="register_input_none h pl15"
+                            className={registerStyle.register_input_none}
                             ref="num"
                             onChange={this.inputNum}
                             value={this.props.userInfo.phoneNum}
@@ -89,7 +88,7 @@ var RegisterBtn = React.createClass({
     },
     render: function () {
         return (
-            <div className="login_btn cfff tc f20" onClick={this.showDialog}>
+            <div className={registerStyle.login_btn} onClick={this.showDialog}>
                 <span>下一步</span>
             </div>
         )

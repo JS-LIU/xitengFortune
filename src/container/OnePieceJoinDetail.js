@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/onePieceJoinStyle.css');
+import onePieceJoinStyle from '../css/onePieceJoinStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {storageActions} from '../redux/actions/storageActions';
@@ -47,21 +47,21 @@ var OnePieceJoinDetail = React.createClass({
     render: function () {
         let joinNodes = this.props.bidOrder.record.list.map((item,index)=>{
             return (
-                <li key={index} className="onePiece_record_item">
-                    <div className="onePiece_record_img">
+                <li key={index} className={onePieceJoinStyle.onePiece_record_item}>
+                    <div className={onePieceJoinStyle.onePiece_record_img}>
                         <img src={item.userIcon} alt="" className="w h"/>
                     </div>
-                    <ul className="onePiece_record_detail">
-                        <li className="onePiece_record_detail_name" style={item.sex == "man"?man:woman}>
+                    <ul className={onePieceJoinStyle.onePiece_record_detail}>
+                        <li className={onePieceJoinStyle.onePiece_record_detail_name} style={item.sex == "man"?man:woman}>
                             {item.userName}
                         </li>
-                        <li className="onePiece_record_detail_time">
+                        <li className={onePieceJoinStyle.onePiece_record_detail_time}>
                             {item.createTime}
                         </li>
-                        <li className="onePiece_record_detail_time">
+                        <li className={onePieceJoinStyle.onePiece_record_detail_time}>
                             参与份数：{item.bidCount}
                         </li>
-                        <li className="onePiece_record_detail_time">
+                        <li className={onePieceJoinStyle.onePiece_record_detail_time}>
                             {item.area}{item.ip}
                         </li>
                     </ul>

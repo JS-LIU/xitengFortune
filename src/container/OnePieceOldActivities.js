@@ -9,7 +9,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/onePieceProductOpenStyle.css');
+import onePieceProductOpenStyle from '../css/onePieceProductOpenStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {purchaseGameActions} from '../redux/actions/purchaseGameActions';
@@ -53,16 +53,16 @@ var OnePieceOldActivities = React.createClass({
     render: function () {
         let userNodes = this.props.purchaseGame.openProducts.userList.map((item,index)=>{
             return (
-                <li key={index} className="onePiece_open_userItem">
-                    <p className="onePiece_open_userItem_title">
+                <li key={index} className={onePieceProductOpenStyle.onePiece_open_userItem}>
+                    <p className={onePieceProductOpenStyle.onePiece_open_userItem_title}>
                         <span>期数：{item.stage}</span>
                         <span>揭晓时间：{item.finishTime}</span>
                     </p>
-                    <div className="onePiece_open_userItem_detail">
-                        <div className="onePiece_open_userItem_pic">
+                    <div className={onePieceProductOpenStyle.onePiece_open_userItem_detail}>
+                        <div className={onePieceProductOpenStyle.onePiece_open_userItem_pic}>
                             <img src={item.userIcon} alt="" className="w h"/>
                         </div>
-                        <ul className="onePiece_open_userItem_detail_text">
+                        <ul className={onePieceProductOpenStyle.onePiece_open_userItem_detail_text}>
                             <li>
                                 获奖用户：{item.userName}
                             </li>

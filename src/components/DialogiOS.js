@@ -3,18 +3,18 @@
  */
 var React = require('react');
 var {Link} = require('react-router');
-require('../css/dialogiOSStyle.css');
+import dialogiOSStyle from '../css/dialogiOSStyle.css';
 
 var DialogiOS = React.createClass({
 
     render: function () {
 
         return (
-            <div className="dialog_big_box w h">
-                <div className="dialog_body">
+            <div className={dialogiOSStyle.dialog_big_box}>
+                <div className={dialogiOSStyle.dialog_body}>
                     {this.props.children}
                 </div>
-                <div className="dialog_mask w h"></div>
+                <div className={dialogiOSStyle.dialog_mask}></div>
             </div>
 
         )
@@ -23,7 +23,7 @@ var DialogiOS = React.createClass({
 var DialogHeader = React.createClass({
     render:function() {
         return (
-            <div className="tc f14 pt15 dialog_header">
+            <div className={dialogiOSStyle.dialog_header}>
                 {this.props.title}
             </div>
         )
@@ -33,7 +33,7 @@ var DialogHeader = React.createClass({
 var DialogBody = React.createClass({
     render:function() {
         return (
-            <div className="tc f14 pb10 dailog_content">
+            <div className={dialogiOSStyle.dailog_content}>
                 {this.props.content}
             </div>
         )
@@ -43,7 +43,7 @@ var DialogBody = React.createClass({
 var DialogFooter = React.createClass({
     render:function() {
         return (
-            <div className="dialog_footer">
+            <div className={dialogiOSStyle.dialog_footer}>
                 {this.props.children}
             </div>
         )
@@ -55,8 +55,8 @@ var DialogConfirm = React.createClass({
     },
     render:function() {
         return (
-            <div className="dialog_btn" onClick={this.hideDialog}>
-                <Link to={this.props.certain.url} className="tc f14 dialog_btn_color">
+            <div className={dialogiOSStyle.dialog_btn} onClick={this.hideDialog}>
+                <Link to={this.props.certain.url} className={dialogiOSStyle.dialog_btn_color}>
                     <span>{this.props.certain.text}</span>
                 </Link>
             </div>
@@ -69,9 +69,9 @@ var DialogCancel = React.createClass({
     },
     render:function() {
         return (
-            <div className="dialog_btn tc f14 dialog_btn_color" onClick={this.hideDialog}>
+            <div className={dialogiOSStyle.dialog_btn} onClick={this.hideDialog}>
                 <Link to={this.props.cancel.url}>
-                    <span className="dialog_btn_color">{this.props.cancel.text}</span>
+                    <span className={dialogiOSStyle.dialog_btn_color}>{this.props.cancel.text}</span>
                 </Link>
 
             </div>

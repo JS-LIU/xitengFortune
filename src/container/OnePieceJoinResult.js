@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/onePieceJoinStyle.css');
+import onePieceJoinStyle from '../css/onePieceJoinStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {purchaseGameActions} from '../redux/actions/purchaseGameActions';
@@ -22,26 +22,26 @@ var OnePieceJoinResult = React.createClass({
     render: function () {
         let onePieceNodes = this.props.purchaseGame.order.bidRecords.map((item,index)=>{
             return (
-                <span key={index} className="onePiece_join_result_purchaseCode">{item.purchaseCode}</span>
+                <span key={index} className={onePieceJoinStyle.onePiece_join_result_purchaseCode}>{item.purchaseCode}</span>
             )
         });
         return (
             <div>
                 <div className="f5f5f5 w h" style={{position:"fixed",top:"0"}}></div>
                 <div className="pr">
-                    <div className="onePiece_join_result_header">
-                        <ul className="onePiece_join_result">
-                            <li className="tc onePiece_join_result_success_box">
-                            <span className="onePiece_join_result_success">
+                    <div className={onePieceJoinStyle.onePiece_join_result_header}>
+                        <ul className={onePieceJoinStyle.onePiece_join_result}>
+                            <li className={onePieceJoinStyle.onePiece_join_result_success_box}>
+                            <span className={onePieceJoinStyle.onePiece_join_result_success}>
                                 参与成功
                             </span>
                             </li>
-                            <li className="tc onePiece_join_result_wait">
+                            <li className={onePieceJoinStyle.onePiece_join_result_wait}>
                                 请等待揭晓结果...
                             </li>
                         </ul>
                     </div>
-                    <ul className="onePiece_join_result_order_info">
+                    <ul className={onePieceJoinStyle.onePiece_join_result_order_info}>
                         <li>订单号：{this.props.purchaseGame.order.id}</li>
                         <li>商品：{this.props.purchaseGame.order.productName}</li>
                         <li>期数：{this.props.purchaseGame.order.stage}</li>
@@ -49,7 +49,7 @@ var OnePieceJoinResult = React.createClass({
                         <li>夺宝号码：{onePieceNodes}</li>
                         <li>支付金额：{this.props.purchaseGame.order.price}</li>
                     </ul>
-                    <Link to="/OnePiece" className="onePiece_confirm_btn tc">
+                    <Link to="/OnePiece" className={onePieceJoinStyle.onePiece_confirm_btn}>
                         继续夺宝
                     </Link>
                 </div>

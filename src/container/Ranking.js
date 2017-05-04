@@ -9,12 +9,10 @@ var _h = require('../../src/Util/HB');
 var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 
-require("../css/awardStyle.css");
+import awardStyle from "../css/awardStyle.css";
 
 import {awardActions} from '../redux/actions/awardActions';
 import {rankActions} from '../redux/actions/rankActions';
-
-
 
 var AwardList = React.createClass({
     componentWillMount:function(){
@@ -23,13 +21,13 @@ var AwardList = React.createClass({
     render: function () {
         let awardNodes = this.props.award.awardList.map((item,index)=>{
            return (
-               <li key={index} className="award_item">
+               <li key={index} className={awardStyle.award_item}>
                    <img src={item.picUrl} alt={item.name} className="w"/>
                    <div>
                        <span></span>
                    </div>
                </li>
-           ) 
+           )
         });
         return (
             <div>

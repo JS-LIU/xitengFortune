@@ -46,6 +46,8 @@
 }
 .diamond_count{
     padding-top: 0.65rem;
+    composes:cblue;
+    composes: tc pr from '../css/base_mobile.css';
 }
 .diamond_num{
     font-size:0.36rem;
@@ -82,6 +84,11 @@
     background:#4964EF;
     line-height:44px;
     height:44px;
+    composes:tc from '../css/base_mobile.css';
+}
+.buy_diamonds_text{
+    composes:cfff;
+    composes:f32 from '../css/base_mobile.css';
 }
 .diamonds_selected{
     border:1px solid #FF4242;
@@ -97,6 +104,7 @@
     color: #777777;
     position: absolute;
     bottom: 0.8rem;
+    composes: tc w from '../css/base_mobile.css';
 }
 .defAcount{
     margin:0.44rem 0.3rem 0;
@@ -108,9 +116,10 @@
     padding:0 0.3rem;
 }
 .defAcount_input{
-   outline: none;
+    outline: none;
     flex: 1;
     font-size: 0.3rem;
+    composes:tr pr10 from '../css/base_mobile.css';
 }
 
 

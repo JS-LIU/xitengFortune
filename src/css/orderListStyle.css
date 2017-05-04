@@ -20,6 +20,7 @@
     flex: 1;
     padding-left:0.2rem;
     font-size:0.24rem;
+    composes:pr from '../css/base_mobile.css';
 }
 .order_item_productName{
     font-size:0.3rem;
@@ -30,6 +31,7 @@
     line-height:0.85rem;
     font-size:0.28rem;
     padding:0 0.2rem;
+    composes:tr from '../css/base_mobile.css';
 }
 .bidRecordNodes{
     padding-left:0.15rem;
@@ -40,4 +42,5 @@
     overflow:hidden;
     text-overflow:ellipsis;
     width:3rem;
+    composes:fl from '../css/base_mobile.css';
 }

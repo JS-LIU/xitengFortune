@@ -25,9 +25,9 @@ var ConfirmBtn = React.createClass({
 
 
 const confirmBtnStyle = {
-    height:"44px",
-    lineHeight:"44px",
-    margin:"30px 15px"
+    height:"0.88rem",
+    lineHeight:"0.88rem",
+    margin:"0.6rem 0.3rem"
 };
 module.exports = ConfirmBtn;
 

@@ -9,9 +9,16 @@
     width:70px;
     height:70px;
     overflow: hidden;
-    background:url("/xitenggame/xitengWapApp/src/images//logo@2x.png") no-repeat center;
+    /*background:url("../../src/images/logo@2x.png") no-repeat center;*/
     -webkit-background-size:contain;
     background-size:contain;
+    composes:tc from '../css/base_mobile.css';
+}
+.login_find_back{
+    composes:tc mt10 from '../css/base_mobile.css';
+}
+.login_input{
+    composes: ml15 mr30 f32 from '../css/base_mobile.css';
 }
 .login_input li{
     display: flex;
@@ -19,17 +26,34 @@
     border-bottom:1px solid #E2E2E2;
     line-height: 49px;
 }
-.login_phone_num,
+.login_input_title{
+    composes: pr60 from '../css/base_mobile.css';
+}
+.login_phone_num{
+    flex: 1;
+    outline:medium;
+}
 .login_password{
     flex: 1;
     outline:medium;
 }
+.J_phoneNum{
+    composes: login_phone_num;
+    composes: f32 from '../css/base_mobile.css';
+}
+.J_password{
+    composes: login_password;
+    composes: f32 from '../css/base_mobile.css';
+}
+
 .login_wx{
     position: fixed;
     bottom:50px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    composes:cblue;
+    composes:f32 tc w from '../css/base_mobile.css';
 }
 .login_btn{
     margin:30px 15px;
@@ -37,9 +61,11 @@
     background:#0A89FE;
     line-height:44px;
     height:44px;
+    composes: cfff;
+    composes: tc f26 from '../css/base_mobile.css';
 }
 .login_wx_btn{
-    background:url("/xitenggame/xitengWapApp/src/images/icon_weixin-@2x.png") no-repeat top center;
+    background:url("../../src/images/icon_weixin-@2x.png") no-repeat top center;
     -webkit-background-size:55px;
     background-size:55px;
     padding-top:60px;

@@ -3,6 +3,12 @@
     padding:0.48rem 0.3rem;
     font-size:0.3rem;
 }
+.current_address_userInfo{
+    composes: clearfix from '../css/base_mobile.css';
+}
+.current_address_receiveAddress{
+    composes: clearfix from '../css/base_mobile.css';
+}
 .f24{
     font-size: 0.24rem;
 }

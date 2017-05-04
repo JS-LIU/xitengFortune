@@ -10,7 +10,7 @@ var { Link } = require('react-router');
 var { DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel } = require('../components/DialogiOS');
 
 import _h from '../Util/HB';
-require('../css/loginStyle.css');
+import loginStyle from '../css/loginStyle.css';
 
 import {userInfoActions} from '../redux/actions/userInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -57,11 +57,11 @@ var Login = React.createClass({
                         {/*back={{text:'取消',src:'/nav_btn_back@2x.png',link:backUrl}}*/}
                     {/*/>*/}
                 {/*</Header>*/}
-                <div className="login_logo tc"></div>
+                <div className={loginStyle.login_logo}></div>
 
                 <LoginInput />
                 <LoginBtn userInfoActionKeys={this.props.userInfoActionKeys}/>
-                <Link to="/Register" className="tc mt5" onClick={this.findPassword}>找回密码</Link>
+                <Link to="/Register" className={loginStyle.login_find_back} onClick={this.findPassword}>找回密码</Link>
 
                 {this.props.showDialog.showDialog?<DialogiOS >
                     <DialogHeader title="账号或密码错误"/>
@@ -88,14 +88,14 @@ var Login = React.createClass({
 var LoginInput = React.createClass({
     render: function () {
         return (
-            <ul className="login_input ml15 mr15 f16">
+            <ul className={loginStyle.login_input}>
                 <li>
-                    <span className="pr30">帐号</span>
-                    <input type="text" placeholder="请输入绑定的手机号" className="login_phone_num f16 J_phoneNum"/>
+                    <span className={loginStyle.login_input_title}>帐号</span>
+                    <input type="text" placeholder="请输入绑定的手机号" className={loginStyle.J_phoneNum}/>
                 </li>
                 <li>
-                    <span className="pr30">密码</span>
-                    <input type="password" placeholder="请输入密码" className="login_password f16 J_password"/>
+                    <span className={loginStyle.login_input_title}>密码</span>
+                    <input type="password" placeholder="请输入密码" className={loginStyle.J_password}/>
                 </li>
             </ul>
         )
@@ -108,7 +108,7 @@ var LoginBtn = React.createClass({
     },
     render: function () {
         return (
-            <div className="login_btn cfff tc f20" onClick={this.login}>
+            <div className={loginStyle.login_btn} onClick={this.login}>
                 <span>登录</span>
             </div>
         )
@@ -126,8 +126,8 @@ var WxBtn = React.createClass({
 
     render: function () {
         return (
-            <div className="cblue f16 tc login_wx w" onClick={this.logIn}>
-                <span className="login_wx_btn">使用微信注册/登录</span>
+            <div className={loginStyle.login_wx} onClick={this.logIn}>
+                <span className={loginStyle.login_wx_btn}>使用微信注册/登录</span>
             </div>
         )
     }

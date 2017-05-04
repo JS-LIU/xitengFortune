@@ -6,7 +6,7 @@ var { bindActionCreators } = require('redux');
 var { connect } = require('react-redux');
 var { Link } = require('react-router');
 
-require('../css/paySuccessStyle.css');
+import paySuccessStyle from '../css/paySuccessStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import _h from '../Util/HB';
@@ -23,7 +23,7 @@ var PayFail = React.createClass({
     render: function () {
         return (
             <div className="po w h f5f5f5">
-                <div className="pay_success cred tc f20 mt10">
+                <div className={paySuccessStyle.pay_fail}>
                     付款失败
                 </div>
                 <ul className="fff pl15 pr15 mt10 f14">

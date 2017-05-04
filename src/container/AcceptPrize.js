@@ -9,7 +9,7 @@ var $ = require('jquery');
 var _h = require('../Util/HB');
 var HeaderAddress = require('../components/HeaderAddress');
 
-require('../css/accpetPrizeStyle.css');
+import accpetPrizeStyle from '../css/accpetPrizeStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {addressActions} from '../redux/actions/addressActions';
@@ -37,13 +37,13 @@ var AccpetPrize = React.createClass({
     render: function () {
 
         return (
-            <div  className="f5f5f5 w h po">
+            <div  className={accpetPrizeStyle.accept_prize_head}>
                 <HeaderAddress address={this.props.address}
                                areaActionKeys={this.props.areaActionKeys}
                                addressActionKeys={this.props.addressActionKeys}/>
 
                 <AcceptPrizeProduct storage={this.props.storage}/>
-                <Link to="/My" className="accept_prize_btn tc" onClick={this.acceptPrize}>
+                <Link to="/My" className={accpetPrizeStyle.accept_prize_btn} onClick={this.acceptPrize}>
                     确认领奖
                 </Link>
             </div>
@@ -53,14 +53,14 @@ var AccpetPrize = React.createClass({
 var AcceptPrizeProduct = React.createClass({
     render: function () {
         return (
-            <div className="accept_prize">
-                <p className="accept_prize_title">幸运奖品</p>
-                <div className="accept_prize_product">
-                    <div className="accept_prize_product_pic">
+            <div className={accpetPrizeStyle.accept_prize}>
+                <p className={accpetPrizeStyle.accept_prize_title}>幸运奖品</p>
+                <div className={accpetPrizeStyle.accept_prize_product}>
+                    <div className={accpetPrizeStyle.accept_prize_product_pic}>
                         <img src={this.props.storage.productInfo.picUrl} alt="" className="w"/>
                     </div>
-                    <ul className="accept_prize_product_info">
-                        <li className="accept_prize_product_title">
+                    <ul className={accpetPrizeStyle.accept_prize_product_info}>
+                        <li className={accpetPrizeStyle.accept_prize_product_title}>
                             {this.props.storage.productInfo.productName}
                         </li>
                         <li className="clearfix">

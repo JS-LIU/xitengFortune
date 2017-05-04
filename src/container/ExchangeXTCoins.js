@@ -12,7 +12,7 @@ var { Header,BackBtn,Title } = require('../components/Header');
 
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
-require('../css/exchangeXTCoinsStyle.css');
+import exchangeXTCoinsStyle from '../css/exchangeXTCoinsStyle.css';
 
 import {loginInfoActions} from '../redux/actions/loginInfoActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -51,14 +51,14 @@ var ExchangeXTCoins = React.createClass({
                     />
                     <Title title={{text:'兑换喜腾币'}}></Title>
                 </Header>
-                <div className="buy_XTCoins po w">
+                <div className={exchangeXTCoinsStyle.buy_XTCoins}>
                     <BuyXTCoins
                         accountActionKeys={this.props.accountActionKeys}
                         account={this.props.account}
                         XTCoins={this.props.XTCoins}
                         XTCoinsActionKeys={this.props.XTCoinsActionKeys}
                     />
-                    <Link to={src} className="exchangeXTCoins tc f16 cfff" onClick={this.exchangeXTCoins(3)}>立即兑换</Link>
+                    <Link to={src} className={exchangeXTCoinsStyle.exchangeXTCoins} onClick={this.exchangeXTCoins(3)}>立即兑换</Link>
                 </div>
                 {this.props.showDialog.showDialog?<DialogiOS >
                     <DialogHeader title="钻石不足"/>
@@ -95,10 +95,10 @@ var MyDiamonds = React.createClass({
     },
     render: function () {
         return (
-            <div className="my_diamonds f14">
-                <span className="c000 pl15">钻石余量：</span>
-                <span className="cred">{this.props.account.diamondAmount}</span>
-                <span className="c000">颗</span>
+            <div className={exchangeXTCoinsStyle.my_diamonds}>
+                <span className={exchangeXTCoinsStyle.my_diamonds_remain}>钻石余量：</span>
+                <span className={exchangeXTCoinsStyle.cred}>{this.props.account.diamondAmount}</span>
+                <span className={exchangeXTCoinsStyle.c000}>颗</span>
                 <span>（钻石兑换喜腾币为1:12）</span>
             </div>
         )
@@ -116,22 +116,22 @@ var  PurchaseQuantity = React.createClass({
         var XTCoinNodes = this.props.XTCoins.XTCoinList.map((item,index)=>{
 
             return (
-                <li className="XTCoin mt10 tc cblue" style={item.selected?{border:"1px solid #FF4242",color:"#FF4242"}:{}} key={index} onClick={this.selectedBuyXTCoin(index)}>
-                    <p className="f16 pt10" >{item.count}</p>
-                    <p className="pb10">喜腾币</p>
+                <li className={exchangeXTCoinsStyle.XTCoin} style={item.selected?{border:"1px solid #FF4242",color:"#FF4242"}:{}} key={index} onClick={this.selectedBuyXTCoin(index)}>
+                    <p className={exchangeXTCoinsStyle.XTCoin_count}>{item.count}</p>
+                    <p className={exchangeXTCoinsStyle.XTCoin_sort}>喜腾币</p>
                 </li>
             )
         });
 
         return (
-            <div className="purchase_quantity">
-                <p className="selected_title f16">选择套餐</p>
-                <ul className="XICoin_box">
+            <div className={exchangeXTCoinsStyle.purchase_quantity}>
+                <p className={exchangeXTCoinsStyle.selected_title}>选择套餐</p>
+                <ul className={exchangeXTCoinsStyle.XICoin_box}>
                     {XTCoinNodes}
                 </ul>
-                <p className="pay_diamonds f16">
+                <p className={exchangeXTCoinsStyle.pay_diamonds}>
                     <span>应付钻石：</span>
-                    <span className="cred">{this.props.XTCoins.price}颗</span>
+                    <span className={exchangeXTCoinsStyle.cred}>{this.props.XTCoins.price}颗</span>
                 </p>
             </div>
         )

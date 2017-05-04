@@ -17,16 +17,22 @@
     background:url("../../src/images/0yuan_home_btn_jiexiao@2x.png") no-repeat center top;
     -webkit-background-size:0.7rem;
     background-size:0.7rem;
+    composes: onePiece_header_icon;
+    composes:tc from '../css/base_mobile.css';
 }
 .show_prize_icon{
     background:url("../../src/images/0yuan_home_btn_shaidan@2x.png") no-repeat center top;
     -webkit-background-size:0.7rem;
     background-size:0.7rem;
+    composes: onePiece_header_icon;
+    composes:tc from '../css/base_mobile.css';
 }
 .help_icon{
     background:url("../../src/images/0yuan_home_btn_help@2x.png") no-repeat center top;
     -webkit-background-size:0.7rem;
     background-size:0.7rem;
+    composes: onePiece_header_icon;
+    composes:tc from '../css/base_mobile.css';
 }
 .purchase_win{
     height:0.8rem;
@@ -77,10 +83,12 @@
     display: flex;
     flex-direction:row;
     justify-content: center;
+    composes:w from '../css/base_mobile.css';
 }
 .onePiece_product_item_pic{
     display: flex;
     height:4rem;
+    composes:h from '../css/base_mobile.css';
 }
 .onePiece_product_name{
     font-size:0.3rem;
@@ -112,6 +120,7 @@
     -moz-border-radius:0.1rem;
     border-radius:0.1rem;
     background: #EFEDEE;
+    composes: pr w from '../css/base_mobile.css';
 }
 .onePiece_rate_line_red{
     top:0;
@@ -121,6 +130,7 @@
     -moz-border-radius:0.1rem;
     border-radius:0.1rem;
     background: #F23030;
+    composes: po from '../css/base_mobile.css';
 }
 .onePiece_rate_total{
     display: flex;
@@ -142,6 +152,7 @@
     border:0.02rem solid #F23030;
     line-height:0.52rem;
     color:#F23030;
+    composes: tc from '../css/base_mobile.css';
 }
 
 

@@ -8,7 +8,7 @@ var { connect } = require('react-redux');
 var { Link } = require('react-router');
 var $ = require('jquery');
 
-require('../css/MyStyle.css');
+import MyStyle from '../css/MyStyle.css';
 
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -43,25 +43,25 @@ var Myaccount = React.createClass({
     render: function () {
         return (
             <div>
-                <div className="my_account_big_XTCoins tc">
+                <div className={MyStyle.my_account_big_XTCoins}>
                     <p>
-                        <span className="f20 cred">{this.props.account.xtbTotalAmount}</span>
+                        <span className={MyStyle.my_account_big_XTCoins_total}>{this.props.account.xtbTotalAmount}</span>
                         <span className="f14">喜腾币</span>
                     </p>
                 </div>
-                <ul className="my_account f14">
+                <ul className={MyStyle.my_account}>
                     <li className="tc">
                         <span>{this.props.account.xtbProfitAmount}</span>
-                        <span className="my_account_XTCoins f12">
+                        <span className={MyStyle.my_account_XTCoins}>
                             <span>普通币</span>
-                            <span className="cred">(全场通用)</span>
+                            <span className={MyStyle.cred}>(全场通用)</span>
                         </span>
                     </li>
                     <li className="tc">
                         <span>{this.props.account.xtbCapitalAmount}</span>
-                        <span className="my_account_color_coins f12">
+                        <span className={MyStyle.my_account_color_coins}>
                             <span>彩色币</span>
-                            <span className="cred">(仅限投注)</span>
+                            <span className={MyStyle.cred}>(仅限投注)</span>
                         </span>
                     </li>
                 </ul>

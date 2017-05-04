@@ -8,7 +8,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/onePieceProductOpenStyle.css');
+import onePieceProductOpenStyle from '../css/onePieceProductOpenStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {purchaseGameActions} from '../redux/actions/purchaseGameActions';
@@ -49,13 +49,13 @@ var OnePieceOldActivitiesHome = React.createClass({
     render: function () {
         let userNodes = this.props.purchaseGame.openProducts.userList.map((item,index)=>{
             return (
-                <li key={index} className="onePiece_open_home">
-                    <div className="onePiece_open_home_box">
-                        <div className="onePiece_open_product_pic">
+                <li key={index} className={onePieceProductOpenStyle.onePiece_open_home}>
+                    <div className={onePieceProductOpenStyle.onePiece_open_home_box}>
+                        <div className={onePieceProductOpenStyle.onePiece_open_product_pic}>
                             <img src={item.productUrl} alt="" className="w h"/>
                         </div>
-                        <ul className="onePiece_open_product_detail">
-                            <li className="onePiece_open_productName">
+                        <ul className={onePieceProductOpenStyle.onePiece_open_product_detail}>
+                            <li className={onePieceProductOpenStyle.onePiece_open_productName}>
                                 {item.productName}
                             </li>
                             <li>
@@ -63,7 +63,7 @@ var OnePieceOldActivitiesHome = React.createClass({
                             </li>
                             <li>
                                 <span>获奖用户：</span>
-                                <span className="onePiece_open_userName">{item.userName||"尚未开奖"}</span>
+                                <span className={onePieceProductOpenStyle.onePiece_open_userName}>{item.userName||"尚未开奖"}</span>
                             </li>
                             <li>
                                 参与分数：{item.bidCount||"尚未开奖"}
@@ -72,7 +72,7 @@ var OnePieceOldActivitiesHome = React.createClass({
                                 <span>
                                     幸运号码：
                                 </span>
-                                <span className="onePiece_open_userName">
+                                <span className={onePieceProductOpenStyle.onePiece_open_userName}>
                                     {item.luckCode||"尚未开奖"}
                                 </span>
 
@@ -86,7 +86,7 @@ var OnePieceOldActivitiesHome = React.createClass({
             );
         });
         return (
-            <div className="f5f5f5">
+            <div className={onePieceProductOpenStyle.f5f5f5}>
                 <div className="f5f5f5 w h" style={{position:"fixed"}}></div>
                 <ul className="pr">
                     {userNodes}

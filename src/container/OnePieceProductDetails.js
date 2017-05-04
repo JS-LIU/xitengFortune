@@ -9,7 +9,7 @@ var {Link} = require('react-router');
 var $ = require('jquery');
 var _h = require('../Util/HB');
 
-require('../css/onePieceProductDetailsStyle.css');
+import onePieceProductDetailsStyle from '../css/onePieceProductDetailsStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {purchaseGameActions} from '../redux/actions/purchaseGameActions';
@@ -49,53 +49,53 @@ var OnePieceProductDetails = React.createClass({
                 img_box.marginLeft = "-"+window_w;
             }
             return (
-                <li className="onePiece_pic" key={index} style={img_box}>
+                <li className={onePieceProductDetailsStyle.onePiece_pic} key={index} style={img_box}>
                     <img src={item.picUrl} alt="" className="h"/>
                 </li>
             )
         });
         let bidRecordNodes = this.props.purchaseGame.bidDetail.bidRecords.map((bidRecord,i)=>{
             return (
-                <span key={i} className="onePiece_detail_bidDetail_record_item">{bidRecord.bidRecordId}</span>
+                <span key={i} className={onePieceProductDetailsStyle.onePiece_detail_bidDetail_record_item}>{bidRecord.bidRecordId}</span>
             )
         });
         return (
             <div className="f5f5f5">
-                <ul className="onePiece_product_pic">
+                <ul className={onePieceProductDetailsStyle.onePiece_product_pic}>
                     {productPicNodes}
                 </ul>
-                <ul className="onePiece_detail_text">
-                    <li className="onePiece_detail_text_title">
-                        <span className="onePiece_detail_purchaseGame_status">{this.props.purchaseGame.detail.purchaseGameStatus.text}</span>
+                <ul className={onePieceProductDetailsStyle.onePiece_detail_text}>
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_text_title}>
+                        <span className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_status}>{this.props.purchaseGame.detail.purchaseGameStatus.text}</span>
                         <span>{this.props.purchaseGame.detail.productName}</span>
                     </li>
-                    <li className="onePiece_detail_text_description">{this.props.purchaseGame.detail.purchaseGameDescription}</li>
-                    <li className="onePiece_detail_text_priceOfOneBidInXtb">
-                        <span className="onePiece_detail_text_priceOfOneBidInXtb_title">每份</span>
-                        <span className="onePiece_detail_Xtb_one">{this.props.purchaseGame.detail.priceOfOneBidInXtb}</span>
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_text_description}>{this.props.purchaseGame.detail.purchaseGameDescription}</li>
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_text_priceOfOneBidInXtb}>
+                        <span className={onePieceProductDetailsStyle.onePiece_detail_text_priceOfOneBidInXtb_title}>每份</span>
+                        <span className={onePieceProductDetailsStyle.onePiece_detail_Xtb_one}>{this.props.purchaseGame.detail.priceOfOneBidInXtb}</span>
                     </li>
                 </ul>
-                <ul className="onePiece_detail_purchaseGame_data">
-                    <li className="onePiece_detail_purchaseGame_stage">
+                <ul className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_data}>
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_stage}>
                         <span>期数：{this.props.purchaseGame.detail.stage}</span>
                     </li>
-                    <li className="onePiece_detail_purchaseGame_line pr">
-                        <div className="onePiece_detail_purchaseGame_line_rate po" style={{width:this.props.purchaseGame.detail.rateOfProgress}}></div>
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_line}>
+                        <div className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_line_rate} style={{width:this.props.purchaseGame.detail.rateOfProgress}}></div>
                     </li>
-                    <li className="onePiece_detail_purchaseGame_data_other">
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_data_other}>
                         <div>
                             <span>总需：{this.props.purchaseGame.detail.targetPurchaseCount}份</span>
                         </div>
                         <div>
                             <span>剩余：</span>
-                            <span className="onePiece_detail_purchaseGame_data_other_red">{this.props.purchaseGame.detail.restPurchaseCount}份</span>
+                            <span className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_data_other_red}>{this.props.purchaseGame.detail.restPurchaseCount}份</span>
                         </div>
                     </li>
-                    <li className="onePiece_detail_purchaseGame_isJoin">
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_isJoin}>
                         {this.props.purchaseGame.bidDetail.bid?"":(
-                            <p className="onePiece_detail_purchaseGame_isJoin_no tc">
+                            <p className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_isJoin_no}>
                                 <span>您还没有参与本期夺宝，</span>
-                                <span className="onePiece_detail_purchaseGame_isJoin_btn">立即参与!</span></p>
+                                <span className={onePieceProductDetailsStyle.onePiece_detail_purchaseGame_isJoin_btn}>立即参与!</span></p>
 
                             )
                         }
@@ -124,21 +124,21 @@ var OnePieceProductDetails = React.createClass({
                             ):""
                         }
                         {this.props.purchaseGame.bidDetail.bidRecords.length == 0?"":(
-                            <div className="onePiece_detail_bidDetail_time_box">
-                                <div className="onePiece_detail_bidDetail_pruchaseGame_info">
-                                    <div className="onePiece_detail_bidDetail_pruchaseGame_info_left">
+                            <div className={onePieceProductDetailsStyle.onePiece_detail_bidDetail_time_box}>
+                                <div className={onePieceProductDetailsStyle.onePiece_detail_bidDetail_pruchaseGame_info}>
+                                    <div className={onePieceProductDetailsStyle.onePiece_detail_bidDetail_pruchaseGame_info_left}>
                                         <span>期数：{this.props.purchaseGame.bidDetail.stage}</span>
                                         <span>揭晓倒计时：{this.props.purchaseGame.bidDetail.bidRecords[0].createTime}</span>
                                     </div>
                                 </div>
-                                <div className="onePiece_detail_bidDetail_join_info">
+                                <div className={onePieceProductDetailsStyle.onePiece_detail_bidDetail_join_info}>
                                     <p>
                                         <span>您参与了：</span>
-                                        <span className="onePiece_detail_bidDetail_join_info_red">{this.props.purchaseGame.bidDetail.bidRecords.length}</span>
+                                        <span className={onePieceProductDetailsStyle.onePiece_detail_bidDetail_join_info_red}>{this.props.purchaseGame.bidDetail.bidRecords.length}</span>
                                         <span>份</span>
                                     </p>
-                                    <div className="onePiece_detail_bidDetail_records">
-                                        <p className="onePiece_detail_bidDetail_records_info">
+                                    <div className={onePieceProductDetailsStyle.onePiece_detail_bidDetail_records}>
+                                        <p className={onePieceProductDetailsStyle.onePiece_detail_bidDetail_records_info}>
                                             <span>夺宝号码：</span>{bidRecordNodes}
                                         </p>
                                         <span>查看全部</span>
@@ -148,19 +148,19 @@ var OnePieceProductDetails = React.createClass({
                         }
                     </li>
                 </ul>
-                <ul className="onePiece_detail_other_function">
-                    <li className="onePiece_detail_other_function_join_detail">
+                <ul className={onePieceProductDetailsStyle.onePiece_detail_other_function}>
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_other_function_join_detail}>
                         <Link to="/OnePieceJoinDetail" >参与详情</Link>
                     </li>
-                    <li className="onePiece_detail_other_function_old_activities">
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_other_function_old_activities}>
                         <Link to={{ pathname: "/OnePieceOldActivities", query: { productId: this.props.purchaseGame.detail.productId } }} >往期揭晓</Link>
                     </li>
-                    <li className="onePiece_detail_other_function_show">
+                    <li className={onePieceProductDetailsStyle.onePiece_detail_other_function_show}>
                         <Link to={{ pathname: "/OnePieceShow", query: { productId: this.props.purchaseGame.detail.productId } }} >晒单</Link>
                     </li>
                 </ul>
-                <div className="onePiece_detail_footer w">
-                    <Link to="/OnePieceBuyNow" className="onePiece_join_footer_btn tc">
+                <div className={onePieceProductDetailsStyle.onePiece_detail_footer}>
+                    <Link to="/OnePieceBuyNow" className={onePieceProductDetailsStyle.onePiece_join_footer_btn}>
                         {this.props.purchaseGame.detail.purchaseGameStatus.key == "bidding"?"立即夺宝":"参与最新一期"}
                     </Link>
                 </div>

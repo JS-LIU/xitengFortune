@@ -10,7 +10,7 @@ var { Header,BackBtn,Title } = require('../components/Header');
 var _h = require('../Util/HB');
 
 
-require('../css/onePieceStyle.css');
+import onePieceStyle from '../css/onePieceStyle.css';
 
 import {activityList} from '../Util/xitengBaseConfig';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -47,7 +47,7 @@ var OnePiece = React.createClass({
     render: function () {
 
         return (
-            <div className="f5f5f5">
+            <div className={onePieceStyle.f5f5f5}>
                 <OnePieceHeader
                     activityActionKeys={this.props.activityActionKeys}
                     purchaseGameActionKeys={this.props.purchaseGameActionKeys}
@@ -83,7 +83,6 @@ var OnePieceHeader = React.createClass({
                     $('.purchase_broadcast_icon').eq(nextIndex).addClass('rollUp_first_over');
                     beginIndex = nextIndex;
                 },990)
-
             }else if(beginIndex != 0 && nextIndex < endIndex){
                 $('.purchase_broadcast_icon').eq(beginIndex).addClass('rollUp_sec');
                 $('.purchase_broadcast_icon').eq(nextIndex).addClass('rollUp_first');
@@ -106,32 +105,32 @@ var OnePieceHeader = React.createClass({
             }
 
             return (
-                <div className="purchase_broadcast_icon" key={index} style={{marginTop:mt}}>
-                    <span className="purchase_broadcast_name">{item.phoneNumber}</span>
+                <div className={onePieceStyle.purchase_broadcast_icon} key={index} style={{marginTop:mt}}>
+                    <span className={onePieceStyle.purchase_broadcast_name}>{item.phoneNumber}</span>
                     <span>{item.productName}</span>
                 </div>
             )
         });
         return (
             <div>
-                <ul className="onePiece_header">
+                <ul className={onePieceStyle.onePiece_header}>
                     <li>
                         <Link to={{ pathname: "/OnePieceOldActivitiesHome", query: { status: "finish_bid" } }} >
-                            <div className="onePiece_header_icon lottery_results_icon tc">揭晓</div>
+                            <div className={onePieceStyle.lottery_results_icon}>揭晓</div>
                         </Link>
                     </li>
                     <li>
                         <Link to={{ pathname: "/OnePieceShow", query: { isAll: "yes" } }}>
-                            <div className="onePiece_header_icon show_prize_icon tc">晒单</div>
+                            <div className={onePieceStyle.show_prize_icon}>晒单</div>
                         </Link>
                     </li>
                     <li>
                         <Link to="/OnePieceHelp">
-                            <div className="onePiece_header_icon help_icon tc">帮助</div>
+                            <div className={onePieceStyle.help_icon}>帮助</div>
                         </Link>
                     </li>
                 </ul>
-                <div className="purchase_broadcast" onClick={this.timer()}>
+                <div className={onePieceStyle.purchase_broadcast} onClick={this.timer()}>
                     {winNodes}
                 </div>
             </div>
@@ -142,7 +141,7 @@ var OnePieceHeader = React.createClass({
 var OnePieceProductList = React.createClass({
     render: function () {
         return (
-            <div className="onePiece_product_list">
+            <div className={onePieceStyle.onePiece_product_list}>
                 <OnePieceProductType
                     purchaseGame={this.props.purchaseGame}
                     purchaseGameActionKeys={this.props.purchaseGameActionKeys}
@@ -183,7 +182,7 @@ var OnePieceProductType = React.createClass({
             )
         });
         return (
-            <ul className="onePiece_product_type">
+            <ul className={onePieceStyle.onePiece_product_type}>
                 {typeNodes}
             </ul>
         )
@@ -203,33 +202,33 @@ var OnePieceProducts = React.createClass({
     render: function () {
         let productNodes = this.props.purchaseGame.products.productList.map((item,index)=>{
             return (
-                <li className="onePiece_product_item" key={index}>
-                    <Link to="/OnePieceProductDetails" className="onePiece_product_item_pic_box w" onClick={this.setPurchaseGameId(item)}>
-                        <img src={item.pictures[0].picUrl} alt={item.productName} className="h onePiece_product_item_pic"/>
+                <li className={onePieceStyle.onePiece_product_item} key={index}>
+                    <Link to="/OnePieceProductDetails" className={onePieceStyle.onePiece_product_item_pic_box} onClick={this.setPurchaseGameId(item)}>
+                        <img src={item.pictures[0].picUrl} alt={item.productName} className={onePieceStyle.onePiece_product_item_pic}/>
                     </Link>
-                    <p className="onePiece_product_name">{item.productName}</p>
-                    <div className="onePiece_rate_box">
-                        <ul className="onePiece_rate">
-                            <li className="onePiece_rate_text">
-                                <span className="onePiece_rate_text_title">揭晓进度</span>
-                                <span className="onePiece_rate_text_title_red">{item.rateOfProgress}</span>
+                    <p className={onePieceStyle.onePiece_product_name}>{item.productName}</p>
+                    <div className={onePieceStyle.onePiece_rate_box}>
+                        <ul className={onePieceStyle.onePiece_rate}>
+                            <li className={onePieceStyle.onePiece_rate_text}>
+                                <span className={onePieceStyle.onePiece_rate_text_title}>揭晓进度</span>
+                                <span className={onePieceStyle.onePiece_rate_text_title_red}>{item.rateOfProgress}</span>
                             </li>
-                            <li className="onePiece_rate_line pr w">
-                                <div className="onePiece_rate_line_red po" style={{width:item.rateOfProgress}}></div>
+                            <li className={onePieceStyle.onePiece_rate_line}>
+                                <div className={onePieceStyle.onePiece_rate_line_red} style={{width:item.rateOfProgress}}></div>
                             </li>
-                            <li className="onePiece_rate_total">
+                            <li className={onePieceStyle.onePiece_rate_total}>
                                 <div>
                                     <span>总需：</span>
                                     <span>{item.targetPurchaseCount}份</span>
                                 </div>
                                 <div>
                                     <span>剩余：</span>
-                                    <span className="onePiece_rate_total_red">{item.targetPurchaseCount-item.currentPurchaseCount}</span>
+                                    <span className={onePieceStyle.onePiece_rate_total_red}>{item.targetPurchaseCount-item.currentPurchaseCount}</span>
                                     <span>份</span>
                                 </div>
                             </li>
                         </ul>
-                        <Link to="/OnePieceBuyNow" className="onePiece_join_btn tc" onClick={this.setPurchaseGameId(item)}>立即参与</Link>
+                        <Link to="/OnePieceBuyNow" className={onePieceStyle.onePiece_join_btn} onClick={this.setPurchaseGameId(item)}>立即参与</Link>
                     </div>
                 </li>
             )

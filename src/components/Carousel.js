@@ -3,7 +3,7 @@
  */
 var React = require('react');
 var $ = require('jquery');
-require('../css/carousel.css');
+import carousel from '../css/carousel.css';
 import _h from '../Util/HB';
 
 var Carousel = React.createClass({
@@ -57,7 +57,7 @@ var Carousel = React.createClass({
     render: function () {
         let imgNodes = this.props.pictures.map((item,index)=>{
             return (
-                <li className="carousel_item" key={index}>
+                <li className={carousel.carousel_item} key={index}>
                     <img src={item.picUrl} alt="" className="w"/>
                 </li>
             )
@@ -65,7 +65,7 @@ var Carousel = React.createClass({
         return (
             <div
                 ref="myRef"
-                className="carousel_box pr tc"
+                className={carousel.carousel_box }
                 style={this.props.carouselStyle.bigBox}>
                 <ul style={this.state.smBox}>
                     {imgNodes}
