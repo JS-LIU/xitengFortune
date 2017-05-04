@@ -4,15 +4,17 @@
 import {SHOW_DIALOG,HIDE_DIALOG} from './dialogActionKeys';
 
 export var dialogActions = {
-    showDialog: ()=>{
+    showDialog: (dialogInfo)=>{
         return {
-            type : SHOW_DIALOG
+            type : SHOW_DIALOG,
+            dialogInfo
         }
     },
 
     hideDialog: ()=>{
         return {
             type: HIDE_DIALOG
+
         }
     },
 };

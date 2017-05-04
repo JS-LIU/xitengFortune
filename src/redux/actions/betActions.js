@@ -5,7 +5,7 @@ import {SHOW_DIALOG,HIDE_DIALOG} from './dialogActionKeys';
 import { GET_ODDS,SET_BET_MONEY } from './betActionKeys';
 import _h from '../../Util/HB';
 import _order from '../actionModule/orderModule';
-
+import _showDialog from '../actionModule/dialogModule';
 
 export const betActions = {
 
@@ -15,7 +15,19 @@ export const betActions = {
             money
         }
     },
+    showBetDialog : ()=>{
+        return (dispatch,getState)=>{
+            _showDialog('betDialog',getState()).success((dialogInfo)=>{
+                console.log(dialogInfo.describe);
+                // dispatch({type:'SHOW_DIALOG',dialogInfo})
 
+            }).error((dialogInfo)=>{
+                console.log(dialogInfo.describe);
+                dispatch({type:'SHOW_DIALOG',dialogInfo});
+            });
+
+        }
+    },
     // immediatelyBet : (money)=>{
     //
     //     return (dispatch,getState)=>{

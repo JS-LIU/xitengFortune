@@ -29,8 +29,9 @@ var Bet = React.createClass({
         this.props.betActionKeys.getOdds();
         this.props.stockGameDetailActionKeys.getStockDetail(this.props.storage.stockGameId);
     },
-    bet:function(){
-        this.props.orderActionKeys.createOrder('/guessGame');
+    showBetDialog:function(){
+        console.log('click');
+        this.props.betActionKeys.showBetDialog();
     },
     render: function () {
         return (
@@ -46,7 +47,7 @@ var Bet = React.createClass({
                         account={this.props.account}
                         betInfo = {this.props.betInfo}
                     />
-                    <div className={betStyle.betBtn}/>
+                    <div className={betStyle.betBtn} onClick={this.showBetDialog}/>
                 </div>
 
                 {/* 投注失败弹出窗口 */}

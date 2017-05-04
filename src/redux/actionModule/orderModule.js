@@ -3,7 +3,6 @@
  */
 import _shoppingCart from '../actionModule/shoppingCardModule';
 import _h from '../../Util/HB';
-import _bet from './betModule';
 
 const order = {
     productList: [],
@@ -32,6 +31,8 @@ const calcTotalMoney = function(item) {
 const calcTotalNum = function(item) {
     order.totalProductCount += item.totalCount;
 };
+
+//  购买钻石
 const buyDiamondsOrder = function(path,state){
     if(path === "/createTradeOrder"){
         let data = {
@@ -43,6 +44,7 @@ const buyDiamondsOrder = function(path,state){
     }
 };
 
+//  兑换商品
 const exchangeProductsOrder = function(path,state){
     if(path === "/exchange/product"){
         let postData = {
@@ -53,7 +55,22 @@ const exchangeProductsOrder = function(path,state){
             xtbPrice:state.order.totalPrice,
             tradeWay:2
         };
-        console.log(postData);
+        return _h.ajax.resource(path).save({},postData)
+    }else{
+        return "nextSuccessor";
+    }
+};
+
+//  猜涨跌
+const guessGame = function(path,state){
+
+    if(path === "/guessGame"){
+        let postData = {
+            accessInfo:state.loginInfo.loginData,
+            stockId:state.storage.stockGameId,
+            guessType:state.storage.guessType,
+            cathecticAmount:state.betInfo.betMoney
+        };
         return _h.ajax.resource(path).save({},postData)
     }else{
         return "nextSuccessor";
