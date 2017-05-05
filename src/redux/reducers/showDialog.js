@@ -7,6 +7,7 @@ export const showDialog = function (state = {},action) {
     switch (action.type) {
         case 'SHOW_DIALOG':
             let dialogInfo = action.dialogInfo||{};
+            console.log('==errorDialog',dialogInfo);
             return Object.assign({},state,{
                 showDialog:true,
                 title:dialogInfo.title,

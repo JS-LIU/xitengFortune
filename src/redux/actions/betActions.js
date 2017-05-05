@@ -1,7 +1,8 @@
 /**
  * Created by LDQ on 2016/9/26.
  */
-import {SHOW_DIALOG,HIDE_DIALOG} from './dialogActionKeys';
+import { SHOW_DIALOG,HIDE_DIALOG} from './dialogActionKeys';
+import { SHOW_PAY_DIALOG,HIDE_PAY_DIALOG } from './payDialogActionKeys';
 import { GET_ODDS,SET_BET_MONEY } from './betActionKeys';
 import _h from '../../Util/HB';
 import _order from '../actionModule/orderModule';
@@ -18,11 +19,10 @@ export const betActions = {
     showBetDialog : ()=>{
         return (dispatch,getState)=>{
             _showDialog('betDialog',getState()).success((dialogInfo)=>{
-                console.log(dialogInfo.describe);
-                // dispatch({type:'SHOW_DIALOG',dialogInfo})
 
+                dispatch({type:'SHOW_PAY_DIALOG',dialogInfo})
             }).error((dialogInfo)=>{
-                console.log(dialogInfo.describe);
+
                 dispatch({type:'SHOW_DIALOG',dialogInfo});
             });
 

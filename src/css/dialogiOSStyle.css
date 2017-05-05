@@ -15,8 +15,8 @@
 }
 .dialog_body{
     position:fixed;
-    margin:0 50px;
-    width:calc(100% - 10.04rem);
+    margin:0 0.52rem;
+    width:calc(100% - 1.04rem);
     top:35%;
     background:#FFF;
     opacity: 0.96;

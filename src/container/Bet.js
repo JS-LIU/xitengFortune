@@ -30,7 +30,6 @@ var Bet = React.createClass({
         this.props.stockGameDetailActionKeys.getStockDetail(this.props.storage.stockGameId);
     },
     showBetDialog:function(){
-        console.log('click');
         this.props.betActionKeys.showBetDialog();
     },
     render: function () {

@@ -4,12 +4,11 @@
 
 export const payDialog = function (state = {},action) {
     switch (action.type) {
-        case 'SHOW_DIALOG':
-            console.log(state);
-            let data = action.data||state;
+        case 'SHOW_PAY_DIALOG':
+            let data = action.dialogInfo||state;
 
             return Object.assign({},state,{
-                showDialog:true,
+                isShowDialog:true,
                 title:data.title,
                 body:data.body,
                 cancel:data.cancel,
@@ -18,7 +17,7 @@ export const payDialog = function (state = {},action) {
 
         case 'HIDE_DIALOG':
             return Object.assign({},state,{
-                showDialog:false
+                isShowDialog:false
             });
         default:
             return state
