@@ -210,7 +210,7 @@
 }
 .guess_stock_god_classify{
     font-size:0.24rem;
-    composes: fl clearfix from '../css/base_mobile.css'
+    composes: fr clearfix from '../css/base_mobile.css'
 }
 .pk_box{
     border-top:0.3rem solid #1c242a ;

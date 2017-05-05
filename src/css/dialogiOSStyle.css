@@ -40,14 +40,14 @@
     border-top:1px solid #E2E2E2;
     overflow: hidden;
 }
+.dialog_btn_color{
+    color:#4A63F1;
+    composes:tc f24 from '../css/base_mobile.css';
+}
 .dialog_btn{
     flex:1;
     line-height:44px;
     border-right: 1px solid #E2E2E2;
     margin-right: -1px;
     composes: dialog_btn_color;
-}
-.dialog_btn_color{
-    color:#4A63F1;
-    composes:tc f24 from '../css/base_mobile.css';
 }
