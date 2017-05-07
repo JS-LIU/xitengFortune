@@ -2,14 +2,10 @@
  * Created by LDQ on 2017/4/6.
  */
 
-var React = require('react');
-var {Link} = require('react-router');
+const React = require('react');
+const {Link} = require('react-router');
 
 const PayDialogHeader  = React.createClass({
-
-    hideDialog:function(){
-        this.props.showDialogActionKeys.hideDialog();
-    },
 
     render: function () {
         return (
@@ -27,20 +23,38 @@ const PayDialogBody = React.createClass({
     render: function () {
         return (
             <div>
+                {this.props.children}
+            </div>
+        )
+    }
+});
 
-                <p>{this.props.body.title}</p>
-                <p>{this.props.body.money}</p>
+const PayMoney = React.createClass({
 
-                <Link to={this.props.body.url}>
-                    {this.props.body.payWay}
+    render: function () {
+        return (
+            <div>
+                {this.props.money.text}
+                {/*{this.props.money.icon}*/}
+                {this.props.money.total}
+            </div>
+        )
+    }
+});
+
+const PayWay = React.createClass({
+
+    render: function () {
+        return (
+            <div>
+                <Link to={this.props.link.url}>
+                    <p>{this.props.link.text}</p>
                 </Link>
             </div>
         )
     }
 });
 
-
-
 module.exports = {
-    PayDialogHeader,PayDialogBody
+    PayDialogHeader,PayDialogBody,PayMoney,PayWay
 };

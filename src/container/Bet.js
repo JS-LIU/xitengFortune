@@ -8,7 +8,7 @@ var { connect } = require('react-redux');
 var { Link } = require('react-router');
 var { Header,BackBtn,Title } = require('../components/Header');
 var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
-const {PayDialogHeader,PayDialogBody} = require('../components/PayDialog');
+const {PayDialogHeader,PayDialogBody,PayMoney,PayWay} = require('../components/PayDialog');
 
 import betStyle from '../css/betStyle.css';
 
@@ -67,14 +67,12 @@ var Bet = React.createClass({
                 {this.props.payDialog.isShowDialog?
                     <DialogiOS>
                         <PayDialogHeader title = {'支付'}/>
-                        <PayDialogBody body = {
-                            {
-                                title:"投注",
-                                money:{icon:"",much:"100"},
-                                payWay:"喜币账户余额支付",
-                                url:""
-                            }
-                        }/>
+
+                        <PayDialogBody >
+                            <PayMoney money = {{text:'投注',total:this.props.betInfo.betMoney}}/>
+                            <PayWay link = {{url:'/Bet',text:'喜币账户余额支付'}}/>
+                        </PayDialogBody>
+
                         <div onClick={this.bet}>确认</div>
                     </DialogiOS>:""}
 
