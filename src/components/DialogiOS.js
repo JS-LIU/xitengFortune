@@ -16,7 +16,6 @@ var DialogiOS = React.createClass({
                 </div>
                 <div className={dialogiOSStyle.dialog_mask}></div>
             </div>
-
         )
     }
 });

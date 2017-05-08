@@ -13,8 +13,8 @@
 .cart_shop_name{
     position:fixed;
     top:0;
-    height:44px;
-    line-height: 44px;
+    height:0.88rem;
+    line-height: 0.88rem;
     background:#FFF;
     composes:pl24 w from '../css/base_mobile.css';
 }
@@ -37,13 +37,13 @@
     height: 1.9rem;
     display:flex;
     flex-direction: row;
-    border-top:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
     composes: pl24 pr from '../css/base_mobile.css';
 }
 .cart_product_pic{
     width: 1.4rem;
     height: 1.4rem;
-    border: 0.01rem solid #E2E2E2;
+    border: 0.01rem solid #E3E3E3;
     overflow: hidden;
     composes:m20 tc from '../css/base_mobile.css';
 }
@@ -76,7 +76,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    border: 0.01rem solid #E2E2E2;
+    border: 0.01rem solid #E3E3E3;
     composes:po from '../Util/base.css';
 }
 .cart_ctrl_reduce,
@@ -91,8 +91,8 @@
     flex:2;
     flex-direction: row;
     justify-content: center;
-    border-left:1px solid #E2E2E2;
-    border-right:1px solid #E2E2E2;
+    border-left:0.01rem solid #E3E3E3;;
+    border-right:0.01rem solid #E3E3E3;;
 }
 .cart_footer{
     position:fixed;
@@ -121,7 +121,7 @@
     composes:fr f32 tc from '../css/base_mobile.css';
 }
 .cart_body{
-    padding-bottom:47px;
+    padding-bottom:0.94rem;
     min-height:calc(100% - 47px);
     composes:f5f5f5;
     composes:po w from '../Util/base.css';

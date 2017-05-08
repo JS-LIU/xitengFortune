@@ -11,7 +11,9 @@
 .payDialog{
     position: relative;
     margin:25% 1.04rem;
-    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    border-radius:0.3rem;
     background-color: #fff;
     z-index: 10;
 }
@@ -72,6 +74,8 @@
     background: #4964EF;
     font-size: 0.36rem;
     color: #ffffff;
+    -webkit-border-radius: 0.4rem;
+    -moz-border-radius: 0.4rem;
     border-radius: 0.4rem;
     margin: 0 1.16rem;
     composes:tc from '../css/base_mobile.css';

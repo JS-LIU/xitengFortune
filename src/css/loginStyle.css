@@ -5,9 +5,9 @@
     color:#0A89FE;
 }
 .login_logo{
-    margin:5px auto;
-    width:70px;
-    height:70px;
+    margin:0.1rem auto;
+    width: 1.4rem;
+    height: 1.4rem;
     overflow: hidden;
     /*background:url("../../src/images/logo@2x.png") no-repeat center;*/
     -webkit-background-size:contain;
@@ -23,8 +23,8 @@
 .login_input li{
     display: flex;
     flex-direction: row;
-    border-bottom:1px solid #E2E2E2;
-    line-height: 49px;
+    border-bottom: 0.01rem solid #E3E3E3;
+    line-height: 0.98rem;
 }
 .login_input_title{
     composes: pr60 from '../css/base_mobile.css';
@@ -48,7 +48,7 @@
 
 .login_wx{
     position: fixed;
-    bottom:50px;
+    bottom: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -56,17 +56,17 @@
     composes:f32 tc w from '../css/base_mobile.css';
 }
 .login_btn{
-    margin:30px 15px;
-    border-radius: 3px;
+    margin: 0.6rem 0.3rem;
+    border-radius: 0.06rem;
     background:#0A89FE;
-    line-height:44px;
-    height:44px;
+    line-height:0.88rem;
+    height:0.88rem;
     composes: cfff;
     composes: tc f26 from '../css/base_mobile.css';
 }
 .login_wx_btn{
     background:url("../../src/images/icon_weixin-@2x.png") no-repeat top center;
-    -webkit-background-size:55px;
-    background-size:55px;
-    padding-top:60px;
+    -webkit-background-size:1.1rem;
+    background-size:1.1rem;
+    padding-top: 1.2rem;
 }

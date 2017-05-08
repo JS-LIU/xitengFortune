@@ -20,7 +20,7 @@
     width:48%;
     margin-right: 1%;
     overflow: hidden;
-    border:1px solid #E2E2E2;
+    border:0.01rem solid #E3E3E3;
     composes: fff;
     composes: mb10 from '../Util/base.css';
 }
@@ -31,14 +31,14 @@
     composes: w tc from '../Util/base.css';
 }
 .shop_xtbTotalAmount{
-    height:44px;
-    line-height:44px;
+    height:0.88rem;
+    line-height: 0.88rem;
 }
 
 
 .shop_product_footer{
     height: 1.3rem;
-    border-top: 0.01rem solid #E2E2E2;
+    border-top: 0.01rem solid #E3E3E3;
     composes: fff;
     composes: pl24 pr24 from '../css/base_mobile.css';
 }
@@ -71,8 +71,8 @@
 .shop_type_item{
     display: flex;
     flex:1;
-    border-left:1px solid #E2E2E2;
-    margin-left:-1px;
+    border-left:0.01rem solid #E3E3E3;
+    margin-left: -0.01rem;
     justify-content:center;
     composes: f30 from '../css/base_mobile.css';
 }

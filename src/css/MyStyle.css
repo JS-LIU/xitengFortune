@@ -18,7 +18,7 @@
     composes: po w from '../css/base_mobile.css';
 }
 .my_header{
-    height:95px;
+    height: 1.9rem;
     display: flex;
     flex-direction: row;
     background:#FFF;
@@ -47,7 +47,7 @@
     justify-content: space-between;
     height: 1.1rem;
     background:#FFF;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.01rem solid #E3E3E3;
     composes:f24 from '../css/base_mobile.css';
 }
 .my_account li{
@@ -55,7 +55,7 @@
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    border-left: 0.01rem solid #E2E2E2;
+    border-left: 0.01rem solid #E3E3E3;
 }
 .my_account_big_XTCoins{
     padding-top:1.4rem;
@@ -129,8 +129,8 @@
 .unLogin{
     height:0.88rem;
     line-height: 0.88rem;
-    border-top: 0.01rem solid #E2E2E2;
-    border-bottom:0.01rem solid #E2E2E2;
+    border-top: 0.01rem solid #E3E3E3;
+    border-bottom:0.01rem solid #E3E3E3;
     background:#FFF;
 }
 .my_toLogin{

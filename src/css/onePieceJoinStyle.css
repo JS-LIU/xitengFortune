@@ -3,7 +3,7 @@
     height:1.94rem;
     display: flex;
     flex-direction: row;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.01rem solid #E3E3E3;
 }
 .onePiece_record_img{
     width:0.85rem;

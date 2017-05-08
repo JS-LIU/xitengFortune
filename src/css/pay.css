@@ -18,42 +18,42 @@ color:#000;
     composes:po w h from '../css/base_mobile.css';
 }
 .product_info{
-    border-top: 1px solid #E2E2E2;
-    border-bottom:1px solid #E2E2E2;
+    border-top: 0.01rem solid #E3E3E3;
+    border-bottom:0.01rem solid #E3E3E3;
 }
 .product_pic{
-    margin:10px 15px;
-    width:50px;
-    height:50px;
+    margin:0.2rem 0.3rem;
+    width:1rem;
+    height:1rem;
     overflow: hidden;
 }
 .payWay_pic{
-    margin:15px;
-    width: 34px;
-    height:34px;
+    margin:0.3rem;
+    width: 0.68rem;
+    height:0.68rem;
     composes:fl from '../css/base_mobile.css';
 }
 .payWay_title{
-    height:40px;
-    line-height:40px;
-    border-top:1px solid #E2E2E2;
+    height:0.8rem;
+    line-height:0.8rem;
+    border-top:0.01rem solid #E3E3E3;
     composes:c000;
     composes:pl24 f32 from '../css/base_mobile.css';
 }
 .product_name{
-    line-height:26px;
+    line-height:0.52rem;
 }
 .product_info{
-    border-top:1px solid #E2E2E2;
-    border-bottom:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
+    border-bottom:0.01rem solid #E3E3E3;
     composes:fff;
     composes: clearfix tc from '../css/base_mobile.css';
 }
 .payWay_box{
-    border-top:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
 }
 .payWay_box li{
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.01rem solid #E3E3E3;
 }
 .selected{
     background:#FFF url("../../src/images/btn_choose_s@2x.png") no-repeat 95% center;
@@ -62,11 +62,11 @@ color:#000;
     composes:pr clearfix from '../css/base_mobile.css';
 }
 .pay_btn{
-    margin:40px 15px;
-    border-radius: 3px;
+    margin:0.8rem 0.3rem;
+    border-radius: 0.06rem;
     background:#0A89FE;
-    line-height:44px;
-    height:44px;
+    line-height:0.88rem;
+    height:0.88rem;
     composes: cfff;
     composes: tc f32 from '../css/base_mobile.css';
 }

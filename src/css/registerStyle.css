@@ -17,22 +17,22 @@
     composes: pl30 from '../css/base_mobile.css';
 }
 .register_user_header{
-    margin:5px auto;
-    width:70px;
-    height:70px;
+    margin:0.1rem auto;
+    width: 1.4rem;
+    height: 1.4rem;
     overflow: hidden;
     -webkit-background-size:contain;
-    border-radius: 50px;
+    border-radius: 1rem;
     composes: tc from '../css/base_mobile.css';
 }
 .register_list{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    margin:0 15px;
-    height:44px;
-    line-height:44px;
-    border-bottom:1px solid #E2E2E2;
+    margin:0 0.3rem;
+    height: 0.88rem;
+    line-height: 0.88rem;
+    border-bottom:0.01rem solid #E3E3E3;
 }
 .register_list_name{
     composes: tc mt20 from '../css/base_mobile.css';
@@ -54,13 +54,13 @@
     composes: tc f24 from '../css/base_mobile.css';
 }
 .next_btn{
-    margin:30px 15px 0;
-    height:42px;
-    line-height:42px;
+    margin:0.6rem 0.3rem 0;
+    height:0.84rem;
+    line-height:0.84rem;
     background:#4964EF;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
+    -webkit-border-radius:0.06rem;
+    -moz-border-radius:0.06rem;
+    border-radius:0.06rem;
     composes: cfff;
     composes: tc f32 from '../css/base_mobile.css';
 }

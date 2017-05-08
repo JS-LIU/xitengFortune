@@ -17,13 +17,13 @@
 }
 .my_diamonds{
     display: flex;
-    height:44px;
-    line-height:44px;
+    height:0.88rem;
+    line-height:0.88rem;
     background:#F5F5F5;
     composes:f24 from '../css/base_mobile.css';
 }
 .selected_title{
-    padding:17px 0 0 15px;
+    padding:0.34rem 0 0 0.3rem;
     composes: f32 from '../css/base_mobile.css';
 }
 .my_diamonds_remain{
@@ -34,7 +34,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    padding:0 15px 15px;
+    padding:0 0.3rem 0.3rem;
 }
 .purchase_quantity{
     background:#FFF;
@@ -43,10 +43,10 @@
     flex-direction:column;
     justify-content:center;
     min-width: 30%;
-    border:1px solid #4964EF;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
+    border:0.01rem solid #4964EF;
+    -webkit-border-radius:0.06rem;
+    -moz-border-radius:0.06rem;
+    border-radius:0.06rem;
     composes: cblue;
     composes: mt10 tc  from '../css/base_mobile.css';
 }
@@ -58,13 +58,13 @@
 }
 .pay_diamonds{
     float:right;
-    margin:15px 15px;
+    margin:0.3rem 0.3rem;
     composes: f32 from '../css/base_mobile.css';
 }
 .exchangeXTCoins{
-    height:40px;
-    line-height:40px;
-    margin:100px 15px;
+    height:0.8rem;
+    line-height:0.8rem;
+    margin:2rem 0.3rem;
     background:#4964EF;
     composes: cfff;
     composes: tc f32 from '../css/base_mobile.css';

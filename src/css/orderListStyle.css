@@ -5,13 +5,13 @@
 .order_item_top{
     display: flex;
     flex-direction: row;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.01rem solid #E3E3E3;
     padding:0.3rem 0.2rem;
 }
 .order_item_pic{
     width:1.71rem;
     height:1.71rem;
-    border:1px solid #E2E2E2;
+    border:0.01rem solid #E3E3E3;
     -webkit-border-radius:0.03rem;
     -moz-border-radius:0.03rem;
     border-radius:0.03rem;

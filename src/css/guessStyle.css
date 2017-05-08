@@ -5,7 +5,7 @@
     color:#FF4242;
 }
 .f18{
-    font-size:18px;
+    font-size: 0.36rem;
 }
 .game_item{
     margin:0.3rem 0.25rem 0;
@@ -130,7 +130,7 @@
     composes:tc from '../css/base_mobile.css';
 }
 .count_down_title{
-    font-size:34px;
+    font-size: 0.68rem;
 }
 .count_down{
     display: flex;
@@ -195,12 +195,12 @@
     background:url('../../src/images/home_line@2x.png') no-repeat top center;
     -webkit-background-size:contain;
     background-size: contain;
-    line-height:50px;
+    line-height: 1rem;
 }
 .guess_stock_god{
     height:0.95rem;
     line-height:0.95rem;
-    border-bottom:1px solid #DDDDDD;
+    border-bottom:0.01rem solid #DDDDDD;
     composes:cfff;
     composes:clearfix from '../css/base_mobile.css'
 }
@@ -214,7 +214,7 @@
 }
 .pk_box{
     border-top:0.3rem solid #1c242a ;
-    padding:0 0.25rem 50px;
+    padding:0 0.25rem 1rem;
 }
 .guess_rank_list{
     margin-top:0.27rem;
@@ -226,9 +226,9 @@
 .prize_pic{
     display: block;
     height:2.6rem;
-    -webkit-border-radius:6px;
-    -moz-border-radius:6px;
-    border-radius:6px;
+    -webkit-border-radius:0.12rem;
+    -moz-border-radius:0.12rem;
+    border-radius:0.12rem;
 }
 .roll_up{
     position:relative;

@@ -6,7 +6,7 @@
 .onePiece_open_userItem_title{
     height:0.8rem;
     line-height:0.8rem;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.01rem solid #E3E3E3;
     color:#333;
 }
 .onePiece_open_userItem_detail{
@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: row;
     background:#FFF;
-    border-bottom: 1px solid #E2E2E2;
+    border-bottom: 0.01rem solid #E3E3E3;
     padding:0.2rem;
 }
 .onePiece_open_product_pic{

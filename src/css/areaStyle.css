@@ -1,5 +1,5 @@
 .area_list li{
-    border-bottom:1px solid #E2E2E2;
-    height:44px;
-    line-height:44px;
+    border-bottom:0.01rem solid #E3E3E3;
+    height:0.88rem;
+    line-height:0.88rem;
 }

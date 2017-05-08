@@ -4,7 +4,7 @@
     justify-content: space-between;
     height:1.4rem;
     background:#FFF;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom: 0.01rem solid #E3E3E3;
     padding:0 0.74rem;
 }
 .onePiece_header_icon{
@@ -38,7 +38,7 @@
     height:0.8rem;
     line-height:0.8rem;
     background:#FFF;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom: 0.01rem solid #E3E3E3;
 }
 .purchase_broadcast_icon{
     background:#FFF url("../../src/images/0yuan_home_icon_message@2x.png") no-repeat 0.24rem center;
@@ -53,7 +53,7 @@
     line-height:0.88rem;
     height:0.88rem;
     font-size:0.28rem;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.01rem solid #E3E3E3;
     overflow: hidden;
 }
 .onePiece_product_list{
@@ -65,8 +65,8 @@
     flex-direction: row;
     justify-content: space-around;
     background:#FFF;
-    border-top:1px solid #E2E2E2;
-    border-bottom:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
+    border-bottom:0.01rem solid #E3E3E3;
     line-height:0.88rem;
     font-size:0.3rem;
     color:#333;

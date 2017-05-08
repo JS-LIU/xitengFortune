@@ -58,27 +58,27 @@
     flex-direction: column;
     justify-content: center;
     flex:1;
-    margin-left:3px;
-    height:77px;
+    margin-left: 0.06rem;
+    height: 1.54rem;
     background:#0082c8;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
+    -webkit-border-radius:0.06rem;
+    -moz-border-radius:0.06rem;
+    border-radius:0.06rem;
     opacity:0.8;
 }
 .bet_center{
-    margin-top:40px;
+    margin-top: 0.8rem;
     composes:pr from '../css/base_mobile.css';
 }
 .input_money_box{
     display: flex;
     justify-content: center;
-    margin:0 50px;
-    height:42px;
-    line-height:42px;
+    margin:0 5px;
+    height: 0.84rem;
+    line-height: 0.84rem;
 }
 .input_money_box p{
-    min-width:40px;
+    min-width: 0.8rem;
 }
 .input_money{
     flex: 3;
@@ -88,7 +88,7 @@
     background:url('../../src/images/cai3-bg@2x.png');
     -webkit-background-size:0.5rem;
     background-size:0.5rem;
-    border:1px solid #FFF;
+    border: 0.01rem solid #FFF;
     color:#FFF;
     composes: pl24 pr24 from '../css/base_mobile.css';
 }

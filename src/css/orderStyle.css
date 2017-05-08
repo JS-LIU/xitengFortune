@@ -15,7 +15,7 @@
     flex-direction: row;
     justify-content: space-between;
     height:1.69rem;
-    border-top:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
     line-height:2.2rem;
     background:#FFF;
     font-size:0.24rem;

@@ -88,7 +88,7 @@
     color:#F23030;
 }
 .onePiece_detail_purchaseGame_isJoin{
-    border-top:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
     font-size:0.24rem;
 }
 .onePiece_detail_purchaseGame_isJoin_no{
@@ -103,7 +103,7 @@
 }
 .onePiece_detail_bidDetail_pruchaseGame_info{
     padding:0.2rem 0;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.1rem solid #E3E3E3;
 }
 .onePiece_detail_bidDetail_pruchaseGame_info_left{
     display: flex;
@@ -166,7 +166,7 @@
 }
 .onePiece_detail_other_function_join_detail a,
 .onePiece_detail_other_function_old_activities a{
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.01rem solid #E3E3E3;
 }
 .onePiece_detail_footer{
     position:fixed;

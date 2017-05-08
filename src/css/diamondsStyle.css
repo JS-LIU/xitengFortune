@@ -22,16 +22,16 @@
     width:calc(33% - 0.27rem);
     margin: 0.3rem 0.24rem 0 0;
     background-size:cover;
-    border:1px solid #E2E2E2;
+    border:0.01rem solid #E3E3E3;
     min-height:1.26rem;
     background:url('/src/images/common_diamonds_package_bg_n@2x.png') no-repeat center;
     -webkit-background-size:cover;
     border-radius: 0.05rem;
 }
 .diamond_bg{
-    border:1px solid #E2E2E2;
+    border:0.01rem solid #E3E3E3;
     width:calc(33% - 17px);
-    min-height:100px;
+    min-height: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,34 +56,34 @@
     font-size:0.26rem;
 }
 .price{
-    line-height: 40px;
-    height:40px;
+    line-height: 0.8rem;
+    height:0.8rem;
     overflow: hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
 }
 .tag{
-    padding:1px 2px;
+    padding:0.02rem 0.04rem;
     background:#FF4242;
-    -webkit-border-radius:2px;
-    -moz-border-radius:2px;
-    border-radius:2px;
+    -webkit-border-radius:0.04rem;
+    -moz-border-radius:0.04rem;
+    border-radius:0.04rem;
 }
 .buy_btn{
     margin:0 auto ;
-    width:75px;
-    padding:1px 6px;
-    -webkit-border-radius:16px;
-    -moz-border-radius:16px;
-    border-radius:16px;
-    border:1px solid #FF4242;
+    width: 1.5rem;
+    padding:0.02rem 0.12rem;
+    -webkit-border-radius:0.32rem;
+    -moz-border-radius:0.32rem;
+    border-radius:0.32rem;
+    border:0.01rem solid #FF4242;
 }
 .buy_diamonds_btn{
     margin:1.1rem 0.3rem;
-    border-radius: 3px;
+    border-radius: 0.06rem;
     background:#4964EF;
-    line-height:44px;
-    height:44px;
+    line-height:0.88rem;
+    height:0.88rem;
     composes:tc from '../css/base_mobile.css';
 }
 .buy_diamonds_text{
@@ -91,10 +91,10 @@
     composes:f32 from '../css/base_mobile.css';
 }
 .diamonds_selected{
-    border:1px solid #FF4242;
+    border:0.01rem solid #FF4242;
 }
 .buyDiaPage{
-    height: 100vh;
+    height: 2rem;
     background: #F5F5F5;
     overflow: hidden;
 }

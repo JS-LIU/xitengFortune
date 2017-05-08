@@ -20,7 +20,7 @@
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-    border-top:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
     height: 1.9rem;
     background:#FFF;
     composes: pl24 from '../css/base_mobile.css';
@@ -39,8 +39,8 @@
     line-height: 0.88rem;
     font-size: 0.32rem;
     color:#333;
-    border-top:0.01rem solid #e3e3e3;
-    border-bottom:0.01rem solid #e3e3e3;
+    border-top:0.01rem solid #E3E3E3;
+    border-bottom:0.01rem solid #E3E3E3;
     padding-left: 0.24rem;
     margin-top: 0.3rem;
     background:#fff;
@@ -53,8 +53,8 @@
     display:flex;
     height:0.68rem;
     line-height: 0.68rem;
-    border-bottom: 0.01rem solid #E2E2E2;
-    border-top:0.01rem solid #E2E2E2;
+    border-bottom: 0.01rem solid #E3E3E3;
+    border-top:0.01rem solid #E3E3E3;
     background:#FFF;
     composes: f26 pl24 from '../css/base_mobile.css';
 }
@@ -132,14 +132,14 @@
     bottom:0;
     z-index: 9;
     height: 0.98rem;
-    border-top: 0.01rem solid #E2E2E2;
+    border-top: 0.01rem solid #E3E3E3;
     composes: w from '../Util/base.css';
 }
 .shop_service_phone,
 .shop_product_cart{
     display: flex;
     flex: 1;
-    border-right: 0.01rem solid #E2E2E2;
+    border-right: 0.01rem solid #E3E3E3;
 }
 .shop_service_phone_icon{
     background:#FFF url('../../src/images/iconfont-dianhua@2x.png') no-repeat center 5px;

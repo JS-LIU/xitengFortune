@@ -3,7 +3,7 @@
 }
 .discover_body{
     top:0;
-    bottom:50px;
+    bottom:1rem;
     composes:f5f5f5;
     composes: po w from '../css/base_mobile.css';
 }

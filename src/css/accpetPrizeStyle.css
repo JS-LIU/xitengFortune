@@ -1,6 +1,6 @@
 .accept_prize{
-    border-top:1px solid #E2E2E2;
-    border-bottom:1px solid #E2E2E2;
+    border-top: 0.01rem solid #E3E3E3;
+    border-bottom:0.01rem solid #E3E3E3;
     background:#FFF;
     margin-top:0.3rem;
 }
@@ -16,7 +16,7 @@
 }
 .accept_prize_product{
     padding:0.3rem;
-    border-top:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
     display: flex;
     flex-direction: row;
 }
@@ -26,7 +26,7 @@
     -webkit-border-radius:0.03rem;
     -moz-border-radius:0.03rem;
     border-radius:0.03rem;
-    border:1px solid #E2E2E2;
+    border:1px solid #E3E3E3;
     overflow: hidden;
 }
 .accept_prize_product_info{
@@ -41,8 +41,10 @@
     color:#333;
 }
 .accept_prize_btn{
-    margin:40px 15px;
-    border-radius: 3px;
+    margin:0.8rem 0.3rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
     background:#4946EF;
     line-height:0.8rem;
     height:0.8rem;
