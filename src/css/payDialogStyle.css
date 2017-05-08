@@ -40,6 +40,12 @@
     border-bottom: 0.01rem solid #E3E3E3;
     composes:tc from '../css/base_mobile.css';
 }
+.payDialog_body_money_icon{
+
+}
+.payDialog_body_money_num{
+    padding-left: 0.1rem;
+}
 .payDialog_payWay{
     height: 0.9rem;
     line-height: 0.9rem;
@@ -48,10 +54,10 @@
     border-bottom: 0.01rem solid #E3E3E3;
 }
 .payDialog_payWay_icon{
-    width: 0.34rem;
-    height: 0.34rem;
+    width: 0.45rem;
+    height: 0.45rem;
     float: left;
-    margin-top: 0.26rem;
+    margin-top: 0.2rem;
 }
 .payDialog_payWay_way{
     padding-left: 0.2rem;

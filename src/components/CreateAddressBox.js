@@ -5,7 +5,6 @@ var React = require('react');
 var {Link} = require('react-router');
 
 import createAddressStyle from '../css/createAddressStyle.css';
-import createAddressBoxStyle from '../css/createAddressBoxStyle.css';
 
 var CreateAddressBox = React.createClass({
     getProvinces:function(){

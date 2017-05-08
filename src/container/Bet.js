@@ -70,7 +70,7 @@ var Bet = React.createClass({
                         <PayDialogHeader title = {'支付'}/>
                         <PayDialogBody >
                             <PayMoney money = {{text:'投注',total:this.props.betInfo.betMoney,icon:'src/images/icon_xitengbi-canyu@2x.png'}}/>
-                            <PayWay link = {{url:'/Bet',text:'喜币账户余额支付',icon:'src/images/xt_coins_2.png'}}/>
+                            <PayWay link = {{url:'/Bet',text:'喜币账户余额支付',icon:'src/images/payment-popup_xibi@2x.png'}}/>
                         </PayDialogBody>
 
                         <div className = {payDialogStyle.paySure} onClick={this.bet}><p className = {payDialogStyle.paySure_btn}>确认</p></div>

@@ -51,8 +51,8 @@ const PayMoney = React.createClass({
             <div>
                 <p className ={payDialogStyle.payDialog_body_title}>{this.props.money.text}</p>
                 <p className ={payDialogStyle.payDialog_body_money}>
-                    <img src={this.props.money.icon} alt=""/>
-                    <span>{this.props.money.total}</span>
+                    <img className={payDialogStyle.payDialog_body_money_icon} src={this.props.money.icon} alt=""/>
+                    <span className={payDialogStyle.payDialog_body_money_num}>{this.props.money.total}</span>
                 </p>
             </div>
         )
