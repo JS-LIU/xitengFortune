@@ -20,6 +20,7 @@ import {dialogActions} from '../redux/actions/dialogActions';
 import {accountActions} from '../redux/actions/accountActions';
 import {stockGameDetailActions} from '../redux/actions/stockGameDetailActions'
 import {orderActions} from '../redux/actions/orderActions';
+import {payDialogActions} from '../redux/actions/payDialogActions';
 
 var Bet = React.createClass({
 
@@ -32,6 +33,11 @@ var Bet = React.createClass({
     },
     showBetDialog:function(){
         this.props.betActionKeys.showBetDialog();
+    },
+    bet:function(){
+        console.log('im bet');
+        this.props.payDialogActionKeys.hidePayDialog();
+        this.props.orderActionKeys.createOrder('/guessGame');
     },
     render: function () {
         return (
@@ -67,13 +73,19 @@ var Bet = React.createClass({
                 {/* 支付弹出窗口 */}
                 {this.props.payDialog.isShowDialog?
                     <PayDialog>
-                        <PayDialogHeader title = {'支付'}/>
+                        <PayDialogHeader
+                            title = {'支付'}
+                            payDialogActionKeys = {this.props.payDialogActionKeys}/>
                         <PayDialogBody >
-                            <PayMoney money = {{text:'投注',total:this.props.betInfo.betMoney,icon:'src/images/icon_xitengbi-canyu@2x.png'}}/>
-                            <PayWay link = {{url:'/Bet',text:'喜币账户余额支付',icon:'src/images/payment-popup_xibi@2x.png'}}/>
+                            <PayMoney
+                                money = {{text:'投注',total:this.props.betInfo.betMoney,icon:'src/images/icon_xitengbi-canyu@2x.png'}}/>
+                            <PayWay
+                                link = {{url:'/Bet',text:'喜币账户余额支付',icon:'src/images/payment-popup_xibi@2x.png'}}/>
                         </PayDialogBody>
 
-                        <div className = {payDialogStyle.paySure} onClick={this.bet}><p className = {payDialogStyle.paySure_btn}>确认</p></div>
+                        <div className = {payDialogStyle.paySure} onClick={this.bet}>
+                            <p className = {payDialogStyle.paySure_btn}>确认</p>
+                        </div>
                     </PayDialog>:""}
 
 
@@ -165,7 +177,8 @@ function mapDispatchToProps(dispatch){
         showDialogActionKeys:bindActionCreators(dialogActions,dispatch),
         accountActionKeys : bindActionCreators(accountActions,dispatch),
         stockGameDetailActionKeys:bindActionCreators(stockGameDetailActions,dispatch),
-        orderActionKeys:bindActionCreators(orderActions,dispatch)
+        orderActionKeys:bindActionCreators(orderActions,dispatch),
+        payDialogActionKeys:bindActionCreators(payDialogActions,dispatch)
     }
 }
 

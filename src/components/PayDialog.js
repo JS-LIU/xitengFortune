@@ -18,14 +18,17 @@ const PayDialog = React.createClass({
             </div>
         )
     }
-})
+});
 
 const PayDialogHeader  = React.createClass({
 
+    hideDialog:function(){
+        this.props.payDialogActionKeys.hidePayDialog();
+    },
     render: function () {
         return (
             <div className = {payDialogStyle.payDialog_head}>
-                <div className ={payDialogStyle.payDialog_head_close} onClick={this.props.hideDialog}>x</div>
+                <div className ={payDialogStyle.payDialog_head_close} onClick={this.hideDialog}>x</div>
                 <p>{this.props.title}</p>
             </div>
         )

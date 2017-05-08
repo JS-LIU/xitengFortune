@@ -15,7 +15,7 @@ export const payDialog = function (state = {},action) {
                 certain:data.certain
             });
 
-        case 'HIDE_DIALOG':
+        case 'HIDE_PAY_DIALOG':
             return Object.assign({},state,{
                 isShowDialog:false
             });

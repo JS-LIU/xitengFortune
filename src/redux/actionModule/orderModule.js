@@ -100,7 +100,7 @@ order.orderListInfo = function(products) {
 
 
 
-order.createOrder = buyDiamondsOrder.after(exchangeProductsOrder);
+order.createOrder = buyDiamondsOrder.after(exchangeProductsOrder).after(guessGame);
 
 module.exports = order;
 
