@@ -94,7 +94,7 @@ const BetHeader = React.createClass({
             <div className={betStyle.bet_header}>
                 <span>{this.props.stockGameDetail.detail.stockGameName}</span>
                 <span className={betStyle.bet_header_stage}>{this.props.stockGameDetail.detail.stage}期</span>
-                <span className={this.props.storage.guessType?betStyle.cgreen:betStyle.cred}>{this.props.storage.guessType?"猜跌":"猜涨"}</span>
+                <span className={this.props.storage.guessType?betStyle.drop:betStyle.rise}>{this.props.storage.guessType?"猜跌":"猜涨"}</span>
             </div>
         )
     }
@@ -119,20 +119,20 @@ const BetCenter = React.createClass({
                            value={this.props.betInfo.betMoney}
                            ref="xbMoney"
                     />
-                    <p className={betStyle.cfff}>喜币</p>
+                    <p className={betStyle.input_money_unit}>喜币</p>
                 </li>
                 <li className={betStyle.selected_box}>
                     <div className={betStyle.selected_money} onClick={this.setMoney('100')}>
-                        <p>100</p>
-                        <p>喜币</p>
+                        <p className={betStyle.selected_money_num}>100</p>
+                        <p className={betStyle.selected_money_unit_item}>喜币（ ）</p>
                     </div>
                     <div className={betStyle.selected_money} onClick={this.setMoney('1000')}>
-                        <p>1000</p>
-                        <p>喜币</p>
+                        <p className={betStyle.selected_money_num}>1000</p>
+                        <p className={betStyle.selected_money_unit_item}>喜币（ ）</p>
                     </div>
                     <div className={betStyle.selected_money_last} onClick={this.setMoney('10000')}>
-                        <p>10000</p>
-                        <p>喜币</p>
+                        <p className={betStyle.selected_money_num}>10000</p>
+                        <p className={betStyle.selected_money_unit_item}>喜币（ ）</p>
                     </div>
                 </li>
                 <li className={betStyle.balance_box}>

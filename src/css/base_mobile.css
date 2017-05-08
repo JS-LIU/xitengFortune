@@ -109,6 +109,9 @@ a{
 .f32{
     font-size:0.32rem;
 }
+.f36{
+    font-size:0.36rem;
+}
 .fb{font-weight:bold;}
 .fn{font-weight:normal;}
 .t2{text-indent:2em;}
