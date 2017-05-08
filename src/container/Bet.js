@@ -1,16 +1,17 @@
 /**
  * Created by LDQ on 2016/9/21.
  */
-var React = require('react');
-var $ = require('jquery');
-var { bindActionCreators } = require('redux');
-var { connect } = require('react-redux');
-var { Link } = require('react-router');
-var { Header,BackBtn,Title } = require('../components/Header');
-var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
-const {PayDialogHeader,PayDialogBody,PayMoney,PayWay} = require('../components/PayDialog');
+const React = require('react');
+const $ = require('jquery');
+const { bindActionCreators } = require('redux');
+const { connect } = require('react-redux');
+const { Link } = require('react-router');
+const { Header,BackBtn,Title } = require('../components/Header');
+const {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
+const {PayDialogHeader,PayDialogBody,PayMoney,PayWay,PayDialog} = require('../components/PayDialog');
 
 import betStyle from '../css/betStyle.css';
+import payDialogStyle from '../css/payDialogStyle.css';
 
 import {storageActions} from '../redux/actions/storageActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
@@ -65,16 +66,15 @@ var Bet = React.createClass({
 
                 {/* 支付弹出窗口 */}
                 {this.props.payDialog.isShowDialog?
-                    <DialogiOS>
+                    <PayDialog>
                         <PayDialogHeader title = {'支付'}/>
-
                         <PayDialogBody >
-                            <PayMoney money = {{text:'投注',total:this.props.betInfo.betMoney}}/>
-                            <PayWay link = {{url:'/Bet',text:'喜币账户余额支付'}}/>
+                            <PayMoney money = {{text:'投注',total:this.props.betInfo.betMoney,icon:'src/images/icon_xitengbi-canyu@2x.png'}}/>
+                            <PayWay link = {{url:'/Bet',text:'喜币账户余额支付',icon:'src/images/xt_coins_2.png'}}/>
                         </PayDialogBody>
 
-                        <div onClick={this.bet}>确认</div>
-                    </DialogiOS>:""}
+                        <div className = {payDialogStyle.paySure} onClick={this.bet}><p className = {payDialogStyle.paySure_btn}>确认</p></div>
+                    </PayDialog>:""}
 
 
                 <div className={betStyle.bet_footer}>

@@ -1,0 +1,72 @@
+.shade{
+    position: fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background: #000000;
+    opacity: 0.7;
+    z-index: 9;
+}
+.payDialog{
+    position: relative;
+    margin:25% 1.04rem;
+    border-radius: 0.3rem;
+    background-color: #fff;
+    z-index: 10;
+}
+.payDialog_head{
+    position: relative;
+    height:0.9rem;
+    line-height: 0.9rem;
+    border-bottom: 0.01rem solid #E3E3E3;
+    composes:f32 tc from '../css/base_mobile.css';
+}
+.payDialog_head_close{
+    position: absolute;
+    padding-left: 0.3rem;
+}
+.payDialog_body{
+    font-size: 0.32rem;
+    padding:0 0.3rem;
+}
+.payDialog_body_title{
+    padding-top:0.36rem;
+    composes:tc from '../css/base_mobile.css';
+}
+.payDialog_body_money{
+    font-size: 0.6rem;
+    padding:0.24rem 0 0.44rem;
+    border-bottom: 0.01rem solid #E3E3E3;
+    composes:tc from '../css/base_mobile.css';
+}
+.payDialog_payWay{
+    height: 0.9rem;
+    line-height: 0.9rem;
+    font-size:0.32rem;
+    padding-left:0.3rem;
+    border-bottom: 0.01rem solid #E3E3E3;
+}
+.payDialog_payWay_icon{
+    width: 0.34rem;
+    height: 0.34rem;
+    float: left;
+    margin-top: 0.26rem;
+}
+.payDialog_payWay_way{
+    padding-left: 0.2rem;
+}
+.paySure{
+    height: 1.21rem;
+    padding-top:0.41rem;
+}
+.paySure_btn{
+    height:0.8rem;
+    line-height: 0.8rem;
+    background: #4964EF;
+    font-size: 0.36rem;
+    color: #ffffff;
+    border-radius: 0.4rem;
+    margin: 0 1.16rem;
+    composes:tc from '../css/base_mobile.css';
+}
