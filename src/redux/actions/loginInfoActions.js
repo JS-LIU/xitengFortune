@@ -91,6 +91,8 @@ export const loginInfoActions = {
         return (dispatch,getState)=>{
             let loginInfo = getState().loginInfo;
             let trimPhoneNum = _h.valid.trimAllBlank(phoneNum + "");
+            console.log("loginInfo---phoneNumLogin-loginActions-==",loginInfo);
+
             let postMD5Data = {
                 accessInfo:loginInfo.postMD5Data(trimPhoneNum)
             };

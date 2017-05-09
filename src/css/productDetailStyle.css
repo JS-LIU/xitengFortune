@@ -47,7 +47,7 @@
     composes:w from '../Util/base.css';
 }
 .detail_product_image{
-    padding-bottom: 0.98rem;
+    padding-bottom: 0.9rem;
 }
 .detail_delivery{
     display:flex;
