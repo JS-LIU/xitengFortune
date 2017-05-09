@@ -20,13 +20,13 @@
     top:35%;
     background:#FFF;
     opacity: 0.96;
-    -webkit-border-radius: 0.6rem;
-    -moz-border-radius: 0.6rem;
-    border-radius: 0.6rem;
+    -webkit-border-radius: 0.2rem;
+    -moz-border-radius: 0.2rem;
+    border-radius: 0.2rem;
     z-index: 10;
 }
 .dialog_header{
-    line-height:25px;
+    line-height:0.5rem;
     composes:tc f24 pt30 from '../css/base_mobile.css';
 }
 .dailog_content{
@@ -37,7 +37,7 @@
     height: 0.88rem;
     border-bottom-left-radius: 0.3rem;
     border-bottom-right-radius: 0.3rem;
-    border-top:1px solid #E3E3E3;
+    border-top:0.01rem solid #E3E3E3;
     overflow: hidden;
 }
 .dialog_btn_color{

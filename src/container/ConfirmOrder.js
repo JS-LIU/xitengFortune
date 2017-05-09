@@ -75,7 +75,7 @@ var CurrentAddress = React.createClass({
                     </div>
                 </div>
                 <div className={confirmOrderStyle.order_user_address}>
-                    <span className="f14">送货地址：</span>
+                    <span className={confirmOrderStyle.order_user_address_detail}>送货地址：</span>
                     <span>{this.props.address.currentAddress.fullAddress}</span>
                 </div>
             </Link>

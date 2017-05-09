@@ -81,7 +81,6 @@
     min-width: 0.8rem;
 }
 .input_money{
-    flex: 3;
     -webkit-border-radius:0.06rem;
     -moz-border-radius:0.06rem;
     border-radius:0.06rem;
@@ -127,9 +126,9 @@
     composes:f36 from '../css/base_mobile.css'
 }
 .selected_money_unit_item{
-    background:url('../../src/images/home-S-currency@2x.png') no-repeat 1.2rem center;
-    -webkit-background-size:0.15rem 0.24rem;
-    background-size:0.15rem 0.24rem;
+    background:url('../../src/images/bet-S-currency-@2x.png') no-repeat 1.2rem center;
+    -webkit-background-size:0.18rem 0.2rem;
+    background-size:0.18rem 0.2rem;
 
 }
 .selected_money_last{
@@ -152,8 +151,8 @@
     composes:tc w from '../css/base_mobile.css';
 }
 .xt_money{
-    background:url('../../src/images/home-S-currency@2x.png') no-repeat left center;
-    -webkit-background-size:0.18rem 0.24rem;
-    background-size:0.18rem 0.24rem;
+    background:url('../../src/images/bet-S-currency-@2x.png') no-repeat left center;
+    -webkit-background-size:0.18rem 0.2rem;
+    background-size:0.18rem 0.2rem;
     padding-left:0.25rem;
 }

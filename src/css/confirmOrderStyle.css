@@ -49,3 +49,6 @@
     display: flex;
     flex-direction: row;
 }
+.order_user_address_detail{
+    composes:f24 pl30 from '../css/base_mobile.css';
+}

@@ -1,14 +1,14 @@
 .entrance{
     margin-top:15px;
-    border-top: 1px solid #E2E2E2;
+    border-top: 0.01rem solid #E3E3E3;
     background:#FFF;
     composes:f32 from '../css/base_mobile.css';
 }
 .entrance_list{
-    height:44px;
-    border-bottom:1px solid #E2E2E2;
-    line-height:44px;
+    height:0.88rem;
+    border-bottom:0.01rem solid #E3E3E3;
+    line-height:0.88rem;
 }
 .entrance_name{
-    padding:12px 0 12px 45px;
+    padding:0.24rem 0 0.24rem 0.9rem;
 }

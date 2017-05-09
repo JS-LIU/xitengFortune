@@ -11,15 +11,15 @@ img{
     padding:0;
 }
 *{
-    margin:0px;
-    padding:0px;
+    margin:0;
+    padding:0;
 }
 .f5f5f5{
     background:#f5f5f5;
 }
 body{
-    margin:0px;
-    padding:0px;
+    margin:0;
+    padding:0;
     overflow-x: hidden;
 }
 /**设置默认字体**/
@@ -44,7 +44,7 @@ a{
     color:rgb(101,101,101);
 }
 img{
-    border:0px;
+    border:0;
 }
 /**重置表格元素**/
 table{
@@ -55,19 +55,19 @@ table{
 
 .clearfix:after{
     display:block;
-    height:0px;
+    height:0;
     clear:both;
     content:".";
     visibility:hidden;
     zoom:1;
 }
 .triangleUp{
-    width:0px;
-    height:0px;
-    border-left: 3px solid transparent;
-    border-right: 3px solid transparent;
-    border-bottom: 6px solid #888888;
-    margin-top: 3px;
+    width:0;
+    height:0;
+    border-left: 0.06rem solid transparent;
+    border-right:0.06rem solid transparent;
+    border-bottom: 0.12rem solid #888888;
+    margin-top: 0.06rem;
 }
 a{
     display:block;
@@ -183,8 +183,8 @@ a{
 
 .css3-vmid{
     position:absolute;
-    top:0px;
-    left:0px;
+    top:0;
+    left:0;
     transform:translate(0px,-50%);
 }
 

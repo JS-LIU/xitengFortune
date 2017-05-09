@@ -26,7 +26,7 @@
     -webkit-border-radius:0.03rem;
     -moz-border-radius:0.03rem;
     border-radius:0.03rem;
-    border:1px solid #E3E3E3;
+    border:0.01rem solid #E3E3E3;
     overflow: hidden;
 }
 .accept_prize_product_info{

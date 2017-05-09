@@ -23,8 +23,8 @@ color:#000;
 }
 .product_pic{
     margin:0.2rem 0.3rem;
-    width:1rem;
-    height:1rem;
+    width:0.6rem;
+    height:0.5rem;
     overflow: hidden;
 }
 .payWay_pic{
@@ -41,11 +41,12 @@ color:#000;
     composes:pl24 f32 from '../css/base_mobile.css';
 }
 .product_name{
-    line-height:0.52rem;
+    margin-top: -0.1rem;
 }
 .product_info{
     border-top:0.01rem solid #E3E3E3;
     border-bottom:0.01rem solid #E3E3E3;
+    padding-bottom: 0.1rem;
     composes:fff;
     composes: clearfix tc from '../css/base_mobile.css';
 }
@@ -57,8 +58,8 @@ color:#000;
 }
 .selected{
     background:#FFF url("../../src/images/btn_choose_s@2x.png") no-repeat 95% center;
-    -webkit-background-size:20px;
-    background-size:20px;
+    -webkit-background-size: 0.4rem;
+    background-size: 0.4rem;
     composes:pr clearfix from '../css/base_mobile.css';
 }
 .pay_btn{
@@ -72,6 +73,8 @@ color:#000;
 }
 
 .realPay{
+    line-height: 0.8rem;
+    margin-right: 0.3rem;
     composes:cred;
     composes:fr from '../css/base_mobile.css';
 }

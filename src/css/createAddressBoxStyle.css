@@ -1,13 +1,13 @@
 .create_address_box{
     margin-top:0.3rem;
-    border-top:1px solid #E2E2E2;
+    border-top:0.01rem solid #E3E3E3;
     background:#FFF;
 }
 .create_address li{
     height:0.88rem;
     padding:0 0.3rem;
     line-height: 0.88rem;
-    border-bottom:1px solid #E2E2E2;
+    border-bottom:0.01rem solid #E3E3E3;
     font-size:0.3rem;
     display: flex;
     flex-direction: row;
