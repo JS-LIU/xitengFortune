@@ -36,6 +36,8 @@ import {settlement} from './settlement';
 import {specification} from './specification';
 import {product} from './product';
 import {payDialog} from './payDialog';
+import {productList} from './productList';
+
 
 const rootReducer = combineReducers({
     account,
@@ -55,6 +57,7 @@ const rootReducer = combineReducers({
     pay,
     product,
     productInfo,
+    productList,
     provinces,
     purchaseGame,
     rank,

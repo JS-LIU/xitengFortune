@@ -3,14 +3,13 @@
  */
 
 
-var React = require('react');
-var $ = require('jquery');
-var { bindActionCreators } = require('redux');
-var { connect } = require('react-redux');
-var {Link} = require('react-router');
-var { Header,BackBtn,Title } = require('../components/Header');
+let React = require('react');
+let { bindActionCreators } = require('redux');
+let { connect } = require('react-redux');
+let {Link} = require('react-router');
+let { Header,BackBtn,Title } = require('../components/Header');
 
-var {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
+let {DialogiOS,DialogHeader,DialogBody,DialogFooter,DialogConfirm,DialogCancel} = require('../components/DialogiOS');
 
 import exchangeXTCoinsStyle from '../css/exchangeXTCoinsStyle.css';
 
@@ -19,11 +18,13 @@ import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
 import {accountActions} from '../redux/actions/accountActions';
 import {XTCoinsActions} from '../redux/actions/XTCoinsActions';
 import {dialogActions} from '../redux/actions/dialogActions';
+import {productListActions} from '../redux/actions/productListActions';
 
-var ExchangeXTCoins = React.createClass({
+const ExchangeXTCoins = React.createClass({
     componentWillMount:function(){
         this.props.showDialogActionKeys.hideDialog();
         this.props.historyUrlsActionKeys.pushUrl('/ExchangeXTCoins');
+        this.props.productListActionKeys.getList('/xtb/list');
     },
     exchangeXTCoins:function(tradeWay){
         return ()=>{
@@ -42,15 +43,6 @@ var ExchangeXTCoins = React.createClass({
 
         return (
             <div>
-                <Header
-                    historyUrls={this.props.historyUrls}
-                    historyUrlsActionKeys={this.props.historyUrlsActionKeys}>
-                    <BackBtn
-                        historyUrlsActionKeys={this.props.historyUrlsActionKeys}
-                        back={{text:'返回',src:'/nav_btn_back@2x.png',link:backUrl}}
-                    />
-                    <Title title={{text:'兑换喜腾币'}}></Title>
-                </Header>
                 <div className={exchangeXTCoinsStyle.buy_XTCoins}>
                     <BuyXTCoins
                         accountActionKeys={this.props.accountActionKeys}
@@ -146,7 +138,8 @@ function mapStatetoProps(state){
         historyUrls:state.historyUrls,
         account:state.account,
         XTCoins:state.XTCoins,
-        showDialog:state.showDialog
+        showDialog:state.showDialog,
+        productList:state.productList
     }
 }
 function mapDispatchToProps(dispatch){
@@ -156,7 +149,8 @@ function mapDispatchToProps(dispatch){
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
         accountActionKeys : bindActionCreators(accountActions,dispatch),
         XTCoinsActionKeys : bindActionCreators(XTCoinsActions,dispatch),
-        showDialogActionKeys:bindActionCreators(dialogActions,dispatch)
+        showDialogActionKeys : bindActionCreators(dialogActions,dispatch),
+        productListActionKeys : bindActionCreators(productListActions,dispatch)
     }
 }
 

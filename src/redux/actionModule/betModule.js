@@ -29,10 +29,10 @@ const moreThanAccount = function(state){
             key:"fail",
             describe:"喜币不足",
             title:"投注失败",
-            body:"喜币余额不足请去购买钻石",
+            body:"你的喜币账户余额不足，请充值",
             certain:{
-                text:"确定",
-                url:"/BuyDiamonds"
+                text:"立即充值",
+                url:"/ExchangeXTCoins"
             },
             cancel:{
                 text:"取消",
