@@ -4,7 +4,7 @@
 import {
     SET_PURCHASEORDER_COUNT,
     GET_NEWEST_WIN_LIST,
-    GET_PRODUCT_LIST,
+    // GET_PRODUCT_LIST,
     GET_SHOW_LIST,
     GET_DETAIL,
     CUT_TYPE,
@@ -27,23 +27,23 @@ export const purchaseGame = function(state = {},action){
             return Object.assign({},state,{
                 newestWin:action.data.content
             });
-        case 'GET_PRODUCT_LIST':
-            var productList = [];
-            if(action.pageNo == 0){
-                productList = action.data.content;
-            }else{
-                productList = state.products.productList.concat(action.data.content);
-            }
-
-            let products = {
-                productList:productList,
-                last:action.data.last,
-                pageNo:action.pageNo
-            };
-
-            return Object.assign({},state,{
-                products:products
-            });
+        // case 'GET_PRODUCT_LIST':
+        //     var productList = [];
+        //     if(action.pageNo == 0){
+        //         productList = action.data.content;
+        //     }else{
+        //         productList = state.products.productList.concat(action.data.content);
+        //     }
+        //
+        //     let products = {
+        //         productList:productList,
+        //         last:action.data.last,
+        //         pageNo:action.pageNo
+        //     };
+        //
+        //     return Object.assign({},state,{
+        //         products:products
+        //     });
         case 'CUT_TYPE':
             let productTypeList = [...state.productType];
 

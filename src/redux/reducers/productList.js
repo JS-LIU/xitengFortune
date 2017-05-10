@@ -9,11 +9,7 @@ export const productList = function (state={},action){
 
         case 'GET_PRODUCT_LIST':
             //  todo 没有写分页
-            return Object.assign({},state,{
-                list:action.productList,
-                last:action.last,
-                pageNo:action.pageNo
-            });
+            return Object.assign({},state,action.info);
 
         default:
             return state
