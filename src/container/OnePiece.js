@@ -8,7 +8,7 @@ let {Link} = require('react-router');
 let $ = require('jquery');
 let { Header,BackBtn,Title } = require('../components/Header');
 let _h = require('../Util/HB');
-
+let Carousel = require('../components/Carousel');
 
 import onePieceStyle from '../css/onePieceStyle.css';
 
@@ -18,6 +18,7 @@ import {activityActions} from '../redux/actions/activityActions';
 import {purchaseGameActions} from '../redux/actions/purchaseGameActions';
 import {storageActions} from '../redux/actions/storageActions';
 import {productListActions} from '../redux/actions/productListActions';
+
 
 const OnePiece = React.createClass({
     componentWillMount:function(){
@@ -70,7 +71,7 @@ const OnePiece = React.createClass({
 });
 
 
-var OnePieceHeader = React.createClass({
+const OnePieceHeader = React.createClass({
     componentWillMount:function(){
         this.props.activityActionKeys.getActivityList({path:"list"},activityList.activityCategory.purchaseGame);
         this.props.purchaseGameActionKeys.getNewestWinList({win:"newestWin"});
@@ -88,36 +89,37 @@ var OnePieceHeader = React.createClass({
         let totalDistance = 0.88 * this.props.purchaseGame.newestWin.length;
         let carouselStyle = {
             bigBox:{
-                height:totalDistance + 'rem'
+                height:'0.88rem',
             },
             smBox:{
-                height:'0.88rem'
+                height:totalDistance + 'rem'
             }
         };
         return (
             <div>
-                {/*<ul className={onePieceStyle.onePiece_header}>*/}
-                    {/*<li>*/}
-                        {/*<Link to={{ pathname: "/OnePieceOldActivitiesHome", query: { status: "finish_bid" } }} >*/}
-                            {/*<div className={onePieceStyle.lottery_results_icon}>揭晓</div>*/}
-                        {/*</Link>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                        {/*<Link to={{ pathname: "/OnePieceShow", query: { isAll: "yes" } }}>*/}
-                            {/*<div className={onePieceStyle.show_prize_icon}>晒单</div>*/}
-                        {/*</Link>*/}
-                    {/*</li>*/}
-                    {/*<li>*/}
-                        {/*<Link to="/OnePieceHelp">*/}
-                            {/*<div className={onePieceStyle.help_icon}>帮助</div>*/}
-                        {/*</Link>*/}
-                    {/*</li>*/}
-                {/*</ul>*/}
+                <ul className={onePieceStyle.onePiece_header}>
+                    <li>
+                        <Link to={{ pathname: "/OnePieceOldActivitiesHome", query: { status: "finish_bid" } }} >
+                            <div className={onePieceStyle.lottery_results_icon}>揭晓</div>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to={{ pathname: "/OnePieceShow", query: { isAll: "yes" } }}>
+                            <div className={onePieceStyle.show_prize_icon}>晒单</div>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/OnePieceHelp">
+                            <div className={onePieceStyle.help_icon}>帮助</div>
+                        </Link>
+                    </li>
+                </ul>
 
-                {/*<ul className={onePieceStyle.purchase_broadcast}>*/}
-                    {/*{winNodes}*/}
-                {/*</ul>*/}
-
+                <Carousel carouselStyle={carouselStyle}
+                          direction="slideUp"
+                          auto={true}>
+                    {winNodes}
+                </Carousel>
             </div>
         )
     }

@@ -1,12 +1,12 @@
 /**
  * Created by LDQ on 2016/8/8.
  */
-var React = require('react');
-var { bindActionCreators } = require('redux');
-var { connect } = require('react-redux');
-var {Link} = require('react-router');
-var Carousel = require('../components/Carousel');
-var StockMarketList = require('./StockMarketList');
+let React = require('react');
+let { bindActionCreators } = require('redux');
+let { connect } = require('react-redux');
+let {Link} = require('react-router');
+let Carousel = require('../components/Carousel');
+let StockMarketList = require('./StockMarketList');
 
 import guessStyle from "../css/guessStyle.css";
 
@@ -34,10 +34,16 @@ var Guess = React.createClass({
 
     },
     render: function () {
-
+        let imgNodes = this.props.activity.list.map((item,index)=>{
+            return (
+                <li className={guessStyle.carousel_item} key={index}>
+                    <img src={item.picUrl} alt="" className="w"/>
+                </li>
+            )
+        });
         let window_w = document.body.clientWidth;
         let totalDistance = window_w * this.props.activity.list.length;
-        var carouselStyle = {
+        let carouselStyle = {
             bigBox:{
                 width:window_w+"px",
                 height:'2.8rem'
@@ -49,11 +55,12 @@ var Guess = React.createClass({
         return (
             <div className={guessStyle.common_bg}>
                 <Carousel
-                    pictures={this.props.activity.list}
                     carouselStyle={carouselStyle}
                     direction="slideLeft"
                     auto={true}
-                />
+                >
+                    {imgNodes}
+                </Carousel>
                 <StockMarketList />
                 <BetList
                     betListActionKeys={this.props.betListActionKeys}

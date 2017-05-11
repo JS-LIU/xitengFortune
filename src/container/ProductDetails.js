@@ -2,13 +2,13 @@
  * Created by LDQ on 2016/8/16.
  */
 
-var React = require('react');
-var { bindActionCreators } = require('redux');
-var { connect } = require('react-redux');
-var {Link} = require('react-router');
-var $ = require('jquery');
-var { Header,BackBtn,Title } = require('../components/Header');
-var Carousel = require('../components/Carousel');
+let React = require('react');
+let { bindActionCreators } = require('redux');
+let { connect } = require('react-redux');
+let {Link} = require('react-router');
+let $ = require('jquery');
+let { Header,BackBtn,Title } = require('../components/Header');
+let Carousel = require('../components/Carousel');
 
 import productDetailStyle from '../css/productDetailStyle.css';
 
@@ -38,14 +38,23 @@ const ProductDetails = React.createClass({
                 width:totalDistance + "px"
             }
         };
+        let imgNodes = productInfo.pictures.map((item,index)=>{
+            return (
+                <li className={productDetailStyle.carousel_item} key={index}>
+                    <img src={item.picUrl} alt="" className="w"/>
+                </li>
+            )
+        });
         return (
             <div>
                 <Carousel
-                    pictures={productInfo.pictures}
+                    // pictures={productInfo.pictures}
                     carouselStyle={carouselStyle}
                     direction="slideLeft"
                     auto={true}
-                />
+                >
+                    {imgNodes}
+                </Carousel>
                 <div className={productDetailStyle.detail_product_info}>
                     <p className={productDetailStyle.detail_product_info_name}>商品名称：{productInfo.productName}</p>
                     <p className={productDetailStyle.detail_product_info_detail}>{productInfo.detail}</p>

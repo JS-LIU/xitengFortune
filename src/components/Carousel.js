@@ -10,13 +10,24 @@ var Carousel = React.createClass({
 
     timer:{},
     getInitialState:function(){
-        return {
-            smBox:carouselStyleRow
+        console.log(this.props.direction);
+        if(this.props.direction === "slideLeft" || this.props.direction === "slideRight"){
+            return {
+                smBox:carouselStyleRow
+            }
+        }else{
+            return {
+                smBox:carouselStyleColumn
+            }
         }
+
     },
     componentWillReceiveProps:function(nextProps){
+        let smBox;
         if(nextProps.direction === "slideLeft" || nextProps.direction === "slideRight"){
-            var smBox = Object.assign({},carouselStyleRow,nextProps.carouselStyle.smBox);
+            smBox = Object.assign({},carouselStyleRow,nextProps.carouselStyle.smBox);
+        }else{
+            smBox = Object.assign({},carouselStyleColumn,nextProps.carouselStyle.smBox);
         }
         this.setState({
             smBox:smBox
@@ -24,6 +35,7 @@ var Carousel = React.createClass({
     },
     componentDidMount:function () {
         var slideX = parseFloat(this.props.carouselStyle.bigBox.width);
+        let slideY = parseFloat(this.props.carouselStyle.bigBox.height);
         _h.slide('left',()=>{
             var x = parseFloat(_h.CSS3.toArray(this.state.smBox.transform));
             x -= slideX;
@@ -35,39 +47,55 @@ var Carousel = React.createClass({
                 smBox:this.state.smBox
             })
         });
-        var x = 0;
+        let x = 0,y = 0;
+        if(this.props.direction === "slideLeft" || this.props.direction === "slideRight"){
+            this.timer = setInterval(()=>{
+                x -= slideX;
+                if(-x === parseFloat(this.state.smBox.width)){
+                    x = 0;
+                }
+                let smBox = Object.assign({},this.state.smBox,{
+                    transform:"translate3d("+x+"px, 0px, 0px)"
+                });
 
-        this.timer = setInterval(()=>{
-            x -= slideX;
-            if(-x === parseFloat(this.state.smBox.width)){
-                x = 0;
-            }
-            var smBox = Object.assign({},this.state.smBox,{
-                transform:"translate3d("+x+"px, 0px, 0px)"
-            });
+                this.setState({
+                    smBox:smBox
+                })
+            },5000);
+        }else{
+            this.timer = setInterval(()=>{
+                y -= slideY;
+                if(-y === parseFloat(this.state.smBox.height)){
+                    y = 0;
+                }
+                let smBox = Object.assign({},this.state.smBox,{
+                    transform:"translate3d(0px, "+y+"rem, 0px)"
+                });
 
-            this.setState({
-                smBox:smBox
-            })
-        },5000);
+                this.setState({
+                    smBox:smBox
+                })
+            },5000);
+        }
+
     },
     componentWillUnmount:function(){
         clearInterval(this.timer);
     },
     render: function () {
-        let imgNodes = this.props.pictures.map((item,index)=>{
-            return (
-                <li className={carousel.carousel_item} key={index}>
-                    <img src={item.picUrl} alt="" className="w"/>
-                </li>
-            )
-        });
+        // let imgNodes = this.props.pictures.map((item,index)=>{
+        //     return (
+        //         <li className={carousel.carousel_item} key={index}>
+        //             <img src={item.picUrl} alt="" className="w"/>
+        //         </li>
+        //     )
+        // });
         return (
             <div
                 className={carousel.carousel_box }
                 style={this.props.carouselStyle.bigBox}>
                 <ul style={this.state.smBox}>
-                    {imgNodes}
+                    {this.props.children}
                 </ul>
 
             </div>
@@ -80,6 +108,12 @@ module.exports = Carousel;
 var carouselStyleRow = {
     display:"flex",
     flexDirection:"row",
+    transitionDuration: "300ms",
+    transform: "translate3d(0px, 0px, 0px)"
+};
+var carouselStyleColumn = {
+    display:"flex",
+    flexDirection:"column",
     transitionDuration: "300ms",
     transform: "translate3d(0px, 0px, 0px)"
 };
