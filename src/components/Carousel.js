@@ -15,7 +15,7 @@ var Carousel = React.createClass({
         }
     },
     componentWillReceiveProps:function(nextProps){
-        if(nextProps.direction == "slideLeft" || nextProps.direction == "slideRight"){
+        if(nextProps.direction === "slideLeft" || nextProps.direction === "slideRight"){
             var smBox = Object.assign({},carouselStyleRow,nextProps.carouselStyle.smBox);
         }
         this.setState({
@@ -27,7 +27,7 @@ var Carousel = React.createClass({
         _h.slide('left',()=>{
             var x = parseFloat(_h.CSS3.toArray(this.state.smBox.transform));
             x -= slideX;
-            if(-x == parseFloat(this.state.smBox.width)){
+            if(-x === parseFloat(this.state.smBox.width)){
                 x = 0;
             }
             this.state.smBox.transform="translate3d("+x+"px, 0px, 0px)";
@@ -36,7 +36,7 @@ var Carousel = React.createClass({
             })
         });
         var x = 0;
-        var slideX = parseFloat(this.props.carouselStyle.bigBox.width);
+
         this.timer = setInterval(()=>{
             x -= slideX;
             if(-x === parseFloat(this.state.smBox.width)){
@@ -64,7 +64,6 @@ var Carousel = React.createClass({
         });
         return (
             <div
-                ref="myRef"
                 className={carousel.carousel_box }
                 style={this.props.carouselStyle.bigBox}>
                 <ul style={this.state.smBox}>

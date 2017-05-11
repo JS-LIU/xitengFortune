@@ -13,6 +13,7 @@ import {
     GET_OPEN,
     BID
 } from './purchaseGameActionKeys';
+import { GET_PRODUCT_LIST } from './productListActionKeys';
 import _h from '../../Util/HB';
 
 export var purchaseGameActions = {
@@ -33,30 +34,32 @@ export var purchaseGameActions = {
                 })
         }
     },
-    getProductList:(path,query={popularity:-1},pageNo=0,size=5)=>{
-        return (dispatch,getState)=>{
-            let loginInfo = getState().loginInfo;
-
-            let postData = {
-                accessInfo:loginInfo.baseLoginData,
-                popularity:"",
-                productName:"",
-                price:"",
-                rateOfProgress:"",
-                size:size,
-                pageNo:pageNo
-            };
-            postData = Object.assign({},postData,query);
-
-            _h.ajax.resource('/purchaseGame/:productList').save(path,postData)
-                .then((data)=>{
-                    dispatch({type:'GET_PRODUCT_LIST', data,pageNo})
-                })
-                .catch((error)=>{
-                    console.log("error",error);
-                })
-        }
-    },
+    // getProductList:(path,pageNo=0,sort)=>{
+    //     return (dispatch,getState)=>{
+    //
+    //         let loginInfo = getState().loginInfo;
+    //
+    //         let postData = {
+    //             accessInfo:loginInfo.baseLoginData,
+    //             popularity:"",
+    //             productName:"",
+    //             price:"",
+    //             rateOfProgress:"",
+    //             size:size,
+    //             pageNo:pageNo
+    //         };
+    //         postData = Object.assign({},postData,query);
+    //
+    //         _h.ajax.resource('/purchaseGame/:productList').save(path,postData)
+    //             .then((data)=>{
+    //                 dispatch({type:'GET_PRODUCT_LIST', data,pageNo})
+    //             })
+    //             .catch((error)=>{
+    //                 console.log("error",error);
+    //             })
+    //
+    //     }
+    // },
     cutType:(item)=>{
         return {
             type: CUT_TYPE,

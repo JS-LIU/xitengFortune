@@ -3,11 +3,6 @@
  */
 export const purchaseGameInit = {
     newestWin:[],
-    products:{
-        productList:[],
-        last:false,
-        pageNo:0
-    },
     productType:[
         {
             query:{

@@ -7,25 +7,32 @@ import _h from '../../Util/HB';
 const productList = {
     getList:{},
     sort:{
-        popularity:1,
+        popularity:"",
         productName:"",
-        price:-1,
-        rateOfProgress:1
+        price:"",
+        rateOfProgress:""
     }
 };
 
 const productListOperator = function(productListInfo,newListInfo){
 
-    newListInfo.pageNo = newListInfo.pageNo || 0;
-    newListInfo.last = newListInfo.last || true;
-    if(newListInfo.pageNo === 0){
+    //  当前页数
+    productListInfo.pageNo = newListInfo.number || 0;
+
+    //  是否是最后一页
+    if(typeof newListInfo.last === "undefined"){
+        productListInfo.last = true;
+    }else{
+        productListInfo.last = newListInfo.last;
+    }
+
+    if(productListInfo.pageNo === 0){
         productListInfo.list = newListInfo.content;
     }else{
         productListInfo.list.concat(newListInfo.content);
     }
 
-    productListInfo.last = newListInfo.last;
-    productListInfo.pageNo = newListInfo.pageNo;
+    console.log("productListInfo============",productListInfo);
     return productListInfo;
 };
 
@@ -60,9 +67,14 @@ const purchaseGameProductList = function(path,state,pageNo,sort = {}){
             pageNo:pageNo,
             size:10,
         });
-        console.log(postData);
+
         let productListInfo = Object.assign({},state.productList);
-        return _h.ajax.resource(path).save({},postData)
+        return _h.ajax.resource(path).save({},postData).then((listInfo)=>{
+            let info = productListOperator(productListInfo,listInfo);
+            return new Promise((resolve,reject)=>{
+                resolve(info)
+            })
+        });
     }else{
         return "nextSuccessor";
     }

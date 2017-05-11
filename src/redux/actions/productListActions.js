@@ -6,10 +6,9 @@ import { GET_PRODUCT_LIST } from './productListActionKeys';
 import _productList from '../actionModule/productListModule';
 
 export const productListActions = {
-    getList:(path,pageNo=0)=>{
+    getList:(path,pageNo=0,sort = {})=>{
         return (dispatch,getState)=>{
-            _productList.getList(path,getState(),pageNo).then((info)=>{
-                console.log(info);
+            _productList.getList(path,getState(),pageNo,sort).then((info)=>{
                 dispatch({type:'GET_PRODUCT_LIST', info})
             });
 
