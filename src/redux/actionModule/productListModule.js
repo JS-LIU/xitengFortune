@@ -11,7 +11,16 @@ const productList = {
         productName:"",
         price:"",
         rateOfProgress:""
-    }
+    },
+    '':XBList,
+
+
+
+
+
+
+
+
 };
 
 const productListOperator = function(productListInfo,newListInfo){
@@ -32,7 +41,6 @@ const productListOperator = function(productListInfo,newListInfo){
         productListInfo.list.concat(newListInfo.content);
     }
 
-    console.log("productListInfo============",productListInfo);
     return productListInfo;
 };
 
@@ -44,14 +52,12 @@ const XBList = function(path,state,pageNo){
             size:10
         };
         let productListInfo = Object.assign({},state.productList);
-        return _h.ajax.resource(path)
-            .save({},postData)
-            .then((listInfo)=>{
-                let info = productListOperator(productListInfo,listInfo);
-                return new Promise((resolve,reject)=>{
-                    resolve(info)
-                })
-            });
+        return _h.ajax.resource(path).save({},postData).then((listInfo)=>{
+            let info = productListOperator(productListInfo,listInfo);
+            return new Promise((resolve,reject)=>{
+                resolve(info)
+            })
+        });
     }else{
         return "nextSuccessor";
     }
@@ -84,6 +90,38 @@ const purchaseGameProductList = function(path,state,pageNo,sort = {}){
 const diamondList = function(path,state,pageNo){
 
 };
+
+
+
+let strategies = {
+    'XBList':function(state,pageNo){
+        let postData = {
+            accessInfo:state.loginInfo.baseLoginData,
+            pageNo:pageNo,
+            size:10
+        };
+        let productListInfo = Object.assign({},state.productList);
+        return _h.ajax.resource(path).save({},postData).then((listInfo)=>{
+            let info = productListOperator(productListInfo,listInfo);
+            return new Promise((resolve,reject)=>{
+                resolve(info)
+            })
+        });
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 productList.getList = XBList.after(purchaseGameProductList);
 

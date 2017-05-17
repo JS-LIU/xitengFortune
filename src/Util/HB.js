@@ -226,7 +226,7 @@ HB.ui = (function(){
             var $_scrollTop = $(this).scrollTop();
             var $_scrollHeight = $(document).height();
             var $_windowHeight = $(this).height();
-            if($_scrollTop + $_windowHeight == $_scrollHeight){
+            if($_scrollTop + $_windowHeight === $_scrollHeight){
                 func();
             }
         });
@@ -248,10 +248,14 @@ HB.ui = (function(){
         head.appendChild(st);
         return defaultFontSize
     };
+    const parseRem = function(px){
+        return px / 100;
+    };
 
     return {
         scrollToTheBottom:scrollToTheBottom,
-        setBaseFontSize:setBaseFontSize
+        setBaseFontSize:setBaseFontSize,
+        parseRem:parseRem
     }
 })();
 
@@ -459,8 +463,9 @@ HB.design = (function(){
     }
 
 
+
     return {
-        Chain:Chain
+        Chain:Chain,
     }
 
 })();

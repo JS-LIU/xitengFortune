@@ -1,12 +1,12 @@
 /**
  * Created by LDQ on 2016/10/17.
  */
-var React = require('react');
-var $ = require('jquery');
+let React = require('react');
+let $ = require('jquery');
 import carousel from '../css/carousel.css';
 import _h from '../Util/HB';
 
-var Carousel = React.createClass({
+const Carousel = React.createClass({
 
     timer:{},
     getInitialState:function(){
@@ -34,7 +34,8 @@ var Carousel = React.createClass({
         });
     },
     componentDidMount:function () {
-        var slideX = parseFloat(this.props.carouselStyle.bigBox.width);
+
+        let slideX = parseFloat(this.props.carouselStyle.bigBox.width);
         let slideY = parseFloat(this.props.carouselStyle.bigBox.height);
         _h.slide('left',()=>{
             var x = parseFloat(_h.CSS3.toArray(this.state.smBox.transform));
@@ -42,7 +43,7 @@ var Carousel = React.createClass({
             if(-x === parseFloat(this.state.smBox.width)){
                 x = 0;
             }
-            this.state.smBox.transform="translate3d("+x+"px, 0px, 0px)";
+            this.state.smBox.transform="translate3d("+x+"px, 0rem, 0rem)";
             this.setState({
                 smBox:this.state.smBox
             })
@@ -55,7 +56,7 @@ var Carousel = React.createClass({
                     x = 0;
                 }
                 let smBox = Object.assign({},this.state.smBox,{
-                    transform:"translate3d("+x+"px, 0px, 0px)"
+                    transform:"translate3d("+x+"px, 0rem, 0rem)"
                 });
 
                 this.setState({
@@ -77,19 +78,11 @@ var Carousel = React.createClass({
                 })
             },5000);
         }
-
     },
     componentWillUnmount:function(){
         clearInterval(this.timer);
     },
     render: function () {
-        // let imgNodes = this.props.pictures.map((item,index)=>{
-        //     return (
-        //         <li className={carousel.carousel_item} key={index}>
-        //             <img src={item.picUrl} alt="" className="w"/>
-        //         </li>
-        //     )
-        // });
         return (
             <div
                 className={carousel.carousel_box }
@@ -102,6 +95,8 @@ var Carousel = React.createClass({
         )
     }
 });
+
+
 
 
 module.exports = Carousel;
