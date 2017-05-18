@@ -23,7 +23,7 @@ const ExchangeXTCoins = React.createClass({
     componentWillMount:function(){
         this.props.showDialogActionKeys.hideDialog();
         this.props.historyUrlsActionKeys.pushUrl('/ExchangeXTCoins');
-        this.props.productListActionKeys.getList('/xtb/list');
+        this.props.productListActionKeys.getXBList();
     },
     exchangeXTCoins:function(tradeWay){
         return ()=>{
@@ -45,7 +45,7 @@ const ExchangeXTCoins = React.createClass({
                     <BuyXTCoins
                         accountActionKeys={this.props.accountActionKeys}
                         account={this.props.account}
-                        XBList = {this.props.productList}
+                        XBList = {this.props.XBList}
                     />
                     <Link to={src} className={exchangeXTCoinsStyle.exchangeXTCoins}>立即兑换</Link>
                 </div>
@@ -77,7 +77,7 @@ const BuyXTCoins = React.createClass({
 const PurchaseQuantity = React.createClass({
 
     render: function () {
-        let XTCoinNodes = this.props.XBList.list.map((item,index)=>{
+        let XBNodes = this.props.XBList.list.map((item,index)=>{
 
             return (
                 <li className={exchangeXTCoinsStyle.XTCoin} key={index}>
@@ -91,7 +91,7 @@ const PurchaseQuantity = React.createClass({
             <div className={exchangeXTCoinsStyle.purchase_quantity}>
                 <p className={exchangeXTCoinsStyle.selected_title}>选择套餐</p>
                 <ul className={exchangeXTCoinsStyle.XICoin_box}>
-                    {XTCoinNodes}
+                    {XBNodes}
                 </ul>
                 <p className={exchangeXTCoinsStyle.pay_diamonds}>
                     <span>充值：</span>
@@ -108,13 +108,13 @@ const PurchaseQuantity = React.createClass({
 
 
 
-function mapStatetoProps(state){
+function mapStateToProps(state){
     return {
         loginInfo:state.loginInfo,
         historyUrls:state.historyUrls,
         account:state.account,
         showDialog:state.showDialog,
-        productList:state.productList,
+        XBList:state.XBList,
     }
 }
 function mapDispatchToProps(dispatch){
@@ -130,4 +130,4 @@ function mapDispatchToProps(dispatch){
 }
 
 
-module.exports = connect(mapStatetoProps,mapDispatchToProps)(ExchangeXTCoins);
+module.exports = connect(mapStateToProps,mapDispatchToProps)(ExchangeXTCoins);

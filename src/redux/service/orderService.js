@@ -1,7 +1,7 @@
 /**
  * Created by LDQ on 2017/3/20.
  */
-import _shoppingCart from '../actionModule/shoppingCardModule';
+import _shoppingCart from './shoppingCardService';
 import _h from '../../Util/HB';
 
 const order = {

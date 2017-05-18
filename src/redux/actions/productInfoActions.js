@@ -7,8 +7,8 @@ import {GET_PRODUCTINFO} from './productInfoActionKeys';
 import {CREATE_PRODUCT} from './productActionKeys';
 import {HIDE_SPEC_PRO} from './specificationActionKeys';
 
-import {productInfo} from '../actionModule/productInfoModule';
-import _product from '../actionModule/productModule';
+import {productInfo} from '../service/productInfoService';
+import _product from '../service/productService';
 
 export const productInfoActions = {
 

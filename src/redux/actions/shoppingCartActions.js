@@ -8,8 +8,8 @@ import {
     CLOSE
 } from '../actions/shoppingCartActionKeys';
 import { HIDE_SPEC_PRO } from '../actions/specificationActionKeys';
-import _shoppingCart from '../actionModule/shoppingCardModule';
-import _product from '../actionModule/productModule';
+import _shoppingCart from '../service/shoppingCardService';
+import _product from '../service/productService';
 
 export const shoppingCartActions = {
 

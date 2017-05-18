@@ -2,7 +2,7 @@
  * Created by LDQ on 2017/5/4.
  */
 
-import _betDialog from './betModule';
+import _betDialog from './betService';
 
 
 const dialogStrategies = {

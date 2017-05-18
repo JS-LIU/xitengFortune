@@ -15,7 +15,7 @@ import {showDialog} from './showDialog';
 import {stockGameDetail} from './stockGameDetail';
 import {historyUrls} from './historyUrls'
 import {account} from './account';
-import {XTCoins} from './XTCoins';
+import {XBList} from './XBList';
 import {rank} from './rank'
 import {betList} from './betList';
 import {award} from './award';
@@ -71,7 +71,7 @@ const rootReducer = combineReducers({
     stockGame,
     stockGameDetail,
     userInfo,
-    XTCoins,
+    XBList,
     WXInfo,
     payDialog
 });

@@ -4,7 +4,7 @@
 
 import { SET_BELONG,INCREASE_NUM,REDUCE_NUM } from './productActionKeys';
 import {SHOW_SPEC_PRO} from './specificationActionKeys';
-import _product from '../actionModule/productModule';
+import _product from '../service/productModule';
 
 export const productActions = {
 

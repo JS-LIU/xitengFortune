@@ -1,12 +1,12 @@
 /**
  * Created by LDQ on 2016/10/8.
  */
+//  todo 删 文件用不上了
 import { DELETE_PRODUCTS } from './shoppingCartActionKeys';
 import { CREATE_SUCCESS,CREATE_FAIL,SET_TRADEORDER } from './createTradeOrderActionKeys';
 import { SHOW_DIALOG } from './dialogActionKeys';
 import _h from '../../Util/HB';
-import {chainOrderDiamonds} from '../actionModule/orderModule';
-import {createTradeOrder} from '../../Util/xitengBaseConfig';
+import {chainOrderDiamonds} from '../service/orderService';
 
 
 function checkedProducts(list){

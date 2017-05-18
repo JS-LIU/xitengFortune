@@ -57,7 +57,7 @@ import {loginInfoInit} from  '../src/redux/store/loginInfoInit';
 import {stockGameDetail} from '../src/redux/store/stockGameDetailInit';
 import {storageInit} from '../src/redux/store/storageInit';
 import {accountInit} from '../src/redux/store/accountInit'
-import {XTCoinsInit} from '../src/redux/store/XTCoinsInit';
+import {XBListInit} from '../src/redux/store/XBListInit';
 import {rankInit} from '../src/redux/store/rankInit.js';
 import {betListInit} from '../src/redux/store/betListInit';
 import {awardInit} from '../src/redux/store/awardInit';
@@ -158,7 +158,7 @@ function initState(){
         showDialog:dialogInit,
         historyUrls:localStorage.historyUrlsInit?JSON.parse(localStorage.historyUrlsInit):historyUrlsInit,
         account:accountInit,
-        XTCoins:XTCoinsInit,
+        XBList:XBListInit,
         rank:rankInit,
         betList:betListInit,
         award:awardInit,

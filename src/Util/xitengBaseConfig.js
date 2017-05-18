@@ -81,3 +81,8 @@ export const picUrl = [
     "/shangzhengzongzhi@2x.png",
     "/chuangyebanzhi@2x.png"
 ];
+
+
+export const baseConsole = {
+    notUpdate:console.log('数据已存在，从state中取值')
+};
