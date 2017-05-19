@@ -2,77 +2,50 @@
  * Created by LDQ on 2017/5/9.
  */
 
+
 import _h from '../../Util/HB';
+import _XBListEntity from '../domain/XBList';
 
 const productList = {
-    getList:function(strategy){
-        let argument = arguments.shift.call(arguments);
-        return listStrategies[strategy].apply(null,argument);
+    getList:function(...args){
+        let strategy = args.shift();
+        return listStrategies[strategy].apply(this,args);
+
     },
     purchaseGameProductList:{},
     XBList:{}
 };
 
-let listStrategies = {
-    'XBList':XBList,
-    'purchaseGameProductList':purchaseGameProductList
+const XBList = function(state,pageNo,dispatchAction){
+
+    if( !state.XBList.last){
+        let postData = {
+            accessInfo:state.loginInfo.baseLoginData,
+            pageNo:pageNo,
+            size:10
+        };
+        _h.ajax.resource("/xtb/list").save({},postData).then((listInfo)=>{
+            let productList_XB = new _XBListEntity(listInfo);
+            dispatchAction(productList_XB);
+        });
+    }
 };
 
-const XBList = function(path,state,pageNo){
+const purchaseGameProductList = function(state,pageNo,sort,dispatchAction){
 
-    let self = arguments.callee;
-    console.log('XBList========',self);
-    return {
-        needUpdate:(dispatchAction)=>{
-            let postData = {
-                accessInfo:state.loginInfo.baseLoginData,
-                pageNo:pageNo,
-                size:10
-            };
-            return _h.ajax.resource("/xtb/list").save({},postData).then((listInfo)=>{
-                let XBList = new XBList(listInfo);
-
-                dispatchAction(listInfo);
-                return self(path,state,pageNo);
-            });
-        },
-        notUpdate:(notUpdateInfo)=>{
-            if(state.XBList.list.length > 0 && state.XBList.pageNo > pageNo){
-                notUpdateInfo();
-                return self(path,state,pageNo)
-            }
-        }
+    if( !state.purchaseGameProductList.last ){
+        let postData = {
+            accessInfo:state.loginInfo.baseLoginData,
+            pageNo:pageNo,
+            size:10,
+            popularity:1
+        };
+        _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
+            dispatchAction(listInfo);
+            return purchaseGameProductList(state,pageNo);
+        });
     }
 
-};
-
-const purchaseGameProductList = function(path,state,pageNo,sort){
-    let self = arguments.callee;
-    console.log('purchaseGameProductList========',self);
-    return {
-        needUpdate:(dispatchAction)=>{
-
-            let postData = {
-                accessInfo:state.loginInfo.baseLoginData,
-                pageNo:pageNo,
-                size:10,
-                popularity:1
-            };
-            return _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
-
-
-                dispatchAction(listInfo);
-                return self(path,state,pageNo);
-            });
-        },
-        notUpdate:(notUpdateInfo)=>{
-            let productList = state.purchaseGameProductList;
-            if(productList.list.length > 0 && productList.pageNo > pageNo){
-                notUpdateInfo();
-                return self(path,state,pageNo)
-            }
-        }
-    }
 };
 const diamondList = function(path,state,pageNo){
 
@@ -97,6 +70,13 @@ const productListOperator = function(productListInfo,newListInfo){
     }
 
     return productListInfo;
+};
+
+
+
+let listStrategies = {
+    'XBList':XBList,
+    'purchaseGameProductList':purchaseGameProductList
 };
 
 

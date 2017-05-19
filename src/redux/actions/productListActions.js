@@ -10,12 +10,10 @@ export const productListActions = {
     getXBList:(pageNo = 0)=>{
         return (dispatch,getState)=>{
 
-            _productList.getList('XBList',getState()).needUpdate((info)=>{
-                console.log('productListActions==getXBList==========',info);
+            _productList.getList('XBList',getState(),pageNo,function(info){
+                console.log(info);
                 dispatch({type:'GET_XB_LIST',info})
-            }).notUpdate(()=>{
-                baseConsole.notUpdate;
-            });
+            })
 
         }
     },
@@ -23,9 +21,7 @@ export const productListActions = {
         return (dispatch,getState)=>{
             _productList.getList('purchaseGameProductList',getState(),pageNo,sort).needUpdate((info)=>{
                 dispatch({type:'GET_PRODUCT_LIST', info})
-            }).notUpdate(()=>{
-                baseConsole.notUpdate;
-            });
+            }).notUpdate();
 
         }
     },

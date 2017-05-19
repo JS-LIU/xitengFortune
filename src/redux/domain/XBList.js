@@ -1,6 +1,13 @@
 /**
- * Created by LDQ on 2017/5/18.
+ * Created by LDQ on 2017/5/19.
  */
-class XBList{
+import ProductListInterface from './ProductListInterface';
 
+
+class XBList extends ProductListInterface{
+    constructor(info){
+        super(info);
+    }
 }
+
+module.exports = XBList;
