@@ -1,7 +1,7 @@
 /**
  * Created by LDQ on 2016/8/8.
  */
-var {combineReducers} = require('redux');
+let {combineReducers} = require('redux');
 import { routerReducer as routing } from 'react-router-redux'
 
 import {stockGame} from './stockGame';
@@ -37,7 +37,7 @@ import {specification} from './specification';
 import {product} from './product';
 import {payDialog} from './payDialog';
 import {productList} from './productList';
-
+import {purchaseGameProductList} from './purchaseGameProductList';
 
 const rootReducer = combineReducers({
     account,
@@ -73,7 +73,8 @@ const rootReducer = combineReducers({
     userInfo,
     XBList,
     WXInfo,
-    payDialog
+    payDialog,
+    purchaseGameProductList
 });
 
 module.exports = rootReducer;

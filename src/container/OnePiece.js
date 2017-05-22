@@ -23,11 +23,7 @@ import {productListActions} from '../redux/actions/productListActions';
 const OnePiece = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/OnePiece');
-        this.props.productListActionKeys.getList(
-            '/purchaseGame/list',
-            0,
-            {popularity:1}
-        )
+        this.props.productListActionKeys.getPurchaseGameProductList();
     },
     scrollToTheBottom:function(){
         _h.ui.scrollToTheBottom(()=>{
@@ -62,7 +58,7 @@ const OnePiece = React.createClass({
                 />
                 <OnePieceProductList
                     purchaseGameActionKeys={this.props.purchaseGameActionKeys}
-                    productList = {this.props.productList}
+                    purchaseGameProductList = {this.props.purchaseGameProductList}
                     storageActionKeys={this.props.storageActionKeys}
                 />
             </div>
@@ -125,7 +121,7 @@ const OnePieceHeader = React.createClass({
     }
 });
 
-var OnePieceProductList = React.createClass({
+let OnePieceProductList = React.createClass({
     render: function () {
         return (
             <div className={onePieceStyle.onePiece_product_list}>
@@ -134,7 +130,7 @@ var OnePieceProductList = React.createClass({
                     {/*purchaseGameActionKeys={this.props.purchaseGameActionKeys}*/}
                 {/*/>*/}
                 <OnePieceProducts
-                    productList = {this.props.productList}
+                    purchaseGameProductList = {this.props.purchaseGameProductList}
                     productListActionKeys = {this.props.productListActionKeys}
                     purchaseGameActionKeys={this.props.purchaseGameActionKeys}
                     storageActionKeys={this.props.storageActionKeys}
@@ -185,7 +181,7 @@ const OnePieceProducts = React.createClass({
         }
     },
     render: function () {
-        let productNodes = this.props.productList.list.map((item,index)=>{
+        let productNodes = this.props.purchaseGameProductList.list.map((item,index)=>{
             return (
                 <li className={onePieceStyle.onePiece_product_item} key={index}>
                     <Link to="/OnePieceProductDetails" className={onePieceStyle.onePiece_product_item_pic_box} onClick={this.setPurchaseGameId(item)}>
@@ -232,7 +228,7 @@ function mapStatetoProps(state){
         activity:state.activity,
         purchaseGame:state.purchaseGame,
         storage:state.storage,
-        productList:state.productList
+        purchaseGameProductList:state.purchaseGameProductList
     }
 }
 function mapDispatchToProps(dispatch){

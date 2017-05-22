@@ -2,7 +2,7 @@
  * Created by LDQ on 2017/5/9.
  */
 
-import { GET_XB_LIST } from './productListActionKeys';
+import { GET_XB_LIST,GET_PURCHASE_GAME_PRODUCT_LIST } from './productListActionKeys';
 import _productList from '../service/productListService';
 import baseConsole from '../../Util/xitengBaseConfig';
 export const productListActions = {
@@ -19,9 +19,12 @@ export const productListActions = {
     },
     getPurchaseGameProductList:(pageNo = 0,sort = {popularity:1})=>{
         return (dispatch,getState)=>{
-            _productList.getList('purchaseGameProductList',getState(),pageNo,sort).needUpdate((info)=>{
-                dispatch({type:'GET_PRODUCT_LIST', info})
-            }).notUpdate();
+
+
+
+            _productList.getList('purchaseGameProductList',getState(),pageNo,sort,function(info){
+                dispatch({type:'GET_PURCHASE_GAME_PRODUCT_LIST',info})
+            });
 
         }
     },
