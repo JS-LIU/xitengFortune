@@ -20,10 +20,8 @@ export const productListActions = {
     getPurchaseGameProductList:(pageNo = 0,sort = {popularity:1})=>{
         return (dispatch,getState)=>{
 
-
-
             _productList.getList('purchaseGameProductList',getState(),pageNo,sort,function(info){
-                dispatch({type:'GET_PURCHASE_GAME_PRODUCT_LIST',info})
+                // dispatch({type:'GET_PURCHASE_GAME_PRODUCT_LIST',info})
             });
 
         }

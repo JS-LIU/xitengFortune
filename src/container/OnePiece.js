@@ -125,10 +125,10 @@ let OnePieceProductList = React.createClass({
     render: function () {
         return (
             <div className={onePieceStyle.onePiece_product_list}>
-                {/*<OnePieceProductType*/}
-                    {/*purchaseGame={this.props.purchaseGame}*/}
-                    {/*purchaseGameActionKeys={this.props.purchaseGameActionKeys}*/}
-                {/*/>*/}
+                <OnePieceProductSort
+                    purchaseGameProductList={this.props.purchaseGameProductList}
+                    productListActionKeys={this.props.productListActionKeys}
+                />
                 <OnePieceProducts
                     purchaseGameProductList = {this.props.purchaseGameProductList}
                     productListActionKeys = {this.props.productListActionKeys}
@@ -140,38 +140,33 @@ let OnePieceProductList = React.createClass({
     }
 });
 
-// var OnePieceProductType = React.createClass({
-//     changeType:function(item){
-//         return ()=>{
-//             function turnQuery(query){
-//                 query[Object.keys(query)[0]] = query[Object.keys(query)[0]]*-1;
-//             }
-//             turnQuery(item.query);
-//             this.props.purchaseGameActionKeys.getProductList(
-//                 {productList:"list"},
-//                 item.query
-//             );
-//             this.props.purchaseGameActionKeys.cutType(item);
-//         }
-//     },
-//
-//     render: function () {
-//         let typeNodes = this.props.purchaseGame.productType.map((item,index)=>{
-//             return (
-//                 <li
-//                     key={index}
-//                     onClick={this.changeType(item)}
-//                     style={item.selected?selectedType:{}}
-//                 >{item.name}</li>
-//             )
-//         });
-//         return (
-//             <ul className={onePieceStyle.onePiece_product_type}>
-//                 {typeNodes}
-//             </ul>
-//         )
-//     }
-// });
+let OnePieceProductSort = React.createClass({
+    changeType:function(item){
+        return ()=>{
+            this.props.productListActionKeys.getPurchaseGameProductList(
+                0,
+                item.sort
+            );
+        }
+    },
+
+    render: function () {
+        let typeNodes = this.props.purchaseGameProductList.sort.map((item,index)=>{
+            return (
+                <li
+                    key={index}
+                    onClick={this.changeType(item)}
+                    style={item.selected?selectedType:{}}
+                >{item.name}</li>
+            )
+        });
+        return (
+            <ul className={onePieceStyle.onePiece_product_type}>
+                {typeNodes}
+            </ul>
+        )
+    }
+});
 
 
 const OnePieceProducts = React.createClass({

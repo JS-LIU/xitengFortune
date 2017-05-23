@@ -7,20 +7,23 @@ export const purchaseGameProductListInit = {
     last:false,
     sort:[
         {
-            key:'popularity',
-            sort:1,
+            type:{
+                popularity:1,
+            },
             name:'人气',
             select:true
         },
         {
-            key:'rateOfProgress',
-            sort:'',
+            type:{
+                rateOfProgress:'',
+            },
             name:'进度',
             select:false
         },
         {
-            price:'price',
-            sort:'',
+            type:{
+                price:'',
+            },
             name:'价格',
             select:false
         }

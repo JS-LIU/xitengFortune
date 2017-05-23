@@ -6,17 +6,7 @@
 import _h from '../../Util/HB';
 import _XBListEntity from '../domain/XBList';
 import _PurchaseGameProductListEntity from '../domain/PurchaseGameProductList';
-const productList = {
-    getList:function(...args){
-        let strategy = args.shift();
-        return listStrategies[strategy].apply(this,args);
-    },
-};
 
-let listStrategies = {
-    'XBList':XBList,
-    'purchaseGameProductList':purchaseGameProductList
-};
 
 let XBList = function(state,pageNo,dispatchAction){
 
@@ -34,15 +24,21 @@ let XBList = function(state,pageNo,dispatchAction){
 };
 
 let purchaseGameProductList = function(state,pageNo,sort,dispatchAction){
-
+    let postData = Object.assign({},{
+        accessInfo:state.loginInfo.baseLoginData,
+        pageNo:pageNo,
+        size:10,
+    },sort);
+    console.log(postData);
+    let stateSort = [...state.purchaseGameProductList.sort];
     _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
-        let list = _PurchaseGameProductListEntity(listInfo,sort);
-        dispatchAction(list)
+        console.log(listInfo);
+        let productList_purchaseGame = _PurchaseGameProductListEntity(listInfo,stateSort,sort);
+
+        dispatchAction(productList_purchaseGame);
     });
 
 
-    let productList_purchaseGame = new _PurchaseGameProductListEntity(listInfo,sortInfo);
-    dispatchAction(productList_purchaseGame);
     // return {
     //     commandList:[],
     //     add:function(command){
@@ -109,7 +105,17 @@ const productListOperator = function(productListInfo,newListInfo){
 
     return productListInfo;
 };
+let listStrategies = {
+    'XBList':XBList,
+    'purchaseGameProductList':purchaseGameProductList
+};
 
+const productList = {
+    getList:function(...args){
+        let strategy = args.shift();
+        return listStrategies[strategy].apply(this,args);
+    }
+};
 
 
 
