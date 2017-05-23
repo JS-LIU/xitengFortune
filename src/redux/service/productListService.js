@@ -2,6 +2,12 @@
  * Created by LDQ on 2017/5/9.
  */
 
+/**
+ *  productList
+ *      getList         //  获取商品列表
+ *      changeListSort  //  改变排序方式
+ *      witchSort       //  当前的排序方式
+ */
 
 import _h from '../../Util/HB';
 import _XBListEntity from '../domain/XBList';
@@ -23,89 +29,28 @@ let XBList = function(state,pageNo,dispatchAction){
     }
 };
 
-let purchaseGameProductList = function(state,pageNo,sort,dispatchAction){
+let purchaseGameProductList = function(state,pageNo,dispatchAction){
+    let sort = state.purchaseGameProductList.sort.find(productList.witchSort);
+
     let postData = Object.assign({},{
         accessInfo:state.loginInfo.baseLoginData,
         pageNo:pageNo,
         size:10,
-    },sort);
-    console.log(postData);
-    let stateSort = [...state.purchaseGameProductList.sort];
-    _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
-        console.log(listInfo);
-        let productList_purchaseGame = _PurchaseGameProductListEntity(listInfo,stateSort,sort);
+    },sort.type);
 
+    _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
+        let productList_purchaseGame = new _PurchaseGameProductListEntity(listInfo);
         dispatchAction(productList_purchaseGame);
     });
-
-
-    // return {
-    //     commandList:[],
-    //     add:function(command){
-    //         this.commandList.push(command)
-    //     },
-    //     execute:function(){
-    //         for(let i = 0,command;command = this.commandList[ i++ ];){
-    //             command.execute();
-    //         }
-    //     }
-    // };
-    // if( !state.purchaseGameProductList.last ){
-    //     let postData = {
-    //         accessInfo:state.loginInfo.baseLoginData,
-    //         pageNo:pageNo,
-    //         size:10,
-    //         popularity:1
-    //     };
-    //     _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
-    //         let productList_purchaseGame = new _PurchaseGameProductListEntity(listInfo);
-    //
-    //         return dispatchAction(productList_purchaseGame);
-    //     });
-    // }
 };
-
-let selectedSortCommand = {
-    execute:function(state,sort){
-        let sortList = [...state.purchaseGameProductList.sort];
-        for(let i = 0,stateSort; stateSort = sortList[ i++ ];){
-            stateSort.selected = false;
-            if(stateSort.key === sort.key){
-                stateSort.selected = true;
-                stateSort.sort = 1;
-            }
-        }
-    }
-};
-
-
-
 
 const diamondList = function(path,state,pageNo){
 
 };
 
-const productListOperator = function(productListInfo,newListInfo){
 
-    //  当前页数
-    productListInfo.pageNo = newListInfo.number || 0;
 
-    //  是否是最后一页
-    if(typeof newListInfo.last === "undefined"){
-        productListInfo.last = true;
-    }else{
-        productListInfo.last = newListInfo.last;
-    }
-
-    if(productListInfo.pageNo === 0){
-        productListInfo.list = newListInfo.content;
-    }else{
-        productListInfo.list.concat(newListInfo.content);
-    }
-
-    return productListInfo;
-};
-let listStrategies = {
+let productListStrategies = {
     'XBList':XBList,
     'purchaseGameProductList':purchaseGameProductList
 };
@@ -113,10 +58,30 @@ let listStrategies = {
 const productList = {
     getList:function(...args){
         let strategy = args.shift();
-        return listStrategies[strategy].apply(this,args);
+        return productListStrategies[strategy].apply(this,args);
+    },
+
+    changeListSort:{},
+    witchSort:function(sort){
+        return sort.select === true;
     }
 };
+productList.changeListSort = function(stateSort,sort){
+    for(let i = 0,sortNode;sortNode = stateSort[ i++ ];){
 
+        if(sortNode.key === sort.key){
+            sortNode.select = true;
+
+            //  更改排序方式
+            sortNode.way = -sortNode.way;
+            sortNode.type[sort.key] = sortNode.way;
+        }else{
+            sortNode.select = false;
+            sortNode.way = 1;
+        }
+    }
+    return stateSort;
+};
 
 
 

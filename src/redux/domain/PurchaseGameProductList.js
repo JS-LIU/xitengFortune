@@ -3,14 +3,11 @@
  */
 
 import ProductListInterface from './ProductListInterface';
-class PurchaseGameProductList extends ProductListInterface{
-    constructor(info,stateSort,sort){
-        super(info);
-        this.sort = {
 
-        }
+class PurchaseGameProductList extends ProductListInterface{
+    constructor(info){
+        super(info);
     }
-       
 }
 
 module.exports = PurchaseGameProductList;

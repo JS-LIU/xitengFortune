@@ -4,8 +4,12 @@
 class ProductListInterface{
     constructor(info){
         this.list = info.content;
-        this.last = info.last || true;
         this.pageNo = info.number || 0;
+        if(typeof info.last === 'undefined'){
+            this.last = true;
+        }else{
+            this.last = info.last;
+        }
     }
 }
 

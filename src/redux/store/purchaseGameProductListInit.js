@@ -8,24 +8,30 @@ export const purchaseGameProductListInit = {
     sort:[
         {
             type:{
-                popularity:1,
+                'popularity':1,
             },
             name:'人气',
-            select:true
+            select:true,
+            key:'popularity',
+            way:1
         },
         {
             type:{
-                rateOfProgress:'',
+                'rateOfProgress':1,
             },
             name:'进度',
-            select:false
+            select:false,
+            key:'rateOfProgress',
+            way:1
         },
         {
             type:{
-                price:'',
+                'price':1,
             },
             name:'价格',
-            select:false
+            select:false,
+            key:'price',
+            way:1
         }
 
     ]

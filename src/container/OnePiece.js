@@ -57,7 +57,7 @@ const OnePiece = React.createClass({
                     purchaseGame={this.props.purchaseGame}
                 />
                 <OnePieceProductList
-                    purchaseGameActionKeys={this.props.purchaseGameActionKeys}
+                    productListActionKeys={this.props.productListActionKeys}
                     purchaseGameProductList = {this.props.purchaseGameProductList}
                     storageActionKeys={this.props.storageActionKeys}
                 />
@@ -143,10 +143,9 @@ let OnePieceProductList = React.createClass({
 let OnePieceProductSort = React.createClass({
     changeType:function(item){
         return ()=>{
-            this.props.productListActionKeys.getPurchaseGameProductList(
-                0,
-                item.sort
-            );
+            this.props.productListActionKeys.changePurchaseProductListSort(item);
+
+            this.props.productListActionKeys.getPurchaseGameProductList();
         }
     },
 
@@ -156,7 +155,7 @@ let OnePieceProductSort = React.createClass({
                 <li
                     key={index}
                     onClick={this.changeType(item)}
-                    style={item.selected?selectedType:{}}
+                    style={item.select?selectedType:{}}
                 >{item.name}</li>
             )
         });
