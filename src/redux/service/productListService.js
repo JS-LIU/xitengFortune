@@ -22,8 +22,10 @@ let XBList = function(state,pageNo,dispatchAction){
             pageNo:pageNo,
             size:10
         };
+
         _h.ajax.resource("/xtb/list").save({},postData).then((listInfo)=>{
-            let productList_XB = new _XBListEntity(listInfo);
+            let stateProductList = [...state.XBList.list];
+            let productList_XB = new _XBListEntity(listInfo,stateProductList);
             dispatchAction(productList_XB);
         });
     }
@@ -32,16 +34,19 @@ let XBList = function(state,pageNo,dispatchAction){
 let purchaseGameProductList = function(state,pageNo,dispatchAction){
     let sort = state.purchaseGameProductList.sort.find(productList.witchSort);
 
-    let postData = Object.assign({},{
-        accessInfo:state.loginInfo.baseLoginData,
-        pageNo:pageNo,
-        size:10,
-    },sort.type);
+    if(!state.purchaseGameProductList.last){
+        let postData = Object.assign({},{
+            accessInfo:state.loginInfo.baseLoginData,
+            pageNo:pageNo,
+            size:10,
+        },sort.type);
 
-    _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
-        let productList_purchaseGame = new _PurchaseGameProductListEntity(listInfo);
-        dispatchAction(productList_purchaseGame);
-    });
+        _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
+            let stateProductList = [...state.purchaseGameProductList.list];
+            let productList_purchaseGame = new _PurchaseGameProductListEntity(listInfo,stateProductList);
+            dispatchAction(productList_purchaseGame);
+        });
+    }
 };
 
 const diamondList = function(path,state,pageNo){

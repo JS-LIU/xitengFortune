@@ -5,8 +5,8 @@ import ProductListInterface from './ProductListInterface';
 
 
 class XBList extends ProductListInterface{
-    constructor(info){
-        super(info);
+    constructor(info,stateXBProductList){
+        super(info,stateXBProductList);
     }
 }
 

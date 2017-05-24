@@ -5,8 +5,8 @@
 import ProductListInterface from './ProductListInterface';
 
 class PurchaseGameProductList extends ProductListInterface{
-    constructor(info){
-        super(info);
+    constructor(info,statePurchaseGameProductList){
+        super(info,statePurchaseGameProductList);
     }
 }
 

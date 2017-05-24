@@ -27,18 +27,8 @@ const OnePiece = React.createClass({
     },
     scrollToTheBottom:function(){
         _h.ui.scrollToTheBottom(()=>{
-            // if(!this.props.productList.last){
-            //     function findQuery(ele){
-            //         return ele.selected == true
-            //     }
-            //     let item = this.props.purchaseGame.productType.find(findQuery);
-            //     let pageNo = this.props.purchaseGame.products.pageNo + 1;
-            //     this.props.productActionKeys.getList(
-            //         '/purchaseGame/list',
-            //         pageNo,
-            //         item.query
-            //     );
-            // }
+            let pageNo = this.props.purchaseGameProductList.pageNo+1;
+            this.props.productListActionKeys.getPurchaseGameProductList(pageNo);
         });
     },
     componentDidMount:function(){

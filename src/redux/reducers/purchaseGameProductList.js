@@ -15,7 +15,10 @@ export const purchaseGameProductList = function(state = {},action){
 
         case 'CHANGE_PURCHASE_PRODUCT_LIST_SORT':
             return Object.assign({},state,{
-                sort:action.sortInfo
+                sort:action.sortInfo,
+                last:false,
+                list:[],
+                pageNo:0
             });
         default:
             return state
