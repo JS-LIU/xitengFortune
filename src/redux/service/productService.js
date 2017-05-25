@@ -11,9 +11,7 @@ const product = {
     specification:{}
 };
 
-
 product.createProduct = function(productInfo){
-
     return Object.assign({},productInfo,{
         totalCount:1
     });
@@ -87,5 +85,3 @@ product.specification = function(product){
 };
 
 module.exports = product;
-
-

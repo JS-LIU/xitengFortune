@@ -126,7 +126,6 @@ const Specifications  = React.createClass({
         }
     },
     render: function () {
-        //  todo 没有样式
         let specNodes = this.props.product.info.specifications.map((item,index)=>{
             let contentNodes = _h.obj.isArray(item.type)?
                 item.type.map((contentItem,index)=>{

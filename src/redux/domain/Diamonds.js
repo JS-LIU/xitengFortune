@@ -1,10 +1,15 @@
 /**
  * Created by LDQ on 2017/5/24.
  */
-class Diamonds{
+
+import CoinInterface from './CoinInterface';
+
+class Diamonds extends CoinInterface{
     constructor(diamonds){
-        this.radio = 12;
+        super();
         this.diamonds = diamonds;
         this.XB = diamonds * this.radio;
     }
 }
+
+module.exports = Diamonds;

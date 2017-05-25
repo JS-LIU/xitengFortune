@@ -6,3 +6,5 @@ class CoinInterface{
         this.radio = 12;
     }
 }
+
+module.exports = CoinInterface;

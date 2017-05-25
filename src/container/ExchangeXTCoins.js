@@ -80,7 +80,7 @@ const PurchaseQuantity = React.createClass({
         let XBNodes = this.props.XBList.list.map((item,index)=>{
 
             return (
-                <li className={exchangeXTCoinsStyle.XTCoin} key={index}>
+                <li className={exchangeXTCoinsStyle.XTCoin} key={index} >
                     <p className={exchangeXTCoinsStyle.XTCoin_count}>{item.xtbCount}</p>
                     <p className={exchangeXTCoinsStyle.XTCoin_sort}>喜币</p>
                 </li>

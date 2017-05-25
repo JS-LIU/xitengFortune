@@ -2,6 +2,12 @@
  * Created by LDQ on 2017/4/10.
  */
 
+
+/**
+ * 投注金额少于10喜币
+ * @param state
+ * @returns {*}
+ */
 const lessThan10 = function(state){
     if(state.betInfo.betMoney < 10){
         return {
@@ -22,6 +28,12 @@ const lessThan10 = function(state){
         return "nextSuccessor";
     }
 };
+
+/**
+ * 投注金额大于账户里的金额
+ * @param state
+ * @returns {*}
+ */
 
 const moreThanAccount = function(state){
     if(state.betInfo.betMoney > state.account.xtbTotalAmount){
@@ -44,6 +56,11 @@ const moreThanAccount = function(state){
     }
 };
 
+/**
+ * 满足投注条件，弹出确认投注提示
+ * @param state
+ * @returns {{key: string, describe: string}}
+ */
 const payConfirm = function(state){
     return {
         key:"success",
