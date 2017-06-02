@@ -110,10 +110,10 @@ const ProductDetail = React.createClass({
 });
 const Specifications  = React.createClass({
     increaseNum:function(){
-        this.props.productActionKeys.increaseNum(this.props.product.info);
+        this.props.productActionKeys.increaseNum('ShopProduct',this.props.product.info);
     },
     reduceNum:function(){
-        this.props.productActionKeys.reduceNum(this.props.product.info);
+        this.props.productActionKeys.reduceNum('ShopProduct',this.props.product.info);
     },
     cancel:function(){
         this.props.shoppingCartActionKeys.cancel();

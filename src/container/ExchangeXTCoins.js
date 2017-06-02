@@ -75,12 +75,17 @@ const BuyXTCoins = React.createClass({
 
 
 const PurchaseQuantity = React.createClass({
-
+    selectedXBProduct:function(item){
+        return ()=>{
+            console.log(item);
+            // this.props.productActionKeys.getProductInfo()
+        }
+    },
     render: function () {
         let XBNodes = this.props.XBList.list.map((item,index)=>{
 
             return (
-                <li className={exchangeXTCoinsStyle.XTCoin} key={index} >
+                <li className={exchangeXTCoinsStyle.XTCoin} key={index} onClick={this.selectedXBProduct(item)}>
                     <p className={exchangeXTCoinsStyle.XTCoin_count}>{item.xtbCount}</p>
                     <p className={exchangeXTCoinsStyle.XTCoin_sort}>喜币</p>
                 </li>
