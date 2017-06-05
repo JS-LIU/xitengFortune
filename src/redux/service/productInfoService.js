@@ -27,15 +27,16 @@ import _h from '../../Util/HB';
 /**
  * 获取 商店商品 详情
  * @param state
+ * @param productId
  * @returns {*}
  */
-let getShopProductInfo = function(state){
+let getShopProductInfo = function(state,productId){
     let loginInfo = state.loginInfo;
-    let productId = state.storage.productId;
+    // let productId = state.storage.productId;
 
     let postData = {
         accessInfo:loginInfo.baseLoginData,
-        productId:productId
+        productId
     };
 
     return _h.ajax.resource('/product/:path').save({path:"detail"},postData)

@@ -58,16 +58,16 @@ var PruductList = React.createClass({
     componentWillMount:function(){
         this.props.shopActionKeys.getProductList();
     },
-    setProductId:function(item){
-        return ()=>{
-            this.props.storageActionKeys.setProductId(item.productId);
-        }
-    },
+    // setProductId:function(item){
+    //     return ()=>{
+    //         this.props.storageActionKeys.setProductId(item.productId);
+    //     }
+    // },
     render:function(){
         let productNodes = this.props.shop.productList.map((item,index)=>{
             return (
-                <li className={shopStyle.shop_product_item} key={index} onClick={this.setProductId(item)} >
-                    <Link to="/ProductDetails" className="w">
+                <li className={shopStyle.shop_product_item} key={index} >
+                    <Link to= {{ pathname: "/ProductDetails", query: { productId: item.productId } }} className="w">
                         <div className={shopStyle.shop_product_pic}>
                             <img src={item.picUrl} alt="商品图片" className="h"/>
                         </div>

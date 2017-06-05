@@ -23,14 +23,16 @@ import _h from '../Util/HB';
 
 const ProductDetails = React.createClass({
     componentWillMount:function(){
+
         this.props.historyUrlsActionKeys.pushUrl('/ProductDetails');
-        this.props.productInfoActionKeys.getProductInfo();
+        let productId = this.props.location.query.productId;
+        this.props.productInfoActionKeys.getShopProductInfo(productId);
     },
     render: function () {
-        var productInfo = this.props.productInfo.productInfo;
+        let shopProductInfo = this.props.shopProduct.productInfo;
         let window_w = document.body.clientWidth;
-        let totalDistance = window_w * productInfo.pictures.length;
-        var carouselStyle = {
+        let totalDistance = window_w * shopProductInfo.pictures.length;
+        let carouselStyle = {
             bigBox:{
                 width:window_w+"px",
             },
@@ -38,7 +40,7 @@ const ProductDetails = React.createClass({
                 width:totalDistance + "px"
             }
         };
-        let imgNodes = productInfo.pictures.map((item,index)=>{
+        let imgNodes = shopProductInfo.pictures.map((item,index)=>{
             return (
                 <li className={productDetailStyle.carousel_item} key={index}>
                     <img src={item.picUrl} alt="" className="w"/>
@@ -48,7 +50,6 @@ const ProductDetails = React.createClass({
         return (
             <div>
                 <Carousel
-                    // pictures={productInfo.pictures}
                     carouselStyle={carouselStyle}
                     direction="slideLeft"
                     auto={true}
@@ -56,22 +57,22 @@ const ProductDetails = React.createClass({
                     {imgNodes}
                 </Carousel>
                 <div className={productDetailStyle.detail_product_info}>
-                    <p className={productDetailStyle.detail_product_info_name}>商品名称：{productInfo.productName}</p>
-                    <p className={productDetailStyle.detail_product_info_detail}>{productInfo.detail}</p>
+                    <p className={productDetailStyle.detail_product_info_name}>商品名称：{shopProductInfo.productName}</p>
+                    <p className={productDetailStyle.detail_product_info_detail}>{shopProductInfo.detail}</p>
                     <div className="clearfix">
                         <p className={productDetailStyle.cred}>
                             <span>￥</span>
-                            <span>{productInfo.price / 100}</span>
+                            <span>{shopProductInfo.price / 100}</span>
                         </p>
                     </div>
                 </div>
                 <div className={productDetailStyle.detail_delivery}>
                     <span className={productDetailStyle.red_checked} >快递：0.00</span>
-                    <span className={productDetailStyle.red_checked}>已售：{productInfo.sales}</span>
-                    <span className={productDetailStyle.red_checked}>库存：{productInfo.inventory}</span>
+                    <span className={productDetailStyle.red_checked}>已售：{shopProductInfo.sales}</span>
+                    <span className={productDetailStyle.red_checked}>库存：{shopProductInfo.inventory}</span>
                 </div>
                 <ProductDetail
-                    productInfo = {productInfo}
+                    shopProductInfo = {shopProductInfo}
                 />
                 <ShopFooter
                     shoppingCart={this.props.shoppingCart}
@@ -92,7 +93,7 @@ const ProductDetails = React.createClass({
 
 const ProductDetail = React.createClass({
     render: function () {
-        let imgNodes = this.props.productInfo.detailPictures.map((item,index)=>{
+        let imgNodes = this.props.shopProductInfo.detailPictures.map((item,index)=>{
             return (
                 <img  src={item.picUrl} key={index} className="w"/>
             )
@@ -205,7 +206,7 @@ const ShopFooter = React.createClass({
 
 function mapStatetoProps(state){
     return {
-        productInfo:state.productInfo,
+        shopProduct:state.productInfo.shopProduct,
         shoppingCart:state.shoppingCart,
         historyUrls:state.historyUrls,
         specification:state.specification,

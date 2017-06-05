@@ -3,113 +3,32 @@
  */
 
 
-import {GET_PRODUCTINFO} from './productInfoActionKeys';
-import {CREATE_PRODUCT} from './productActionKeys';
+import {GET_SHOP_PRODUCT_INFO} from './productInfoActionKeys';
 import {HIDE_SPEC_PRO} from './specificationActionKeys';
 
-import {productInfo} from '../service/productInfoService';
-import _product from '../service/productService';
+import _productInfo from '../service/productInfoService';
 
 export const productInfoActions = {
 
-    getShopProductInfo:()=>{
+    //  获取 商店 商品详情
+    getShopProductInfo:(productId)=>{
         return (dispatch,getState)=>{
             dispatch({type:'HIDE_SPEC_PRO'});
+            _productInfo('shopProductInfo',getState(),productId).then((shopProduct)=>{
 
-            productInfo.getProductInfo('ShopProduct',getState()).then((info)=>{
-                let productInfo = info.productInfo;
-                dispatch({type:'GET_PRODUCTINFO', productInfo});
+                dispatch({type:'GET_SHOP_PRODUCT_INFO', shopProduct});
             }).catch((error)=>{
                 console.log("error",error);
             });
-
-            // productInfo.getProductInfo(getState())
-            //     .then((productInfo)=>{
-            //
-            //         let product = _product.createProduct(productInfo.productInfo);
-            //
-            //         // dispatch({type:'CREATE_PRODUCT',product});
-            //         dispatch({type:'GET_PRODUCTINFO', productInfo});
-            //
-            //     }).catch((error)=>{
-            //     console.log("error",error);
-            // });
-
         }
     },
 
     getXBProductInfo:()=>{
-        return (dispatch,getState)=>{
-            dispatch({type:'HIDE_SPEC_PRO'});
-
-            productInfo.getProductInfo(getState())
-                .then((productInfo)=>{
-
-                    let product = _product.createProduct(productInfo.productInfo);
-
-                    // dispatch({type:'CREATE_PRODUCT',product});
-                    dispatch({type:'GET_PRODUCTINFO', productInfo});
-
-                }).catch((error)=>{
-                console.log("error",error);
-            });
-
-        }
     },
 
     getMemberProductInfo:()=>{
-        return (dispatch,getState)=>{
-            dispatch({type:'HIDE_SPEC_PRO'});
-
-            productInfo.getProductInfo(getState())
-                .then((productInfo)=>{
-
-                    let product = _product.createProduct(productInfo.productInfo);
-
-                    // dispatch({type:'CREATE_PRODUCT',product});
-                    dispatch({type:'GET_PRODUCTINFO', productInfo});
-
-                }).catch((error)=>{
-                console.log("error",error);
-            });
-
-        }
     },
     getPurchaseProductInfo:()=>{
-        return (dispatch,getState)=>{
-            dispatch({type:'HIDE_SPEC_PRO'});
-
-            productInfo.getProductInfo(getState())
-                .then((productInfo)=>{
-
-                    let product = _product.createProduct(productInfo.productInfo);
-
-                    // dispatch({type:'CREATE_PRODUCT',product});
-                    dispatch({type:'GET_PRODUCTINFO', productInfo});
-
-                }).catch((error)=>{
-                console.log("error",error);
-            });
-
-        }
     },
 
-    getProductInfo:()=>{
-        return (dispatch,getState)=>{
-            dispatch({type:'HIDE_SPEC_PRO'});
-
-            productInfo.getProductInfo(getState())
-                .then((productInfo)=>{
-
-                let product = _product.createProduct(productInfo.productInfo);
-
-                // dispatch({type:'CREATE_PRODUCT',product});
-                dispatch({type:'GET_PRODUCTINFO', productInfo});
-
-            }).catch((error)=>{
-                console.log("error",error);
-            });
-
-        }
-    },
 };

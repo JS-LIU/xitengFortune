@@ -2,7 +2,7 @@
  * Created by LDQ on 2017/4/11.
  */
 
-
+import ShopProduct from '../domain/ShopProduct';
 // const product = {
 //
 //     createProduct:{},
@@ -87,10 +87,10 @@
 
 
 let ProductTypes = {
-    'XBProduct':XBProduct,
+    // 'XBProduct':XBProduct,
     'shopProduct':ShopProduct,
-    'memberProduct':MemberProduct,
-    'purchaseProduct':PurchaseProduct
+    // 'memberProduct':MemberProduct,
+    // 'purchaseProduct':PurchaseProduct
 
 
 };

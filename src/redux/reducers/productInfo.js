@@ -3,14 +3,18 @@
  */
 
 
-import { GET_PRODUCTINFO } from '../actions/productInfoActionKeys'
+import { GET_SHOP_PRODUCT_INFO } from '../actions/productInfoActionKeys'
 
 
 export const productInfo = function (state={},action){
     switch (action.type) {
 
-        case 'GET_PRODUCTINFO':
-            return Object.assign({},state,action.productInfo);
+        //  获取 商店 商品详情
+        case 'GET_SHOP_PRODUCT_INFO':
+            return Object.assign({},state,{
+                shopProduct:action.shopProduct
+            });
+
 
         default:
             return state
