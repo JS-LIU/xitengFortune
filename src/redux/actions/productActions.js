@@ -17,8 +17,7 @@ export const productActions = {
     },
     increaseNum:(type,product)=>{
         return (dispatch,getState)=>{
-
-            let productInfo = _product.increaseNum(type,product);
+            let productInfo = _product(type,product).increaseNum().info;
             dispatch({type:'INCREASE_NUM',productInfo});
 
         }
@@ -26,7 +25,7 @@ export const productActions = {
     reduceNum:(type,product)=>{
         return (dispatch,getState)=>{
 
-            let productInfo = _product.reduceNum(type,product);
+            let productInfo = _product(type,product).reduceNum().info;
             dispatch({type:'REDUCE_NUM',productInfo});
 
         }

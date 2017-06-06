@@ -4,7 +4,7 @@
 
 
 import _h from '../../Util/HB';
-
+import ShopProduct from '../domain/ShopProduct';
 // export const productInfo = {
 //     getProductInfo:{},
 // };
@@ -39,7 +39,13 @@ let getShopProductInfo = function(state,productId){
         productId
     };
 
-    return _h.ajax.resource('/product/:path').save({path:"detail"},postData)
+    return _h.ajax.resource('/product/:path').save({path:"detail"},postData).then((info)=>{
+        let productInfo = new ShopProduct(info.productInfo);
+        return new Promise((resolve,reject)=>{
+            let shopProductInfo = productInfo.info;
+            resolve(shopProductInfo)
+        })
+    });
 };
 
 /**

@@ -29,7 +29,7 @@ const ProductDetails = React.createClass({
         this.props.productInfoActionKeys.getShopProductInfo(productId);
     },
     render: function () {
-        let shopProductInfo = this.props.shopProduct.productInfo;
+        let shopProductInfo = this.props.shopProductInfo;
         let window_w = document.body.clientWidth;
         let totalDistance = window_w * shopProductInfo.pictures.length;
         let carouselStyle = {
@@ -67,7 +67,7 @@ const ProductDetails = React.createClass({
                     </div>
                 </div>
                 <div className={productDetailStyle.detail_delivery}>
-                    <span className={productDetailStyle.red_checked} >快递：0.00</span>
+                    <span className={productDetailStyle.red_checked}>快递：0.00</span>
                     <span className={productDetailStyle.red_checked}>已售：{shopProductInfo.sales}</span>
                     <span className={productDetailStyle.red_checked}>库存：{shopProductInfo.inventory}</span>
                 </div>
@@ -111,10 +111,10 @@ const ProductDetail = React.createClass({
 });
 const Specifications  = React.createClass({
     increaseNum:function(){
-        this.props.productActionKeys.increaseNum('ShopProduct',this.props.product.info);
+        this.props.productActionKeys.increaseNum('shopProduct',this.props.product.info);
     },
     reduceNum:function(){
-        this.props.productActionKeys.reduceNum('ShopProduct',this.props.product.info);
+        this.props.productActionKeys.reduceNum('shopProduct',this.props.product.info);
     },
     cancel:function(){
         this.props.shoppingCartActionKeys.cancel();
@@ -206,7 +206,7 @@ const ShopFooter = React.createClass({
 
 function mapStatetoProps(state){
     return {
-        shopProduct:state.productInfo.shopProduct,
+        shopProductInfo:state.productInfo.shopProductInfo,
         shoppingCart:state.shoppingCart,
         historyUrls:state.historyUrls,
         specification:state.specification,

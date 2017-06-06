@@ -99,19 +99,16 @@ let ProductTypes = {
 let productService = function(type,productInfo){
     let product = new ProductTypes[type](productInfo);
     return {
-        increaseNum:product.increaseNum,
-        reduceNum:product.reduceNum
+        increaseNum:function(){
+            product.increaseNum();
+            return product
+        },
+        reduceNum:function(){
+            product.reduceNum();
+            return product
+        }
     }
 };
-
-
-
-
-
-
-
-
-
 
 
 module.exports = productService;

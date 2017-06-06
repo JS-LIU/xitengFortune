@@ -14,9 +14,8 @@ export const productInfoActions = {
     getShopProductInfo:(productId)=>{
         return (dispatch,getState)=>{
             dispatch({type:'HIDE_SPEC_PRO'});
-            _productInfo('shopProductInfo',getState(),productId).then((shopProduct)=>{
-
-                dispatch({type:'GET_SHOP_PRODUCT_INFO', shopProduct});
+            _productInfo('shopProductInfo',getState(),productId).then((shopProductInfo)=>{
+                dispatch({type:'GET_SHOP_PRODUCT_INFO', shopProductInfo});
             }).catch((error)=>{
                 console.log("error",error);
             });

@@ -11,8 +11,9 @@ export const productInfo = function (state={},action){
 
         //  获取 商店 商品详情
         case 'GET_SHOP_PRODUCT_INFO':
+
             return Object.assign({},state,{
-                shopProduct:action.shopProduct
+                shopProductInfo:action.shopProductInfo
             });
 
 
