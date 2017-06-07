@@ -12,10 +12,9 @@ let Carousel = require('../components/Carousel');
 
 import productDetailStyle from '../css/productDetailStyle.css';
 
-import {productInfoActions} from '../redux/actions/productInfoActions';
+import {shopProductInfoActions} from '../redux/actions/shopProductInfoActions';
 import {shoppingCartActions} from '../redux/actions/shoppingCartActions';
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
-import {productActions} from '../redux/actions/productActions';
 import {orderActions} from '../redux/actions/orderActions';
 
 
@@ -26,12 +25,12 @@ const ProductDetails = React.createClass({
 
         this.props.historyUrlsActionKeys.pushUrl('/ProductDetails');
         let productId = this.props.location.query.productId;
-        this.props.productInfoActionKeys.getShopProductInfo(productId);
+        this.props.shopProductInfoActionKeys.getShopProductInfo(productId);
     },
     render: function () {
-        let shopProductInfo = this.props.shopProductInfo;
+        let shopProduct = this.props.shopProduct;
         let window_w = document.body.clientWidth;
-        let totalDistance = window_w * shopProductInfo.pictures.length;
+        let totalDistance = window_w * shopProduct.info.pictures.length;
         let carouselStyle = {
             bigBox:{
                 width:window_w+"px",
@@ -40,7 +39,7 @@ const ProductDetails = React.createClass({
                 width:totalDistance + "px"
             }
         };
-        let imgNodes = shopProductInfo.pictures.map((item,index)=>{
+        let imgNodes = shopProduct.info.pictures.map((item,index)=>{
             return (
                 <li className={productDetailStyle.carousel_item} key={index}>
                     <img src={item.picUrl} alt="" className="w"/>
@@ -57,32 +56,32 @@ const ProductDetails = React.createClass({
                     {imgNodes}
                 </Carousel>
                 <div className={productDetailStyle.detail_product_info}>
-                    <p className={productDetailStyle.detail_product_info_name}>商品名称：{shopProductInfo.productName}</p>
-                    <p className={productDetailStyle.detail_product_info_detail}>{shopProductInfo.detail}</p>
+                    <p className={productDetailStyle.detail_product_info_name}>商品名称：{shopProduct.info.productName}</p>
+                    <p className={productDetailStyle.detail_product_info_detail}>{shopProduct.info.detail}</p>
                     <div className="clearfix">
                         <p className={productDetailStyle.cred}>
                             <span>￥</span>
-                            <span>{shopProductInfo.price / 100}</span>
+                            <span>{shopProduct.info.price / 100}</span>
                         </p>
                     </div>
                 </div>
                 <div className={productDetailStyle.detail_delivery}>
                     <span className={productDetailStyle.red_checked}>快递：0.00</span>
-                    <span className={productDetailStyle.red_checked}>已售：{shopProductInfo.sales}</span>
-                    <span className={productDetailStyle.red_checked}>库存：{shopProductInfo.inventory}</span>
+                    <span className={productDetailStyle.red_checked}>已售：{shopProduct.info.sales}</span>
+                    <span className={productDetailStyle.red_checked}>库存：{shopProduct.info.inventory}</span>
                 </div>
                 <ProductDetail
-                    shopProductInfo = {shopProductInfo}
+                    shopProduct = {shopProduct}
                 />
                 <ShopFooter
                     shoppingCart={this.props.shoppingCart}
                     shoppingCartActionKeys = {this.props.shoppingCartActionKeys}
-                    productActionKeys = {this.props.productActionKeys}
+                    shopProductInfoActionKeys = {this.props.shopProductInfoActionKeys}
                 />
                 {this.props.specification.isShowSpec?
                     <Specifications
-                        product={this.props.product}
-                        productActionKeys = {this.props.productActionKeys}
+                        shopProduct={shopProduct}
+                        shopProductInfoActionKeys = {this.props.shopProductInfoActionKeys}
                         shoppingCartActionKeys={this.props.shoppingCartActionKeys}
                         orderActionKeys={this.props.orderActionKeys}
                     />:""}
@@ -93,7 +92,7 @@ const ProductDetails = React.createClass({
 
 const ProductDetail = React.createClass({
     render: function () {
-        let imgNodes = this.props.shopProductInfo.detailPictures.map((item,index)=>{
+        let imgNodes = this.props.shopProduct.info.detailPictures.map((item,index)=>{
             return (
                 <img  src={item.picUrl} key={index} className="w"/>
             )
@@ -111,23 +110,23 @@ const ProductDetail = React.createClass({
 });
 const Specifications  = React.createClass({
     increaseNum:function(){
-        this.props.productActionKeys.increaseNum('shopProduct',this.props.product.info);
+        this.props.shopProductInfoActionKeys.increaseShopProductNum(this.props.shopProduct.info);
     },
     reduceNum:function(){
-        this.props.productActionKeys.reduceNum('shopProduct',this.props.product.info);
+        this.props.shopProductInfoActionKeys.reduceShopProductNum(this.props.shopProduct.info);
     },
     cancel:function(){
         this.props.shoppingCartActionKeys.cancel();
     },
     buyProduct:function(){
-        if(this.props.product.belong === 'shoppingCart'){
-            this.props.shoppingCartActionKeys.addProduct(this.props.product.info);
+        if(this.props.shopProduct.belong === 'shoppingCart'){
+            this.props.shoppingCartActionKeys.addProduct(this.props.shopProduct.info);
         }else{
-            this.props.orderActionKeys.createOrderListInfo(this.props.product.info);
+            this.props.orderActionKeys.createOrderListInfo(this.props.shopProduct.info);
         }
     },
     render: function () {
-        let specNodes = this.props.product.info.specifications.map((item,index)=>{
+        let specNodes = this.props.shopProduct.info.specifications.map((item,index)=>{
             let contentNodes = _h.obj.isArray(item.type)?
                 item.type.map((contentItem,index)=>{
                 return (
@@ -158,12 +157,12 @@ const Specifications  = React.createClass({
                     <span className={productDetailStyle.shop_choose_num}>选择数量</span>
                     <div className={productDetailStyle.shop_choose_num_ctrl}>
                         <span className={productDetailStyle.shop_choose_num_ctrl_item} onClick={this.reduceNum}>-</span>
-                        <span className={productDetailStyle.shop_choose_num_ctrl_item_num}>{this.props.product.info.totalCount}</span>
+                        <span className={productDetailStyle.shop_choose_num_ctrl_item_num}>{this.props.shopProduct.info.totalCount}</span>
                         <span className={productDetailStyle.shop_choose_num_ctrl_item} onClick={this.increaseNum}>+</span>
                     </div>
                 </div>
                 {/*todo 跳转页面的方式还需要通过【规格是否全选】来判断*/}
-                <Link to={this.props.product.belong === "shoppingCart"?'/ProductDetails':'/ConfirmOrder'} className={productDetailStyle.shop_choose_sure} onClick={this.buyProduct}>确定</Link>
+                <Link to={this.props.shopProduct.belong === "shoppingCart"?'/ProductDetails':'/ConfirmOrder'} className={productDetailStyle.shop_choose_sure} onClick={this.buyProduct}>确定</Link>
             </div>
         )
     }
@@ -174,7 +173,7 @@ const ShopFooter = React.createClass({
 
     setProductBelong:function(belong){
         return ()=>{
-            this.props.productActionKeys.setBelong(belong);
+            this.props.shopProductInfoActionKeys.setShopProductBelong(belong);
         }
     },
     render:function(){
@@ -206,7 +205,7 @@ const ShopFooter = React.createClass({
 
 function mapStatetoProps(state){
     return {
-        shopProductInfo:state.productInfo.shopProductInfo,
+        shopProduct:state.shopProductInfo,
         shoppingCart:state.shoppingCart,
         historyUrls:state.historyUrls,
         specification:state.specification,
@@ -217,8 +216,7 @@ function mapDispatchToProps(dispatch){
 
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
-        productInfoActionKeys:bindActionCreators(productInfoActions,dispatch),
-        productActionKeys:bindActionCreators(productActions,dispatch),
+        shopProductInfoActionKeys:bindActionCreators(shopProductInfoActions,dispatch),
         shoppingCartActionKeys:bindActionCreators(shoppingCartActions,dispatch),
         orderActionKeys:bindActionCreators(orderActions,dispatch)
     }

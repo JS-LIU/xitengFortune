@@ -12,5 +12,6 @@ class Product{
     reduceNum(){
         this.info.totalCount -= 1;
     }
+
 }
 module.exports = Product;

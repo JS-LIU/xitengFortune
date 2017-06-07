@@ -7,7 +7,7 @@ import { routerReducer as routing } from 'react-router-redux'
 import {stockGame} from './stockGame';
 import {shop} from './shop';
 import {storage} from './storage';
-import {productInfo} from './productInfo';
+import {shopProductInfo} from './shopProductInfo';
 import {shoppingCart} from './shoppingCart';
 import {diamonds} from './diamonds';
 import {loginInfo} from './loginInfo';
@@ -34,7 +34,6 @@ import {purchaseGame} from './purchaseGame';
 import {bidOrder} from './bidOrder';
 import {settlement} from './settlement';
 import {specification} from './specification';
-import {product} from './product';
 import {payDialog} from './payDialog';
 import {productList} from './productList';
 import {purchaseGameProductList} from './purchaseGameProductList';
@@ -55,8 +54,7 @@ const rootReducer = combineReducers({
     loginInfo,
     order,
     pay,
-    product,
-    productInfo,
+    shopProductInfo,
     productList,
     provinces,
     purchaseGame,

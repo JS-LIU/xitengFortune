@@ -106,6 +106,10 @@ let productService = function(type,productInfo){
         reduceNum:function(){
             product.reduceNum();
             return product
+        },
+        setBelong:function(belong){
+            product.setBelong(belong);
+            return product
         }
     }
 };

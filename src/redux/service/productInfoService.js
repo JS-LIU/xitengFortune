@@ -32,7 +32,6 @@ import ShopProduct from '../domain/ShopProduct';
  */
 let getShopProductInfo = function(state,productId){
     let loginInfo = state.loginInfo;
-    // let productId = state.storage.productId;
 
     let postData = {
         accessInfo:loginInfo.baseLoginData,

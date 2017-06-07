@@ -4,8 +4,8 @@
 import Product from './Product';
 
 class ShopProduct extends Product{
-    constructor(info){
-        super(info);
+    constructor(productInfo){
+        super(productInfo);
     }
 }
 

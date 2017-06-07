@@ -63,7 +63,7 @@ import {betListInit} from '../src/redux/store/betListInit';
 import {awardInit} from '../src/redux/store/awardInit';
 import {historyUrlsInit} from '../src/redux/store/historyUrlsInit';
 import {shopInit} from '../src/redux/store/shopInit';
-import {productInfoInit} from '../src/redux/store/productInfoInit';
+import {shopProductInfoInit} from '../src/redux/store/shopProductInfoInit';
 import {addressInit} from '../src/redux/store/addressInit';
 import {provincesInit} from '../src/redux/store/provincesInit';
 import {citiesInit} from '../src/redux/store/citiesInit';
@@ -82,7 +82,6 @@ import {bidOrderInit} from '../src/redux/store/bidOrderInit';
 import {settlementInit} from '../src/redux/store/settlementInit';
 import {specificationInit} from '../src/redux/store/specificationInit';
 import {payDialogInit} from '../src/redux/store/payDialogInit';
-import {productInit} from '../src/redux/store/productInit';
 import {purchaseGameProductListInit} from '../src/redux/store/purchaseGameProductListInit';
 
 import _h from '../src/Util/HB';
@@ -151,8 +150,7 @@ function initState(){
         shop:shopInit,
         diamonds:diamondListInit,
         storage:localStorage.storageInit?JSON.parse(localStorage.storageInit):storageInit,
-        productInfo:productInfoInit,
-        product:productInit,
+        shopProductInfo:shopProductInfoInit,
         shoppingCart:shoppingCartInit,
         loginInfo:localStorage.loginInfoInit?JSON.parse(localStorage.loginInfoInit):loginInfoInit,
         showDialog:dialogInit,
