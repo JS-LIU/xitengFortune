@@ -16,19 +16,35 @@ let converseSpecifications ={
 };
 
 
-let SpecificationSelectedOperator = {
-    findSpecification:function(){
+let SpecificationsSelectedOperator = {
 
+    findChanged:function(list,changedId){
+        function isEqualId(item){
+            if(item.id === changedId){
+                return item;
+            }
+        }
+
+        return list.find(isEqualId);
     },
-    findOption:function(){
 
+    changeSelectedState:function(changedSpecification,changedOption){
+
+        //  todo: StateFactory
+        if(changedOption.selected === 'unselected'){
+            //  将其他的选项变为未选择
+            for(let i = 0,option; option = changedSpecification[i++];){
+                option.selected = 'unselected';
+            }
+            changedOption = 'selected';
+            changedSpecification.selected = 'selected';
+        }
+
+        if(changedOption.selected === 'selected'){
+            changedOption = 'unselected';
+            changedSpecification.selected = 'unselected';
+        }
     },
-    changeOptionSelected:function(){
-
-    },
-    changeSpecificationSelected:function(){
-
-    }
 };
 
 
@@ -55,34 +71,10 @@ class Specification{
         return true;
     }
     selected(specificationId,optionId){
+        let changedSpecification = SpecificationsSelectedOperator.findChanged(this.specifications,specificationId);
+        let changedOption = SpecificationsSelectedOperator.findChanged(changedSpecification.options,optionId);
 
-        let findSpecification = function(specification){
-            if(specification.id === specificationId){
-                return specification;
-            }
-        };
-        let findOption = function(option){
-            if(option.id === optionId){
-                return option;
-            }
-        };
-
-        let changeOptionSelected = function(){
-
-        };
-
-        let changeSpecificationSelected = function(){
-
-        };
-
-        let changedSpecification = this.specifications.find(findSpecification);
-        let changedOption = changedSpecification.option.find(findOption);
-
-
-
-        if(changedOption.selected === 'unselected'){
-
-        }
+        SpecificationsSelectedOperator.changeSelectedState(changedSpecification,changedOption);
 
     }
 }
