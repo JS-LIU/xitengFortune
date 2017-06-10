@@ -3,6 +3,9 @@
  */
 
 import ShopProduct from '../domain/ShopProduct';
+import specificationService from './specificationService';
+
+
 // const product = {
 //
 //     createProduct:{},
@@ -110,7 +113,8 @@ let productService = function(type,productInfo){
         setBelong:function(belong){
             product.setBelong(belong);
             return product
-        }
+        },
+        specifications:specificationService(product.specifications)
     }
 };
 

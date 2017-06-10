@@ -6,6 +6,8 @@ import Product from './Product';
 class ShopProduct extends Product{
     constructor(productInfo){
         super(productInfo);
+        let specification = new Specification(this.productInfo.specifications);
+        this.productInfo.specifications = specification.specifications;
     }
 }
 

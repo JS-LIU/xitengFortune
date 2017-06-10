@@ -11,7 +11,9 @@ let converseSpecifications ={
         }
     },
     addProp:function(item,prop){
-        return Object.assign(item,prop);
+        if(typeof item.selected === "undefined"){
+            return Object.assign(item,prop);
+        }
     }
 };
 
@@ -36,12 +38,10 @@ let SpecificationsSelectedOperator = {
             for(let i = 0,option; option = changedSpecification[i++];){
                 option.selected = 'unselected';
             }
-            changedOption = 'selected';
+            changedOption.selected = 'selected';
             changedSpecification.selected = 'selected';
-        }
-
-        if(changedOption.selected === 'selected'){
-            changedOption = 'unselected';
+        }else if(changedOption.selected === 'selected'){
+            changedOption.selected = 'unselected';
             changedSpecification.selected = 'unselected';
         }
     },
