@@ -101,6 +101,7 @@ let ProductTypes = {
 
 let productService = function(type,productInfo){
     let product = new ProductTypes[type](productInfo);
+    console.log(product);
     return {
         increaseNum:function(){
             product.increaseNum();
@@ -114,7 +115,7 @@ let productService = function(type,productInfo){
             product.setBelong(belong);
             return product
         },
-        specifications:specificationService(product.specifications)
+        specifications:specificationService(product.info.specifications)
     }
 };
 

@@ -52,14 +52,16 @@ class Specification{
     constructor(specifications){
         this.specifications = specifications;
         let self = this;
-
-        converseSpecifications.iterator(self.specifications,function(specification,i){
-            converseSpecifications.addProp(specification,{selected:'unselected'});
-
-            converseSpecifications.iterator(self.specifications[i].options,function(option,j){
-                converseSpecifications.addProp(option,{selected:'unselected'});
+        if(specifications.length > 0){
+            converseSpecifications.iterator(self.specifications,function(specification,i){
+                converseSpecifications.addProp(specification,{selected:'unselected'});
+                converseSpecifications.iterator(self.specifications[i].options,function(option,j){
+                    converseSpecifications.addProp(option,{selected:'unselected'});
+                });
             });
-        });
+        }
+
+
 
     }
     isAllSelected() {

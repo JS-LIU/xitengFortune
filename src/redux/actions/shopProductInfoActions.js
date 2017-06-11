@@ -7,7 +7,8 @@ import {
     GET_SHOP_PRODUCT_INFO,
     INCREASE_SHOP_PRODUCT_NUM,
     REDUCE_SHOP_PRODUCT_NUM,
-    SET_SHOP_PRODUCT_BELONG
+    SET_SHOP_PRODUCT_BELONG,
+    SELECTED_SHOP_PRODUCT_SPECIFICATIONS
 } from './productInfoActionKeys';
 import {HIDE_SPEC_PRO} from './specificationActionKeys';
 
@@ -46,5 +47,12 @@ export const shopProductInfoActions = {
             dispatch({type:'REDUCE_SHOP_PRODUCT_NUM',shopProductInfo});
         }
     },
+    selectedShopProductSpecifications:(specificationId,optionId)=>{
+        return (dispatch,getState)=>{
+            let shopProductInfo = getState().shopProductInfo.info;
 
+            let specifications = _product('shopProduct',shopProductInfo).specifications.selected(specificationId,optionId)
+            dispatch({type:'SELECTED_SHOP_PRODUCT_SPECIFICATIONS',specifications});
+        }
+    }
 };

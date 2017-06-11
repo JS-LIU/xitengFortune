@@ -7,7 +7,9 @@ import {
     GET_SHOP_PRODUCT_INFO,
     INCREASE_SHOP_PRODUCT_NUM,
     REDUCE_SHOP_PRODUCT_NUM,
-    SET_SHOP_PRODUCT_BELONG} from '../actions/productInfoActionKeys'
+    SET_SHOP_PRODUCT_BELONG,
+    SELECTED_SHOP_PRODUCT_SPECIFICATIONS
+} from '../actions/productInfoActionKeys'
 
 export const shopProductInfo = function (state={},action){
     switch (action.type) {
@@ -34,6 +36,15 @@ export const shopProductInfo = function (state={},action){
         case 'SET_SHOP_PRODUCT_BELONG':
             return Object.assign({},state,{
                 belong:action.belong
+            });
+
+        //  选择 商店商品 的 规格
+        case 'SELECTED_SHOP_PRODUCT_SPECIFICATIONS':
+            let shopProduct = Object.assign({},state);
+            shopProduct.info.specifications = action.specifications;
+
+            return Object.assign({},state,{
+                info:shopProduct
             });
         default:
             return state

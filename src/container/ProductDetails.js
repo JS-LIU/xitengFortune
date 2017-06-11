@@ -125,20 +125,25 @@ const Specifications  = React.createClass({
             this.props.orderActionKeys.createOrderListInfo(this.props.shopProduct.info);
         }
     },
+    selectedOption:function(specificationId,optionId){
+        return ()=>{
+            this.props.shopProductInfoActionKeys.selectedShopProductSpecifications(specificationId,optionId);
+        }
+    },
     render: function () {
-        let specNodes = this.props.shopProduct.info.specifications.map((item,index)=>{
-            let contentNodes = _h.obj.isArray(item.type)?
-                item.type.map((contentItem,index)=>{
+        let specNodes = this.props.shopProduct.info.specifications.map((specificationItem,index)=>{
+            let contentNodes = _h.obj.isArray(specificationItem.options)?
+                specificationItem.options.map((optionItem,index)=>{
                 return (
-                    <li key={index}>
-                        <span>{contentItem.name}</span>}
+                    <li key={index} onClick={this.selectedOption(specificationItem.id,optionItem.id)}>
+                        <span>{optionItem.name}</span>
                     </li>
                 )
             }):"";
             return (
 
                 <li key={index}>
-                    <span>{item.name}</span>
+                    <span>{specificationItem.name}</span>
                     <ul>
                         {contentNodes}
                     </ul>

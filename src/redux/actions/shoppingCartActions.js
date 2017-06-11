@@ -17,8 +17,9 @@ export const shoppingCartActions = {
         return (dispatch,getState)=>{
 
             let products = getState().shoppingCart.products;
+            let shopProductInfo = getState().shopProductInfo.info;
 
-            if(_product.specification(product).isAllSelected){
+            if(_product('shopProduct',shopProductInfo).specifications.isAllSelected){
                 let shoppingCartInfo = _shoppingCart.getListInfo({
                     changeList:function(){
                         return _shoppingCart.addProduct(products,product)
