@@ -60,9 +60,6 @@ class Specification{
                 });
             });
         }
-
-
-
     }
     isAllSelected() {
         for (let i = 0, item; item = this.specifications[i++];) {

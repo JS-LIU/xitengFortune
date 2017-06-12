@@ -14,6 +14,7 @@ import _XBListEntity from '../domain/XBList';
 import _PurchaseGameProductListEntity from '../domain/PurchaseGameProductList';
 
 
+
 let XBList = function(state,pageNo,dispatchAction){
 
     if( !state.XBList.last){

@@ -78,6 +78,7 @@ const PurchaseQuantity = React.createClass({
     selectedXBProduct:function(item){
         return ()=>{
             console.log(item);
+
             // this.props.productActionKeys.getProductInfo()
         }
     },
