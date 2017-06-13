@@ -35,7 +35,7 @@ import {bidOrder} from './bidOrder';
 import {settlement} from './settlement';
 import {specification} from './specification';
 import {payDialog} from './payDialog';
-import {productList} from './productList';
+import {productList_shop} from './productList_shop';
 import {purchaseGameProductList} from './purchaseGameProductList';
 
 const rootReducer = combineReducers({
@@ -55,7 +55,7 @@ const rootReducer = combineReducers({
     order,
     pay,
     shopProductInfo,
-    productList,
+    productList_shop,
     provinces,
     purchaseGame,
     rank,

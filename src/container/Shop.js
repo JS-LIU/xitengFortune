@@ -128,7 +128,7 @@ var ProductType = React.createClass({
 function mapStatetoProps(state){
     return {
         historyUrls:state.historyUrls,
-        shop:state.shop,
+        productList_shop:state.productList_shop,
         storage:state.storage,
     }
 }

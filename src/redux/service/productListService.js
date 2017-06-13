@@ -3,7 +3,7 @@
  */
 
 /**
- *  productList
+ *  productList_shop
  *      getList         //  获取商品列表
  *      changeListSort  //  改变排序方式
  *      witchSort       //  当前的排序方式

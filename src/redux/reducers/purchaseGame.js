@@ -28,15 +28,15 @@ export const purchaseGame = function(state = {},action){
                 newestWin:action.data.content
             });
         // case 'GET_PRODUCT_LIST':
-        //     var productList = [];
+        //     var productList_shop = [];
         //     if(action.pageNo == 0){
-        //         productList = action.data.content;
+        //         productList_shop = action.data.content;
         //     }else{
-        //         productList = state.products.productList.concat(action.data.content);
+        //         productList_shop = state.products.productList_shop.concat(action.data.content);
         //     }
         //
         //     let products = {
-        //         productList:productList,
+        //         productList_shop:productList_shop,
         //         last:action.data.last,
         //         pageNo:action.pageNo
         //     };
