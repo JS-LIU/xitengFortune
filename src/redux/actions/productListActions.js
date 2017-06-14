@@ -10,12 +10,13 @@ import {
 } from './productListActionKeys';
 
 import _productList from '../service/productListService';
+import _sortService from '../service/sortService';
+
 
 export const productListActions = {
 
     getXBList:(pageNo = 0)=>{
         return (dispatch,getState)=>{
-
             _productList.getList('XBList',getState(),pageNo,function(info){
                 dispatch({type:'GET_XB_LIST',info})
             })
@@ -37,29 +38,14 @@ export const productListActions = {
         }
     },
 
-    getProductList_Shop:(pageNo = 0,sort = {
-        type:{
-            'tagName':'推荐',
-        },
-        name:'推荐',
-        select:true,
-        key:'tagName',
-        way:1
-    })=>{
-
-    },
-    changeShopProductListSort:()=>{
-        return ()=>{
-
-        }
-    },
-    changePurchaseProductListSort:(sort)=>{
+    getProductList_Shop:(pageNo = 0)=>{
         return (dispatch,getState)=>{
-            let stateSort = getState().purchaseGameProductList.sort;
-            let sortInfo = _productList.changeListSort(stateSort,sort);
-            dispatch({type:'CHANGE_PURCHASE_PRODUCT_LIST_SORT',sortInfo});
+            let sortList = getState().sort_shopProductList.sortList;
+            let sortItem = _sortService(sortList).findCurrentSort();
+            _productList.getList('shopProductList',getState(),pageNo,sortItem,function(info){
+                dispatch({type:'GET_XB_LIST',info})
+            })
         }
     }
-
 
 };

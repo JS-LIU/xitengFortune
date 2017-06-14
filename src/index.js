@@ -83,7 +83,7 @@ import {specificationInit} from '../src/redux/store/specificationInit';
 import {payDialogInit} from '../src/redux/store/payDialogInit';
 import {purchaseGameProductListInit} from '../src/redux/store/purchaseGameProductListInit';
 import {productList_shop_init} from '../src/redux/store/productList_shop_init';
-
+import {sort_shopProductList_init} from '../src/redux/store/sort_shopProductList_init';
 
 import _h from '../src/Util/HB';
 const {syncHistoryWithStore} = require('react-router-redux');
@@ -177,8 +177,8 @@ function initState(){
         specification:specificationInit,
         payDialog:payDialogInit,
         purchaseGameProductList:purchaseGameProductListInit,
-        productList_shop:productList_shop_init
-
+        productList_shop:productList_shop_init,
+        sort_shopProductList:sort_shopProductList_init
     }
 }
 

@@ -2,18 +2,20 @@
  * Created by LDQ on 2017/5/9.
  */
 
-/**
- *  productList_shop
- *      getList         //  获取商品列表
- *      changeListSort  //  改变排序方式
- *      witchSort       //  当前的排序方式
- */
 
 import _h from '../../Util/HB';
 import _XBListEntity from '../domain/XBList';
 import _PurchaseGameProductListEntity from '../domain/PurchaseGameProductList';
+import sortService from './sortService';
 
 
+/**
+ *
+ * @param state
+ * @param pageNo
+ * @param dispatchAction
+ * @constructor
+ */
 
 let XBList = function(state,pageNo,dispatchAction){
 
@@ -32,6 +34,13 @@ let XBList = function(state,pageNo,dispatchAction){
     }
 };
 
+
+/**
+ *
+ * @param state
+ * @param pageNo
+ * @param dispatchAction
+ */
 let purchaseGameProductList = function(state,pageNo,dispatchAction){
     let sort = state.purchaseGameProductList.sort.find(productList.witchSort);
 
@@ -50,6 +59,67 @@ let purchaseGameProductList = function(state,pageNo,dispatchAction){
     }
 };
 
+
+/**
+ *
+ * @param state
+ * @param pageNo
+ * @param targetSort
+ * @param dispatchAction
+ */
+
+let getShopProductList = function(state,pageNo,targetSort,dispatchAction){
+    let sortList = state.sort_shopProductList.sortList;
+    let currentSort = sortService(sortList).findCurrentSort();
+
+    let sortType = targetSort.type;
+    let postData = Object.assign({},sort,{
+        accessInfo:state.loginInfo.baseLoginData,
+        pageNo:pageNo,
+    });
+
+    _h.ajax.resource("/product/list").save({},postData).then((listInfo)=>{
+        let stateProductList = [...state.purchaseGameProductList.list];
+        let productList_purchaseGame = new _PurchaseGameProductListEntity(listInfo,stateProductList);
+        dispatchAction(productList_purchaseGame);
+    });
+
+};
+
+let differentSort = function(currentSort,targetSort){
+    if(currentSort.key !== targetSort.key){
+        getShopProductList();
+    }else{
+        return 'nextSuccessor';
+    }
+};
+let lastPage = function(){
+    if(last){
+        return state.productList_shop;
+    }else {
+        return 'nextSuccessor';
+    }
+};
+let newPage = function(){
+    if(currentPage < targetPage){
+        getShopProductList();
+    }else{
+        return 'nextSuccessor';
+    }
+};
+
+let oldPage = function(){
+    if(currentPage <= targetPage){
+        return state.productList_shop;
+    }else{
+        return 'nextSuccessor';
+    }
+};
+
+let getProductList = differentSort.after(lastPage).after(newPage).after(oldPage);
+
+
+
 const diamondList = function(path,state,pageNo){
 
 };
@@ -58,37 +128,20 @@ const diamondList = function(path,state,pageNo){
 
 let productListStrategies = {
     'XBList':XBList,
-    'purchaseGameProductList':purchaseGameProductList
+    'purchaseGameProductList':purchaseGameProductList,
+    'shopProductList':shopProductList
 };
 
-const productList = {
-    getList:function(...args){
-        let strategy = args.shift();
-        return productListStrategies[strategy].apply(this,args);
-    },
-
-    changeListSort:{},
-    witchSort:function(sort){
-        return sort.select === true;
+/**
+ *
+ * @param args
+ */
+let productList = function(...args){
+    let strategy = args.shift();
+    return {
+        getList:productListStrategies[strategy].apply(this,args),
     }
 };
-productList.changeListSort = function(stateSort,sort){
-    for(let i = 0,sortNode;sortNode = stateSort[ i++ ];){
-
-        if(sortNode.key === sort.key){
-            sortNode.select = true;
-
-            //  更改排序方式
-            sortNode.way = -sortNode.way;
-            sortNode.type[sort.key] = sortNode.way;
-        }else{
-            sortNode.select = false;
-            sortNode.way = 1;
-        }
-    }
-    return stateSort;
-};
-
 
 
 module.exports = productList;

@@ -46,7 +46,7 @@ let sortSelectedOperator = {
 };
 
 
-class SortInterface{
+class Sort{
     constructor(info){
         this.info = info;
     }
@@ -56,6 +56,10 @@ class SortInterface{
         let currentSort = sortSelectedOperator.findCurrentSort(this.info);
         sortSelectedOperator.changeSelectedState(this.info,targetSortItem,currentSort);
     }
+
+    findCurrentSort(){
+        return sortSelectedOperator.findCurrentSort(this.info);
+    }
 }
 
-module.exports = SortInterface;
+module.exports = Sort;

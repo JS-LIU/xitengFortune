@@ -1,0 +1,4 @@
+/**
+ * Created by LDQ on 2017/6/14.
+ */
+export const SELECTED_SHOP_PRODUCT_LIST_SORT = 'SELECTED_SHOP_PRODUCT_LIST_SORT';

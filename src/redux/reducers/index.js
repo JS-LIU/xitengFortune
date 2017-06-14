@@ -37,6 +37,8 @@ import {specification} from './specification';
 import {payDialog} from './payDialog';
 import {productList_shop} from './productList_shop';
 import {purchaseGameProductList} from './purchaseGameProductList';
+import {sort_shopProductList} from './sort_shopProductList';
+
 
 const rootReducer = combineReducers({
     account,
@@ -72,7 +74,8 @@ const rootReducer = combineReducers({
     XBList,
     WXInfo,
     payDialog,
-    purchaseGameProductList
+    purchaseGameProductList,
+    sort_shopProductList
 });
 
 module.exports = rootReducer;

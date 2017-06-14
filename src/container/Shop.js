@@ -1,13 +1,13 @@
 /**
  * Created by LDQ on 2016/8/13.
  */
-var React = require('react');
-var { bindActionCreators } = require('redux');
-var { connect } = require('react-redux');
-var {Link} = require('react-router');
-var $ = require('jquery');
-var { Header,BackBtn,Title } = require('../components/Header');
-var _h = require('../Util/HB');
+let React = require('react');
+let { bindActionCreators } = require('redux');
+let { connect } = require('react-redux');
+let {Link} = require('react-router');
+let $ = require('jquery');
+let { Header,BackBtn,Title } = require('../components/Header');
+let _h = require('../Util/HB');
 
 import shopStyle from '../css/shopStyle.css';
 
@@ -18,7 +18,7 @@ import {storageActions} from '../redux/actions/storageActions';
 //  todo 测试使用 提交时删除
 import {loginInfoActions} from '../redux/actions/loginInfoActions';
 
-var Shop = React.createClass({
+let Shop = React.createClass({
     componentWillMount:function(){
         this.props.historyUrlsActionKeys.pushUrl('/Shop');
         //  todo 测试使用 提交时删除
@@ -54,7 +54,7 @@ var Shop = React.createClass({
     }
 });
 
-var PruductList = React.createClass({
+let PruductList = React.createClass({
     componentWillMount:function(){
         this.props.shopActionKeys.getProductList();
     },
@@ -97,7 +97,7 @@ var PruductList = React.createClass({
     }
 
 });
-var ProductType = React.createClass({
+let ProductType = React.createClass({
     cutType:function(mannerId,index){
         return ()=>{
             this.props.shopActionKeys.getProductList(mannerId,index);
