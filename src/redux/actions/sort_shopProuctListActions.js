@@ -10,12 +10,6 @@ export const sort_shopProductListActions = {
     //  获取 商店 商品详情
     selected:(selectedSortItem)=>{
         return (dispatch,getState)=>{
-
-            let sortList = getState().sort_shopProductList.sort;
-            let newSortList = _sortService(sortList).selected(selectedSortItem);
-
-            dispatch({type:'SELECTED_SHOP_PRODUCT_LIST_SORT',newSortList});
-
         }
     },
 };

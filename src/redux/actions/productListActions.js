@@ -8,7 +8,7 @@ import {
     CHANGE_PURCHASE_PRODUCT_LIST_SORT,
     GET_PRODUCT_LIST_SHOP
 } from './productListActionKeys';
-
+import {SELECTED_SHOP_PRODUCT_LIST_SORT} from './sortActionKeys';
 import _productList from '../service/productListService';
 import _sortService from '../service/sortService';
 
@@ -38,13 +38,18 @@ export const productListActions = {
         }
     },
 
-    getProductList_Shop:(pageNo = 0)=>{
+    getProductList_Shop:(pageNo = 0,sortItem)=>{
         return (dispatch,getState)=>{
-            let sortList = getState().sort_shopProductList.sortList;
-            let sortItem = _sortService(sortList).findCurrentSort();
-            _productList.getList('shopProductList',getState(),pageNo,sortItem,function(info){
-                dispatch({type:'GET_XB_LIST',info})
-            })
+            _productList('shopProductList',getState(),pageNo,sortItem).then((productListInfo)=>{
+
+                dispatch({type:'GET_PRODUCT_LIST_SHOP',productListInfo});
+                let sortList = getState().sort_shopProductList.sort;
+                let newSortList = _sortService(sortList).selected(sortItem);
+
+                dispatch({type:'SELECTED_SHOP_PRODUCT_LIST_SORT',newSortList});
+            });
+
+
         }
     }
 

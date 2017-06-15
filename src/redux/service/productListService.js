@@ -4,19 +4,30 @@
 
 
 import _h from '../../Util/HB';
-import _XBListEntity from '../domain/XBList';
-import _PurchaseGameProductListEntity from '../domain/PurchaseGameProductList';
+import _XBList from '../domain/XBList';
+import _ProductList_purchase from '../domain/ProductList_purchase';
+import _ProductList_shop from '../domain/ProductList_shop';
 import sortService from './sortService';
 
 
+let productListParam = {
+    'shopProductList':function(state){
+        return {
+            sortList:state.sort_shopProductList.sortList,
+            last:state.productList_shop.last,
+            currentPage:state.productList_shop.pageNo,
+            productList_shop:state.productList_shop,
+            list:state.productList_shop.list,
+        }
+    }
+};
+
 /**
- *
  * @param state
  * @param pageNo
  * @param dispatchAction
  * @constructor
  */
-
 let XBList = function(state,pageNo,dispatchAction){
 
     if( !state.XBList.last){
@@ -28,7 +39,7 @@ let XBList = function(state,pageNo,dispatchAction){
 
         _h.ajax.resource("/xtb/list").save({},postData).then((listInfo)=>{
             let stateProductList = [...state.XBList.list];
-            let productList_XB = new _XBListEntity(listInfo,stateProductList);
+            let productList_XB = new _XBList(listInfo,stateProductList);
             dispatchAction(productList_XB);
         });
     }
@@ -53,11 +64,13 @@ let purchaseGameProductList = function(state,pageNo,dispatchAction){
 
         _h.ajax.resource("/purchaseGame/list").save({},postData).then((listInfo)=>{
             let stateProductList = [...state.purchaseGameProductList.list];
-            let productList_purchaseGame = new _PurchaseGameProductListEntity(listInfo,stateProductList);
+            let productList_purchaseGame = new _ProductList_purchase(listInfo,stateProductList);
             dispatchAction(productList_purchaseGame);
         });
     }
 };
+
+
 
 
 /**
@@ -65,52 +78,94 @@ let purchaseGameProductList = function(state,pageNo,dispatchAction){
  * @param state
  * @param pageNo
  * @param targetSort
- * @param dispatchAction
  */
 
-let getShopProductList = function(state,pageNo,targetSort,dispatchAction){
-    let sortList = state.sort_shopProductList.sortList;
-    let currentSort = sortService(sortList).findCurrentSort();
+let getShopProductList = function(state,pageNo,targetSort){
 
     let sortType = targetSort.type;
-    let postData = Object.assign({},sort,{
+    let postData = Object.assign({},sortType,{
         accessInfo:state.loginInfo.baseLoginData,
         pageNo:pageNo,
     });
 
-    _h.ajax.resource("/product/list").save({},postData).then((listInfo)=>{
-        let stateProductList = [...state.purchaseGameProductList.list];
-        let productList_purchaseGame = new _PurchaseGameProductListEntity(listInfo,stateProductList);
-        dispatchAction(productList_purchaseGame);
+    return _h.ajax.resource("/product/list").save({},postData).then((listInfo)=>{
+        let productListInfo = new _ProductList_shop(listInfo);
+        return new Promise((resolve,reject)=>{
+            resolve(productListInfo);
+        })
     });
 
 };
 
-let differentSort = function(currentSort,targetSort){
+/**
+ * @param type
+ * @param state
+ * @param pageNo
+ * @param targetSort
+ * @returns {string}
+ */
+
+let differentSort = function(type,state,pageNo,targetSort){
+    let sortList = productListParam[type](state).sortList;
+    let currentSort = sortService(sortList).findCurrentSort();
+
     if(currentSort.key !== targetSort.key){
-        getShopProductList();
-    }else{
-        return 'nextSuccessor';
-    }
-};
-let lastPage = function(){
-    if(last){
-        return state.productList_shop;
-    }else {
-        return 'nextSuccessor';
-    }
-};
-let newPage = function(){
-    if(currentPage < targetPage){
-        getShopProductList();
+        return getShopProductList(state,pageNo,targetSort);
     }else{
         return 'nextSuccessor';
     }
 };
 
-let oldPage = function(){
-    if(currentPage <= targetPage){
-        return state.productList_shop;
+/**
+ *
+ * @param type
+ * @param state
+ * @param pageNo
+ * @param targetSort
+ * @returns {*}
+ */
+let lastPage = function(type,state,pageNo,targetSort){
+    if(productListParam[type].last){
+        return productListParam[type](state).productList_shop;
+    }else {
+        return 'nextSuccessor';
+    }
+};
+
+/**
+ * @param type
+ * @param state
+ * @param pageNo
+ * @param targetSort
+ * @returns {string}
+ */
+let newPage = function(type,state,pageNo,targetSort){
+    let currentPage = productListParam[type](state).pageNo;
+    let existingList = productListParam[type](state).list;
+    if(currentPage < pageNo){
+        getShopProductList(state,pageNo,targetSort).then((listInfo)=>{
+            listInfo.list = existingList.concat(listInfo.list);
+
+            return new Promise((resolve,reject)=>{
+                resolve(listInfo);
+            })
+        });
+    }else{
+        return 'nextSuccessor';
+    }
+};
+
+/**
+ * @param type
+ * @param state
+ * @param pageNo
+ * @param targetSort
+ * @returns {*}
+ */
+let oldPage = function(type,state,pageNo,targetSort){
+    let currentPage = productListParam[type](state).pageNo;
+    if(currentPage <= pageNo){
+        return productListParam[type](state).productList_shop;
     }else{
         return 'nextSuccessor';
     }
@@ -118,29 +173,20 @@ let oldPage = function(){
 
 let getProductList = differentSort.after(lastPage).after(newPage).after(oldPage);
 
-
-
-const diamondList = function(path,state,pageNo){
-
-};
-
-
-
 let productListStrategies = {
     'XBList':XBList,
     'purchaseGameProductList':purchaseGameProductList,
-    'shopProductList':shopProductList
+    'shopProductList':getProductList
 };
 
 /**
- *
- * @param args
+ * @param type
+ * @param state
+ * @param pageNo
+ * @param targetSort
  */
-let productList = function(...args){
-    let strategy = args.shift();
-    return {
-        getList:productListStrategies[strategy].apply(this,args),
-    }
+let productList = function(type,state,pageNo,targetSort){
+    return productListStrategies[type](type,state,pageNo,targetSort);
 };
 
 

@@ -4,10 +4,10 @@
 
 import ProductListInterface from './ProductListInterface';
 
-class PurchaseGameProductList extends ProductListInterface{
+class ProductList_purchase extends ProductListInterface{
     constructor(info,statePurchaseGameProductList){
         super(info,statePurchaseGameProductList);
     }
 }
 
-module.exports = PurchaseGameProductList;
+module.exports = ProductList_purchase;
