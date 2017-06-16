@@ -6,10 +6,14 @@ import Sort from '../domain/sort';
 
 let sortService = function(sortInfo){
     let sort = new Sort(sortInfo);
-
     return {
-        selected:sort.selected,
-        findCurrentSort:sort.findCurrentSort
+        selected:function(targetItem){
+            sort.selected(targetItem);
+            return sort.info;
+        },
+        findCurrentSort:function(){
+            return sort.findCurrentSort();
+        },
     }
 
 };

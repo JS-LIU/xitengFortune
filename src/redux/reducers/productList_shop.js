@@ -8,8 +8,8 @@ export const productList_shop = function (state={}, action){
     switch (action.type) {
 
         case 'GET_PRODUCT_LIST_SHOP':
-
-            return Object.assign({},state,action.info);
+            console.log(action.productListInfo);
+            return Object.assign({},state,action.productListInfo);
 
         default:
             return state

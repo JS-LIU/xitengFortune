@@ -36,7 +36,7 @@ let sortSelectedOperator = {
             this.changeSortWay.reverse(selectedItem);
         }else{
             for(let i = 0,item;item = sortList[i++];){
-                item[i].selected = false;
+                item.selected = false;
                 this.changeSortWay.initialize(item,1);
             }
             selectedItem.selected = true;
@@ -52,7 +52,7 @@ class Sort{
     }
 
     selected(selectedItem){
-        let targetSortItem = sortSelectedOperator.findSelectedSort(this.info);
+        let targetSortItem = sortSelectedOperator.findSelectedSort(this.info,selectedItem.key);
         let currentSort = sortSelectedOperator.findCurrentSort(this.info);
         sortSelectedOperator.changeSelectedState(this.info,targetSortItem,currentSort);
     }

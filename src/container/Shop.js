@@ -12,8 +12,7 @@ let _h = require('../Util/HB');
 import shopStyle from '../css/shopStyle.css';
 
 import {historyUrlsActions} from '../redux/actions/historyUrlsActions';
-import {shopActions} from '../redux/actions/shopActions';
-import {storageActions} from '../redux/actions/storageActions';
+import {productListActions} from '../redux/actions/productListActions';
 
 //  todo 测试使用 提交时删除
 import {loginInfoActions} from '../redux/actions/loginInfoActions';
@@ -23,31 +22,40 @@ let Shop = React.createClass({
         this.props.historyUrlsActionKeys.pushUrl('/Shop');
         //  todo 测试使用 提交时删除
         this.props.loginInfoActionKeys.phoneNumLogin('18801321546','123456');
+
+        this.props.productListActionKeys.getProductList_Shop(0,{
+            type:{
+                tagName:'推荐',
+            },
+            name:'推荐',
+            selected:true,
+            key:'tagName'
+        })
     },
     componentDidMount:function(){
-        _h.ui.scrollToTheBottom(()=>{
-            if(!this.props.shop.last){
-                let pageNo = this.props.shop.pageNo + 1;
-                let type = this.props.shop.type;
-                let manner = {};
-                for(let i = 0;i < type.length;i++){
-                    if(type[i].selected){
-                        manner = {mannerId:type[i].mannerId,index:i};
-                        break;
-                    }
-                }
-                this.props.shopActionKeys.getProductList(manner.mannerId,manner.index,pageNo);
-            }
-        });
+        // _h.ui.scrollToTheBottom(()=>{
+        //     if(!this.props.shop.last){
+        //         let pageNo = this.props.shop.pageNo + 1;
+        //         let type = this.props.shop.type;
+        //         let manner = {};
+        //         for(let i = 0;i < type.length;i++){
+        //             if(type[i].selected){
+        //                 manner = {mannerId:type[i].mannerId,index:i};
+        //                 break;
+        //             }
+        //         }
+        //         this.props.shopActionKeys.getProductList(manner.mannerId,manner.index,pageNo);
+        //     }
+        // });
     },
     render: function () {
 
         return (
             <div className={shopStyle.f5f5f5}>
                 <PruductList
-                    shop={this.props.shop}
-                    shopActionKeys={this.props.shopActionKeys}
-                    storageActionKeys={this.props.storageActionKeys}
+                    productList={this.props.productList_shop}
+                    sortList = {this.props.sort_shopProductList.sortList}
+                    productListActionKeys={this.props.productListActionKeys}
                 />
             </div>
         )
@@ -55,16 +63,8 @@ let Shop = React.createClass({
 });
 
 let PruductList = React.createClass({
-    componentWillMount:function(){
-        this.props.shopActionKeys.getProductList();
-    },
-    // setProductId:function(item){
-    //     return ()=>{
-    //         this.props.storageActionKeys.setProductId(item.productId);
-    //     }
-    // },
     render:function(){
-        let productNodes = this.props.shop.productList.map((item,index)=>{
+        let productNodes = this.props.productList.list.map((item,index)=>{
             return (
                 <li className={shopStyle.shop_product_item} key={index} >
                     <Link to= {{ pathname: "/ProductDetails", query: { productId: item.productId } }} className="w">
@@ -86,8 +86,8 @@ let PruductList = React.createClass({
         return (
             <div>
                 <ProductType
-                    shopActionKeys={this.props.shopActionKeys}
-                    shop={this.props.shop}
+                    productListActionKeys = {this.props.productListActionKeys}
+                    sortList = {this.props.sortList}
                 />
                 <ul className={shopStyle.shop_product_list}>
                     {productNodes}
@@ -98,21 +98,21 @@ let PruductList = React.createClass({
 
 });
 let ProductType = React.createClass({
-    cutType:function(mannerId,index){
+    cutType:function(sortItem){
         return ()=>{
-            this.props.shopActionKeys.getProductList(mannerId,index);
+            this.props.productListActionKeys.getProductList_Shop(0,sortItem)
         }
     },
     render: function () {
-        let typeNodes = this.props.shop.type.map((item,index)=>{
+        let typeNodes = this.props.sortList.map((item,index)=>{
             return (
                 <li
                     key={index}
                     className={shopStyle.shop_type_item}
-                    onClick={this.cutType(item.mannerId,index)}
+                    onClick={this.cutType(item)}
                 >
                     <span style={item.selected?cBlueStyle:{}}>
-                        {item.title}</span>
+                        {item.name}</span>
                 </li>
             )
         });
@@ -129,14 +129,14 @@ function mapStatetoProps(state){
     return {
         historyUrls:state.historyUrls,
         productList_shop:state.productList_shop,
+        sort_shopProductList:state.sort_shopProductList,
         storage:state.storage,
     }
 }
 function mapDispatchToProps(dispatch){
     return{
         historyUrlsActionKeys : bindActionCreators(historyUrlsActions,dispatch),
-        shopActionKeys : bindActionCreators(shopActions,dispatch),
-        storageActionKeys: bindActionCreators(storageActions,dispatch),
+        productListActionKeys : bindActionCreators(productListActions,dispatch),
 
         //  todo 测试使用 提交时删除
         loginInfoActionKeys:bindActionCreators(loginInfoActions,dispatch)

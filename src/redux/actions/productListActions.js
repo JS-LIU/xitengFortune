@@ -40,14 +40,14 @@ export const productListActions = {
 
     getProductList_Shop:(pageNo = 0,sortItem)=>{
         return (dispatch,getState)=>{
-            _productList('shopProductList',getState(),pageNo,sortItem).then((productListInfo)=>{
-
+            let productListInfo = _productList('shopProductList',getState(),pageNo,sortItem).then((productListInfo)=>{
                 dispatch({type:'GET_PRODUCT_LIST_SHOP',productListInfo});
-                let sortList = getState().sort_shopProductList.sort;
-                let newSortList = _sortService(sortList).selected(sortItem);
-
-                dispatch({type:'SELECTED_SHOP_PRODUCT_LIST_SORT',newSortList});
             });
+
+            let sortList = getState().sort_shopProductList.sortList;
+            let newSortList = _sortService(sortList).selected(sortItem);
+
+            dispatch({type:'SELECTED_SHOP_PRODUCT_LIST_SORT',newSortList});
 
 
         }

@@ -5,10 +5,10 @@ export const sort_shopProductList_init = {
     sortList:[
         {
             type:{
-                'tagName':'推荐',
+                tagName:'推荐',
             },
             name:'推荐',
-            select:true,
+            selected:true,
             key:'tagName'
         },
         {
@@ -16,7 +16,7 @@ export const sort_shopProductList_init = {
                 'salesTag':1,
             },
             name:'销量',
-            select:false,
+            selected:false,
             key:'salesTag',
             way:1
         },
@@ -25,7 +25,7 @@ export const sort_shopProductList_init = {
                 'priceTag':1,
             },
             name:'价格',
-            select:false,
+            selected:false,
             key:'priceTag',
             way:1
         }

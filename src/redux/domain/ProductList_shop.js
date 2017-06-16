@@ -4,8 +4,10 @@
 import ProductListInterface from './ProductListInterface';
 
 class ProductList_shop extends ProductListInterface{
-    constructor(info,statePurchaseGameProductList){
-        super(info,statePurchaseGameProductList);
+    constructor(info){
+        super(info);
+        this.pageNo = info.currentPage;
+        this.list = info.datas;
     }
 }
 
