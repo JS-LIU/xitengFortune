@@ -6,7 +6,8 @@ import ProductListInterface from './ProductListInterface';
 class ProductList_shop extends ProductListInterface{
     constructor(info){
         super(info);
-        this.pageNo = info.currentPage;
+        //  后台数据从1开始
+        this.pageNo = info.currentPage - 1;
         this.list = info.datas;
     }
 }

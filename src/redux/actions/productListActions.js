@@ -40,7 +40,8 @@ export const productListActions = {
 
     getProductList_Shop:(pageNo = 0,sortItem)=>{
         return (dispatch,getState)=>{
-            let productListInfo = _productList('shopProductList',getState(),pageNo,sortItem).then((productListInfo)=>{
+            _productList('shopProductList',getState(),pageNo,sortItem).then((productListInfo)=>{
+
                 dispatch({type:'GET_PRODUCT_LIST_SHOP',productListInfo});
             });
 

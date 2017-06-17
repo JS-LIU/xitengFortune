@@ -191,10 +191,8 @@ let newPage = function(type,state,pageNo,targetSort){
  * @returns {*}
  */
 let oldPage = function(type,state,pageNo,targetSort){
-    let currentPage = productListParam[type](state).pageNo;
-    console.log(productListParam[type](state));
-    console.log(pageNo);
-    console.log(currentPage);
+
+    let currentPage = productListParam[type](state).currentPage;
     if(currentPage <= pageNo){
         return new Promise((resolve,reject)=>{
             resolve(productListParam[type](state).productList_shop);
