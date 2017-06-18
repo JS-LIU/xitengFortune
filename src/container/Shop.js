@@ -33,26 +33,16 @@ let Shop = React.createClass({
         })
     },
     componentDidMount:function(){
-        // _h.ui.scrollToTheBottom(()=>{
-        //     if(!this.props.shop.last){
-        //         let pageNo = this.props.shop.pageNo + 1;
-        //         let type = this.props.shop.type;
-        //         let manner = {};
-        //         for(let i = 0;i < type.length;i++){
-        //             if(type[i].selected){
-        //                 manner = {mannerId:type[i].mannerId,index:i};
-        //                 break;
-        //             }
-        //         }
-        //         this.props.shopActionKeys.getProductList(manner.mannerId,manner.index,pageNo);
-        //     }
-        // });
+        _h.ui.scrollToTheBottom(()=>{
+            let pageNo = this.props.productList_shop.pageNo + 1;
+            this.props.productListActionKeys.getProductList_Shop(pageNo);
+        });
     },
     render: function () {
 
         return (
             <div className={shopStyle.f5f5f5}>
-                <PruductList
+                <ProductList
                     productList={this.props.productList_shop}
                     sortList = {this.props.sort_shopProductList.sortList}
                     productListActionKeys={this.props.productListActionKeys}
@@ -62,7 +52,7 @@ let Shop = React.createClass({
     }
 });
 
-let PruductList = React.createClass({
+let ProductList = React.createClass({
     render:function(){
         let productNodes = this.props.productList.list.map((item,index)=>{
             return (

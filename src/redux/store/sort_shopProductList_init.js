@@ -18,7 +18,6 @@ export const sort_shopProductList_init = {
             name:'销量',
             selected:false,
             key:'salesTag',
-            way:1
         },
         {
             type:{
